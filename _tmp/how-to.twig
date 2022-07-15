@@ -1,0 +1,1953 @@
+{% extends "base/base.twig" %}
+
+{% block config %}
+  {{ parent() }}
+  {% set page = {
+    title: 'JavaScript. Практическое пособие'
+  } %}
+{% endblock %}
+
+{# ☝️🧐 Use Alt+space for indentation inside pre #}
+
+{% block content %}
+  <input class="input__field is-lg" id="topic-filter" type="text" placeholder="Фильтр записей: введите запрос">
+
+  {# Make a draggable element #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3 id="topic-draggable-base">Перетаскиваемый элемент</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Разметка:</p>
+      <pre>
+      <code class="language-html">&lt;div class=&quot;draggable&quot; id=&quot;dragMe&quot;&gt;Drag me&lt;/div&gt;
+      </code>
+      </pre>
+      <p>Стили:</p>
+      <pre>
+        <code class="language-scss">.draggable {
+            // Indicate the element draggable
+            cursor: move;
+
+            // It will be positioned absolutely
+            position: absolute;
+
+            // Doesn't allow to select the content inside
+            user-select: none;
+          }
+        </code>
+      </pre>
+      <p>Чтобы сделать элемент перетаскиваемым, нам нужно отслеживать три события:</p>
+      <ul>
+      <li><code>mousedown</code> позволит нам определить текущее положение мыши;</li>
+      <li><code>mousemove</code> даст возможность рассчитать как далеко мышка передвинулась и где сейчас находится перетаскиваемый элемент;</li>
+      <li><code>mouseup</code> на этом событии удалим обработчики, установленные с предыдущими двумя.</li>
+      </ul>
+      <pre>
+        <code class="language-javascript">// Текущая позиция мышки
+        let x = 0;
+        let y = 0;
+
+        const ele = document.getElementById('dragMe');
+
+        /** Отслеживаем передвижение */
+        const mouseMoveHandler = (e) =&gt; {
+          // Как далеко курсор передвинулся
+          const dx = e.clientX - x;
+          const dy = e.clientY - y;
+
+          // Устанавливаем позицию элемента
+          ele.style.top = `${ele.offsetTop + dy}px`;
+          ele.style.left = `${ele.offsetLeft + dx}px`;
+
+          // Переопределяем позицию курсора
+          x = e.clientX;
+          y = e.clientY;
+        };
+
+        /** Удаляем обработчики на прекращении перетаскивания */
+        const mouseUpHandler = () =&gt; {
+          // Remove the handlers of `mousemove` and `mouseup`
+          document.removeEventListener('mousemove', mouseMoveHandler);
+          document.removeEventListener('mouseup', mouseUpHandler);
+        };
+
+        /** Добавляем обработчики перед перетаскиванием */
+        const mouseDownHandler = (e) =&gt; {
+          // Получаем координаты курсора
+          x = e.clientX;
+          y = e.clientY;
+
+          // Устанавливаем слушатели на документ
+          document.addEventListener('mousemove', mouseMoveHandler);
+          document.addEventListener('mouseup', mouseUpHandler);
+        };
+
+        ele.addEventListener('mousedown', mouseDownHandler);
+        </code>
+      </pre>
+
+    </div>
+  </details>
+
+  {# Drag and drop element in a list #}
+  <details class="accordion" id="topic-dnd-li">
+    <summary class="accordion__header">
+      <h3>Сортировка элементов списка перетягиванием</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Разметка и стили:</p>
+      <pre>
+        <code class="language-html">&lt;style&gt;
+          .draggable {
+            cursor: move;
+            user-select: none;
+          }
+        &lt;/style&gt;
+
+        &lt;div id=&quot;list&quot;&gt;
+          &lt;div class=&quot;draggable&quot;&gt;A&lt;/div&gt;
+          &lt;div class=&quot;draggable&quot;&gt;B&lt;/div&gt;
+          &lt;div class=&quot;draggable&quot;&gt;C&lt;/div&gt;
+          &lt;div class=&quot;draggable&quot;&gt;D&lt;/div&gt;
+          &lt;div class=&quot;draggable&quot;&gt;E&lt;/div&gt;
+        &lt;/div&gt;
+        </code>
+      </pre>
+      <h4>Делаем элементы перетягиваемыми</h4>
+      <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
+      <pre>
+        <code class="language-javascript">// Элемент, перетаскиваемый в данный момент
+        let draggingEle;
+
+        // Текущая позиция курсора относительно перетаскиваемого элемента
+        let x = 0;
+        let y = 0;
+
+        /** Перетаскивание в процессе */
+        const mouseMoveHandler = (e) =&gt; {
+          // Устанавливаем позицию перетаскиваемого элемента
+          draggingEle.style.position = 'absolute';
+          draggingEle.style.top = `${e.pageY - y}px`;
+          draggingEle.style.left = `${e.pageX - x}px`;
+        };
+
+        /** Перетаскивание закончилось.
+          * Удаляем стили позиционирования перетаскиваемого
+          * элемента и слушатели
+          */
+        const mouseUpHandler = () =&gt; {
+          // Remove the position styles
+          draggingEle.style.removeProperty('top');
+          draggingEle.style.removeProperty('left');
+          draggingEle.style.removeProperty('position');
+
+          x = null;
+          y = null;
+          draggingEle = null;
+
+          // Удаляем слушатели `mousemove` и `mouseup`
+          document.removeEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.removeEventListener(
+            'mouseup', mouseUpHandler
+          );
+        };
+
+        /** Перетаскивание начинается */
+        const mouseDownHandler = (e) =&gt; {
+          draggingEle = e.target;
+
+          // Рассчитываем позицию курсора
+          const rect = draggingEle.getBoundingClientRect();
+          x = e.pageX - rect.left;
+          y = e.pageY - rect.top;
+
+          // Устанавливаем слушатели на документ
+          document.addEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.addEventListener('mouseup', mouseUpHandler);
+        };
+
+        /* Теперь установим слушатели `mousedown`
+        на каждый элемент списка */
+        const listItems = document
+          .getElementById('list')
+          .querySelectorAll('.dragable');
+
+        listItems.forEach((item) =&gt; {
+          item.addEventListener('mousedown', mouseDownHandler);
+        });
+        </code>
+      </pre>
+      <h4>Добавим заглушку</h4>
+      <p>Во время перетаскивания списка, место элемента, изъятого из потока, смыкается. Например, место перетягиваемого элемента <code>C</code> сразу же займет его «сосед снизу» — <code>D</code>. Это может нарушить спокойствие пользователя и, чтобы предупредить такие сдвиги, надо создать заглушку той же высоты, что и изъятый элемент.</p>
+      <p>Заглушка создается в начале перетягивания.</p>
+      <pre>
+        <code class="language-javascript">let placeholder;
+        let isDraggingStarted = false;
+
+        const mouseMoveHandler = (e) =&gt; {
+          const draggingRect =
+            draggingEle.getBoundingClientRect();
+
+          if (!isDraggingStarted) {
+          // Обновляем флаг
+          isDraggingStarted = true;
+
+          // Создаем заглушку
+          placeholder = document.createElement('div');
+          placeholder.classList.add('placeholder');
+          draggingEle.parentNode.insertBefore(
+            placeholder,
+            draggingEle.nextSibling
+          );
+
+          /* Задаем высоту заглушке — такую же,
+          как у изъятого элемента */
+          placeholder.style.height = `${draggingRect.height}px`;
+          }
+
+          // ...
+        };
+        </code>
+      </pre>
+      <p>Заглушка удаляется, как только пользователь отпустит перетаскиваемый элемент.</p>
+      <pre>
+        <code class="language-javascript">const mouseUpHandler = () =&gt; {
+          // Удаляем
+          placeholder &amp;&amp;
+            placeholder.parentNode.removeChild(placeholder);
+          
+          // Восстанавливаем флаг
+          isDraggingStarted = false;
+
+          // ...
+        };
+        </code>
+      </pre>
+      <p>В итоге в момент перетаскивания элемента <code>C</code> узлы списка в DOM выстраиваются в такую последовательность:</p>
+      <pre>
+        <code class="language-txt">A
+        B
+        «заглушка»
+        C — перетаскиваемый элемент
+        D
+        E
+        </code>
+      </pre>
+      <h4>Определяем куда пользователь перетягивает элемент: вверх или вниз</h4>
+      <p>Во-первых, нам потребуется вспомогательная функция, определяющая в каком положении находится перетаскиваемый элемент в текущий момент: сверху или снизу указанного в параметре соседа.</p>
+      <p>Элемент <code>nodeA</code> считается выше элемента <code>nodeB</code>, если значение вертикального центра <code>nodeA</code> меньше аналогичного значения <code>nodeB</code>.</p>
+      <p>Вертикальный центр рассчитывается как сумма координаты <code>top</code> элемента и половины его высоты.</p>
+      <pre>
+        <code class="language-javascript">const isAbove = (nodeA, nodeB) =&gt; {
+          // Получаем границы элементов
+          const rectA = nodeA.getBoundingClientRect();
+          const rectB = nodeB.getBoundingClientRect();
+
+          return (
+            rectA.top + rectA.height / 2 &lt;
+            rectB.top + rectB.height / 2
+          );
+        };
+        </code>
+      </pre>
+      <p>Как только пользователь начинает перетаскивание, мы определяем соседей выбранного — снизу и сверху.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          /* Порядок элементов:
+             prevEle
+             draggingEle
+             placeholder
+             nextEle */
+          const prevEle = draggingEle.previousElementSibling;
+          const nextEle = placeholder.nextElementSibling;
+        };
+        </code>
+      </pre>
+      <p>Если пользователь перетаскивает элемент вверх, мы меняем местами заглушку и соседа сверху.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          // ...
+
+          // Пользователь тащит элемент вверх
+          if (prevEle &amp;&amp; isAbove(draggingEle, prevEle)) {
+            /* Изменение порядка: исходный -&gt; новый
+               prevEle                     -&gt; placeholder
+               draggingEle                 -&gt; draggingEle
+               placeholder                 -&gt; prevEle */
+            swap(placeholder, draggingEle);
+            swap(placeholder, prevEle);
+          }
+        };
+        </code>
+      </pre>
+      <p>Если пользователь перетаскивает элемент вниз, мы меняем местами заглушку и соседа снизу.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          // ...
+
+          // User moves the dragging element to the bottom
+          if (nextEle &amp;&amp; isAbove(nextEle, draggingEle)) {
+            /* Изменение порядка: исходный -&gt; новый
+               draggingEle                 -&gt; nextEle
+               placeholder                 -&gt; placeholder
+               nextEle                     -&gt; draggingEle */
+            swap(nextEle, placeholder);
+            swap(nextEle, draggingEle);
+          }
+        };
+        </code>
+      </pre>
+      <p>Полная функция для изменения порядка элементов списка:</p>
+      <pre>
+        <code class="language-javascript">const swap = (nodeA, nodeB) =&gt; {
+          const parentA = nodeA.parentNode;
+          const siblingA =
+            nodeA.nextSibling === nodeB
+              ? nodeA
+              : nodeA.nextSibling;
+
+          // Поднимаем `nodeA` выше `nodeB`
+          nodeB.parentNode.insertBefore(nodeA, nodeB);
+
+          /* Поднимаем `nodeB` выше соседа элемента `nodeA`
+          верхнего или нижнего определяется в тернарном
+          операторе выше */
+          parentA.insertBefore(nodeB, siblingA);
+        };
+        </code>
+      </pre>
+      <p>Демо-виджет и полный код можно посмотреть на <a href="https://htmldom.dev/drag-and-drop-element-in-a-list/" target="_blank" rel="noopener noreferrer">HTML DOM</a></p>
+
+
+    </div>
+  </details>
+
+  {# Show a custom context menu at clicked position #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Пользовательское контекстное меню на ПКМ</h3>
+    </summary>
+    <div class="accordion__body">
+      <pre>
+        <code class="language-html">&lt;div class=&quot;is-relative&quot;&gt;
+          &lt;div id=&quot;element&quot;&gt;
+            Кликни правой кнопкой мыши (ПКМ)
+          &lt;/div&gt;
+          &lt;ul class=&quot;menu is-context&quot; role=&quot;menu&quot; id=&quot;menu&quot;&gt;
+            ...
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        </code>
+      </pre>
+      <h4>Предотвращаем вызов стандартного контекстного меню</h4>
+      <pre>
+        <code class="language-javascript">const ele = document.getElementById('element');
+        ele.addEventListener('contextmenu', (e) =&gt; {
+          e.preventDefault();
+        });
+        </code>
+      </pre>
+      <h4>Показываем пользовательское меню в области клика</h4>
+      <p>Чтобы получить координаты меню, оно должно быть абсолютно позиционировано относительно своего контейнера. Поэтому в разметке добавлена «обёртка» <code>.is-relative</code>.</p>
+      <pre>
+        <code class="language-scss">.is-relative {
+            position: relative;
+          }
+
+          .menu.is-context {
+            // Скрыто по умолчанию
+            display: none;
+            position: absolute;
+
+            &amp;.is-on {
+              display: block;
+            }
+          }
+        </code>
+      </pre>
+      <p>Рассчитываем позицию меню по позиции мышки.</p>
+      <pre>
+        <code class="language-javascript">ele.addEventListener('contextmenu', (e) =&gt; {
+            const rect = ele.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Задаем координаты
+            menu.style.top = `${y}px`;
+            menu.style.left = `${x}px`;
+
+            // Показываем меню
+            menu.classList.add('is-on');
+          });
+        </code>
+      </pre>
+      <h4>Закрываем меню по клику за его пределами</h4>
+      <pre>
+        <code class="language-javascript">ele.addEventListener('contextmenu', (e) =&gt; {
+            /* ...
+            Добавляем вложенный слушатель */
+            document.addEventListener('click', docClickHandler);
+          });
+
+          /** Прячем меню на клике за его пределами */
+          const docClickHandler = (e) =&gt; {
+            const isClickedOutside = !menu.contains(e.target);
+            if (isClickedOutside) {
+              menu.classList.remove('is-on');
+
+              // Удаляем обработчик
+              document.removeEventListener(
+                'click', docClickHandler
+              );
+            }
+          };
+        </code>
+      </pre>
+      <p>Обработчик клика удаляется со страницы вместе с меню, так как он не нужен, пока меню скрыто.</p>
+    </div>
+  </details>
+
+  {# Create resizable split views #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Масштабируемое разделенное представление (split view)</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Исходная разметка.</p>
+      <pre>
+        <code class="language-html">&lt;div style=&quot;display: flex&quot;&gt;
+          &lt;div class=&quot;left&quot;&gt;Left&lt;/div&gt;
+
+          &lt;!-- The resizer --&gt;
+          &lt;div class=&quot;resizer&quot; id=&quot;dragMe&quot;&gt;&lt;/div&gt;
+
+          &lt;div class=&quot;right&quot;&gt;Right&lt;/div&gt;
+        &lt;/div&gt;
+        </code>
+      </pre>
+      <h4>Обновление ширины честей split-представления</h4>
+      <p>О том, как делать перетаскиваемый элемент, <a href="#topic-draggable-base">см. здесь</a>.</p>
+      <p>В нашем случае ручка масштабирования будет двигаться только по горизонтали. Сначала нам надо получить позицию мыши и ширину левой части split-представления до масштабирования.</p>
+      <pre>
+        <code class="language-javascript">const resizer = document.getElementById('dragMe');
+        const leftSide = resizer.previousElementSibling;
+        const rightSide = resizer.nextElementSibling;
+
+        // Позиция мыши
+        let x = 0;
+        let y = 0;
+
+        // Ширина левой части
+        let leftWidth = 0;
+
+        /** Обработка перетягивания мышью */
+        const mouseDownHandler = (e) =&gt; {
+          // Текущая позиция мыши
+          x = e.clientX;
+          y = e.clientY;
+
+          leftWidth = leftSide.getBoundingClientRect().width;
+
+          // Добавляем вложенные обработчики
+          document.addEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.addEventListener('mouseup', mouseUpHandler);
+        };
+
+        // Назначаем первый обработчик
+        resizer.addEventListener('mousedown', mouseDownHandler);
+        </code>
+      </pre>
+      <p>Если вернуться к разметке, обнаружим, что левая и правая часть представления являются предыдущим и следующим «соседями» ручки перетаскивания. Следовательно, выбираем их вот таким образом:</p>
+      <pre>
+        <code class="language-javascript">const leftSide = resizer.previousElementSibling;
+        const rightSide = resizer.nextElementSibling;
+        </code>
+      </pre>
+      <p>Далее. Когда пользователь двигает мышью, мы определяем — как далеко — и, соответственно, обновляем ширину левой части представления.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          // Как далеко сместилась мышь
+          const dx = e.clientX - x;
+          const dy = e.clientY - y;
+
+          const newLeftWidth =
+            ((leftWidth + dx) * 100) /
+            resizer.parentNode.getBoundingClientRect().width;
+          leftSide.style.width = `${newLeftWidth}%`;
+        };
+        </code>
+      </pre>
+      <p>Меняя ширину левой части представления, устанавливаем новое значение в процентах (от родительского элемента). Устанавливаем для правой части CSS-свойство <code>flex: 1 1 0</code> и она будет занимать всё оставшееся место — не нужно рассчитывать ширину в JS.</p>
+      <pre>
+        <code class="language-css">.right { flex: 1 1 0;}</code>
+      </pre>
+      <h4>Исправляем мигание курсора</h4>
+      <p>Когда пользователь перетаскивает ручку, мы должны поменять курсор.</p>
+      <p>Но если мы изменим его только у ручки, то обнаружим, что он при перетягивании постоянно меняется: то нужный, то обычная стрелка. Это происходит потому, что под мышь попадают и другие элементы, а не только <code>resizer</code>.</p>
+      <p>Чтобы исправить «баг», следует на момент перетягивания поменять курсор не только для ручки, но и для всего документа.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          // ...
+          resizer.style.cursor = 'col-resize';
+          document.body.style.cursor = 'col-resize';
+        };
+        </code>
+      </pre>
+      <p>Также на момент перетягивания нужно предотвратить срабатывание событий и выделение текста в обоих частях split-представления. Для этого используем CSS-свойства <code>user-select</code> и <code>pointer-events</code>.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          // ...
+          leftSide.style.userSelect = 'none';
+          leftSide.style.pointerEvents = 'none';
+          
+          rightSide.style.userSelect = 'none';
+          rightSide.style.pointerEvents = 'none';
+        };
+        </code>
+      </pre>
+      <p>Стили будут удалены сразу после окончания перетягивания.</p>
+      <pre>
+        <code class="language-javascript">const mouseUpHandler = () =&gt; {
+          resizer.style.removeProperty('cursor');
+          document.body.style.removeProperty('cursor');
+
+          leftSide.style.removeProperty('user-select');
+          leftSide.style.removeProperty('pointer-events');
+
+          rightSide.style.removeProperty('user-select');
+          rightSide.style.removeProperty('pointer-events');
+
+          // Удаляем обработчики
+          document.removeEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.removeEventListener(
+            'mouseup', mouseUpHandler
+          );
+        };
+        </code>
+      </pre>
+      <h4>Перетягивание по вертикали</h4>
+      <p>Вместо того, чтобы обновлять значение ширины левой части представления, будем обновлять высоту верхней части.</p>
+      <pre>
+        <code class="language-javascript">const prevSibling = resizer.previousElementSibling;
+        let prevSiblingHeight = 0;
+
+        const mouseDownHandler = function (e) {
+          const rect = prevSibling.getBoundingClientRect();
+          prevSiblingHeight = rect.height;
+        };
+
+        const mouseMoveHandler = function (e) {
+          const h =
+            ((prevSiblingHeight + dy) * 100) /
+            resizer.parentNode.getBoundingClientRect().height;
+          prevSibling.style.height = `${h}%`;
+        };
+        </code>
+      </pre>
+      <p>Также поменяем курсор на <code>row-resize</code>.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) => {
+          //...
+          resizer.style.cursor = 'row-resize';
+          document.body.style.cursor = 'row-resize';
+        };
+        </code>
+      </pre>
+      <h4>Вложенные split-представления</h4>
+      <p>Допустим, что нам нужно добавить в правую часть горизонтального split-представления вертикальное — как в VSCode, если выбрать View ➜ Editor Layout ➜ Two Rows.</p>
+      <p>У нас будет две ручки перетягивания. Чтобы выбирать одну из них, добавим <code>data</code>-атрибуты.</p>
+      <pre>
+        <code class="language-html">&lt;style&gt;
+          .right {
+            display: flex;
+            flex: 1 1 0;
+            flex-direction: column;
+          }
+        &lt;/style&gt;
+        &lt;div style=&quot;display: flex&quot;&gt;
+          &lt;div class=&quot;left&quot;&gt;Left&lt;/div&gt;
+          &lt;div class=&quot;resizer&quot; data-direction=&quot;horizontal&quot;&gt;&lt;/div&gt;
+
+          &lt;div class=&quot;right&quot;&gt;
+            &lt;div&gt;Top&lt;/div&gt;
+            &lt;div class=&quot;resizer&quot; data-direction=&quot;vertical&quot;&gt;&lt;/div&gt;
+            &lt;div style=&quot;flex: 1 1 0%&quot;&gt;Bottom&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        </code>
+      </pre>
+      <p>Теперь мы можем получать направление перетягивания.</p>
+      <pre>
+        <code class="language-javascript">const direction =
+          resizer.getAttribute('data-direction') ||
+          'horizontal';
+        </code>
+      </pre>
+      <p>The logic of setting the width or height of previous sibling depends on the direction:</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          switch (direction) {
+            case 'vertical':
+              const h =
+                ((prevSiblingHeight + dy) * 100) /
+                resizer.parentNode.getBoundingClientRect().height;
+              prevSibling.style.height = `${h}%`;
+              break;
+            case 'horizontal':
+            default:
+              const w =
+                ((prevSiblingWidth + dx) * 100) /
+                resizer.parentNode.getBoundingClientRect().width;
+              prevSibling.style.width = `${w}%`;
+              break;
+          }
+
+          const cursor = direction === 'horizontal'
+            ? 'col-resize'
+            : 'row-resize';
+          resizer.style.cursor = cursor;
+          document.body.style.cursor = cursor;
+
+          // ...
+        };
+        </code>
+      </pre>
+      <p>Демо-виджеты можно посмотреть на <a href="https://htmldom.dev/make-a-draggable-element/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</p>
+
+    </div>
+  </details>
+
+  {# Drag to scroll #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3 id="topic-drag-to-scroll">Прокрутка перетягиванием</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Кроме традиционной прокрутки некоторые приложения предлагают прокрутку перетягиванием — например, передвижение холста в Photoshop и Figma с зажатым пробелом.</p>
+      <p>Разметка и стили.</p>
+      <pre>
+        <code class="language-html">&lt;style&gt;
+          .container {
+            cursor: grab;
+            overflow: auto;
+          }
+        &lt;/style&gt;
+
+        &lt;div id=&quot;container&quot; class=&quot;container&quot;&gt;...&lt;/div&gt;
+        </code>
+      </pre>
+      <h4>Прокрутка в указанное положение</h4>
+      <p>Поскольку благодаря <code>overflow: auto;</code> содержание контейнера становится прокручиваемым, мы можем прокрутить его до указанной точки с помощью свойств <code>scrollTop</code> и <code>scrollLeft</code>.</p>
+      <pre>
+        <code class="language-javascript">const ele = document.getElementById('container');
+        ele.scrollTop = 100;
+        ele.scrollLeft = 150;
+        </code>
+      </pre>
+      <h3>Теперь то же самое — перетягиванием</h3>
+      <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
+      <pre>
+        <code class="language-javascript">let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+        const mouseDownHandler = (e) =&gt; {
+          pos = {
+            // Текущее положение прокрутки
+            left: ele.scrollLeft,
+            top: ele.scrollTop,
+            // Получить положение мыши
+            x: e.clientX,
+            y: e.clientY,
+          };
+
+          document.addEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.addEventListener('mouseup', mouseUpHandler);
+        };
+        </code>
+      </pre>
+      <p>В объекте <code>pos</code> сохраняются положение курсора и прокрутки. (Объект, кстати, предпочтительней четырех переменных, так как объединяет логически связанные значения).</p>
+      <p>Когда пользователь передвигает мышь, мы замеряем, насколько далеко, и затем прокручиваем содержимое в ту же точку.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+          // Как далеко перемещен курсор
+          const dx = e.clientX - pos.x;
+          const dy = e.clientY - pos.y;
+
+          // Прокручиваем элемент
+          ele.scrollTop = pos.top - dy;
+          ele.scrollLeft = pos.left - dx;
+        };
+        </code>
+      </pre>
+      <p>Опыт взаимодействия в процессе перетягивания может быть улучшен, с помощью пары CSS-свойств.</p>
+      <pre>
+        <code class="language-javascript">const mouseDownHandler = (e) =&gt; {
+          // Change the cursor and prevent user from selecting the text
+          ele.style.cursor = 'grabbing';
+          ele.style.userSelect = 'none';
+          // ...
+        };
+
+        /** По окончании перетягивания */
+        const mouseUpHandler = () =&gt; {
+          document.removeEventListener('mousemove', mouseMoveHandler);
+          document.removeEventListener('mouseup', mouseUpHandler);
+
+          // Меняем курсор и разрешаем выделение
+          ele.style.cursor = 'grab';
+          ele.style.removeProperty('user-select');
+        };
+        </code>
+      </pre>
+
+    </div>
+  </details>
+
+  {# Drag and drop table row #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Перетягивание строки в таблице</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Техника основана на <a href="#topic-dnd-li">перетягивании элементов списка</a>. Идея заключается в том, чтобы создавать дубликат строк таблицы в виде списка — как только пользователь начинает тянуть. На время перетягивания мы показываем только этот список (каждый элемент — клон строки), а таблицу прячем.</p>
+      <p>Также во время перетягивания мы определяем порядковый номер перетаскиваемого элемента списка. И переносим соответствующую строку исходной таблицы до или после «строки назначения».</p>
+      <h4>Обработчики событий</h4>
+      <p>Как нам известно из раздела о <a href="#topic-dnd-li">перетягивании элементов списка</a>, первым делом надо создать обработчики для трёх событий.</p>
+      <ul>
+      <li><code>mousedown</code> — добавляем обработчик на первые ячейки строк.</li>
+      <li><code>mousemove</code> - добавляем обработчик на документ и содержит код создания и вставки «заглушки» на время перетаскивания.</li>
+      <li><code>mouseup</code> — событие окончания перетаскивания.</li>
+      </ul>
+      <pre>
+        <code class="language-html">&lt;table id=&quot;table&quot;&gt;
+            ...
+        &lt;/table&gt;
+
+        &lt;script&gt;
+          const table = document.getElementById('table');
+
+        const mouseMoveHandler = (e) =&gt; {
+          // ...
+        };
+
+        const mouseUpHandler =  () =&gt; {
+          // ...
+          // Удаляем обработчики `mousemove` и `mouseup`
+          document.removeEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.removeEventListener(
+            'mouseup', mouseUpHandler
+          );
+        };
+
+        const mouseDownHandler = (e) =&gt; {
+          // ...
+
+          // Устанавливаем слушатели
+          document.addEventListener(
+            'mousemove', mouseMoveHandler
+          );
+          document.addEventListener(
+            'mouseup', mouseUpHandler
+          );
+        };
+
+        // Добавляем обработчики начала перетаскивания
+        table.querySelectorAll('tr').forEach((row, index) =&gt; {
+          // Игнорируем первую строку — фактический thead.
+          if (index === 0) {
+            return;
+          }
+
+          // Первая ячейка строки
+          const firstCell = row.firstElementChild;
+          firstCell.classList.add('draggable');
+
+          // Устанавливаем слушатели
+          firstCell.addEventListener('mousedown', mouseDownHandler);
+        });
+        &lt;/script&gt;
+
+        #### Клонируем таблицу, когда пользователь тащит строку
+
+        Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.
+
+        ```javascript
+        let isDraggingStarted = false;
+
+        const mouseMoveHandler = (e) =&gt; {
+          if (!isDraggingStarted) {
+            isDraggingStarted = true;
+
+            cloneTable();
+          }
+          // ...
+        };
+        </code>
+      </pre>
+      <p>Функция cloneTable создает клон таблицы и показывает его вместо таблицы.</p>
+      <pre>
+        <code class="language-javascript">let list;
+
+        const cloneTable = () =&gt; {
+          // Получаем границы таблицы
+          const rect = table.getBoundingClientRect();
+
+          // Получаем ширину таблицы
+          const width = parseInt(
+            window.getComputedStyle(table).width, 10
+          );
+
+          // Создаем псевдосписок
+          list = document.createElement('div');
+
+          // Устанавливаем его по координатам таблицы
+          list.style.position = 'absolute';
+          list.style.left = `${rect.left}px`;
+          list.style.top = `${rect.top}px`;
+
+          // Вставляем до таблицы
+          table.parentNode.insertBefore(list, table);
+
+          // Таблицу скрываем
+          table.style.visibility = 'hidden';
+        };
+        </code>
+      </pre>
+      <p>Лист будет состоять из клонов строк.</p>
+      <pre>
+        <code class="language-javascript">let list;
+
+        const cloneTable = () =&gt; {
+          // Получаем границы таблицы
+          const rect = table.getBoundingClientRect();
+
+          // Получаем ширину таблицы
+          const width = parseInt(
+            window.getComputedStyle(table).width, 10
+          );
+
+          // Создаем псевдосписок
+          list = document.createElement('div');
+
+          // Устанавливаем его по координатам таблицы
+          list.style.position = 'absolute';
+          list.style.left = `${rect.left}px`;
+          list.style.top = `${rect.top}px`;
+
+          // Вставляем до таблицы
+          table.parentNode.insertBefore(list, table);
+
+          // Таблицу скрываем
+          table.style.visibility = 'hidden';
+        };
+        </code>
+      </pre>
+      <p>После клонирования в DOM у нас должна добавиться такая конструкция.</p>
+      <pre>
+        <code class="language-html">&lt;!-- Список --&gt;
+        &lt;div&gt;
+          &lt;!-- Первый элемент… --&gt;
+          &lt;div&gt;
+            &lt;table&gt;
+              &lt;tr&gt;
+                &lt;!-- …содержит клон первой строки
+                исходной таблицы --&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Второй элемент и т. д. --&gt;
+        &lt;/div&gt;
+
+
+        &lt;table&gt;&lt;!-- Исходная таблица --&gt;&lt;/table&gt;
+        </code>
+      </pre>
+      <p>Теперь нам нужно установить ширину ячеек, чтобы сделать дубликат таблицы похожим на оригинал.</p>
+      <pre>
+        <code class="language-javascript">cells.forEach((cell) =&gt; {
+          const newCell = cell.cloneNode(true);
+          // Устанавливаем ширину оригинальной ячейки
+          newCell.style.width = `${parseInt(
+            window.getComputedStyle(cell).width,
+            10
+          )}px`;
+          newRow.appendChild(newCell);
+        });
+        </code>
+      </pre>
+      <p>Определяем индексы перетаскиваемой и целевой строки.</p>
+      <pre>
+        <code class="language-javascript">// Перетаскиваемый элемент
+        let draggingEle;
+        // Индекс Перетаскиваемой строки
+        let draggingRowIndex;
+
+        const mouseDownHandler = (e) =&gt; {
+          // Получаем исходную строку
+          const originalRow = e.target.parentNode;
+          draggingRowIndex = [].slice
+            .call(table.querySelectorAll('tr'))
+            .indexOf(originalRow);
+        };
+
+        const mouseMoveHandler = (e) =&gt; {
+          if (!isDraggingStarted) {
+            cloneTable();
+
+            // Получаем перетягиваемый элемент
+            draggingEle = [].slice.call(list.children)[draggingRowIndex];
+          }
+        };
+
+        const mouseUpHandler = () =&gt; {
+          // Получаем индекс целевой строки
+          const endRowIndex = [].slice
+            .call(list.children)
+            .indexOf(draggingEle);
+        };
+        </code>
+      </pre>
+      <p>После того, как мы получили <code>draggingRowIndex</code> и <code>endRowIndex</code>, нетрудно определить, где пользователь отпустит перетаскиваемый элемент — сверху или снизу от исходной точки. И теперь мы можем решить, куда пристроить целевую строку: до или после нового места перетаскиваемой.</p>
+      <pre>
+        <code class="language-javascript">const mouseUpHandler = () =&gt; {
+          // Переносим перетаскиваемую строку к `endRowIndex`
+          const rows = [].slice.call(table.querySelectorAll('tr'));
+          draggingRowIndex &gt; endRowIndex
+            ? // Пользователь отпустил сверху
+              rows[endRowIndex].parentNode.insertBefore(
+                rows[draggingRowIndex],
+                rows[endRowIndex]
+              )
+            : // Пользователь отпустил снизу
+              rows[endRowIndex].parentNode.insertBefore(
+                rows[draggingRowIndex],
+                rows[endRowIndex].nextSibling
+              );
+        };
+        </code>
+      </pre>
+      <p>Демо-виджет и полный код можно посмотреть на <a href="https://htmldom.dev/drag-and-drop-table-row/"  target="_blank" rel="noopener noreferrer">HTML DOM</a>.</p>
+
+    </div>
+  </details>
+
+  {# Drag and drop table column #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Перетягивание колонки в таблице</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Техника основана на <a href="#topic-dnd-li">перетягивании элементов списка</a>. Идея заключается в том, чтобы создавать дубликат колонок в виде списка — как только пользователь начинает тянуть. На время перетягивания мы показываем только этот список (каждый элемент — клон колонки), а таблицу прячем.</p>
+      <p>Также во время перетягивания мы определяем порядковый номер перетаскиваемого и целевого элемента списка. И меняем местами соответствующие колонки.</p>
+      <h4>Обработчики событий</h4>
+      <p>Как нам известно из раздела о <a href="#topic-dnd-li">перетягивании элементов списка</a>, первым делом надо создать обработчики для трёх событий.</p>
+      <ul>
+      <li><code>mousedown</code> — добавляем обработчик на первые ячейки колонок и содержит логику перетягивания их клонов.</li>
+      <li><code>mousemove</code> - добавляем обработчик на документ и содержит код создания и вставки «заглушки» на время перетаскивания.</li>
+      <li><code>mouseup</code> — событие окончания перетаскивания.</li>
+      </ul>
+      <p>Разметка и «каркас» скрипта.</p>
+      <pre>
+        <code class="language-html">&lt;table id=&quot;table&quot;&gt;&lt;!-- ... --&gt;&lt;/table&gt;
+
+        &lt;script&gt;
+          const table = document.getElementById('table');
+
+          const mouseMoveHandler = (e) =&gt; {
+            // ...
+          };
+
+          const mouseUpHandler = () =&gt; {
+            // ...
+            // Удаляем обработчики `mousemove` и `mouseup`
+            document.removeEventListener(
+              'mousemove', mouseMoveHandler
+            );
+            document.removeEventListener(
+              'mouseup', mouseUpHandler
+            );
+          };
+
+          const mouseDownHandler = (e) =&gt; {
+            // ...
+
+            // Добавляем обработчики на документ
+            document.addEventListener(
+              'mousemove', mouseMoveHandler
+            );
+            document.addEventListener(
+              'mouseup', mouseUpHandler
+            );
+          };
+
+          // Добавляем обработчики начала перетаскивания
+          table
+            .querySelectorAll('th')
+            .forEach((headerCell) =&gt; {
+              headerCell.addEventListener(
+                'mousedown', mouseDownHandler
+              );
+          });
+        &lt;/script&gt;
+        </code>
+      </pre>
+      <h4>Клонируем таблицу, когда пользователь перетягивает колонку</h4>
+      <p>Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.</p>
+      <pre>
+        <code class="language-javascript">let isDraggingStarted = false;
+
+        const mouseMoveHandler = (e) =&gt; {
+          if (!isDraggingStarted) {
+            isDraggingStarted = true;
+
+            cloneTable();
+          }
+          // ...
+        };
+        </code>
+      </pre>
+      <p>Функция <code>cloneTable</code> создает клон таблицы и показывает его вместо таблицы.</p>
+      <pre>
+        <code class="language-javascript">let list;
+
+        const cloneTable = () =&gt; {
+          // Получаем границы таблицы
+          const rect = table.getBoundingClientRect();
+
+          /* Создает список — не семантический `ul`,
+          простой `div` */
+          list = document.createElement('div');
+
+          // Устанавливаем его по координатам таблицы
+          list.style.position = 'absolute';
+          list.style.left = `${rect.left}px`;
+          list.style.top = `${rect.top}px`;
+
+          // В коде вставляем перед таблицей
+          table.parentNode.insertBefore(list, table);
+
+          // Прячем таблицу
+          table.style.visibility = 'hidden';
+        };
+        </code>
+      </pre>
+      <p>Лист будет состоять из клонов колонок.</p>
+      <pre>
+        <code class="language-javascript">const cloneTable = () =&gt; {
+          // ...
+
+          /* Получаем поверхностную копию всех td.
+          Делаем из NodeList массив, чтобы применить
+          позже метод `filter`.*/
+          const originalCells = [].slice.call(
+            table.querySelectorAll('tbody td')
+          );
+
+          /* Получаем поверхностную копию всех th.
+          В данном случае не уверен ыв необходимости
+          `[].slice.call`, так как `NodeList` имеет
+          свойство `length` и метод `forEach` */
+          const originalHeaderCells = [].slice.call(
+            table.querySelectorAll('th')
+          );
+
+          const numColumns = originalHeaderCells.length;
+
+          // Перебираем все th
+          originalHeaderCells.forEach(
+            (headerCell, headerIndex) =&gt; {
+              const width = parseInt(
+                window.getComputedStyle(headerCell).width,
+                10
+              );
+
+              /* Создаем список и новую таблицу
+              из первой строки исходной */  
+              const item = document.createElement('div');
+              item.classList.add('draggable');
+          
+              const newTable = document.createElement('table');
+          
+              /* Строка заголовков th
+              (семантически — потомок thead) */
+              const th = headerCell.cloneNode(true);
+              let newRow = document.createElement('tr');
+              newRow.appendChild(th);
+              newTable.appendChild(newRow);
+          
+              const cells = originalCells.filter((c, idx) =&gt; {
+                return (idx - headerIndex) % numColumns === 0;
+              });
+          
+              cells.forEach((cell) =&gt; {
+                const newCell = cell.cloneNode(true);
+                newRow = document.createElement('tr');
+                newRow.appendChild(newCell);
+                newTable.appendChild(newRow);
+              });
+          
+              item.appendChild(newTable);
+              list.appendChild(item);
+            }
+          );
+        };
+        </code>
+      </pre>
+      <p>После клонирования в DOM у нас должна добавиться такая конструкция.</p>
+      <pre>
+        <code class="language-html">&lt;!-- Список --&gt;
+        &lt;div&gt;
+          &lt;!-- Первый элемент… --&gt;
+          &lt;div&gt;
+            &lt;table&gt;
+              &lt;!-- …содержит клон первой колонки
+              исходной таблицы --&gt;
+              &lt;tr&gt;
+                ...
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                ...
+              &lt;/tr&gt;
+              ...
+            &lt;/table&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Второй элемент и т. д. --&gt;
+        &lt;/div&gt;
+
+        &lt;table&gt;&lt;!-- Исходная таблица --&gt;&lt;/table&gt;
+        </code>
+      </pre>
+      <p>Теперь нам нужно установить ширину ячеек, чтобы сделать дубликат таблицы похожим на оригинал.</p>
+      <pre>
+        <code class="language-javascript">originalHeaderCells.forEach((headerCell, headerIndex) =&gt; {
+          // Получаем ширину оригинальной ячейки
+          const width = parseInt(
+            window.getComputedStyle(headerCell).width, 10
+          );
+
+          newTable.style.width = `${width}px`;
+
+          cells.forEach((cell) =&gt; {
+            const newCell = cell.cloneNode(true);
+            newCell.style.width = `${width}px`;
+            // ...
+          });
+        });
+        </code>
+      </pre>
+      <p>Определяем индексы перетаскиваемой и целевой колонки.</p>
+      <pre>
+        <code class="language-javascript">// Перетаскиваемый элемент
+        let draggingEle;
+        // Индекс перетаскиваемой колонки
+        let draggingRowIndex;
+
+        const mouseDownHandler = (e) =&gt; {
+          // Получаем индекс перетаскиваемой колонки
+          draggingColumnIndex = [].slice
+            .call(table.querySelectorAll('th'))
+            .indexOf(e.target);
+        };
+
+        const mouseMoveHandler = (e) =&gt; {
+          if (!isDraggingStarted) {
+            cloneTable();
+
+            // Получаем перетаскиваемый элемент
+            draggingEle = [].slice
+              .call(list.children)[draggingColumnIndex];
+          }
+        };
+
+        const mouseUpHandler = () =&gt; {
+          // Получаем индекс последней колонки
+          const endColumnIndex = [].slice
+            .call(list.children)
+            .indexOf(draggingEle);
+        };
+
+        </code>
+      </pre>
+      <p>После того, как мы получили <code>draggingColumnIndex</code> и <code>endColumnIndex</code>, нетрудно определить, где пользователь отпустит перетаскиваемый элемент — справа или слева от исходной точки. И теперь мы можем решить, куда пристроить целевую колонку: до или после нового места перетаскиваемой.</p>
+      <pre>
+        <code class="language-javascript">const mouseUpHandler = () =&gt; {
+          // Двигаем перетаскиваемую колонку к `endColumnIndex`
+          table.querySelectorAll('tr').forEach(function (row) {
+            const cells = [].slice.call(
+              row.querySelectorAll('th, td')
+            );
+            draggingColumnIndex &gt; endColumnIndex
+              ? cells[endColumnIndex].parentNode.insertBefore(
+                  cells[draggingColumnIndex],
+                  cells[endColumnIndex]
+                )
+              : cells[endColumnIndex].parentNode.insertBefore(
+                  cells[draggingColumnIndex],
+                  cells[endColumnIndex].nextSibling
+                );
+          });
+        };
+        </code>
+      </pre>
+      <p>Демо-виджет и полный код можно посмотреть на <a href="https://htmldom.dev/drag-and-drop-table-column/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</p>
+
+    </div>
+  </details>
+
+  {# Show a loading indicator when an iframe is being loaded #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Индикатор загрузки <code>iframe</code></h3>
+    </summary>
+    <div class="accordion__body">
+      <h4>Разметка и стили</h4>
+      <p>Изначально <code>iframe</code> скрыто (<code>opacity: 0</code>). А индикатор выравнен по центру.</p>
+      <pre>
+        <code class="language-html">&lt;div class=&quot;container&quot;&gt;
+            &lt;!-- The loading indicator --&gt;
+            &lt;div class=&quot;loader&quot; id=&quot;loader&quot;&gt;Loading&lt;/div&gt;
+            
+            &lt;!-- The iframe --&gt;
+            &lt;iframe id=&quot;frame&quot; style=&quot;opacity: 0;&quot;&gt;&lt;/iframe&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <pre>
+        <code class="language-scss">.container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+          }
+
+          .loader {
+            background: var(--color-background-alt);
+            box-shadow: var(--layer-box-shadow-z3);
+            border-radius: var(--shape-border-radius-base);
+            padding: $size-line $size-1p5;
+          }
+        </code>
+      </pre>
+      <h4>Обработка события <code>load</code></h4>
+      <p>Скроем индикатор, когда загрузка закончится.</p>
+      <pre>
+        <code class="language-javascript">const iframeEle = document.getElementById('iframe');
+          const loadingEle = document.getElementById('loader');
+
+          iframeEle.addEventListener('load', () =&gt; {
+            // Скрыть индикатор
+            loadingEle.style.display = 'none';
+
+            // Показать iframe
+            iframeEle.style.opacity = 1;
+          });
+        </code>
+      </pre>
+    </div>
+  </details>
+
+  {# Create an image comparison slider #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Виджет сравнения фотографий</h3>
+    </summary>
+    <div class="accordion__body">
+      <h4>Разметка</h4>
+      <p>Виджет состоит из контейнера и трех компонентов.</p>
+      <ul>
+      <li>Сверху — <code>div</code> с фоном из измененного изображения.</li>
+      <li>Ниже — передвижная грань.</li>
+      <li>Внизу — исходное изображения.</li>
+      </ul>
+      <pre>
+        <code class="language-html">&lt;div class=&quot;container&quot;&gt;
+            &lt;div class=&quot;modified-image&quot;&gt;&lt;/div&gt;
+            
+            &lt;!-- Грань --&gt;
+            &lt;div class=&quot;cropper&quot; id=&quot;drag-me&quot;&gt;&lt;/div&gt;
+            
+            &lt;img src=&quot;/original.png&quot;&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <p>В исходном положении измененное изображение обрезано пополам.</p>
+      <pre>
+        <code class="language-scss">.container {
+            position: relative;
+          }
+
+          .modified-image {
+            background: url('/modified.png') no-repeat 0;
+            background-size: auto 100%;
+            position: absolute;
+            top: 0;  
+            left: 0;
+
+            // Половина измененного изображения
+            width: 50%;
+            height: 100%;
+          }
+
+          // Грань пересекает изображения посередине
+          .cropper {
+            background-color: #cbd5e0;
+            cursor: ew-resize;
+            
+            position: absolute;
+            top: 0;
+            left: 50%;
+            
+            width: 2px;
+            height: 100%;
+          }
+        </code>
+      </pre>
+      <h4>Обработчики</h4>
+      <p>Когда пользователь передвигает грань, мы рассчитываем насколько переместился курсор и, исходя из этого, — новое положение грани и ширину измененного изображения.</p>
+      <pre>
+        <code class="language-javascript">const cropper = document.getElementById('drag-me');
+          const leftSide = cropper.previousElementSibling;
+
+          // Инициализируем координаты курсора
+          let x = 0;
+          let y = 0;
+
+          // Инициализируем ширину модифицированного изображения
+          let leftWidth = 0;
+
+          /* Обработчик события `mousedown`. Срабатывает,
+          когда пользователь перетаскивает грань */
+          const mouseDownHandler = (e) =&gt; {
+            // Текущие координаты курсора
+            x = e.clientX;
+            y = e.clientY;
+
+            // Текущая ширина модифицированного изображения
+            leftWidth =
+              leftSide.getBoundingClientRect().width;
+
+            // Устанавливаем слушатели на документ
+            document.addEventListener(
+              'mousemove', mouseMoveHandler
+            );
+            document.addEventListener('mouseup', mouseUpHandler);
+          };
+
+          const mouseMoveHandler = (e) =&gt; {
+            // Как далеко передвинулся курсор
+            const dx = e.clientX - x;
+            const dy = e.clientY - y;
+
+            let newLeftWidth =
+              ((leftWidth + dx) * 100) /
+              cropper.parentNode.getBoundingClientRect().width;
+            newLeftWidth = Math.max(newLeftWidth, 0);
+            newLeftWidth = Math.min(newLeftWidth, 100);
+
+            /* Расчет ширины модифицированного изображения
+            и позиции грани */
+            leftSide.style.width = `${newLeftWidth}%`;
+            cropper.style.left = `${newLeftWidth}%`;
+          };
+
+          // Устанавливаем слушатель
+          cropper.addEventListener(
+            'mousedown', mouseDownHandler
+          );
+        </code>
+      </pre>
+      <p>Кроме всего прочего, мы должны следить за тем, чтобы в наших расчетах учитывались передвижения курсора только в рамках контейнера. Поэтому мы должны сравнивать <code>newLeftWidth</code> с 0 и 100 процентами ширины контейнера.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+            // Предыдущий код...
+
+            newLeftWidth = Math.max(newLeftWidth, 0);
+            newLeftWidth = Math.min(newLeftWidth, 100);
+          };
+        </code>
+      </pre>
+    </div>
+  </details>
+
+  {# Show a ghost element when dragging an element #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Оформление виртуальной проекции перетягиваемого элемента</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>По умолчанию браузер создает полупрозрачного виртуального двойника перетягиваемого элемента. Но его можно еще и оформить по собственному смотрению.</p>
+
+      <pre>
+        <code class="language-html">&lt;div class=&quot;is-draggable&quot; draggable=&quot;true&quot;&gt;
+            Перенеси меня
+          &lt;/div&gt;
+        </code>
+      </pre>
+
+      <pre>
+        <code class="language-javascript">const ele = document.getElementById('dragMe');
+
+          // Виртуальная проекция
+          let ghostEle;
+
+          ele.addEventListener('dragstart', (e) =&gt; {
+            // Создаем виртуальную проекцию
+            ghostEle = document.createElement('div');
+            ghostEle.classList.add('is-dragging');
+            ghostEle.innerHTML = 'Уиии!';
+            document.body.appendChild(ghostEle);
+
+            // Заменяем проекцию по умолчанию пользовательской
+            e.dataTransfer.setDragImage(ghostEle, 0, 0);
+          });
+
+          // По окончанию перетягивания виртуальную проекцию следует удалить.
+
+          ele.addEventListener('dragend', () =&gt; {
+            document.body.removeChild(ghostEle);
+          });
+        </code>
+      </pre>
+
+      <p>Также можно использовать заранее подготовленную разметку.</p>
+
+      <pre>
+        <code class="language-javascript">&lt;div class=&quot;is-draggable&quot; draggable=&quot;true&quot;&gt;
+            Перенеси меня
+          &lt;/div&gt;
+          &lt;div class=&quot;is-dragging&quot; id=&quot;ghost&quot;&gt;
+            Уиии!
+          &lt;/div&gt;
+        </code>
+      </pre>
+
+      <p>Обработчик события не сильно изменится.</p>
+      <pre>
+        <code class="language-javascript">const ghostEle = document.getElementById('ghost');
+
+          ele.addEventListener('dragstart', (e) =&gt; {
+            e.dataTransfer.setDragImage(ghostEle, 0, 0);
+          });
+        </code>
+      </pre>
+    </div>
+  </details>
+
+  {# Copy highlighted code to the clipboard #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Скопировать пример кода со страницы</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Задача. Предоставить пользователю скопировать в буфер обмена пример кода по нажатию кнопки.</p>
+      <pre>
+        <code class="language-html">&lt;pre id=&quot;sample-code&quot;&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;
+          &lt;button id=&quot;copy-button&quot;&gt;Copy&lt;/button&gt;
+        </code>
+      </pre>
+      <p>Копирование выполняется в три этапа:</p>
+      <ul>
+        <li>Выделяем содержимое тега <code>&lt;code&gt;</code>.</li>
+        <li>
+        <p>Копируем в буфер, используя метод <code>document.execCommand('copy')</code></p>
+        <p>☝️🧐 Метод <code>execCommand()</code> официально считается устаревшим, но альтернативы пока нет. Если нужны команды для работы с контентом в режиме редактирования документа — <code>document.designMode</code> — пока приходится пользоваться <code>execCommand()</code> */</p>
+        </li>
+        <li>Предыдущие шаги связаны с изменением пользовательского выделения. Поэтому исходное выделение надо сохранить и восстановить после копирования.</li>
+      </ul>
+      <pre>
+        <code class="language-javascript">(() =&gt; {
+            const copyButton =
+              document.getElementById('copy-button');
+            const codeEle =
+              document.getElementById('sample-code');
+
+            copyButton.addEventListener('click', () =&gt; {
+              const selection = window.getSelection();
+
+              // Сохраняем выделение
+              const currentRange =
+                selection.rangeCount === 0
+                  ? null
+                  : selection.getRangeAt(0);
+
+              // Выделяем содержимое между `&lt;code&gt;`
+              const range = document.createRange();
+              range.selectNodeContents(codeEle);
+              selection.removeAllRanges();
+              selection.addRange(range);
+
+              // Копируем в буфер
+              try {
+                document.execCommand('copy');
+                copyButton.innerHTML = 'Copied';
+              } catch (err) {
+                // Невозможно скопировать
+                copyButton.innerHTML = 'Copy';
+              } finally {
+                // Восстанавливаем выделение
+                selection.removeAllRanges();
+                currentRange &amp;&amp;
+                selection.addRange(currentRange);
+              }
+            });
+          })();
+        </code>
+      </pre>
+    </div>
+  </details>
+
+  {# Create a custom scrollbar #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Пользовательская полоса прокрутки</h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Можно обновить внешний вид полосы прокрутки исключительно стилями.</p>
+      <pre>
+        <code class="language-scss">// Firefox
+          body {
+            scrollbar-width: thin;
+            
+            // Цвета бегунка и «рельса»
+            scrollbar-color: #718096 #edf2f7;
+          }
+
+          // Chrome, Edge и Safari
+          body::-webkit-scrollbar {
+            width: .75rem;
+          }
+
+          *::-webkit-scrollbar-track {
+            background-color: #edf2f7;
+          }
+
+          *::-webkit-scrollbar-thumb {
+            background-color: #718096;
+            border-radius: 9999px;
+          }
+        </code>
+      </pre>
+
+      <h4>Альтернативный метод</h4>
+      <p>Но поскольку <code>-webkit-scrollbar</code> не является стандартным псевдоэлементом и однажды может перестать поддерживаться, можно скрыть родной скроллбар браузера и вместо него использовать пользовательский. Например, для такого контейнера с прокруткой.</p>
+      <pre>
+        <code class="language-html">&lt;div class=&quot;wrapper&quot; id=&quot;wrapper&quot;&gt;
+            &lt;div class=&quot;content&quot; id=&quot;content&quot;&gt;
+              ...
+            &lt;/div&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <pre>
+        <code class="language-scss">.wrapper {
+            overflow: hidden;
+            max-height: 32rem;
+          }
+
+          .content {
+            // Скрыть скроллбар по умолчанию
+            margin-right: -1.6rem;
+            padding-right: 1.6rem;
+
+            overflow: auto;
+            height: 100%;
+          }
+        </code>
+      </pre>
+
+      <h4>Пользовательская полоса прокрутки — исходная разметка и логика</h4>
+      <p>Добавим под «обёрткой» добавим «якорь» — ориентир для позиционирования скроллбара — и собственно скроллбар.</p>
+      <pre>
+        <code class="language-html">&lt;div id=&quot;wrapper&quot;&gt;...&lt;/div&gt;
+
+          &lt;!-- Якорь --&gt;
+          &lt;div
+            id=&quot;anchor&quot;
+            style=&quot;position: absolute; top: 0; left: 0;&quot;
+          &gt;
+          &lt;/div&gt;
+
+          &lt;!-- Скроллбар --&gt;
+          &lt;div
+            id=&quot;scrollbar&quot;
+            style=&quot;position: absolute; width: .75rem;&quot;
+          &gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <p>Установим скроллбар в правый верхний угол.</p>
+      <pre>
+        <code class="language-javascript">const wrapper = document.getElementById('wrapper');
+          const content = document.getElementById('content');
+          const anchor = document.getElementById('anchor');
+          const scrollbar = document.getElementById('scrollbar');
+
+          // Получаем размеры и положения контейнера и якоря
+          const wrapperRect = wrapper.getBoundingClientRect();
+          const anchorRect = anchor.getBoundingClientRect();
+
+          // Устанавливаем скроллбар
+          const top = wrapperRect.top - anchorRect.top;
+          const left = wrapperRect.width + wrapperRect.left - anchorRect.left;
+          scrollbar.style.top = `${top}px`;
+          scrollbar.style.left = `${left}px`;
+
+          // Высота скроллбара равна высоте контейнера
+          scrollbar.style.height = `${wrapperRect.height}px`;
+        </code>
+      </pre>
+
+      <h4>Конструируем полосу прокрутки</h4>
+      <p>Скроллбар состоит из «рельса» <code>track</code> и бегунка <code>thumb</code> — абсолютно позиционированных относительно родительского элемента.</p>
+      <pre>
+        <code class="language-html">&lt;div id=&quot;scrollbar&quot;&gt;
+            &lt;div class=&quot;track&quot; id=&quot;track&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;thumb&quot; id=&quot;thumb&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <pre>
+        <code class="language-scss">.track {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            // Растягиваем на всю площадь
+            width: 100%;
+            height: 100%;
+          }
+
+          .thumb {
+            left: 0;
+            position: absolute;
+            
+            // Растягиваем только по ширине
+            width: 100%;
+          }
+        </code>
+      </pre>
+
+      <p>Рассчитываем высоту бегунка: пропорционально отношению высоты содержания и высоты контейнера.</p>
+      <pre>
+        <code class="language-javascript">const track = document.getElementById('track');
+          const thumb = document.getElementById('thumb');
+
+          const scrollRatio =
+            content.clientHeight / content.scrollHeight;
+          thumb.style.height = `${scrollRatio * 100}%`;
+        </code>
+      </pre>
+
+      <h4>Перетаскивание для прокрутки</h4>
+      <p>Подробнее о технике <a href="#topic-drag-to-scroll">см. здесь</a>.</p>
+      <pre>
+        <code class="language-javascript">let pos = { top: 0, y: 0 };
+
+          const mouseDownThumbHandler = (e) =&gt; {
+            pos = {
+              // Текущая позиция бегунка прокрутки
+              top: content.scrollTop,
+              // Текущая позиция курсора
+              y: e.clientY,
+            };
+
+            document.addEventListener(
+              'mousemove', mouseMoveHandler
+            );
+            document.addEventListener(
+              'mouseup', mouseUpHandler
+            );
+          };
+
+          const mouseMoveHandler = (e) =&gt; {
+            // Как далеко курсор переместился
+            const dy = e.clientY - pos.y;
+
+            // Прокручиваем содержание
+            content.scrollTop = pos.top + dy / scrollRatio;
+          };
+
+          // Назначаем обработчик `mousedown`
+          thumb.addEventListener(
+            'mousedown', mouseDownThumbHandler
+          );
+        </code>
+      </pre>
+
+      <p>Когда пользователь перетягивает бегунок, он также прокручивает содержание элемента <code>content</code>. Для того, чтобы обновлять положение бегунка назначим обработчик события <code>scroll</code> на элемент <code>content</code>.</p>
+      <pre>
+          <code class="language-javascript">const scrollContentHandler = () =&gt; {
+            window.requestAnimationFrame(() =&gt; {
+              thumb.style.top = `
+                ${(content.scrollTop * 100) /
+                content.scrollHeight}%
+              `;
+            });
+          };
+
+          content.addEventListener('scroll', scrollContentHandler);
+        </code>
+      </pre>
+
+      <h4>Переходы по клику на «рельсе»</h4>
+      <p>Для этого способа прокрутки мы должны снова рассчитать свойство <code>scrollTop</code> элемента <code>content</code>.</p>
+      <pre>
+        <code class="language-javascript">const trackClickHandler = (e) =&gt; {
+            const bound = track.getBoundingClientRect();
+            const percentage =
+              (e.clientY - bound.top) / bound.height;
+            content.scrollTop =
+              percentage *
+              (content.scrollHeight - content.clientHeight);
+          };
+
+          track.addEventListener('click', trackClickHandler);
+        </code>
+      </pre>
+    </div>
+  </details>
+
+  {# Create a range slider #}
+  <details class="accordion">
+    <summary class="accordion__header">
+      <h3>Слайдер диапазона — <code>range</code></h3>
+    </summary>
+    <div class="accordion__body">
+      <p>Два способа создать элемент управления.</p>
+      <h4>1) <code>input[type='range']</code> и CSS</h4>
+      <p>«Дешево и сердито».</p>
+      <pre>
+        <code class="language-html">&lt;input type=&quot;range&quot;&gt;</code>
+      </pre>
+      <pre>
+        <code class="language-scss">[type='range'] {
+            --thumb-color: var(--color-primary-base);
+            --border-color: var(--color-ink-border);
+
+            $size-height-range-track: $size-half;
+            $size-height-range-thumb: $size-2p5;
+            $size-border-width-range-thumb: $size-half;
+
+            appearance: none;
+            background: none;
+            height: $size-height-range-thumb;
+            width: 100%;
+
+            // ⚠️ Список селекторов в случае
+            // с нестандартными псведоэлементами
+            // не срабатывает. Только миксин и инклуд
+            // для каждого селектора по отдельности
+            @mixin range-track {
+              background-color: var(--border-color);
+              border-radius: $shape-border-radius-pill;
+              transition:
+                background
+                $motion-duration-sm
+                $motion-easing-base,
+                box-shadow
+                $motion-duration-sm
+                $motion-easing-base;
+              width: 100%;
+              height: $size-height-range-track;
+            }
+
+            // Track
+            &amp;::-webkit-slider-runnable-track {
+              @include range-track;
+            }
+
+            &amp;::-moz-range-track {
+              @include range-track;
+            }
+
+            &amp;::-ms-track {
+              @include range-track;
+            }
+
+            @mixin range-thumb {
+              appearance: none;
+              background-color: var(--thumb-color);
+              border-radius: 50%;
+              border:
+                $size-border-width-range-thumb
+                solid
+                var(--range-thumb-border-color);
+              cursor: pointer;
+              margin-top: -(
+                $size-height-range-thumb * .5 -
+                $size-height-range-track * .5
+              );
+              transition:
+                background
+                $motion-duration-sm
+                $motion-easing-base,
+                transform
+                $motion-duration-sm
+                $motion-easing-base;
+              width: $size-height-range-thumb;
+              height: $size-height-range-thumb;
+            }
+
+            // Thumb
+            &amp;::-webkit-slider-thumb {
+              @include range-thumb;
+            }
+
+            &amp;::-moz-range-thumb {
+              @include range-thumb;
+            }
+
+            &amp;::-ms-thumb {
+              @include range-thumb;
+            }
+
+            &amp;:hover {
+              --thumb-color: hsl(var(--h) var(--s) 65%);
+            }
+
+            &amp;:hover,
+            &amp;:focus,
+            &amp;:active {
+              // Thumb
+              &amp;::-webkit-slider-thumb {
+                transform: scale(1.25);
+              }
+
+              &amp;::-moz-range-thumb {
+                transform: scale(1.25);
+              }
+
+              &amp;::-ms-thumb {
+                transform: scale(1.25);
+              }
+            }
+          }
+        </code>
+      </pre>
+      <p><code>input[type='range']</code> поддерживается абсолютным абсолютным большинством браузеров. Но, если потребуется, можно добавить проверку.</p>
+      <pre>
+        <code class="language-javascript">const isRangeInputSupported = () =&gt; {
+            const ele = document.createElement('input');
+            ele.setAttribute('type', 'range');
+            /* Если браузер не поддерживает поле `range`,
+            атрибуту `type` будет присвоено значение `text` */
+            return ele.type !== 'text';
+          };
+        </code>
+      </pre>
+      <p>Минус метода — нельзя сделать вертикальный виджет.</p>
+      <h4>2) JS</h4>
+      <p>Пользовательский слайдер диапазона собирается из трех деталей: бегунка и двух половинок дорожки.</p>
+      <pre>
+        <code class="language-html">&lt;div class=&quot;container&quot;&gt;
+            &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;thumb&quot; id=&quot;thumb&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <pre>
+        <code class="language-scss">.container {
+            display: flex;
+            align-items: center;
+            height: $size-2p5;
+          }
+
+          .right {
+            // Правая половинка занимает
+            // всё свободное место
+            flex: 1;
+            height: $size-half;
+          }
+        </code>
+      </pre>
+      <p>Назначим на бегунок обработчик события <code>mousedown</code>, чтобы сделать его перетаскиваемым. В обработчик будет сохранятся позиция элемента.</p>
+      <pre>
+        <code class="language-javascript">const thumb = document.getElementById('thumb');
+          const leftSide = thumb.previousElementSibling;
+
+          // The current position of mouse
+          let x = 0;
+          let y = 0;
+          let leftWidth = 0;
+
+          // Обработчик будет срабатывать при перетаскивании
+          const mouseDownHandler = (e) =&gt; {
+            // Текущая позиция мыши
+            x = e.clientX;
+            y = e.clientY;
+            leftWidth = leftSide.getBoundingClientRect().width;
+
+            // Назначаем вложенные обработчики
+            document.addEventListener(
+              'mousemove', mouseMoveHandler
+            );
+
+            document.addEventListener('mouseup', mouseUpHandler);
+          };
+        </code>
+      </pre>
+      <p>Когда бегунок перемещаемся, мы можем рассчитать расстояние, которое проделал курсор — это будет разница между исходной и текущей позицией. С этими данными мы можем рассчитать и ширину левой части дорожки.</p>
+      <pre>
+        <code class="language-javascript">const mouseMoveHandler = (e) =&gt; {
+            // Как далеко мышь продвинулась
+            const dx = e.clientX - x;
+            const dy = e.clientY - y;
+
+            const containerWidth =
+              thumb.parentNode.getBoundingClientRect().width;
+            let newLeftWidth =
+              ((leftWidth + dx) * 100) / containerWidth;
+            newLeftWidth = Math.max(newLeftWidth, 0);
+            newLeftWidth = Math.min(newLeftWidth, 100);
+
+            leftSide.style.width = `${newLeftWidth}%`;
+          };
+
+          /* Обработчик срабатывает в тот момент,
+          когда пользователь отпускает бегунок */
+          const mouseUpHandler = () =&gt; {
+            leftSide.style.removeProperty('user-select');
+            leftSide.style.removeProperty('pointer-events');
+
+            rightSide.style.removeProperty('user-select');
+            rightSide.style.removeProperty('pointer-events');
+
+            // Удаляем слушатели, пока они не нужны
+            document.removeEventListener(
+              'mousemove',
+              mouseMoveHandler
+            );
+            
+            document.removeEventListener(
+              'mouseup',
+              mouseUpHandler
+            );
+          };
+
+          // Назначаем обработчик
+          thumb.addEventListener(
+            'mousedown', mouseDownHandler
+          );
+        </code>
+      </pre>
+    </div>
+  </details>
+
+{% endblock %}
+

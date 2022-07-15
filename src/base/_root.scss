@@ -1,0 +1,107 @@
+// stylelint-disable declaration-colon-space-after, order/order
+
+@use 'sass:math';
+
+:root {
+  // ---------------------------------------------------------------------------
+  // 🧑🏻‍🎨 GRAPHICS
+  // ---------------------------------------------------------------------------
+  // #region
+
+  --asset-data-image-list-bullet:       url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%225%22%20height%3D%227%22%20viewBox%3D%220%200%205%207%22%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%222.5%22%20fill-opacity%3D%22.38%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
+
+  --size-width-height-icon:             #{$size-line};
+
+  --asset-data-image-chevron-down:      url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M16.5858%2010L12%2014.5858L7.41425%2010%22%20stroke%3D%22black%22%20stroke-opacity%3D%220.38%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E');
+  // #endregion
+
+  // ---------------------------------------------------------------------------
+  // 🔠 TYPOGRAPHY AND SPACING
+  // ---------------------------------------------------------------------------
+  // #region
+  --font-size-hero-title:               3.8rem;
+  // Keep parentheses to do math using interpolation
+  --font-line-height-hero-title:        #{math.div(40, 38)};
+  --font-weight-hero-title:             300;
+  --size-padding-top-hero-title:        1.4rem;
+  --size-padding-bottom-hero-title:     1.8rem;
+
+  --font-size-title:                    2.8rem;
+  --font-line-height-title:             #{math.div(32, 28)};
+  --font-weight-title:                  500;
+  --size-padding-top-title:             2.2rem;
+  --size-padding-bottom-title:          1.8rem;
+  --size-margin-top-title-minus:        #{-$size-line};
+
+  --font-size-subhead-h2:               2.1rem;
+  --font-line-height-subhead-h2:        #{math.div(24, 21)};
+  --font-weight-subhead-h2:             500;
+  --size-padding-top-subhead-h2:        .5rem;
+  --size-padding-bottom-subhead-h2:     1.9rem;
+  --size-margin-top-h2-plus:            #{$size-line * 2};
+
+  --font-size-big:                      1.6rem;
+  --font-line-height-big:               1.5; // 24px
+  --font-weight-big:                    500;
+  --size-padding-top-big:               .6rem;
+  --size-padding-bottom-big:            1.8rem;
+  --size-margin-top-subhead-plus:       #{$size-line};
+
+  --font-size-base:                     1.6rem;
+  --font-line-height-base:              1.5; // 24px
+  --size-padding-top-base:              .6rem;
+  --size-padding-bottom-base:           1.8rem;
+
+  --font-size-small:                    1.2rem;
+  --font-line-height-small:             1.333; // 16px
+  --size-padding-top-small:             1.2rem;
+  --size-padding-bottom-small:          2rem;
+
+  // Lists
+  --size-padding-bottom-li:             .2rem;
+  --size-padding-bottom-list:           #{$size-2};
+
+  // Boxes
+  --size-padding-x-container:           #{$size-2d5};
+  --size-padding-x-box:                 #{$size-2d5};
+
+  // Form
+  --size-padding-y-input:               #{$size-1d5};
+  --size-padding-x-input:               #{$size-2};
+
+  // Table
+  --size-padding-x-cell:                #{$size-2};
+  --size-padding-y-cell:                #{$size-1};
+
+  @media screen and (min-width: #{map-get($grid-breakpoints, 'md')}) {
+    --size-padding-x-container:         #{$size-5};
+    --size-padding-x-box:               #{$size-3};
+  }
+
+  @media screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) {
+    --font-size-hero-title:             5.1rem;
+    --font-line-height-hero-title:      #{math.div(56, 51)};
+    --size-padding-top-hero-title:      .2rem;
+    --size-padding-bottom-hero-title:   1.4rem;
+
+    --font-size-title:                  3.8rem;
+    --font-line-height-title:           #{math.div(40, 38)};
+    --size-padding-top-title:           1.4rem;
+    --size-padding-bottom-title:        1.8rem;
+    --size-margin-top-title-minus:      0;
+
+    --font-size-subhead-h2:             2.8rem;
+    --font-line-height-subhead-h2:      #{math.div(28, 32)};
+    --size-padding-top-subhead-h2:      .2rem;
+    --size-padding-bottom-subhead-h2:   2.15rem;
+    --size-margin-top-subhead-h2-plus:  #{$size-line};
+
+    --font-size-big:                    2.1rem;
+    --font-line-height-big:             #{math.div(24, 21)};
+    --font-weight-big:                  400;
+    --size-padding-top-big:             .5rem;
+    --size-padding-bottom-big:          1.9rem;
+  }
+  // #endregion
+}
+

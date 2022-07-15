@@ -1,0 +1,65 @@
+// Modifiers are not defined in component files. The unique page styles are
+// written in the corresponded <head> section (less is better). And styles
+// for a group of pages are written in pages folder. E.g. /pages/company.scss
+// .hero.is-company { background: hsl(50, 100%, 50%); }
+
+@import 'base/variables';
+
+// BS & RESET
+@import './node_modules/bootstrap/scss/functions';
+@import './node_modules/bootstrap/scss/variables';
+@import './node_modules/bootstrap/scss/mixins';
+@import './node_modules/the-new-css-reset/css/reset';
+
+// Base
+@import 'base/root';
+@import 'base/doc';
+@import 'base/content/copy';
+@import 'base/content/headings';
+@import 'base/content/code';
+@import 'base/input/input';
+// @import 'base/graphics/icon';
+// @import 'base/content/media';
+// @import 'base/button';
+@import 'base/layout/layout';
+
+
+// Components
+@import 'components/content-main/main';
+@import 'components/content-table/table';
+@import 'components/disclosure-accordion/accordion';
+@import 'components/feedback-alert/alert';
+@import 'components/structure-footer/footer';
+
+// Utilities
+@import 'util/content';
+@import 'util/layout';
+
+// BS5 utilities
+@import './node_modules/bootstrap/scss/utilities';
+
+// Only use the utilities we need
+// Add additional classes set as mixins and maps of necessary values
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    'display',
+    'margin-top',
+    'margin-bottom',
+    'negative-margin-top',
+    'negative-margin-bottom',
+    'margin-x',
+    'padding-x',
+    'padding-top',
+    'padding-bottom',
+    'padding-start',
+    'padding-end'
+    // 'order','flex','flex-direction','flex-grow','flex-shrink','flex-wrap','justify-content','align-items','align-content','align-self','margin', 'margin-y', 'margin-start', 'margin-end','negative-margin','negative-margin-x','negative-margin-y', 'negative-margin-start', 'negative-margin-end','padding','padding-x','padding-y',
+  )
+  );
+
+@import './node_modules/bootstrap/scss/utilities/api';
+
+// Print
+@import 'base/print';
+

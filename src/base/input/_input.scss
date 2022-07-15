@@ -1,0 +1,83 @@
+// Input container
+.input {
+  position: relative;
+  padding-bottom: var(--size-padding-bottom-form-group);
+}
+
+// Multi input fields (e. g. birthday) container
+// .input
+//   .row
+//     .col-sm-6
+//       .input__field
+//     .col-sm-6
+//       .input__field
+
+// or
+
+// .input
+//   .row
+//     .input__field
+//     .input__field
+
+.input > .row {
+  display: flex;
+  gap: $size-1;
+}
+
+// Text input, text area, select
+.input__field {
+  appearance: none;
+  background-clip: padding-box;
+  background-color: $color-background-input;
+  background-image: none;
+  border-radius: $shape-border-radius-sm;
+  border: $size-border-width solid $color-ink-border;
+  color: $color-ink-2ry;
+  display: block;
+  margin: 0;
+  padding-top: var(--size-padding-y-input);
+  padding-right: var(--size-padding-x-input);
+  padding-bottom: var(--size-padding-y-input);
+  padding-left: var(--size-padding-x-input);
+  overflow: visible;
+  transition: border-color $motion-easing-base $motion-duration-sm;
+  width: 100%;
+
+  &:focus {
+    color: $color-ink-base;
+    border-color: $color-brand-primary-base;
+    box-shadow: $layer-box-shadow-focus-outline;
+    outline: 0;
+  }
+
+  // Placeholder
+  &::placeholder {
+    color: $color-ink-3ry;
+    // Override Firefox's unusual default opacity
+    opacity: 1;
+  }
+}
+
+.input__field.is-lg {
+  font-size: var(--font-size-big);
+  margin-bottom: $size-line * 2;
+  padding-top: calc(var(--size-padding-y-input) - .1rem);
+  padding-bottom: calc(var(--size-padding-y-input) - .1rem);
+}
+
+// stylelint-disable selector-no-qualifying-type
+.input__field.is-textarea {
+  // In textarea, we can control the bottom padding only add falce bottom border.
+  // It's tricky enough. But we can easily add whitespace from above
+  padding-top: calc(var(--size-padding-y-input) + .9rem);
+}
+// stylelint-enable selector-no-qualifying-type
+
+.input__hint {
+  color: $color-ink-2ry;
+  display: inline-block;
+  padding-top: var(--size-padding-top-label);
+  position: absolute;
+  top: 0;
+  right: 0;
+}

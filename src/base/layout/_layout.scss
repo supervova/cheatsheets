@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+// CONTAINER
+// -----------------------------------------------------------------------------
+
+.container,
+%container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: var(--size-padding-x-container);
+  padding-right: var(--size-padding-x-container);
+  width: 100%;
+  max-width: $size-width-readable;
+}
+
+section {
+  padding-bottom: $size-line * 2;
+}

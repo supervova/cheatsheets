@@ -1,0 +1,25 @@
+.footer {
+  @extend %container;
+
+  padding-top: $size-line;
+  padding-bottom: $size-line * 4;
+}
+
+.footer__copyright {
+  @include media-breakpoint-up(md) {
+    margin-bottom: -$size-line;
+  }
+}
+
+.footer__credits-caption {
+  padding-bottom: .2rem;
+}
+
+.footer__credits,
+.footer__credits-caption {
+  display: inline-block;
+}
+
+.footer__credits {
+  @extend %list-inline;
+}

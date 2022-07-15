@@ -1,0 +1,264 @@
+// stylelint-disable selector-no-qualifying-type
+
+// ☝️🧐  To prevent collapsing of multi-line cells without `nowrap`, we should
+// specify the width at list one cell in column. Sometimes it is also required
+// to change the `display `property to the `block` and use only rem or px units.
+// E.g. `.table_desc { display: block; width: 40rem; }`
+// @see https://momentum.design/components/data-table/code
+// @see https://stackoverflow.design/product/components/tables/#cell-widths
+// @see https://get.foundation/sites/docs/table.html#scrolling-table
+//
+// `table-layout` of the table should be set to `auto`.
+//
+// In addition, we can crop strings with a ellipse, adding a div wrap with the
+// `.text-truncate` class and `max-width: 100%`.
+// @see https://www.lightningdesignsystem.com/components/data-tables/
+
+$table-background:                      $color-background-base;
+$table-accent-bg:                       $color-background-alt;
+$table-hover-bg:                        hsla(0, 0%, 0%, .03);
+
+// -----------------------------------------------------------------------------
+// BASE
+// -----------------------------------------------------------------------------
+// #region
+
+table {
+  // Use
+  --title-width: 24rem;
+
+  background-color: $table-background;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  margin-top: var(--size-margin-top-table);
+  margin-bottom: var(--size-margin-bottom-table);
+  width: 100%;
+  max-width: 100%;
+
+  @include media-breakpoint-up(lg) {
+    --title-width: 32rem;
+  }
+}
+
+// The `table-layout: fixed` property defines the algorithm used to lay out
+// table cells, rows, and columns. The main benefit of table-layout: fixed;
+// is that the table renders much faster. The table and column widths are set
+// by the widths of table and col or by the width of the first row of cells.
+
+.table.has-fixed-layout {
+  table-layout: fixed;
+}
+
+caption {
+  // caption-side: bottom;
+  color: inherit;
+  font-weight: bolder;
+  text-align: left;
+  padding-top: 0;
+  padding-bottom: $size-1;
+  padding-left: calc(var(--size-padding-x-cell) / 2);
+}
+
+th,
+td {
+  border-top: $size-border-width solid $color-ink-border;
+  text-align: left;
+  padding-top: calc(var(--size-padding-y-cell) - #{$size-border-width});
+  padding-right: var(--size-padding-x-cell);
+  padding-bottom: var(--size-padding-y-cell);
+  padding-left: var(--size-padding-x-cell);
+  vertical-align: top;
+
+  &:first-child {
+    padding-left: calc(var(--size-padding-x-cell) / 2);
+  }
+
+  &:last-child {
+    padding-right: calc(var(--size-padding-x-cell) / 2);
+  }
+
+  // Remove margin from the last-child
+  > :last-child { margin-bottom: 0; }
+}
+
+thead th {
+  border-bottom: (2 * $size-border-width) solid $color-ink-border;
+  font-weight: bolder;
+  padding-bottom: calc(var(--size-padding-y-cell) - #{$size-border-width * 2});
+  vertical-align: bottom;
+  position: relative;
+
+  &[colspan] {
+    text-align: center;
+  }
+}
+
+thead th:not(:first-child)::before {
+  background: var(--color-ink-border);
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition: translateY(-50%);
+  width: .1rem;
+  height: $size-line;
+}
+
+th[scope='row'] {
+  border-right: $size-border-width solid $color-ink-border;
+
+  tbody & {
+    background: $color-background-base;
+  }
+}
+
+// Custom header (thead th) widths
+// The width of the cells is valid only in non-responsive tables. For responsive
+// ones, set the width of the nested text blocks. See .table__th & .table__subtitle
+// stylelint-disable block-opening-brace-space-before, rule-empty-line-before
+.table__cell.is-1col  { width: 8.3333333%;}
+.table__cell.is-2col  { width: 16.6666667%; }
+.table__cell.is-3col  { width: 25%; }
+.table__cell.is-4col  { width: 33.3333333%; }
+.table__cell.is-5col  { width: 41.6666667%; }
+.table__cell.is-6col  { width: 50%; }
+.table__cell.is-7col  { width: 58.3333333%; }
+.table__cell.is-8col  { width: 66.6666667%; }
+.table__cell.is-9col  { width: 75%; }
+.table__cell.is-10col { width: 83.3333333%; }
+.table__cell.is-11col { width: 91.6666667%; }
+.table__cell.is-full { width: 100%; }
+// stylelint-enable block-opening-brace-space-before, rule-empty-line-before
+
+.table__th {
+  @extend %text-truncate;
+  color: var(--color-ink-base);
+  display: block;
+  font-weight: 500;
+}
+
+.table__th,
+.report__subtitle {
+  @extend %text-truncate;
+  max-width: var(--title-width);
+}
+
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// Hover effect and zebra striping (deprecated)
+// -----------------------------------------------------------------------------
+
+// #region
+
+// tbody tr:nth-of-type(odd) {
+//   background-color: $table-accent-bg;
+// }
+
+tbody tr:hover {
+  background-color: $table-hover-bg;
+  transition: background-color $motion-duration-sm;
+}
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// Helpers
+// -----------------------------------------------------------------------------
+
+// #region
+
+.table__cell.is-num {
+  text-align: right;
+}
+
+// Row numbers
+tbody {
+  // Start the counter
+  tr {
+    counter-increment: row-number;
+  }
+}
+
+.table__row-number {
+  // Add the counter number
+  &::after {
+    content: counter(row-number);
+  }
+}
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// Responsive table
+// -----------------------------------------------------------------------------
+
+// #region
+
+@mixin table-container {
+  -webkit-overflow-scrolling: touch;
+
+  // Edge shadows
+  background:
+    linear-gradient(to right, $table-background 30%, rgba(255, 255, 255, 0)),
+    linear-gradient(to right, rgba(255, 255, 255, 0), $table-background 70%) 0 100%,
+    radial-gradient(
+      farthest-side at 0% 50%,
+      rgba(0, 0, 0, .2),
+      rgba(0, 0, 0, 0)
+    ),
+    radial-gradient(
+      farthest-side at 100% 50%,
+      rgba(0, 0, 0, .2),
+      rgba(0, 0, 0, 0)
+    )
+    0 100%;
+  background-attachment: local, local, scroll, scroll;
+  background-color: $table-background;
+  background-position: 0 0, 100%, 0 0, 100%;
+  background-repeat: no-repeat;
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+
+  border: .1rem solid $color-ink-border;
+  margin-top: var(--size-margin-top-table);
+  margin-bottom: var(--size-margin-bottom-table);
+
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: inline mandatory;
+  max-inline-size: 100%;
+
+  &:focus {
+    box-shadow: $layer-box-shadow-focus-outline;
+  }
+
+  table {
+    margin: 0;
+    max-width: none;
+    width: auto;
+    min-width: 100%;
+  }
+
+  td,
+  th {
+    scroll-snap-align: start;
+  }
+}
+
+// Generate series of `.table-wrapper-*` classes for configuring the screen
+// size of where our table will overflow.
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  // breakpoint-infix function returns a blank string if smallest (xs) breakpoint,
+  // otherwise returns the name with a dash in front.
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+  .table-wrapper#{$infix} {
+    @include media-breakpoint-down($breakpoint) {
+      @include table-container;
+    }
+  }
+}
+

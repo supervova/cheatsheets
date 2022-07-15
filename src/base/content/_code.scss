@@ -1,0 +1,40 @@
+pre,
+code,
+kbd,
+samp {
+  color: $color-ink-code;
+  font-family: $font-family-code;
+  font-size: 1em;
+  line-height: inherit;
+}
+
+code,
+pre {
+  direction: ltr;
+  hyphens: none;
+  text-align: left;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  tab-size: 2;
+}
+
+pre {
+  // We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a
+  // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
+  // -webkit-overflow-scrolling: touch;
+
+  // Disable auto-hiding scrollbar in legacy Edge to avoid overlap,
+  // making it impossible to interact with the content
+  -ms-overflow-style: scrollbar;
+  white-space: pre-line;
+  padding: 0;
+  overflow: auto;
+  tab-size: 2;
+
+  > code,
+  > .hljs {
+    border-radius: $shape-border-radius-base;
+    padding: 2.3rem var(--size-padding-x-box) 2.5rem;
+  }
+}

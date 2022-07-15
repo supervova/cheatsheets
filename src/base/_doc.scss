@@ -1,0 +1,38 @@
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 62.5%;
+  text-size-adjust: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+// stylelint-disable at-rule-no-vendor-prefix
+@at-root {
+  @-ms-viewport {
+    width: device-width;
+  }
+}
+// stylelint-enable at-rule-no-vendor-prefix
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: $color-background-base;
+  color: $color-ink-base;
+
+  // Use flex to distribute blocks across the entire height of the screen
+  // setting central area flex-growth to 1.
+  // display: flex;
+  // flex-direction: column;
+
+  font-family: $font-family-base;
+  font-size: var(--font-size-base);
+  line-height: var(--font-line-height-base);
+  margin: 0;
+  min-height: 100vh;
+  scrollbar-gutter: stable both-edges;
+  text-align: left;
+  text-align: left;
+}
