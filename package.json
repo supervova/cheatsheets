@@ -8,7 +8,8 @@
     "url": "https://super-mark.ru/"
   },
   "scripts": {
-    "start": "concurrently --kill-others 'gulp s' 'gulp w'"
+    "start": "concurrently --kill-others 'gulp s' 'gulp w'",
+    "deploy": "git subtree push --prefix _site origin gh-pages"
   },
   "engines": {
     "node": ">=10",
