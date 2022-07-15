@@ -13,7 +13,6 @@ categories:
   {%- include details.html title="Слайдер диапазона — `range`" path="how-to/general/range-slider.md" -%}
 </section>
 
-
 <section>
   <h2>Перетаскивание / перетягивание</h2>
   {%- include details.html title="Перетаскиваемый элемент" path="how-to/dragging/draggable-element.md" -%}
@@ -50,5 +49,3 @@ categories:
   {%- include details.html title="Скопировать пример кода со страницы" path="how-to/editing/copy-highlighted-code-to-clipboard.md" -%}
 
 </section>
-
-
