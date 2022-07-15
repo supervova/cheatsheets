@@ -27,6 +27,8 @@ _site
 # LOCAL DEVELOPMENT
 # ------------------------------------------------------------------------------
 
+todo.md
+
 # Editors
 !.vscode/extensions.json
 !.vscode/launch.json

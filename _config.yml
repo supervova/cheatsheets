@@ -69,12 +69,13 @@ exclude:
   - gemfiles
   - gulpfile*
   - js/base
-  # Use trailing slash to keep processing the how-to.md
+    # Use trailing slash to keep processing the how-to.md
   - js/how-to/
   - node_modules
   - package.json
   - readme.md
   - src
+  - todo.md
   - yarn-error.log
   - yarn.lock
 
