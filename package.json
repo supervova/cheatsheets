@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "concurrently --kill-others 'gulp s' 'gulp w'",
-    "deploy": "git subtree push --prefix _site origin gh-pages"
+    "deploy": "cd _site && git add --all && git commit -m 'Deploy updates' && git push origin gh-pages && cd .."
   },
   "engines": {
     "node": ">=10",

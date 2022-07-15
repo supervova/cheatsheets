@@ -291,20 +291,6 @@ const build = series(clean, jekyllBuild, parallel(css, js));
 
 /**
  * -----------------------------------------------------------------------------
- * 📤 DEPLOY
- * -----------------------------------------------------------------------------
- */
-// #region
-
-const ghPages = require('gulp-gh-pages');
-
-function deploy() {
-  return src(`${root.dest.site}/**/*`).pipe(ghPages());
-}
-// #endregion
-
-/**
- * -----------------------------------------------------------------------------
  * ☑️ TASKS
  * -----------------------------------------------------------------------------
  */
@@ -313,7 +299,6 @@ exports.bs = serveBS;
 exports.clean = clean;
 exports.j = jekyllBuild;
 exports.jks = jekyllServe;
-exports.deploy = deploy;
 
 // Base
 exports.js = js;
