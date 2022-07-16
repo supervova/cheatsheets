@@ -11,8 +11,8 @@
 // But for some reason, the watchFiles() does not work in the `serve` series.
 // Therefore, I launch two processes in parallel: `npm start`.
 
-// The last options: symlink, lastRun
-import { src, dest, watch, series, parallel } from 'gulp';
+// The last option: symlink
+import { src, dest, watch, series, parallel, lastRun } from 'gulp';
 
 // GENERAL
 import browserSync from 'browser-sync';
@@ -88,6 +88,11 @@ const paths = {
     },
     watch: [`${root.src}/**/*.js`],
     dest: `${root.dest.assets}/js`,
+  },
+
+  files: {
+    src: `${root.src}/img/*.+(png|jpg|jpeg|webp)`,
+    dest: `${root.dest.assets}/img`,
   },
 };
 // #endregion
@@ -244,6 +249,12 @@ function clean() {
     `${root.src}/**/*.css`,
   ]);
 }
+
+function files() {
+  return src(paths.files.src, { since: lastRun(files) })
+    .pipe(changed(paths.files.dest))
+    .pipe(dest(paths.files.dest));
+}
 // #endregion
 
 /**
@@ -298,6 +309,7 @@ const build = series(clean, jekyllBuild, parallel(css, js));
 // Add-ons
 exports.bs = serveBS;
 exports.clean = clean;
+exports.f = files;
 exports.j = jekyllBuild;
 exports.jks = jekyllServe;
 

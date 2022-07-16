@@ -1,3 +1,9 @@
+---
+layout: compress
+# Compress layout has been known to mangle markup and break JavaScript…
+# especially if inline // comments are present. Be careful
+---
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'ru' }}" prefix="og: http://ogp.me/ns#">
   {%- include head.html -%}
