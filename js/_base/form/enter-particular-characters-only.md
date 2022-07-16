@@ -10,7 +10,7 @@
 <input type="color">`
 ```
 
-Другие специальные типы можно найти [здесь](https://developer.mozilla.org/ru/docs/Web/HTML/Element/input).
+Другие специальные типы можно найти [здесь](https://developer.mozilla.org/ru/docs/Web/HTML/Element/input){:target="_blank"}.
 
 #### Атрибут `pattern` элемента `input`
 

@@ -36,7 +36,7 @@ if (
 }
 ```
 
-См. [Intersection Observer API](https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API)
+См. [Intersection Observer API](https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API){:target="_blank"}.
 
 #### Альтернативный способ
 

@@ -47,6 +47,17 @@ cont text = document.querySelectorAll('p');
 text[0].style.backgroundColor = 'red';
 ```
 
+Чтобы применять к набору элементов методы массива — `map` или `filter` — его надо конвертировать в массив.
+
+```javascript
+const cells =
+  [].slice.call(table.querySelectorAll('th, td'));
+
+// Или с помощью spread-оператора
+const cells = table.querySelectorAll('th, td');
+const texts = [...cells].map(n => n.textContent)
+```
+
 #### Устаревшие методы: по HTML-тегу или по CSS-классу
 
 Возвращают псевдомассивы всех указанных узлов или элементов страницы определенного класса.

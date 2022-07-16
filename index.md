@@ -5,7 +5,7 @@ categories:
 is-index: true
 # has-patronymic: true
 ---
-
+<h2>Grace Nguyen</h2>
 <section>
   <h2>Теория</h2>
   {%- include details.html title="Основы" path="js/_base/theory/base.md" -%}
@@ -120,7 +120,7 @@ is-index: true
   <h2>AJAX</h2>
   {%- include details.html title="Получить данные с сервера — `fetch`" path="js/_base/ajax/fetch-get-data.md" -%}
   {%- include details.html title="Послать файлы на сервер — `fetch`" path="js/_base/ajax/fetch-upload-files.md" -%}
-  {%- include details.html title="" path="js/_base/ajax/xml-http-request.md" -%}
+  {%- include details.html title="Послать файлы на сервер — `XMLHttpRequest`" path="js/_base/ajax/xml-http-request.md" -%}
 </section>
 
 <section id="topic-common-checks">

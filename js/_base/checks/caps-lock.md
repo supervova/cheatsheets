@@ -32,7 +32,7 @@ textboxEle.addEventListener('keydown', (e) => {
 
 `getModifierState()` не позволяет одновременно определить нажатый Shift. Поэтому добавляем еще один слушатель на `keypress`.
 
-⚠️ MDN и VS Code считают метод `navigator.platform` устаревшим. И ходят слухи, что Chrome планирует отказаться от поддержки. Хотя в официальных документах таких планов найти не удалось. В качестве альтернативы MDN рекомендует использовать `navigator.userAgentData`. Однако поддержка браузерами нового метода пока сильно ограничена. Поэтому проверку на macOS делаем двойной. См. [здесь](https://caniuse.com/?search=userAgentData) и [здесь](https://bit.ly/3HVZHzY).
+⚠️ MDN и VS Code считают метод `navigator.platform` устаревшим. И ходят слухи, что Chrome планирует отказаться от поддержки. Хотя в официальных документах таких планов найти не удалось. В качестве альтернативы MDN рекомендует использовать `navigator.userAgentData`. Однако поддержка браузерами нового метода пока сильно ограничена. Поэтому проверку на macOS делаем двойной. См. [здесь](https://caniuse.com/?search=userAgentData){:target="_blank"} и [здесь](https://bit.ly/3HVZHzY){:target="_blank"}.
 
 ```javascript
 textboxEle.addEventListener('keypress', (e) => {

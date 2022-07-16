@@ -110,4 +110,4 @@ resizers.forEach((resizer) => {
 });
 ```
 
-См. демо на [HTML DOM](https://htmldom.dev/demo/make-a-resizable-element/)
+См. демо на [HTML DOM](https://htmldom.dev/demo/make-a-resizable-element/){:target="_blank"}.

@@ -86,7 +86,7 @@ for (const x in numbers) {
 
 #### `continue`
 
-⛔️ [Не рекомендуется](https://eslint.org/docs/rules/no-continue). Лучше использовать условие для подходящих элементов, а не для исключений. В примере это было бы if `(y !== 5) { console.log(`${y}, `); }`.
+⛔️ [Не рекомендуется](https://eslint.org/docs/rules/no-continue){:target="_blank"}. Лучше использовать условие для подходящих элементов, а не для исключений. В примере это было бы if `(y !== 5) { console.log(`${y}, `); }`.
 
 ```javascript
 for (let y = 0; y < 10; y++) {

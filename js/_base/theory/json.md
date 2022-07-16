@@ -6,11 +6,11 @@ JSON — это текстовой формат для хранения и пе�
 
 ```javascript
 const str = `{ "names":
-  [
-    {"first": "Hakuna", "last": "Matata" }
-    {"first": "Jane", "last": "Doe" }
-    {"first": "Air", "last": "Jordan"}
-  ]
+  [
+    {"first": "Hakuna", "last": "Matata" }
+    {"first": "Jane", "last": "Doe" }
+    {"first": "Air", "last": "Jordan"}
+  ]
 }`;
 ```
 

@@ -2,7 +2,7 @@
 
 #### Опция `preventScroll` метода `focus()`
 
-⚠️  [Значительный процент браузеров](https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option) не поддерживает эту опцию. Решение надо принимать по ситуации.
+⚠️  [Значительный процент браузеров](https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option){:target="_blank"} не поддерживает эту опцию. Решение надо принимать по ситуации.
 
 ```javascript
 element.focus({preventScroll: true});

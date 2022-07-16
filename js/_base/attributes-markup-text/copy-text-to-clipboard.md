@@ -35,4 +35,4 @@ navigator.clipboard.writeText(myTextarea.value);
 // document.body.removeChild(myTextarea);
 ```
 
-См. «[Clipboard_API](https://developer.mozilla.org/ru/docs/Web/API/Clipboard_API).
+См. «[Clipboard_API](https://developer.mozilla.org/ru/docs/Web/API/Clipboard_API){:target="_blank"}.

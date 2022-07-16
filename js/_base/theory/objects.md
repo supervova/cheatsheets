@@ -25,8 +25,8 @@ fullName = student.fullName();
 
 В JS всё является объектом. В том числе — так называемые DOM-коллекции. Это объекты (псевдомассивы), представляющие список узлов (DOM-элементов).
 
-- [`HTMLCollection`](https://developer.mozilla.org/ru/docs/Web/API/HTMLCollection) — коллекция HTML-элементов;
-- [`NodeList`](https://developer.mozilla.org/ru/docs/Web/API/NodeList) — коллекция DOM-узлов (кроме HTML-элементов, это текстовые узлы, комментарии и др.), возвращаемая такими это коллекция узлов, возвращаемая такими методами, как `Node.childNodes` и `document.querySelectorAll`.
+- [`HTMLCollection`](https://developer.mozilla.org/ru/docs/Web/API/HTMLCollection){:target="_blank"} — коллекция HTML-элементов;
+- [`NodeList`](https://developer.mozilla.org/ru/docs/Web/API/NodeList){:target="_blank"} — коллекция DOM-узлов (кроме HTML-элементов, это текстовые узлы, комментарии и др.), возвращаемая такими это коллекция узлов, возвращаемая такими методами, как `Node.childNodes` и `document.querySelectorAll`.
 
 DOM-коллекции бывают:
 

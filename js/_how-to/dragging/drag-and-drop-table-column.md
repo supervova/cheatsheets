@@ -262,4 +262,4 @@ const mouseUpHandler = () => {
 };
 ```
 
-См. демо на [HTML DOM](https://htmldom.dev/demo/drag-and-drop-table-column/).
+См. демо на [HTML DOM](https://htmldom.dev/demo/drag-and-drop-table-column/){:target="_blank"}.

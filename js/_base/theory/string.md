@@ -59,4 +59,4 @@ const text = ' Hello World!';
 const result = text.trim();
 ```
 
-[Другие методы](https://www.w3schools.com/jsref/jsref_obj_string.asp)
+[Другие методы](https://www.w3schools.com/jsref/jsref_obj_string.asp){:target="_blank"}.

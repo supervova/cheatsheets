@@ -95,4 +95,4 @@ regexp = new RegExp('ab+c', 'i');
 
 Есть выражения, которые могут «подвесить» интерпретатор JavaScript с потреблением 100% процессора. В браузере движок перестанет реагировать на другие события и понадобится перезагрузить страницу. Происходит это тогда, когда шаблон недостаточно конкретен и интерпретатору приходится перебирать миллионы вариантов.
 
-Решить проблему помогает [опережающая проверка](https://learn.javascript.ru/regexp-catastrophic-backtracking#operezhayuschaya-proverka-v-pomosch).
+Решить проблему помогает [опережающая проверка](https://learn.javascript.ru/regexp-catastrophic-backtracking#operezhayuschaya-proverka-v-pomosch){:target="_blank"}.

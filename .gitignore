@@ -27,6 +27,8 @@ _site
 # LOCAL DEVELOPMENT
 # ------------------------------------------------------------------------------
 
+# Working stuff
+deploy.sh
 todo.md
 
 # Editors

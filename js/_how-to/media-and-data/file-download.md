@@ -25,7 +25,7 @@ document.body.removeChild(link);
 
 Часто надо загрузить динамически создаваемое содержание: текст, изображение, JSON.
 
-Сгенерированное содержание (в примере — JSON), можно перевести в [объект Blob](https://developer.mozilla.org/ru/docs/Web/API/Blob) и затем вызвать событие `click`, как описывалось выше.
+Сгенерированное содержание (в примере — JSON), можно перевести в [объект Blob](https://developer.mozilla.org/ru/docs/Web/API/Blob){:target="_blank"} и затем вызвать событие `click`, как описывалось выше.
 
 ```javascript
 // Создаем Blob c JSON'ом

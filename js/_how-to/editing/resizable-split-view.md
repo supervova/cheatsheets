@@ -224,4 +224,4 @@ const mouseMoveHandler = (e) => {
 };
 ```
 
-См. демо на [HTML DOM](https://htmldom.dev/demo/make-a-draggable-element/).
+См. демо на [HTML DOM](https://htmldom.dev/demo/make-a-draggable-element/){:target="_blank"}.
