@@ -9,7 +9,11 @@
   },
   "scripts": {
     "start": "concurrently --kill-others 'gulp s' 'gulp w'",
-    "deploy": "cd _site && git add --all && git commit -m 'Deploy updates' && git push origin gh-pages && cd .."
+    "deploy": "yarn prebuid && yarn build && yarn pages && yarn postpages",
+    "prebuid": "rm -rf _site && git worktree add _site gh-pages",
+    "build": "gulp --p",
+    "pages": "cd _site && git add --all && git commit -m 'Deploy updates' && git push origin gh-pages",
+    "postpages": "git worktree remove _site && cd .."
   },
   "engines": {
     "node": ">=10",

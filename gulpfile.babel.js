@@ -270,7 +270,7 @@ function watchFiles() {
   watch(paths.jekyll.watch, series(jekyllBuild));
 }
 
-const serve = series(clean, jekyllBuild, parallel(css, js), jekyllServe);
+const serve = series(clean, jekyllBuild, parallel(css, js, files), jekyllServe);
 
 /* Use Browsersync for testing on mobile devices. Use html paths instead
 extension-free permalinks */
@@ -298,7 +298,7 @@ function serveBS(done) {
  */
 // #region
 
-const build = series(clean, jekyllBuild, parallel(css, js));
+const build = series(clean, jekyllBuild, parallel(css, js, files));
 // #endregion
 
 /**
