@@ -239,4 +239,4 @@ const swap = (nodeA, nodeB) => {
 };
 ```
 
-Демо-виджет и полный код можно посмотреть на [HTML DOM](https://htmldom.dev/drag-and-drop-element-in-a-list/)
+См. демо на [HTML DOM](https://htmldom.dev/demo/drag-and-drop-element-in-a-list/index.html)

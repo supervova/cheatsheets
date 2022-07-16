@@ -57,7 +57,9 @@ defaults:
       lang: ru
 
 # Exclude from processing.
-# The following items will not be processed.
+# We use underscore prefix in js/[_base, _how-to] to prevent the processing
+# of the folder contents into multiple files but using it as trigger for jekyll
+# build.
 exclude:
   - '*.pug'
   - .jekyll-assets-cache
@@ -68,9 +70,6 @@ exclude:
   - _tmp
   - gemfiles
   - gulpfile*
-  - js/base
-    # Use trailing slash to keep processing the how-to.md
-  - js/how-to/
   - node_modules
   - package.json
   - readme.md

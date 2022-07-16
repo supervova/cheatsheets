@@ -70,13 +70,14 @@ const paths = {
   },
 
   jekyll: {
-    docs: [
+    watch: [
       `${root.base}/*.html`,
       `${root.base}/_config.yml`,
       `${root.base}/_data/*.yml`,
       `${root.base}/_includes/*.html`,
       `${root.base}/_layouts/*.html`,
       `${root.base}/_posts/*.*`,
+      `${root.base}/**/*.md`,
     ],
   },
 
@@ -255,7 +256,7 @@ function clean() {
 function watchFiles() {
   watch(paths.css.watch, series(css));
   watch(paths.js.src.main, series(js));
-  watch(paths.jekyll.docs, series(jekyllBuild));
+  watch(paths.jekyll.watch, series(jekyllBuild));
 }
 
 const serve = series(clean, jekyllBuild, parallel(css, js), jekyllServe);
