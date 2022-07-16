@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript. Практическое пособие</title>
-<meta name="description" content="Интерфейсы: редактирование, общее {%- include details.html title=&quot;Пользовательское контекстное меню на ПКМ&quot; path=&quot;_how-to/general/custom-context-menu-at-clicked-position.md&quot; -%} {%- include details.html title=&quot;Вывод элемента в область видимости прокручиваемого контейнера&quot; path=&quot;_how-to/general/scroll-to-be-visible.md&quot; -%} {%- include details.html title=&quot;Пользовательская полоса прокрутки&quot; path=&quot;_how-to/general/custom-scrollbar.md&quot; -%} {%- include details.html title=&quot;Слайдер диапазона — `range`&quot; path=&quot;_how-to/general/range-slider.md&quot; -%} Перетаскивание / перетягивание {%- include details.html title=&quot;Перетаскиваемый элемент&quot;...">
+<meta name="description" content="Интерфейсы: редактирование, общее {%- include details.html title=&quot;Пользовательское контекстное меню на ПКМ&quot; path=&quot;_how-to/general/custom-context-menu-at-clicked-position.md&quot; id=&quot;topic-context-menu&quot; -%} {%- include details.html title=&quot;Вывод элемента в область видимости прокручиваемого контейнера&quot; path=&quot;_how-to/general/scroll-to-be-visible.md&quot; -%} {%- include details.html title=&quot;Пользовательская полоса прокрутки&quot; path=&quot;_how-to/general/custom-scrollbar.md&quot; -%} {%- include details.html title=&quot;Слайдер диапазона — `range`&quot; path=&quot;_how-to/general/range-slider.md&quot; -%} {%- include details.html title=&quot;Плавная прокрутка — пользовательская...">
 <meta name="author" content="Vladimir Nikishin, www.super-mark.ru">
 <meta name="apple-mobile-web-app-title" content="Шпоры">
 <meta name="theme-color" content="#e5effa"><link rel="canonical" href="https://cheatsheets.super-mark.ru/js/how-to"><link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220716-1204">
+<link rel="stylesheet" href="/assets/css/style.css?20220716-2045">
 </head>
 <body>
     <main class="main">
@@ -19,7 +19,7 @@
   <input class="input__field is-lg" id="topic-filter" type="text" placeholder="Фильтр записей: введите запрос">
 
   <section>
-  <h2>Интерфейсы: редактирование, общее</h2><details class="accordion">
+  <h2>Интерфейсы: редактирование, общее</h2><details class="accordion" id="topic-context-menu">
   <summary class="accordion__header">
     <h3>Пользовательское контекстное меню на ПКМ</h3>
   </summary>
@@ -559,6 +559,148 @@
 </code></pre></div>      </div>
     </div>
 </details>
+<details class="accordion">
+  <summary class="accordion__header">
+    <h3>Плавная прокрутка — пользовательская настройка анимации</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Плавную прокрутку легко можно сделать в JS…</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">({</span> <span class="na">behavior</span><span class="p">:</span> <span class="dl">'</span><span class="s1">smooth</span><span class="dl">'</span> <span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>… Или CSS.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">scroll-behavior</span><span class="o">:</span> <span class="nt">smooth</span><span class="o">;</span>
+</code></pre></div>      </div>
+
+      <p>Но оба метода не дают разработчику изменить анимацию прокрутки.</p>
+
+      <p>В этом разделе разбираем сложный, но дающий большую свободу метод.</p>
+
+      <p>Разметка:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"trigger"</span> <span class="na">href=</span><span class="s">"#section-1"</span><span class="nt">&gt;&lt;/a&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"trigger"</span> <span class="na">href=</span><span class="s">"#section-2"</span><span class="nt">&gt;&lt;/a&gt;</span>
+...
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"section-1"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"section-2"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+
+      <p>После клика по ссылка страница должны прокрутиться к соответствующему разделу.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">triggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
+<span class="err">  </span><span class="dl">'</span><span class="s1">.trigger</span><span class="dl">'</span>
+<span class="p">);</span>
+
+<span class="nx">triggers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">ele</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">clickHandler</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p><code class="language-plaintext highlighter-rouge">clickHandler</code> обрабатывает событие <code class="language-plaintext highlighter-rouge">click</code> по ссылке. Определяет целевой раздел страницы по атрибуту <code class="language-plaintext highlighter-rouge">href</code> и прокручивает страницу к нужному разделу:</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">clickHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+<span class="err">  </span><span class="c1">// Получаем id целевой секции из атрибута `href`</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">href</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">href</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">href</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+
+<span class="err">  </span><span class="nx">scrollToTarget</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <h4 id="scrolltotarget">Функция <code class="language-plaintext highlighter-rouge">scrollToTarget</code></h4>
+
+      <p>Чтобы прокрутить страницу к нужному место можно использовать метод <code class="language-plaintext highlighter-rouge">window.scrollTo(0, y)</code> который прокручивает к месту по указанному расстоянию от верхнего края.</p>
+
+      <ul>
+        <li>Начальная точка прокрутки — текущее положение страницы в области просмотра — <code class="language-plaintext highlighter-rouge">window.pageYOffset</code>.</li>
+        <li>Конечная точка — расстояние до целевого раздела. Значение можно получить с помощью <code class="language-plaintext highlighter-rouge">target.getBoundingClientRect().top</code>.</li>
+        <li>Продолжительность прокрутки указывается в миллисекундах. В примере — 800 мс.</li>
+      </ul>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">duration</span> <span class="o">=</span> <span class="mi">800</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">scrollToTarget</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="p">{</span> <span class="nx">top</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">target</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">startPos</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span><span class="p">;</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">diff</span> <span class="o">=</span> <span class="nx">top</span><span class="p">;</span>
+
+<span class="err">  </span><span class="kd">let</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="err">  </span><span class="kd">let</span> <span class="nx">requestId</span><span class="p">;</span>
+
+<span class="err">  </span><span class="kd">const</span> <span class="nx">loop</span> <span class="o">=</span> <span class="p">(</span><span class="nx">currentTime</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">startTime</span> <span class="o">=</span> <span class="nx">currentTime</span><span class="p">;</span>
+<span class="err">    </span><span class="p">}</span>
+
+<span class="err">    </span><span class="c1">// Время в миллисекундах</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">currentTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+
+<span class="err">    </span><span class="kd">const</span> <span class="nx">percent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">time</span> <span class="o">/</span> <span class="nx">duration</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="err">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">startPos</span> <span class="o">+</span> <span class="nx">diff</span> <span class="o">*</span> <span class="nx">percent</span><span class="p">);</span>
+
+<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">time</span> <span class="o">&lt;</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">      </span><span class="c1">// Продолжаем прокрутку</span>
+<span class="err">      </span><span class="nx">requestId</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span>
+<span class="err">    </span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">      </span><span class="c1">// Останавливаем</span>
+<span class="err">      </span><span class="nb">window</span><span class="p">.</span><span class="nx">cancelAnimationFrame</span><span class="p">(</span><span class="nx">requestId</span><span class="p">);</span>
+<span class="err">    </span><span class="p">}</span>
+<span class="err">  </span><span class="p">};</span>
+<span class="err">  </span><span class="nx">requestId</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>Здесь мы указываем браузеру выполнить функцию <code class="language-plaintext highlighter-rouge">loop</code> до того, как появится целевой радел. При первом выполнении функции инициализируется переменная <code class="language-plaintext highlighter-rouge">starttime</code> — как текущая временная метка <code class="language-plaintext highlighter-rouge">currenttime</code>.</p>
+
+      <p>Затем мы вычисляем время, затраченное к текущему моменту на прокрутку:</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">currentTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+</code></pre></div>      </div>
+
+      <p>Зная затраченное время и заданную продолжительность, нетрудно рассчитать процент выполнения полного цикла прокрутки. И затем передать данные в метод <code class="language-plaintext highlighter-rouge">scrollTo</code> для расчета конечной координаты.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// `percent` — это диапазон от 0 до 1</span>
+<span class="kd">const</span> <span class="nx">percent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">time</span> <span class="o">/</span> <span class="nx">duration</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">startPos</span> <span class="o">+</span> <span class="nx">diff</span> <span class="o">*</span> <span class="nx">percent</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Если затраченное время меньше заданной продолжительности, продолжаем прокрутку. В противном случае останавливаемся.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">time</span> <span class="o">&lt;</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">requestId</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">  </span><span class="nb">window</span><span class="p">.</span><span class="nx">cancelAnimationFrame</span><span class="p">(</span><span class="nx">requestId</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>☝️🧐 Часто для расчетов анимации используется <code class="language-plaintext highlighter-rouge">setTimeout()</code> или <code class="language-plaintext highlighter-rouge">setInterval()</code>, но использованный  в примере<a href="https://developer.mozilla.org/ru/docs/Web/API/window/requestAnimationFrame" target="_blank">requestAnimationFrame</a> метод лучше по показателям производительности.</p>
+
+      <h4 id="section-8">Настройка анимации</h4>
+
+      <p>До сих пор анимация осуществлялась неестественно прямолинейно. Но мы можем добавить <a href="https://1loc.dev/misc/easing-functions/" target="_blank">любой эффект замедления</a>.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">easeInQuad</span> <span class="o">=</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">return</span> <span class="nx">t</span> <span class="o">*</span> <span class="nx">t</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">loop</span> <span class="o">=</span> <span class="p">(</span><span class="nx">currentTime</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">percent</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">time</span> <span class="o">/</span> <span class="nx">duration</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="err">  </span><span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span>
+<span class="err">    </span><span class="mi">0</span><span class="p">,</span> <span class="nx">startPos</span> <span class="o">+</span> <span class="nx">diff</span> <span class="o">*</span> <span class="nx">easeInQuad</span><span class="p">(</span><span class="nx">percent</span><span class="p">)</span>
+<span class="err">  </span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>См. демо на <a href="https://htmldom.dev/demo/scroll-to-an-element-smoothly/index.htm" target="_blank">HTML DOM</a>.</p>
+    </div>
+</details>
 </section>
 
 <section>
@@ -751,7 +893,7 @@
 <span class="p">});</span>
 </code></pre></div>      </div>
 
-      <p>См. демо на <a href="https://htmldom.dev/demo/make-a-resizable-element/">HTML DOM</a></p>
+      <p>См. демо на <a href="https://htmldom.dev/demo/make-a-resizable-element/" target="_blank">HTML DOM</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -777,7 +919,7 @@
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-8">Делаем элементы перетягиваемыми</h4>
+      <h4 id="section-9">Делаем элементы перетягиваемыми</h4>
 
       <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
 
@@ -846,7 +988,7 @@
 <span class="p">});</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-9">Добавим заглушку</h4>
+      <h4 id="section-10">Добавим заглушку</h4>
 
       <p>Во время перетаскивания списка, место элемента, изъятого из потока, смыкается. Например, место перетягиваемого элемента <code class="language-plaintext highlighter-rouge">C</code> сразу же займет его «сосед снизу» — <code class="language-plaintext highlighter-rouge">D</code>. Это может нарушить спокойствие пользователя и, чтобы предупредить такие сдвиги, надо создать заглушку той же высоты, что и изъятый элемент.</p>
 
@@ -904,7 +1046,7 @@ D
 E
 </code></pre></div>      </div>
 
-      <h4 id="section-10">Определяем куда пользователь перетягивает элемент: вверх или вниз</h4>
+      <h4 id="section-11">Определяем куда пользователь перетягивает элемент: вверх или вниз</h4>
 
       <p>Во-первых, нам потребуется вспомогательная функция, определяющая в каком положении находится перетаскиваемый элемент в текущий момент: сверху или снизу указанного в параметре соседа.</p>
 
@@ -990,7 +1132,7 @@ E
 <span class="p">};</span>
 </code></pre></div>      </div>
 
-      <p>См. демо на <a href="https://htmldom.dev/demo/drag-and-drop-element-in-a-list/index.html">HTML DOM</a></p>
+      <p>См. демо на <a href="https://htmldom.dev/demo/drag-and-drop-element-in-a-list/index.html" target="_blank">HTML DOM</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -1067,7 +1209,7 @@ E
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"container"</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-11">Прокрутка в указанное положение</h4>
+      <h4 id="section-12">Прокрутка в указанное положение</h4>
 
       <p>Поскольку благодаря <code class="language-plaintext highlighter-rouge">overflow: auto;</code> содержание контейнера становится прокручиваемым, мы можем прокрутить его до указанной точки с помощью свойств <code class="language-plaintext highlighter-rouge">scrollTop</code> и <code class="language-plaintext highlighter-rouge">scrollLeft</code>.</p>
 
@@ -1076,7 +1218,7 @@ E
 <span class="nx">ele</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-12">Теперь то же самое — перетягиванием</h4>
+      <h4 id="section-13">Теперь то же самое — перетягиванием</h4>
 
       <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
 
@@ -1144,7 +1286,7 @@ E
 
       <p>Также во время перетягивания мы определяем порядковый номер перетаскиваемого элемента списка. И переносим соответствующую строку исходной таблицы до или после «строки назначения».</p>
 
-      <h4 id="section-13">Обработчики событий</h4>
+      <h4 id="section-14">Обработчики событий</h4>
 
       <p>Как нам известно из раздела о <a href="#topic-dnd-li">перетягивании элементов списка</a>, первым делом надо создать обработчики для трёх событий.</p>
 
@@ -1205,7 +1347,7 @@ E
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-14">Клонируем таблицу, когда пользователь тащит строку</h4>
+      <h4 id="section-15">Клонируем таблицу, когда пользователь тащит строку</h4>
 
       <p>Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.</p>
 
@@ -1362,7 +1504,7 @@ E
 <span class="p">};</span>
 </code></pre></div>      </div>
 
-      <p>См. демо на <a href="https://htmldom.dev/demo/drag-and-drop-table-row/">HTML DOM</a>.</p>
+      <p>См. демо на <a href="https://htmldom.dev/demo/drag-and-drop-table-row/" target="_blank">HTML DOM</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -1374,7 +1516,7 @@ E
 
       <p>Также во время перетягивания мы определяем порядковый номер перетаскиваемого и целевого элемента списка. И меняем местами соответствующие колонки.</p>
 
-      <h4 id="section-15">Обработчики событий</h4>
+      <h4 id="section-16">Обработчики событий</h4>
 
       <p>Как нам известно из раздела о <a href="#topic-dnd-li">перетягивании элементов списка</a>, первым делом надо создать обработчики для трёх событий.</p>
 
@@ -1429,7 +1571,7 @@ E
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-16">Клонируем таблицу, когда пользователь перетягивает колонку</h4>
+      <h4 id="section-17">Клонируем таблицу, когда пользователь перетягивает колонку</h4>
 
       <p>Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.</p>
 
@@ -1628,7 +1770,7 @@ E
 <span class="p">};</span>
 </code></pre></div>      </div>
 
-      <p>См. демо на <a href="https://htmldom.dev/demo/drag-and-drop-table-column/">HTML DOM</a>.</p>
+      <p>См. демо на <a href="https://htmldom.dev/demo/drag-and-drop-table-column/" target="_blank">HTML DOM</a>.</p>
     </div>
 </details>
 </section>
@@ -1933,7 +2075,7 @@ https://bit.ly/3v5Iu3p */</span>
     <h3>Виджет сравнения фотографий</h3>
   </summary>
   <div class="accordion__body">
-      <h4 id="section-17">Разметка</h4>
+      <h4 id="section-18">Разметка</h4>
 
       <p>Виджет состоит из контейнера и трех компонентов.</p>
 
@@ -1985,7 +2127,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-18">Обработчики</h4>
+      <h4 id="section-19">Обработчики</h4>
 
       <p>Когда пользователь передвигает грань, мы рассчитываем насколько переместился курсор и, исходя из этого, — новое положение грани и ширину измененного изображения.</p>
 
@@ -2056,7 +2198,7 @@ https://bit.ly/3v5Iu3p */</span>
     <h3>Загрузка файла: по клику и при переходе на страницу</h3>
   </summary>
   <div class="accordion__body">
-      <h4 id="section-19">Загрузка по клику</h4>
+      <h4 id="section-20">Загрузка по клику</h4>
 
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/path/to/file"</span> <span class="na">download</span><span class="nt">&gt;</span>Download<span class="nt">&lt;/a&gt;</span>
 </code></pre></div>      </div>
@@ -2077,11 +2219,11 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-20">Загрузка сгенерированного содержания</h4>
+      <h4 id="section-21">Загрузка сгенерированного содержания</h4>
 
       <p>Часто надо загрузить динамически создаваемое содержание: текст, изображение, JSON.</p>
 
-      <p>Сгенерированное содержание (в примере — JSON), можно перевести в <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob">объект Blob</a> и затем вызвать событие <code class="language-plaintext highlighter-rouge">click</code>, как описывалось выше.</p>
+      <p>Сгенерированное содержание (в примере — JSON), можно перевести в <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob" target="_blank">объект Blob</a> и затем вызвать событие <code class="language-plaintext highlighter-rouge">click</code>, как описывалось выше.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем Blob c JSON'ом</span>
 <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello Word</span><span class="dl">'</span> <span class="p">});</span>
@@ -2129,7 +2271,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="nx">myFrame</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-21">Получение данных</h4>
+      <h4 id="section-22">Получение данных</h4>
 
       <p>Чтобы получить данные, в <code class="language-plaintext highlighter-rouge">iframe</code> или на родительской странице нужно добавить слушателя события <code class="language-plaintext highlighter-rouge">message</code>.</p>
 
@@ -2144,7 +2286,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-22">Совет</h4>
+      <h4 id="section-23">Совет</h4>
 
       <p>Если обмен данными осуществляется с разными <code class="language-plaintext highlighter-rouge">iframe</code>, можно добавить свойство-«подпись».</p>
 
@@ -2190,7 +2332,7 @@ https://bit.ly/3v5Iu3p */</span>
     <h3>Индикатор загрузки `iframe`</h3>
   </summary>
   <div class="accordion__body">
-      <h4 id="section-23">Разметка и стили</h4>
+      <h4 id="section-24">Разметка и стили</h4>
 
       <p>Изначально <code class="language-plaintext highlighter-rouge">iframe</code> скрыто (<code class="language-plaintext highlighter-rouge">opacity: 0</code>). А индикатор выравнен по центру.</p>
 
@@ -2241,7 +2383,7 @@ https://bit.ly/3v5Iu3p */</span>
     <h3>Экспорт HTML-таблицы в CSV</h3>
   </summary>
   <div class="accordion__body">
-      <h4 id="section-24">Экспорт ячеек</h4>
+      <h4 id="section-25">Экспорт ячеек</h4>
 
       <p>В примере мы переведем данные таблицы <code class="language-plaintext highlighter-rouge">exportMe</code> в CSV по нажатию кнопки <code class="language-plaintext highlighter-rouge">export</code>.</p>
 
@@ -2307,6 +2449,375 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="err">  </span><span class="nx">download</span><span class="p">(</span><span class="nx">csv</span><span class="p">,</span> <span class="dl">'</span><span class="s1">download.csv</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion">
+  <summary class="accordion__header">
+    <h3>Изменение ширины колонки в таблице</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Разметка:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"table"</span> <span class="na">id=</span><span class="s">"resize-me"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/table&gt;</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-26">«Ручки»</h4>
+
+      <p>Для каждой колонки создадим «ручки» — абсолютно позиционированные относительно ячейки первой строки элементы, которые будет перемещать пользователь. Они нужны потому, что края колонок не являются DOM-элементами.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.table</span> <span class="nt">th</span> <span class="p">{</span>
+<span class="err">  </span><span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.resizer</span> <span class="p">{</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="n">col-resize</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Создадим «ручки» в JS.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">resize-me</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">cols</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">th</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">cols</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">col</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">resizer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">resizer</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="err">  </span><span class="c1">// Сделаем высоту ручки равной высоте таблицы</span>
+<span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">table</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+
+<span class="err">  </span><span class="c1">// Прикрепим ручку к колонке</span>
+<span class="err">  </span><span class="nx">col</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">resizer</span><span class="p">);</span>
+
+<span class="err">  </span><span class="c1">// До этой функции скоро доберемся</span>
+<span class="err">  </span><span class="nx">createResizableColumn</span><span class="p">(</span><span class="nx">col</span><span class="p">,</span> <span class="nx">resizer</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div>      </div>
+
+      <h4 id="section-27">Обработчики событий</h4>
+
+      <p>Напишем функцию <code class="language-plaintext highlighter-rouge">createResizableColumn</code> с двумя параметрами:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">col</code> — ячейка первой строки таблицы</li>
+        <li><code class="language-plaintext highlighter-rouge">resizer</code> — «ручка»</li>
+      </ul>
+
+      <p>In order to allow user to resize <code class="language-plaintext highlighter-rouge">col</code>, we have to handle three events:</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">mousedown</code> — добавляем обработчик на первые ячейки колонок для отслеживания позиции курсора.</li>
+        <li><code class="language-plaintext highlighter-rouge">mousemove</code> — добавляем обработчик на документ для рассчета дальности перемещения курсора и соответствующего изменения ширины колонки.</li>
+        <li><code class="language-plaintext highlighter-rouge">mouseup</code> — добавляем обработчик на документ, чтобы по окончанию перетягивания удалить обработчики, установленные ранее.</li>
+      </ul>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">createResizableColumn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">col</span><span class="p">,</span> <span class="nx">resizer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Текущая позиция мыши</span>
+<span class="err">  </span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err">  </span><span class="kd">let</span> <span class="nx">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="err">  </span><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="c1">// Определяем, как далеко курсор переместился</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">dx</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">x</span><span class="p">;</span>
+
+<span class="err">    </span><span class="c1">// Соответственно, меняем ширину колонки</span>
+<span class="err">    </span><span class="nx">col</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">w</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="p">};</span>
+
+<span class="err">  </span><span class="cm">/* Удаляем слушатели и обработчики, как только
+  пользователь заканчивает перетаскивание ручки */</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span>
+<span class="err">      </span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseMoveHandler</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span>
+<span class="err">      </span><span class="dl">'</span><span class="s1">mouseup</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseUpHandler</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">  </span><span class="p">};</span>
+
+<span class="err">  </span><span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="c1">// Текущая позиция курсора</span>
+<span class="err">    </span><span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">;</span>
+
+<span class="err">    </span><span class="c1">// Рассчитываем текущую ширину колонки</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">col</span><span class="p">);</span>
+<span class="err">    </span><span class="nx">w</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+<span class="err">    </span><span class="c1">// Устанавливаем слушатели на документ</span>
+<span class="err">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
+<span class="err">      </span><span class="dl">'</span><span class="s1">mousemove</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseMoveHandler</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
+<span class="err">      </span><span class="dl">'</span><span class="s1">mouseup</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseUpHandler</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">  </span><span class="p">};</span>
+
+<span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
+<span class="err">    </span><span class="dl">'</span><span class="s1">mousedown</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseDownHandler</span>
+<span class="err">  </span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-28">Выделение ручки</h4>
+
+      <p>Окрасим ручки в синий на <code class="language-plaintext highlighter-rouge">:hover</code>.</p>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.resizer</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nc">.resizing</span> <span class="p">{</span>
+<span class="err">  </span><span class="nl">border-right</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Добавим ручкам класс <code class="language-plaintext highlighter-rouge">is-resizing</code> — на то время, пока пользователь их перетягивает.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">is-resizing</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">is-resizing</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>См. демо на <a href="https://htmldom.dev/demo/resize-columns-of-a-table/index.html" target="_blank">HTML DOM</a>.</p>
+
+    </div>
+</details>
+<details class="accordion">
+  <summary class="accordion__header">
+    <h3>Показать или скрыть колонки таблицы</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Каркас разметки:</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">"table"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"menu"</span><span class="nt">&gt;&lt;/ul&gt;</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-29">Меню</h4>
+
+      <p>Меню содержит чекбоксы для скрытия каждой из колонок.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"menu"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>
+    <span class="c">&lt;!-- Чекбокс первой колонки --&gt;</span>
+    <span class="nt">&lt;label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span><span class="nt">&gt;</span>Название столбца
+    <span class="nt">&lt;/label&gt;</span>
+    <span class="c">&lt;!-- Остальные колонки ... --&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div>      </div>
+
+      <p>Чтобы добавить в меню все нужные чекбоксы, переберем ячейки первой строки таблицы.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">menu</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">menu</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">table</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">th</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">headers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">th</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Создаем чекбокс для каждой колонки</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">li</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">li</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">label</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">label</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">checkbox</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">checkbox</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="err">  </span><span class="c1">// Надпись в `label` соответствует названию столбца</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">th</span><span class="p">.</span><span class="nx">textContent</span><span class="p">);</span>
+
+<span class="err">  </span><span class="nx">label</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">checkbox</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">label</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+
+<span class="err">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">menu</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>Для переключения видимости будем обрабатывать событие <code class="language-plaintext highlighter-rouge">change</code>.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">headers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">th</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Создаем чекбокс для каждой колонки</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="err">  </span><span class="c1">// Обрабатываем событие</span>
+<span class="err">  </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">checked</span>
+<span class="err">      </span><span class="p">?</span> <span class="nx">showColumn</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span>
+<span class="err">      </span><span class="p">:</span> <span class="nx">hideColumn</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="err">  </span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>К функциям <code class="language-plaintext highlighter-rouge">showColumn</code> и <code class="language-plaintext highlighter-rouge">hideColumn</code> вернемся чуть позже.</p>
+
+      <h4 id="section-30">Как показать/скрыть меню</h4>
+
+      <ul>
+        <li>Меню должно открываться, когда пользователь кликает на первую строку таблицы.</li>
+        <li>Меню должно скрываться, когда пользователь кликает за его пределами.</li>
+      </ul>
+
+      <p>Контекстному меню посвящен <a href="#topic-context-menu">собственный раздел</a>. А в данном случае оно будет реализовано так.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">thead</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">thead</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="cm">/* Обработаем событие `contextmenu` на первой
+строке таблицы */</span>
+<span class="nx">thead</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+<span class="err">  </span><span class="c1">// Покажем меню</span>
+<span class="err">  </span><span class="c1">// ...</span>
+
+<span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">documentClickHandler</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Скроем меню на клике за его границами</span>
+<span class="kd">const</span> <span class="nx">documentClickHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-31">Переключаем колонки</h4>
+
+      <p>Кликая определенный чекбокс в меню, мы должны скрывать и показывать колонки по соответствующему индексу в <code class="language-plaintext highlighter-rouge">NodeList</code>.</p>
+
+      <p>Для того, чтобы выбрать все ячейки в колонке, мы каждой добавим атрибут <code class="language-plaintext highlighter-rouge">data-column-index</code> с общим значением.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Получаем количество колонок</span>
+<span class="kd">const</span> <span class="nx">numColumns</span> <span class="o">=</span> <span class="nx">headers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+
+<span class="cm">/* Чтобы позже использовать метод `filter`,
+сохраним набор элементов, как массив */</span>
+<span class="kd">const</span> <span class="nx">cells</span> <span class="o">=</span>
+<span class="err">  </span><span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">th, td</span><span class="dl">'</span><span class="p">));</span>
+
+<span class="nx">cells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">cell</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span>
+<span class="err">    </span><span class="dl">'</span><span class="s1">data-column-index</span><span class="dl">'</span><span class="p">,</span> <span class="nx">index</span> <span class="o">%</span> <span class="nx">numColumns</span>
+<span class="err">  </span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>Прячем колонки с определенным значением <code class="language-plaintext highlighter-rouge">data-column-index</code>.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">hideColumn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">cells</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="k">return</span> <span class="p">(</span>
+<span class="err">        </span><span class="nx">cell</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-column-index</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span>
+<span class="err">        </span><span class="s2">`</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">`</span>
+<span class="err">      </span><span class="p">);</span>
+<span class="err">    </span><span class="p">})</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">cell</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">    </span><span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>Показываем колонки.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">showColumn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">cells</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="k">return</span> <span class="p">(</span>
+<span class="err">        </span><span class="nx">cell</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-column-index</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span>
+<span class="err">        </span><span class="s2">`</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">`</span>
+<span class="err">      </span><span class="p">);</span>
+<span class="err">    </span><span class="p">})</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">cell</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+<span class="err">    </span><span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-32">Не позволяем скрыть последнюю оставшуюся колонку</h4>
+
+      <p>Добавим чекбоксам в меню тот же <code class="language-plaintext highlighter-rouge">data</code>-атрибут, что и ячейкам.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">headers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">th</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Создаем чекбокс для каждой колонки</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="err">  </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-column-index</span><span class="dl">'</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>Когда колонка скрыта, мы добавляем еще один пользовательский атрибут, для того чтобы поменить скрытую колонку.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">hideColumn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">cells</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="c1">// ...</span>
+<span class="err">    </span><span class="p">})</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="c1">// ...</span>
+<span class="err">      </span><span class="nx">cell</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-shown</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">false</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>Подсчитав, сколько колонок уже скрыто, мы можем блокировать чекбокс, связанной с единственной оставшейся.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">hideColumn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Сколько колонок уже скрыто?</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">numHiddenCols</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">headers</span><span class="p">].</span><span class="nx">filter</span><span class="p">((</span><span class="nx">th</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="nx">th</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-shown</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">false</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}).</span><span class="nx">length</span><span class="p">;</span>
+
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">numHiddenCols</span> <span class="o">===</span> <span class="nx">numColumns</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="cm">/* Когда остается одна видимая колонка,
+    блокируем соответствующий чекбокс */</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">shownColumnIndex</span> <span class="o">=</span> <span class="nx">thead</span>
+<span class="err">      </span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">[data-shown="true"]</span><span class="dl">'</span><span class="p">)</span>
+<span class="err">      </span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-column-index</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="err">    </span><span class="kd">const</span> <span class="nx">checkbox</span> <span class="o">=</span> <span class="nx">menu</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span>
+<span class="err">      </span><span class="s2">`
+        [type="checkbox"]
+        [data-column-index="</span><span class="p">${</span><span class="nx">shownColumnIndex</span><span class="p">}</span><span class="s2">"]
+      `</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">    </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>Меняем атрибут <code class="language-plaintext highlighter-rouge">data-shown</code>, когда колонка видна.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">cell</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-shown</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">showColumn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">cells</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="c1">// ...</span>
+<span class="err">    </span><span class="p">})</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="c1">// ...</span>
+<span class="err">      </span><span class="nx">cell</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-shown</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="p">});</span>
+
+<span class="err">  </span><span class="nx">menu</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">[type="checkbox"][disabled]</span><span class="dl">'</span><span class="p">)</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">checkbox</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">disabled</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>См. демо на <a href="https://htmldom.dev/demo/show-or-hide-table-columns/index.html" target="_blank">HTML DOM</a>.</p>
     </div>
 </details>
 </section>
@@ -2390,7 +2901,7 @@ https://bit.ly/3v5Iu3p */</span>
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.right</span> <span class="p">{</span> <span class="nl">flex</span><span class="p">:</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span><span class="p">;}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-25">Исправляем мигание курсора</h4>
+      <h4 id="section-33">Исправляем мигание курсора</h4>
 
       <p>Когда пользователь перетаскивает ручку, мы должны поменять курсор.</p>
 
@@ -2439,7 +2950,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-26">Перетягивание по вертикали</h4>
+      <h4 id="section-34">Перетягивание по вертикали</h4>
 
       <p>Вместо того, чтобы обновлять значение ширины левой части представления, будем обновлять высоту верхней части.</p>
 
@@ -2530,7 +3041,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
-      <p>См. демо на <a href="https://htmldom.dev/demo/make-a-draggable-element/">HTML DOM</a>.</p>
+      <p>См. демо на <a href="https://htmldom.dev/demo/make-a-draggable-element/" target="_blank">HTML DOM</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -2557,7 +3068,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-27">2. С помощью обработчиков событий</h4>
+      <h4 id="section-35">2. С помощью обработчиков событий</h4>
 
       <p>Тот же <code class="language-plaintext highlighter-rouge">div</code> с <code class="language-plaintext highlighter-rouge">id</code> и <code class="language-plaintext highlighter-rouge">data</code>-атрибутом. Делаем <code class="language-plaintext highlighter-rouge">placeholder</code> по значению <code class="language-plaintext highlighter-rouge">data</code>-атрибута. На фокусе очищаем содержимое элемента, если оно совпадает с текстом <code class="language-plaintext highlighter-rouge">placeholder</code>‘а. На <code class="language-plaintext highlighter-rouge">blur</code>‘е, если пользователь ничего не ввёл, возвращаем <code class="language-plaintext highlighter-rouge">placeholder</code>.</p>
 
@@ -2656,7 +3167,7 @@ https://bit.ly/3v5Iu3p */</span>
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220716-1204"></script>
+<script src="/assets/js/main.js?20220716-2045"></script>
 
 <script>
   hljs.highlightAll();

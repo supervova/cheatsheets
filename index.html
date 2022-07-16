@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220716-1204">
+<link rel="stylesheet" href="/assets/css/style.css?20220716-2045">
 </head>
 <body>
     <main class="main">
@@ -259,7 +259,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 
       <h4 id="section-8">Побитовые операторы</h4>
 
-      <p>Интерпретируют операнды как последовательность из 32 битов (нулей и единиц). <a href="https://learn.javascript.ru/bitwise-operators">Подробнее</a>.</p>
+      <p>Интерпретируют операнды как последовательность из 32 битов (нулей и единиц). <a href="https://learn.javascript.ru/bitwise-operators" target="_blank">Подробнее</a>.</p>
 
       <p>|       | Значение                          | Пример  | ==           | Итог | Дес. |
 | —– | ——————————— | ——- | ———— | —- | —- |
@@ -654,7 +654,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 
       <h4 id="continue"><code class="language-plaintext highlighter-rouge">continue</code></h4>
 
-      <p>⛔️ <a href="https://eslint.org/docs/rules/no-continue">Не рекомендуется</a>. Лучше использовать условие для подходящих элементов, а не для исключений. В примере это было бы if <code class="language-plaintext highlighter-rouge">(y !== 5) { console.log(</code>${y}, <code class="language-plaintext highlighter-rouge">); }</code>.</p>
+      <p>⛔️ <a href="https://eslint.org/docs/rules/no-continue" target="_blank">Не рекомендуется</a>. Лучше использовать условие для подходящих элементов, а не для исключений. В примере это было бы if <code class="language-plaintext highlighter-rouge">(y !== 5) { console.log(</code>${y}, <code class="language-plaintext highlighter-rouge">); }</code>.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 <span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">y</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
@@ -774,7 +774,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
 </code></pre></div>      </div>
 
-      <p><a href="https://www.w3schools.com/jsref/jsref_obj_string.asp">Другие методы</a></p>
+      <p><a href="https://www.w3schools.com/jsref/jsref_obj_string.asp" target="_blank">Другие методы</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -1001,8 +1001,8 @@ consectetur adipisicing elit. Sed repellendus. */</span>
       <p>В JS всё является объектом. В том числе — так называемые DOM-коллекции. Это объекты (псевдомассивы), представляющие список узлов (DOM-элементов).</p>
 
       <ul>
-        <li><a href="https://developer.mozilla.org/ru/docs/Web/API/HTMLCollection"><code class="language-plaintext highlighter-rouge">HTMLCollection</code></a> — коллекция HTML-элементов;</li>
-        <li><a href="https://developer.mozilla.org/ru/docs/Web/API/NodeList"><code class="language-plaintext highlighter-rouge">NodeList</code></a> — коллекция DOM-узлов (кроме HTML-элементов, это текстовые узлы, комментарии и др.), возвращаемая такими это коллекция узлов, возвращаемая такими методами, как <code class="language-plaintext highlighter-rouge">Node.childNodes</code> и <code class="language-plaintext highlighter-rouge">document.querySelectorAll</code>.</li>
+        <li><a href="https://developer.mozilla.org/ru/docs/Web/API/HTMLCollection" target="_blank"><code class="language-plaintext highlighter-rouge">HTMLCollection</code></a> — коллекция HTML-элементов;</li>
+        <li><a href="https://developer.mozilla.org/ru/docs/Web/API/NodeList" target="_blank"><code class="language-plaintext highlighter-rouge">NodeList</code></a> — коллекция DOM-узлов (кроме HTML-элементов, это текстовые узлы, комментарии и др.), возвращаемая такими это коллекция узлов, возвращаемая такими методами, как <code class="language-plaintext highlighter-rouge">Node.childNodes</code> и <code class="language-plaintext highlighter-rouge">document.querySelectorAll</code>.</li>
       </ul>
 
       <p>DOM-коллекции бывают:</p>
@@ -1126,7 +1126,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 
       <p>Есть выражения, которые могут «подвесить» интерпретатор JavaScript с потреблением 100% процессора. В браузере движок перестанет реагировать на другие события и понадобится перезагрузить страницу. Происходит это тогда, когда шаблон недостаточно конкретен и интерпретатору приходится перебирать миллионы вариантов.</p>
 
-      <p>Решить проблему помогает <a href="https://learn.javascript.ru/regexp-catastrophic-backtracking#operezhayuschaya-proverka-v-pomosch">опережающая проверка</a>.</p>
+      <p>Решить проблему помогает <a href="https://learn.javascript.ru/regexp-catastrophic-backtracking#operezhayuschaya-proverka-v-pomosch" target="_blank">опережающая проверка</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -1141,11 +1141,11 @@ consectetur adipisicing elit. Sed repellendus. */</span>
       <p>Пример записи объекта в JSON.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">`{ "names":
-  [
-    {"first": "Hakuna", "last": "Matata" }
-    {"first": "Jane", "last": "Doe" }
-    {"first": "Air", "last": "Jordan"}
-  ]
+  [
+    {"first": "Hakuna", "last": "Matata" }
+    {"first": "Jane", "last": "Doe" }
+    {"first": "Air", "last": "Jordan"}
+  ]
 }`</span><span class="p">;</span>
 </code></pre></div>      </div>
 
@@ -1329,7 +1329,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
     <h3>Промисы</h3>
   </summary>
   <div class="accordion__body">
-      <p><a href="https://learn.javascript.ru/promise-basics">Промис</a> (promise; термин не переводится) – это специальный объект, который связывает «создающий» и «потребляющий» код.</p>
+      <p><a href="https://learn.javascript.ru/promise-basics" target="_blank">Промис</a> (promise; термин не переводится) – это специальный объект, который связывает «создающий» и «потребляющий» код.</p>
 
       <ul>
         <li>«Создающий» код делает что-то, что занимает время. Например, загружает данные по сети или поставлен на таймер.</li>
@@ -1475,7 +1475,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>Инструкция <code class="language-plaintext highlighter-rouge">throw</code> позволяет создавать пользовательские сообщения об ошибках (генерировать исключения в профессиональных терминах). Выполнение текущей функции будет остановлено (инструкции после <code class="language-plaintext highlighter-rouge">throw</code> не будут выполнены), и управление будет передано в ближайший блок <code class="language-plaintext highlighter-rouge">catch</code>. Если <code class="language-plaintext highlighter-rouge">catch</code> ниже нет, выполнение программы будет остановлено. <a href="https://www.w3schools.com/js/js_errors.asp">Подробнее</a>.</p>
+      <p>Инструкция <code class="language-plaintext highlighter-rouge">throw</code> позволяет создавать пользовательские сообщения об ошибках (генерировать исключения в профессиональных терминах). Выполнение текущей функции будет остановлено (инструкции после <code class="language-plaintext highlighter-rouge">throw</code> не будут выполнены), и управление будет передано в ближайший блок <code class="language-plaintext highlighter-rouge">catch</code>. Если <code class="language-plaintext highlighter-rouge">catch</code> ниже нет, выполнение программы будет остановлено. <a href="https://www.w3schools.com/js/js_errors.asp" target="_blank">Подробнее</a>.</p>
 
       <p>Необязательный раздел <code class="language-plaintext highlighter-rouge">finally</code> выполняется в любом случае:</p>
 
@@ -1565,6 +1565,16 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cont</span> <span class="nx">text</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">p</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">text</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div>      </div>
+
+      <p>Чтобы применять к набору элементов методы массива — <code class="language-plaintext highlighter-rouge">map</code> или <code class="language-plaintext highlighter-rouge">filter</code> — его надо конвертировать в массив.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cells</span> <span class="o">=</span>
+<span class="err">  </span><span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">th, td</span><span class="dl">'</span><span class="p">));</span>
+
+<span class="c1">// Или с помощью spread-оператора</span>
+<span class="kd">const</span> <span class="nx">cells</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">th, td</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">texts</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">cells</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">n</span> <span class="o">=&gt;</span> <span class="nx">n</span><span class="p">.</span><span class="nx">textContent</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <h4 id="html----css-">Устаревшие методы: по HTML-тегу или по CSS-классу</h4>
@@ -1869,9 +1879,9 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">title</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <p>Задать или поменять значения атрибутов можно двумя способами. С помощью метода <code class="language-plaintext highlighter-rouge">setAttribute</code> или напрямую поменяв свойство DOM-узла. Разница между свойствами и атрибутами незначительная, <a href="https://bit.ly/3I6LtfS">но есть</a>.</p>
+      <p>Задать или поменять значения атрибутов можно двумя способами. С помощью метода <code class="language-plaintext highlighter-rouge">setAttribute</code> или напрямую поменяв свойство DOM-узла. Разница между свойствами и атрибутами незначительная, <a href="https://bit.ly/3I6LtfS" target="_blank">но есть</a>.</p>
 
-      <p>Установка свойств короче — это плюс. Кроме того, свойства однозначно предпочтительней <a href="https://bit.ly/3I4Y9UD">для операций со строковыми стилями</a>.</p>
+      <p>Установка свойств короче — это плюс. Кроме того, свойства однозначно предпочтительней <a href="https://bit.ly/3I4Y9UD" target="_blank">для операций со строковыми стилями</a>.</p>
 
       <p>Вместе с тем, нужно учитывать, что не браузер создает DOM-свойства не для всех атрибутов. Например, свойства <code class="language-plaintext highlighter-rouge">role</code> нет и его нужно задавать через <code class="language-plaintext highlighter-rouge">setAttribute</code>.</p>
 
@@ -2642,7 +2652,7 @@ reject(true), если скрипт не загрузится — наприме
 <span class="c1">// document.body.removeChild(myTextarea);</span>
 </code></pre></div>      </div>
 
-      <p>См. «<a href="https://developer.mozilla.org/ru/docs/Web/API/Clipboard_API">Clipboard_API</a>.</p>
+      <p>См. «<a href="https://developer.mozilla.org/ru/docs/Web/API/Clipboard_API" target="_blank">Clipboard_API</a>.</p>
     </div>
 </details>
 <details class="accordion">
@@ -3226,7 +3236,7 @@ reject(true), если скрипт не загрузится — наприме
 
       <h4 id="preventscroll--focus">Опция <code class="language-plaintext highlighter-rouge">preventScroll</code> метода <code class="language-plaintext highlighter-rouge">focus()</code></h4>
 
-      <p>⚠️  <a href="https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option">Значительный процент браузеров</a> не поддерживает эту опцию. Решение надо принимать по ситуации.</p>
+      <p>⚠️  <a href="https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option" target="_blank">Значительный процент браузеров</a> не поддерживает эту опцию. Решение надо принимать по ситуации.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">focus</span><span class="p">({</span><span class="na">preventScroll</span><span class="p">:</span> <span class="kc">true</span><span class="p">});</span>
 </code></pre></div>      </div>
@@ -3332,7 +3342,7 @@ reject(true), если скрипт не загрузится — наприме
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"color"</span><span class="nt">&gt;</span>`
 </code></pre></div>      </div>
 
-      <p>Другие специальные типы можно найти <a href="https://developer.mozilla.org/ru/docs/Web/HTML/Element/input">здесь</a>.</p>
+      <p>Другие специальные типы можно найти <a href="https://developer.mozilla.org/ru/docs/Web/HTML/Element/input" target="_blank">здесь</a>.</p>
 
       <h4 id="pattern--input">Атрибут <code class="language-plaintext highlighter-rouge">pattern</code> элемента <code class="language-plaintext highlighter-rouge">input</code></h4>
 
@@ -3567,7 +3577,7 @@ reject(true), если скрипт не загрузится — наприме
     <h3>Сериализация данных формы</h3>
   </summary>
   <div class="accordion__body">
-      <p>Функция <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F">сериализует данные формы</a>: названия и значения полей.</p>
+      <p>Функция <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F" target="_blank">сериализует данные формы</a>: названия и значения полей.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">serialize</span> <span class="o">=</span> <span class="p">(</span><span class="nx">formEle</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="cm">/* Получаем все элементы формы `formEle`
@@ -3810,11 +3820,9 @@ reject(true), если скрипт не загрузится — наприме
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3></h3>
+    <h3>Послать файлы на сервер — `XMLHttpRequest`</h3>
   </summary>
   <div class="accordion__body">
-      <h3 id="xmlhttprequest">Послать файлы на сервер — <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code></h3>
-
       <p>☝️🧐 Лучше использовать <code class="language-plaintext highlighter-rouge">fetch</code>. Встроенный объект <code class="language-plaintext highlighter-rouge">XMLHttpRequest</code> приводится здесь только для полноты картины.</p>
 
       <p>Функция <code class="language-plaintext highlighter-rouge">upload</code> посылает выбранные в <code class="language-plaintext highlighter-rouge">fileEle</code> файлы на сервер.</p>
@@ -3939,7 +3947,7 @@ reject(true), если скрипт не загрузится — наприме
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>См. <a href="https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API">Intersection Observer API</a></p>
+      <p>См. <a href="https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API" target="_blank">Intersection Observer API</a>.</p>
 
       <h4 id="section-75">Альтернативный способ</h4>
 
@@ -4023,7 +4031,7 @@ reject(true), если скрипт не загрузится — наприме
 
       <p><code class="language-plaintext highlighter-rouge">getModifierState()</code> не позволяет одновременно определить нажатый Shift. Поэтому добавляем еще один слушатель на <code class="language-plaintext highlighter-rouge">keypress</code>.</p>
 
-      <p>⚠️ MDN и VS Code считают метод <code class="language-plaintext highlighter-rouge">navigator.platform</code> устаревшим. И ходят слухи, что Chrome планирует отказаться от поддержки. Хотя в официальных документах таких планов найти не удалось. В качестве альтернативы MDN рекомендует использовать <code class="language-plaintext highlighter-rouge">navigator.userAgentData</code>. Однако поддержка браузерами нового метода пока сильно ограничена. Поэтому проверку на macOS делаем двойной. См. <a href="https://caniuse.com/?search=userAgentData">здесь</a> и <a href="https://bit.ly/3HVZHzY">здесь</a>.</p>
+      <p>⚠️ MDN и VS Code считают метод <code class="language-plaintext highlighter-rouge">navigator.platform</code> устаревшим. И ходят слухи, что Chrome планирует отказаться от поддержки. Хотя в официальных документах таких планов найти не удалось. В качестве альтернативы MDN рекомендует использовать <code class="language-plaintext highlighter-rouge">navigator.userAgentData</code>. Однако поддержка браузерами нового метода пока сильно ограничена. Поэтому проверку на macOS делаем двойной. См. <a href="https://caniuse.com/?search=userAgentData" target="_blank">здесь</a> и <a href="https://bit.ly/3HVZHzY" target="_blank">здесь</a>.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">textboxEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keypress</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">isMac</span> <span class="o">=</span>
@@ -4775,7 +4783,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220716-1204"></script>
+<script src="/assets/js/main.js?20220716-2045"></script>
 
 <script>
   hljs.highlightAll();
