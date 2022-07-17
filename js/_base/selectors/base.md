@@ -47,7 +47,7 @@ cont text = document.querySelectorAll('p');
 text[0].style.backgroundColor = 'red';
 ```
 
-Чтобы применять к набору элементов методы массива — `map` или `filter` — его надо конвертировать в массив.
+Чтобы применять к набору элементов методы массива — `map` или `filter` — надо создать из набора элементов массив.
 
 ```javascript
 const cells =

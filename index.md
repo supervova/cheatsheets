@@ -164,3 +164,5 @@ is-index: true
   {%- include details.html title="Прокрутка к любой области страницы: наверх, к определенному разделу и т.д." path="js/_base/window/scroll-to-any-place-on-page.md" -%}
   {%- include details.html title="Смена favicon сайта" path="js/_base/window/change-favicon.md" -%}
 </section>
+
+См. также [практическое пособие](/js/how-to.html).
