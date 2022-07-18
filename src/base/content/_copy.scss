@@ -164,6 +164,11 @@ ul {
   }
 }
 
+ol {
+  list-style: decimal-leading-zero;
+  padding-left: $size-3;
+}
+
 ol ol,
 ul ul,
 ul ol {

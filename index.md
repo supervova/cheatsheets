@@ -5,7 +5,7 @@ categories:
 is-index: true
 # has-patronymic: true
 ---
-<h2>Grace Nguyen</h2>
+
 <section>
   <h2>Теория</h2>
   {%- include details.html title="Основы" path="js/_base/theory/base.md" -%}
@@ -26,6 +26,7 @@ is-index: true
   {%- include details.html title="Глобальные функции и объекты" path="js/_base/theory/global-functions.md" -%}
   {%- include details.html title="Промисы" path="js/_base/theory/promises.md" -%}
   {%- include details.html title="Ошибки" path="js/_base/theory/errors.md" -%}
+  {%- include details.html title="Правила хорошего кода" path="js/_base/theory/best-practicies.md" -%}
 </section>
 
 <section>
