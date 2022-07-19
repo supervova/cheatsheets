@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220719-1150">
+<link rel="stylesheet" href="/assets/css/style.css?20220719-1237">
 </head>
 <body>
     <main class="main">
@@ -144,6 +144,11 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 
 <span class="c1">// null</span>
 <span class="nx">a</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="cm">/* Символ — примитивный тип данных, который
+может быть использован, как ключ для свойства
+объекта */</span>
+<span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="nb">Symbol</span><span class="p">();</span>
 
 <span class="c1">// Массив</span>
 <span class="kd">const</span> <span class="nx">sheets</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">HTML</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">CSS</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">JS</span><span class="dl">'</span><span class="p">];</span>
@@ -1641,7 +1646,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
         <li>Избегать глобальных переменных.</li>
         <li>Объявлять/инициализировать переменные и классы вверху программы.</li>
         <li>Никогда не использовать <code class="language-plaintext highlighter-rouge">new</code> и экземпляры встроенных классов для присвоения значений примитивного типа.</li>
-        <li>И вообще никаких <code class="language-plaintext highlighter-rouge">new</code>.</li>
+        <li>И вообще избегать <code class="language-plaintext highlighter-rouge">new</code>.</li>
         <li>Остерегаться случайного преобразования типов.</li>
         <li>Использовать тройное равно для сравнения.</li>
         <li>Функции: JSDoc-комментарии и параметры по умолчанию.</li>
@@ -1679,16 +1684,20 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 
       <h4 id="new---------">3) Никогда не использовать <code class="language-plaintext highlighter-rouge">new</code> и экземпляры встроенных классов для присвоения значений примитивного типа</h4>
 
-      <p>Строки, числа и логические типы данных можно преобразовывать, если надо, и сравнивать. Объекты сравнивать между собой или с примитивами нельзя. eslint: no-new-wrappers</p>
+      <p>Строки, числа, логические типы данных можно преобразовывать, если надо, и сравнивать. Объекты сравнивать между собой или с примитивами нельзя. eslint: no-new-wrappers</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// ⛔️</span>
 </code></pre></div>      </div>
 
-      <h4 id="new-object-string-number-boolean-array--function">4) И вообще НИКАКИХ new Object(), String(), Number(), Boolean(), Array() и Function()</h4>
+      <h4 id="new------object-array-function">4) Также не использовать оператор <code class="language-plaintext highlighter-rouge">new</code> для создания экземпляров встроенных классов <code class="language-plaintext highlighter-rouge">Object</code>, <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">Function</code></h4>
 
       <p>Это усложняет код и замедляет его выполнение.</p>
 
-      <p>Исключение — <code class="language-plaintext highlighter-rouge">new RegExp()</code>, которое используется, когда надо создать регулярное выражение «на лету» из динамически сгенерированной строки.</p>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span> <span class="c1">// ⛔️</span>
+<span class="kd">const</span> <span class="nx">myObject</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// 👍</span>
+</code></pre></div>      </div>
+
+      <p>Ограничения не означает полного запрета на оператор <code class="language-plaintext highlighter-rouge">new</code>. Ег нужно использовать для создания экземпляров пользовательских объектов, и некоторых встроенных объектов. Например, <code class="language-plaintext highlighter-rouge">new RegExp()</code> используется, когда надо создать регулярное выражение «на лету» из динамически сгенерированной строки. А <code class="language-plaintext highlighter-rouge">new Event()</code> для создания пользовательского события.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// новый объект</span>
 <span class="kd">const</span> <span class="nx">x1</span> <span class="o">=</span> <span class="p">{};</span>
@@ -5249,7 +5258,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220719-1150"></script>
+<script src="/assets/js/main.js?20220719-1237"></script>
 
 <script>
   hljs.highlightAll();
