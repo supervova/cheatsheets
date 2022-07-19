@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220719-1237">
+<link rel="stylesheet" href="/assets/css/style.css?20220719-1259">
 </head>
 <body>
     <main class="main">
@@ -1646,7 +1646,7 @@ consectetur adipisicing elit. Sed repellendus. */</span>
         <li>Избегать глобальных переменных.</li>
         <li>Объявлять/инициализировать переменные и классы вверху программы.</li>
         <li>Никогда не использовать <code class="language-plaintext highlighter-rouge">new</code> и экземпляры встроенных классов для присвоения значений примитивного типа.</li>
-        <li>И вообще избегать <code class="language-plaintext highlighter-rouge">new</code>.</li>
+        <li>Также избегать <code class="language-plaintext highlighter-rouge">new</code> для создания экземпляров <code class="language-plaintext highlighter-rouge">Object</code>, <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">Function</code>.</li>
         <li>Остерегаться случайного преобразования типов.</li>
         <li>Использовать тройное равно для сравнения.</li>
         <li>Функции: JSDoc-комментарии и параметры по умолчанию.</li>
@@ -1687,6 +1687,12 @@ consectetur adipisicing elit. Sed repellendus. */</span>
       <p>Строки, числа, логические типы данных можно преобразовывать, если надо, и сравнивать. Объекты сравнивать между собой или с примитивами нельзя. eslint: no-new-wrappers</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// ⛔️</span>
+</code></pre></div>      </div>
+
+      <p><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Symbol" target="_blank">Новые символы</a> создаются с помощью функции <code class="language-plaintext highlighter-rouge">Symbol()</code>.  Следовательно, оператор <code class="language-plaintext highlighter-rouge">new</code> в данном случае не просто не рекомендован, а вызовет ошибку.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sym</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Symbol</span><span class="p">();</span> <span class="c1">// ⛔️ TypeError</span>
+<span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nb">Symbol</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// 👍</span>
 </code></pre></div>      </div>
 
       <h4 id="new------object-array-function">4) Также не использовать оператор <code class="language-plaintext highlighter-rouge">new</code> для создания экземпляров встроенных классов <code class="language-plaintext highlighter-rouge">Object</code>, <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">Function</code></h4>
@@ -1986,6 +1992,16 @@ consectetur adipisicing elit. Sed repellendus. */</span>
         </li>
         <li><a href="https://github.com/airbnb/javascript" target="_blank">Оригинал руководства</a></li>
         <li><a href="https://github.com/uprock/javascript">Перевод</a> (устаревшей версии){:target=”_blank”}</li>
+      </ul>
+    </div>
+</details>
+<details class="accordion">
+  <summary class="accordion__header">
+    <h3>Углубленное изучение</h3>
+  </summary>
+  <div class="accordion__body">
+      <ul>
+        <li><strong>Символ</strong> — уникальный и неизменяемый примитивный тип данных, который может быть использован как ключ для свойств объектов. См. в <a href="https://www.w3schools.com/js/js_es6.asp#mark_symbol" target="_blank">W3Schools</a> и «<a href="https://learn.javascript.ru/symbol" target="_blank">современном учебнике</a>».</li>
       </ul>
     </div>
 </details>
@@ -5258,7 +5274,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220719-1237"></script>
+<script src="/assets/js/main.js?20220719-1259"></script>
 
 <script>
   hljs.highlightAll();
