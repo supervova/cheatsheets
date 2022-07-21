@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220720-1210">
+<link rel="stylesheet" href="/assets/css/style.css?20220721-1131">
 </head>
 <body>
     <main class="main">
@@ -36,7 +36,7 @@
 
       <h4 id="section">Предотвращаем вызов стандартного контекстного меню</h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">element</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">element</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 <span class="p">});</span>
@@ -63,7 +63,7 @@
 
       <p>Рассчитываем позицию меню по позиции мышки.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
@@ -79,7 +79,7 @@
 
       <h4 id="section-2">Закрываем меню по клику за его пределами</h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="cm">/* ...
   Добавляем вложенный слушатель */</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">docClickHandler</span><span class="p">);</span>
@@ -109,7 +109,7 @@
   <div class="accordion__body">
       <p>Функция <code class="language-plaintext highlighter-rouge">scrollToBeVisible</code> перемещает элемент, переданный в первый параметр, в область видимости контейнера, переданного во второй параметр. См. также раздел <a href="/#topic-is-visible">«Виден ли элемент в области просмотра блока с прокруткой»</a></p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scrollToBeVisible</span> <span class="o">=</span> <span class="p">(</span><span class="nx">ele</span><span class="p">,</span> <span class="nx">container</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scrollToBeVisible</span> <span class="o">=</span> <span class="p">(</span><span class="nx">ele</span><span class="p">,</span> <span class="nx">container</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">eleTop</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">offsetTop</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">eleBottom</span> <span class="o">=</span> <span class="nx">eleTop</span> <span class="o">+</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">;</span>
 
@@ -207,7 +207,7 @@
 
       <p>Установим скроллбар в правый верхний угол.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrapper</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">wrapper</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">content</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">anchor</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">anchor</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">scrollbar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">scrollbar</span><span class="dl">'</span><span class="p">);</span>
@@ -257,7 +257,7 @@
 
       <p>Рассчитываем высоту бегунка: пропорционально отношению высоты содержания и высоты контейнера.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">track</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">track</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">track</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">track</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">thumb</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">thumb</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="kd">const</span> <span class="nx">scrollRatio</span> <span class="o">=</span>
@@ -269,7 +269,7 @@
 
       <p>Подробнее о технике <a href="#topic-drag-to-scroll">см. здесь</a>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span> <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span> <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
 
 <span class="kd">const</span> <span class="nx">mouseDownThumbHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span>
@@ -303,7 +303,7 @@
 
       <p>Когда пользователь перетягивает бегунок, он также прокручивает содержание элемента <code class="language-plaintext highlighter-rouge">content</code>. Для того, чтобы обновлять положение бегунка назначим обработчик события <code class="language-plaintext highlighter-rouge">scroll</code> на элемент <code class="language-plaintext highlighter-rouge">content</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scrollContentHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scrollContentHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">    </span><span class="nx">thumb</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s2">`
       </span><span class="p">${(</span><span class="nx">content</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span>
@@ -319,7 +319,7 @@
 
       <p>Для этого способа прокрутки мы должны снова рассчитать свойство <code class="language-plaintext highlighter-rouge">scrollTop</code> элемента <code class="language-plaintext highlighter-rouge">content</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">trackClickHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">trackClickHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">bound</span> <span class="o">=</span> <span class="nx">track</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">percentage</span> <span class="o">=</span>
 <span class="err">    </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">bound</span><span class="p">.</span><span class="nx">top</span><span class="p">)</span> <span class="o">/</span> <span class="nx">bound</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
@@ -452,7 +452,7 @@
 
       <p><code class="language-plaintext highlighter-rouge">input[type='range']</code> поддерживается абсолютным абсолютным большинством браузеров. Но, если потребуется, можно добавить проверку.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isRangeInputSupported</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isRangeInputSupported</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">range</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="cm">/* Если браузер не поддерживает поле `range`,
@@ -490,7 +490,7 @@
 
       <p>Назначим на бегунок обработчик события <code class="language-plaintext highlighter-rouge">mousedown</code>, чтобы сделать его перетаскиваемым. В обработчик будет сохранятся позиция элемента.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">thumb</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">thumb</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">thumb</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">thumb</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">thumb</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
 
 <span class="c1">// The current position of mouse</span>
@@ -516,7 +516,7 @@
 
       <p>Когда бегунок перемещаемся, мы можем рассчитать расстояние, которое проделал курсор — это будет разница между исходной и текущей позицией. С этими данными мы можем рассчитать и ширину левой части дорожки.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Как далеко мышь продвинулась</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dx</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">x</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">y</span><span class="p">;</span>
@@ -716,7 +716,7 @@
 
       <p>Стили:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="nx">draggable</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="nx">draggable</span> <span class="p">{</span>
 <span class="err">    </span><span class="c1">// Indicate the element draggable</span>
 <span class="err">    </span><span class="nx">cursor</span><span class="p">:</span> <span class="nx">move</span><span class="p">;</span>
 
@@ -736,7 +736,7 @@
         <li><code class="language-plaintext highlighter-rouge">mouseup</code> на этом событии удалим обработчики, установленные с предыдущими двумя.</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Текущая позиция мышки</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Текущая позиция мышки</span>
 <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
@@ -923,7 +923,7 @@
 
       <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Элемент, перетаскиваемый в данный момент</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Элемент, перетаскиваемый в данный момент</span>
 <span class="kd">let</span> <span class="nx">draggingEle</span><span class="p">;</span>
 
 <span class="c1">// Текущая позиция курсора относительно перетаскиваемого элемента</span>
@@ -994,7 +994,7 @@
 
       <p>Заглушка создается в начале перетягивания.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">placeholder</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">placeholder</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">isDraggingStarted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -1024,7 +1024,7 @@
 
       <p>Заглушка удаляется, как только пользователь отпустит перетаскиваемый элемент.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Удаляем</span>
 <span class="err">  </span><span class="nx">placeholder</span> <span class="o">&amp;&amp;</span>
 <span class="err">    </span><span class="nx">placeholder</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">placeholder</span><span class="p">);</span>
@@ -1054,7 +1054,7 @@ E
 
       <p>Вертикальный центр рассчитывается как сумма координаты <code class="language-plaintext highlighter-rouge">top</code> элемента и половины его высоты.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isAbove</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeA</span><span class="p">,</span> <span class="nx">nodeB</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isAbove</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeA</span><span class="p">,</span> <span class="nx">nodeB</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем границы элементов</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">rectA</span> <span class="o">=</span> <span class="nx">nodeA</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">rectB</span> <span class="o">=</span> <span class="nx">nodeB</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
@@ -1068,7 +1068,7 @@ E
 
       <p>Как только пользователь начинает перетаскивание, мы определяем соседей выбранного — снизу и сверху.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="cm">/* Порядок элементов:
      prevEle
      draggingEle
@@ -1081,7 +1081,7 @@ E
 
       <p>Если пользователь перетаскивает элемент вверх, мы меняем местами заглушку и соседа сверху.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// ...</span>
 
 <span class="err">  </span><span class="c1">// Пользователь тащит элемент вверх</span>
@@ -1098,7 +1098,7 @@ E
 
       <p>Если пользователь перетаскивает элемент вниз, мы меняем местами заглушку и соседа снизу.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// ...</span>
 
 <span class="err">  </span><span class="c1">// User moves the dragging element to the bottom</span>
@@ -1115,7 +1115,7 @@ E
 
       <p>Полная функция для изменения порядка элементов списка:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">swap</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeA</span><span class="p">,</span> <span class="nx">nodeB</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">swap</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nodeA</span><span class="p">,</span> <span class="nx">nodeB</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">parentA</span> <span class="o">=</span> <span class="nx">nodeA</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">siblingA</span> <span class="o">=</span>
 <span class="err">    </span><span class="nx">nodeA</span><span class="p">.</span><span class="nx">nextSibling</span> <span class="o">===</span> <span class="nx">nodeB</span>
@@ -1147,7 +1147,7 @@ E
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div>      </div>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// Виртуальная проекция</span>
 <span class="kd">let</span> <span class="nx">ghostEle</span><span class="p">;</span>
@@ -1182,7 +1182,7 @@ E
 
       <p>Обработчик события не сильно изменится.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ghostEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">ghost</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ghostEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">ghost</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragstart</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">dataTransfer</span><span class="p">.</span><span class="nx">setDragImage</span><span class="p">(</span><span class="nx">ghostEle</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -1213,7 +1213,7 @@ E
 
       <p>Поскольку благодаря <code class="language-plaintext highlighter-rouge">overflow: auto;</code> содержание контейнера становится прокручиваемым, мы можем прокрутить его до указанной точки с помощью свойств <code class="language-plaintext highlighter-rouge">scrollTop</code> и <code class="language-plaintext highlighter-rouge">scrollLeft</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">container</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">container</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
 </code></pre></div>      </div>
@@ -1222,7 +1222,7 @@ E
 
       <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span> <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span> <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
 
 <span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span>
@@ -1245,7 +1245,7 @@ E
 
       <p>Когда пользователь передвигает мышь, мы замеряем, насколько далеко, и затем прокручиваем содержимое в ту же точку.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Как далеко перемещен курсор</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dx</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
@@ -1258,7 +1258,7 @@ E
 
       <p>Опыт взаимодействия в процессе перетягивания может быть улучшен, с помощью пары CSS-свойств.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Change the cursor and prevent user from selecting the text</span>
 <span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">grabbing</span><span class="dl">'</span><span class="p">;</span>
 <span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">userSelect</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
@@ -1351,7 +1351,7 @@ E
 
       <p>Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">isDraggingStarted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">isDraggingStarted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isDraggingStarted</span><span class="p">)</span> <span class="p">{</span>
@@ -1365,7 +1365,7 @@ E
 
       <p>Функция <code class="language-plaintext highlighter-rouge">cloneTable</code> создает клон таблицы и показывает его вместо таблицы.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">list</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">list</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">cloneTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем границы таблицы</span>
@@ -1394,7 +1394,7 @@ E
 
       <p>Лист будет состоять из клонов строк.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">list</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">list</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">cloneTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем границы таблицы</span>
@@ -1442,7 +1442,7 @@ E
 
       <p>Теперь нам нужно установить ширину ячеек, чтобы сделать дубликат таблицы похожим на оригинал.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">cell</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">newCell</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 <span class="err">  </span><span class="c1">// Устанавливаем ширину оригинальной ячейки</span>
 <span class="err">  </span><span class="nx">newCell</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nb">parseInt</span><span class="p">(</span>
@@ -1455,7 +1455,7 @@ E
 
       <p>Определяем индексы перетаскиваемой и целевой строки.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Перетаскиваемый элемент</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Перетаскиваемый элемент</span>
 <span class="kd">let</span> <span class="nx">draggingEle</span><span class="p">;</span>
 <span class="c1">// Индекс Перетаскиваемой строки</span>
 <span class="kd">let</span> <span class="nx">draggingRowIndex</span><span class="p">;</span>
@@ -1487,7 +1487,7 @@ E
 
       <p>После того, как мы получили <code class="language-plaintext highlighter-rouge">draggingRowIndex</code> и <code class="language-plaintext highlighter-rouge">endRowIndex</code>, нетрудно определить, где пользователь отпустит перетаскиваемый элемент — сверху или снизу от исходной точки. И теперь мы можем решить, куда пристроить целевую строку: до или после нового места перетаскиваемой.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Переносим перетаскиваемую строку к `endRowIndex`</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">rows</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">tr</span><span class="dl">'</span><span class="p">));</span>
 <span class="err">  </span><span class="nx">draggingRowIndex</span> <span class="o">&gt;</span> <span class="nx">endRowIndex</span>
@@ -1575,7 +1575,7 @@ E
 
       <p>Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">isDraggingStarted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">isDraggingStarted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isDraggingStarted</span><span class="p">)</span> <span class="p">{</span>
@@ -1589,7 +1589,7 @@ E
 
       <p>Функция <code class="language-plaintext highlighter-rouge">cloneTable</code> создает клон таблицы и показывает его вместо таблицы.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">list</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">list</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">cloneTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем границы таблицы</span>
@@ -1614,7 +1614,7 @@ E
 
       <p>Лист будет состоять из клонов колонок.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cloneTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cloneTable</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="c1">// ...</span>
 
 <span class="cm">/* Получаем поверхностную копию всех td.
@@ -1701,7 +1701,7 @@ E
 
       <p>Теперь нам нужно установить ширину ячеек, чтобы сделать дубликат таблицы похожим на оригинал.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">originalHeaderCells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">headerCell</span><span class="p">,</span> <span class="nx">headerIndex</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">originalHeaderCells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">headerCell</span><span class="p">,</span> <span class="nx">headerIndex</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем ширину оригинальной ячейки</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">width</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span>
 <span class="err">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">headerCell</span><span class="p">).</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span>
@@ -1719,7 +1719,7 @@ E
 
       <p>Определяем индексы перетаскиваемой и целевой колонки.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Перетаскиваемый элемент</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Перетаскиваемый элемент</span>
 <span class="kd">let</span> <span class="nx">draggingEle</span><span class="p">;</span>
 <span class="c1">// Индекс перетаскиваемой колонки</span>
 <span class="kd">let</span> <span class="nx">draggingRowIndex</span><span class="p">;</span>
@@ -1751,7 +1751,7 @@ E
 
       <p>После того, как мы получили <code class="language-plaintext highlighter-rouge">draggingColumnIndex</code> и <code class="language-plaintext highlighter-rouge">endColumnIndex</code>, нетрудно определить, где пользователь отпустит перетаскиваемый элемент — справа или слева от исходной точки. И теперь мы можем решить, куда пристроить целевую колонку: до или после нового места перетаскиваемой.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Двигаем перетаскиваемую колонку к `endColumnIndex`</span>
 <span class="err">  </span><span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">tr</span><span class="dl">'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">row</span><span class="p">)</span> <span class="p">{</span>
 <span class="err">    </span><span class="kd">const</span> <span class="nx">cells</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span>
@@ -1783,7 +1783,7 @@ E
   <div class="accordion__body">
       <p>Вместо ненайденных картинок показывать картинку с соответствующим сообщением.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Находим все картинки…</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Находим все картинки…</span>
 <span class="kd">const</span> <span class="nx">images</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">img</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// и перебираем</span>
@@ -1800,7 +1800,7 @@ E
     <h3>Вставить изображение из буфера обмена</h3>
   </summary>
   <div class="accordion__body">
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Устанавливаем слушатель события `paste`</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Устанавливаем слушатель события `paste`</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">paste</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 
 <span class="err">  </span><span class="c1">// Получаем данные из буфера</span>
@@ -1826,13 +1826,13 @@ E
 
       <p>Теперь мы можем увидеть картинку на странице, предположим, в «заглушке» <code class="language-plaintext highlighter-rouge">img#preview</code>. Для это в слушатель, после создания <code class="language-plaintext highlighter-rouge">blob</code> получаем этот элемент и устанавливаем его атрибут <code class="language-plaintext highlighter-rouge">src</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">imageEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">imageEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">imageEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>А можем отослать на сервер в AJAX-запросе. (Код нужно вставить в том же слушателе).</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем новую FormData</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем новую FormData</span>
 <span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
 <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">image</span><span class="dl">'</span><span class="p">,</span> <span class="nx">blob</span><span class="p">,</span> <span class="dl">'</span><span class="s1">filename</span><span class="dl">'</span><span class="p">);</span>
 
@@ -1865,13 +1865,13 @@ E
 <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"preview"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fileEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">input-file</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fileEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">input-file</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">previewEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <h4 id="urlcreateobjecturl">1. Используем метод <code class="language-plaintext highlighter-rouge">URL.createObjectURL()</code></h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем выбранный файл</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
@@ -1885,7 +1885,7 @@ E
 
       <h4 id="filereaderreadasdataurl">2. Используем метод FileReader.readAsDataURL()</h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем выбранный файл</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
@@ -1907,7 +1907,7 @@ E
   <div class="accordion__body">
       <p><strong>Задача</strong>. Масштабировать изображение на заданное в процентах значение. Для выбора картинки есть <code class="language-plaintext highlighter-rouge">#upload[type='file']</code>, для предпросмотра — пустой <code class="language-plaintext highlighter-rouge">div#preview</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">picture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">upload</span><span class="dl">'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">picture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">upload</span><span class="dl">'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="kd">const</span> <span class="nx">previewEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="cm">/**
@@ -1982,7 +1982,7 @@ E
 
       <p>Как только мы получаем Blob масштабированной картинки, мы можем просмотреть ее на странице или отослать на сервер, как часть <code class="language-plaintext highlighter-rouge">FormData</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Уменьшаем картинку на 50%</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Уменьшаем картинку на 50%</span>
 <span class="nx">resize</span><span class="p">(</span><span class="nx">picture</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">blob</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Предпросмотр</span>
 <span class="err">  </span><span class="nx">previewEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
@@ -2141,7 +2141,7 @@ E
 
       <p>А обработчик печати вызываться из слушателя установленного на кнопку.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">printBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">print</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">printBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">print</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">printBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// ...</span>
@@ -2150,7 +2150,7 @@ E
 
       <h4 id="iframe">Создаем временный <code class="language-plaintext highlighter-rouge">iframe</code></h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">iframe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">iframe</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// Делаем его невидимыми</span>
 <span class="nx">iframe</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -2170,7 +2170,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Даже не смотря на то, что в <code class="language-plaintext highlighter-rouge">iframe</code> нет содержания из внешнего источника, надо дождаться его готовности.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">iframe</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">iframe</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Клонируем картинку</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">image</span> <span class="o">=</span>
 <span class="err">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">image</span><span class="dl">'</span><span class="p">).</span><span class="nx">cloneNode</span><span class="p">();</span>
@@ -2195,7 +2195,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>…Когда пользователь запускает печать или когда закрывает окно печати.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
 <span class="err">  </span><span class="dl">'</span><span class="s1">afterprint</span><span class="dl">'</span><span class="p">,</span>
 <span class="err">  </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">    </span><span class="nx">iframe</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">iframe</span><span class="p">);</span>
@@ -2265,7 +2265,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Когда пользователь передвигает грань, мы рассчитываем насколько переместился курсор и, исходя из этого, — новое положение грани и ширину измененного изображения.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cropper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">drag-me</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cropper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">drag-me</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">cropper</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
 
 <span class="c1">// Инициализируем координаты курсора</span>
@@ -2318,7 +2318,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Кроме всего прочего, мы должны следить за тем, чтобы в наших расчетах учитывались передвижения курсора только в рамках контейнера. Поэтому мы должны сравнивать <code class="language-plaintext highlighter-rouge">newLeftWidth</code> с 0 и 100 процентами ширины контейнера.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Предыдущий код...</span>
 
 <span class="err">  </span><span class="nx">newLeftWidth</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">newLeftWidth</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -2339,7 +2339,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <h4 id="click">Загрузка при переходе на страницу — вызов события <code class="language-plaintext highlighter-rouge">click</code></h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем ссылку</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем ссылку</span>
 <span class="kd">const</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
 <span class="c1">// &lt;a href="/path/to/real-name" download="my-name"&gt;</span>
 <span class="nx">link</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">my-name</span><span class="dl">'</span><span class="p">;</span>
@@ -2359,7 +2359,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Сгенерированное содержание (в примере — JSON), можно перевести в <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob" target="_blank">объект Blob</a> и затем вызвать событие <code class="language-plaintext highlighter-rouge">click</code>, как описывалось выше.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем Blob c JSON'ом</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Создаем Blob c JSON'ом</span>
 <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello Word</span><span class="dl">'</span> <span class="p">});</span>
 <span class="kd">const</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">data</span><span class="p">],</span> <span class="p">{</span>
 <span class="err">  </span><span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
@@ -2385,12 +2385,12 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>В этом примере в переменной <code class="language-plaintext highlighter-rouge">message</code> передаем строку.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>А если нужно передать объект, сначала записываем в формате JSON и конвертируем в строку методом <code class="language-plaintext highlighter-rouge">stringify</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
 <span class="err">  </span><span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello from iframe</span><span class="dl">'</span><span class="p">,</span>
 <span class="err">  </span><span class="na">date</span><span class="p">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
 <span class="p">});</span>
@@ -2401,7 +2401,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <h4 id="iframe-2">Передача данных в <code class="language-plaintext highlighter-rouge">iframe</code></h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Вызов из родительской страницы</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Вызов из родительской страницы</span>
 <span class="nx">myFrame</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
@@ -2409,7 +2409,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Чтобы получить данные, в <code class="language-plaintext highlighter-rouge">iframe</code> или на родительской странице нужно добавить слушателя события <code class="language-plaintext highlighter-rouge">message</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем данные</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
 
@@ -2424,7 +2424,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Если обмен данными осуществляется с разными <code class="language-plaintext highlighter-rouge">iframe</code>, можно добавить свойство-«подпись».</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Передача данных из `iframe`</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Передача данных из `iframe`</span>
 <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
 <span class="err">  </span><span class="na">channel</span><span class="p">:</span> <span class="dl">'</span><span class="s1">FROM_FRAME_A</span><span class="dl">'</span><span class="p">,</span>
 <span class="err">  </span><span class="c1">// ...</span>
@@ -2435,7 +2435,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>В получателе (в примере — родительская страница) теперь можно распознавать отправителей.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 
 <span class="err">  </span><span class="c1">// Откуда «дровишки»?</span>
@@ -2449,7 +2449,7 @@ https://bit.ly/3v5Iu3p */</span>
     <h3>Установить высоту iframe по содержанию</h3>
   </summary>
   <div class="accordion__body">
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-iframe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-iframe</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">frame</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получим высоту содержания</span>
@@ -2499,7 +2499,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Скроем индикатор, когда загрузка закончится.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">iframeEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">iframe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">iframeEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">iframe</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">loadingEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">loader</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">iframeEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -3081,7 +3081,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Функция <code class="language-plaintext highlighter-rouge">toCsv</code> переводит ячейки в формат CSV. Получаем строки, перебираем каждую: извлекаем содержимое ячеек, записываем через запятую; каждую <code class="language-plaintext highlighter-rouge">tr</code> записываем на новой строке.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">toCsv</span> <span class="o">=</span> <span class="p">(</span><span class="nx">table</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">toCsv</span> <span class="o">=</span> <span class="p">(</span><span class="nx">table</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем все строки таблицы</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">rows</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">tr</span><span class="dl">'</span><span class="p">);</span>
 
@@ -3106,7 +3106,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Функция <code class="language-plaintext highlighter-rouge">download</code> создает временную невидимую ссылку скачивания. Добавляет в атрибут <code class="language-plaintext highlighter-rouge">href</code> CSV, как Data URL. Инициирует событие <code class="language-plaintext highlighter-rouge">click</code>, а затем удаляет временную ссылку.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">download</span> <span class="o">=</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">download</span> <span class="o">=</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">fileName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">link</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span>
 <span class="err">    </span><span class="dl">'</span><span class="s1">href</span><span class="dl">'</span><span class="p">,</span>
@@ -3126,7 +3126,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Устанавливаем на кнопку слушатель с обработчиком, последовательно вызывающим функции <code class="language-plaintext highlighter-rouge">toCsv</code> и <code class="language-plaintext highlighter-rouge">download</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">exportMe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">exportMe</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">exportBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">export</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">exportBtn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -3165,7 +3165,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>В нашем случае ручка масштабирования будет двигаться только по горизонтали. Сначала нам надо получить позицию мыши и ширину левой части split-представления до масштабирования.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">resizer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">resizer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
 
@@ -3197,13 +3197,13 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Если вернуться к разметке, обнаружим, что левая и правая часть представления являются предыдущим и следующим «соседями» ручки перетаскивания. Следовательно, выбираем их вот таким образом:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">leftSide</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">rightSide</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
 </code></pre></div>      </div>
 
       <p>Далее. Когда пользователь двигает мышью, мы определяем — как далеко — и, соответственно, обновляем ширину левой части представления.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Как далеко сместилась мышь</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dx</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">x</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">y</span><span class="p">;</span>
@@ -3228,7 +3228,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Чтобы исправить «баг», следует на момент перетягивания поменять курсор не только для ручки, но и для всего документа.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// ...</span>
 <span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">col-resize</span><span class="dl">'</span><span class="p">;</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">col-resize</span><span class="dl">'</span><span class="p">;</span>
@@ -3237,7 +3237,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Также на момент перетягивания нужно предотвратить срабатывание событий и выделение текста в обоих частях split-представления. Для этого используем CSS-свойства <code class="language-plaintext highlighter-rouge">user-select</code> и <code class="language-plaintext highlighter-rouge">pointer-events</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="c1">// ...</span>
 <span class="err">  </span><span class="nx">leftSide</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">userSelect</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
 <span class="err">  </span><span class="nx">leftSide</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">pointerEvents</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
@@ -3249,7 +3249,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Стили будут удалены сразу после окончания перетягивания.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">cursor</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">cursor</span><span class="dl">'</span><span class="p">);</span>
 
@@ -3273,7 +3273,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Вместо того, чтобы обновлять значение ширины левой части представления, будем обновлять высоту верхней части.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">prevSibling</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">prevSibling</span> <span class="o">=</span> <span class="nx">resizer</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">prevSiblingHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -3291,7 +3291,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Также поменяем курсор на <code class="language-plaintext highlighter-rouge">row-resize</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">//...</span>
 <span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">row-resize</span><span class="dl">'</span><span class="p">;</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">row-resize</span><span class="dl">'</span><span class="p">;</span>
@@ -3326,14 +3326,14 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Теперь мы можем получать направление перетягивания.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">direction</span> <span class="o">=</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">direction</span> <span class="o">=</span>
 <span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-direction</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span>
 <span class="err">  </span><span class="dl">'</span><span class="s1">horizontal</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div>      </div>
 
       <p>The logic of setting the width or height of previous sibling depends on the direction:</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="k">switch</span> <span class="p">(</span><span class="nx">direction</span><span class="p">)</span> <span class="p">{</span>
 <span class="err">    </span><span class="k">case</span> <span class="dl">'</span><span class="s1">vertical</span><span class="dl">'</span><span class="p">:</span>
 <span class="err">      </span><span class="kd">const</span> <span class="nx">h</span> <span class="o">=</span>
@@ -3382,7 +3382,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Значение <code class="language-plaintext highlighter-rouge">data-placeholder</code> показываем, если элемент пустой.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="nx">is</span><span class="o">-</span><span class="nx">editable</span><span class="p">:</span><span class="nx">empty</span><span class="p">:</span><span class="nx">before</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="nx">is</span><span class="o">-</span><span class="nx">editable</span><span class="p">:</span><span class="nx">empty</span><span class="p">:</span><span class="nx">before</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">content</span><span class="p">:</span> <span class="nx">attr</span><span class="p">(</span><span class="nx">data</span><span class="o">-</span><span class="nx">placeholder</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
@@ -3391,7 +3391,7 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Тот же <code class="language-plaintext highlighter-rouge">div</code> с <code class="language-plaintext highlighter-rouge">id</code> и <code class="language-plaintext highlighter-rouge">data</code>-атрибутом. Делаем <code class="language-plaintext highlighter-rouge">placeholder</code> по значению <code class="language-plaintext highlighter-rouge">data</code>-атрибута. На фокусе очищаем содержимое элемента, если оно совпадает с текстом <code class="language-plaintext highlighter-rouge">placeholder</code>‘а. На <code class="language-plaintext highlighter-rouge">blur</code>‘е, если пользователь ничего не ввёл, возвращаем <code class="language-plaintext highlighter-rouge">placeholder</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit-me</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit-me</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">placeholder</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-placeholder</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="cm">/* Если элемент пустой, заполняем его строкой
@@ -3434,7 +3434,7 @@ https://bit.ly/3v5Iu3p */</span>
         <li>Предыдущие шаги связаны с изменением пользовательского выделения. Поэтому исходное выделение надо сохранить и восстановить после копирования.</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">copyButton</span> <span class="o">=</span>
 <span class="err">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">copy-button</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">codeEle</span> <span class="o">=</span>
@@ -3488,7 +3488,7 @@ https://bit.ly/3v5Iu3p */</span>
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220720-1210"></script>
+<script src="/assets/js/main.js?20220721-1131"></script>
 
 <script>
   hljs.highlightAll();
