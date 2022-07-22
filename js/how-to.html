@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220721-1559">
+<link rel="stylesheet" href="/assets/css/style.css?20220722-1255">
 </head>
 <body>
     <main class="main">
@@ -36,8 +36,8 @@
 
       <h4 id="section">Предотвращаем вызов стандартного контекстного меню</h4>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">element</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">element</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
@@ -63,8 +63,8 @@
 
       <p>Рассчитываем позицию меню по позиции мышки.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
 
@@ -79,7 +79,7 @@
 
       <h4 id="section-2">Закрываем меню по клику за его пределами</h4>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">contextmenu</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="cm">/* ...
   Добавляем вложенный слушатель */</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">docClickHandler</span><span class="p">);</span>
@@ -109,9 +109,9 @@
   <div class="accordion__body">
       <p>Функция <code class="language-plaintext highlighter-rouge">scrollToBeVisible</code> перемещает элемент, переданный в первый параметр, в область видимости контейнера, переданного во второй параметр. См. также раздел <a href="/#topic-is-visible">«Виден ли элемент в области просмотра блока с прокруткой»</a></p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scrollToBeVisible</span> <span class="o">=</span> <span class="p">(</span><span class="nx">ele</span><span class="p">,</span> <span class="nx">container</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">eleTop</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">offsetTop</span><span class="p">;</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">eleBottom</span> <span class="o">=</span> <span class="nx">eleTop</span> <span class="o">+</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">scrollToBeVisible</span> <span class="o">=</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">container</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">eleTop</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">offsetTop</span><span class="p">;</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">eleBottom</span> <span class="o">=</span> <span class="nx">eleTop</span> <span class="o">+</span> <span class="nx">el</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">;</span>
 
 <span class="err">  </span><span class="kd">const</span> <span class="nx">containerTop</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">;</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">containerBottom</span> <span class="o">=</span>
@@ -453,11 +453,11 @@
       <p><code class="language-plaintext highlighter-rouge">input[type='range']</code> поддерживается абсолютным абсолютным большинством браузеров. Но, если потребуется, можно добавить проверку.</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isRangeInputSupported</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">range</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">range</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="cm">/* Если браузер не поддерживает поле `range`,
   атрибуту `type` будет присвоено значение `text` */</span>
-<span class="err">  </span><span class="k">return</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">type</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="k">return</span> <span class="nx">el</span><span class="p">.</span><span class="nx">type</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -566,7 +566,7 @@
   <div class="accordion__body">
       <p>Плавную прокрутку легко можно сделать в JS…</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ele</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">({</span> <span class="na">behavior</span><span class="p">:</span> <span class="dl">'</span><span class="s1">smooth</span><span class="dl">'</span> <span class="p">});</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">el</span><span class="p">.</span><span class="nx">scrollIntoView</span><span class="p">({</span> <span class="na">behavior</span><span class="p">:</span> <span class="dl">'</span><span class="s1">smooth</span><span class="dl">'</span> <span class="p">});</span>
 </code></pre></div>      </div>
 
       <p>… Или CSS.</p>
@@ -594,8 +594,8 @@
 <span class="err">  </span><span class="dl">'</span><span class="s1">.trigger</span><span class="dl">'</span>
 <span class="p">);</span>
 
-<span class="nx">triggers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">ele</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">clickHandler</span><span class="p">);</span>
+<span class="nx">triggers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">el</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">clickHandler</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
@@ -740,7 +740,7 @@
 <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="cm">/** Отслеживаем передвижение */</span>
 <span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -749,8 +749,8 @@
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">y</span><span class="p">;</span>
 
 <span class="err">  </span><span class="c1">// Устанавливаем позицию элемента</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">ele</span><span class="p">.</span><span class="nx">offsetTop</span> <span class="o">+</span> <span class="nx">dy</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">ele</span><span class="p">.</span><span class="nx">offsetLeft</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">el</span><span class="p">.</span><span class="nx">offsetTop</span> <span class="o">+</span> <span class="nx">dy</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">el</span><span class="p">.</span><span class="nx">offsetLeft</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
 
 <span class="err">  </span><span class="c1">// Переопределяем позицию курсора</span>
 <span class="err">  </span><span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">;</span>
@@ -775,7 +775,7 @@
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mouseup</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseUpHandler</span><span class="p">);</span>
 <span class="p">};</span>
 
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousedown</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseDownHandler</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mousedown</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseDownHandler</span><span class="p">);</span>
 </code></pre></div>      </div>
     </div>
 </details>
@@ -830,7 +830,7 @@
         <li><code class="language-plaintext highlighter-rouge">mouseup</code> — добавляем обработчик на документ, чтобы удалить обработчик <code class="language-plaintext highlighter-rouge">mousemove</code> и самого себя.</li>
       </ul>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">resize-me</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">resize-me</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// Текущая позиция курсора</span>
 <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -846,8 +846,8 @@
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">y</span><span class="p">;</span>
 
 <span class="err">  </span><span class="c1">// Обновляем размеры элемента</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">w</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">h</span> <span class="o">+</span> <span class="nx">dy</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">w</span> <span class="o">+</span> <span class="nx">dx</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">h</span> <span class="o">+</span> <span class="nx">dy</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="cm">/* Удаляем обработчики */</span>
@@ -867,7 +867,7 @@
 <span class="err">  </span><span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">;</span>
 <span class="err">  </span>
 <span class="err">  </span><span class="c1">// Измеряем элемент</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">ele</span><span class="p">);</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">w</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">h</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">styles</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
 <span class="err">  </span>
@@ -884,7 +884,7 @@
 
       <p>Все обработчики готовы. Теперь добавляем обработчик <code class="language-plaintext highlighter-rouge">mousedown</code> на ручки.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">resizers</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">.resizer</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">resizers</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">.resizer</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="nx">resizers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">resizer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">resizer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span>
@@ -924,7 +924,7 @@
       <p>Используем технику, описанную в разделе «<a href="#topic-draggable-base">Перетягиваемый элемент</a>».</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Элемент, перетаскиваемый в данный момент</span>
-<span class="kd">let</span> <span class="nx">draggingEle</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">draggingEl</span><span class="p">;</span>
 
 <span class="c1">// Текущая позиция курсора относительно перетаскиваемого элемента</span>
 <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -933,9 +933,9 @@
 <span class="cm">/** Перетаскивание в процессе */</span>
 <span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Устанавливаем позицию перетаскиваемого элемента</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="nx">y</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="nx">x</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="nx">y</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="nx">x</span><span class="p">}</span><span class="s2">px`</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="cm">/** Перетаскивание закончилось.
@@ -944,13 +944,13 @@
   */</span>
 <span class="kd">const</span> <span class="nx">mouseUpHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Remove the position styles</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">top</span><span class="dl">'</span><span class="p">);</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">left</span><span class="dl">'</span><span class="p">);</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">position</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">top</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">left</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">position</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="err">  </span><span class="nx">x</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 <span class="err">  </span><span class="nx">y</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">draggingEle</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">draggingEl</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 
 <span class="err">  </span><span class="c1">// Удаляем слушатели `mousemove` и `mouseup`</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span>
@@ -963,10 +963,10 @@
 
 <span class="cm">/** Перетаскивание начинается */</span>
 <span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">draggingEle</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">draggingEl</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
 
 <span class="err">  </span><span class="c1">// Рассчитываем позицию курсора</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">draggingEle</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">draggingEl</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
 <span class="err">  </span><span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
 <span class="err">  </span><span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
 
@@ -999,7 +999,7 @@
 
 <span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">draggingRect</span> <span class="o">=</span>
-<span class="err">    </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
+<span class="err">    </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">();</span>
 
 <span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isDraggingStarted</span><span class="p">)</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Обновляем флаг</span>
@@ -1008,9 +1008,9 @@
 <span class="err">  </span><span class="c1">// Создаем заглушку</span>
 <span class="err">  </span><span class="nx">placeholder</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">placeholder</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">placeholder</span><span class="dl">'</span><span class="p">);</span>
-<span class="err">  </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span>
+<span class="err">  </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span>
 <span class="err">    </span><span class="nx">placeholder</span><span class="p">,</span>
-<span class="err">    </span><span class="nx">draggingEle</span><span class="p">.</span><span class="nx">nextSibling</span>
+<span class="err">    </span><span class="nx">draggingEl</span><span class="p">.</span><span class="nx">nextSibling</span>
 <span class="err">  </span><span class="p">);</span>
 
 <span class="err">  </span><span class="cm">/* Задаем высоту заглушке — такую же,
@@ -1070,12 +1070,12 @@ E
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseMoveHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="cm">/* Порядок элементов:
-     prevEle
-     draggingEle
+     prevEl
+     draggingEl
      placeholder
-     nextEle */</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">prevEle</span> <span class="o">=</span> <span class="nx">draggingEle</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">nextEle</span> <span class="o">=</span> <span class="nx">placeholder</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
+     nextEl */</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">prevEl</span> <span class="o">=</span> <span class="nx">draggingEl</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">nextEl</span> <span class="o">=</span> <span class="nx">placeholder</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -1085,13 +1085,13 @@ E
 <span class="err">  </span><span class="c1">// ...</span>
 
 <span class="err">  </span><span class="c1">// Пользователь тащит элемент вверх</span>
-<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">prevEle</span> <span class="o">&amp;&amp;</span> <span class="nx">isAbove</span><span class="p">(</span><span class="nx">draggingEle</span><span class="p">,</span> <span class="nx">prevEle</span><span class="p">))</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">prevEl</span> <span class="o">&amp;&amp;</span> <span class="nx">isAbove</span><span class="p">(</span><span class="nx">draggingEl</span><span class="p">,</span> <span class="nx">prevEl</span><span class="p">))</span> <span class="p">{</span>
 <span class="err">    </span><span class="cm">/* Изменение порядка: исходный -&gt; новый
-       prevEle                     -&gt; placeholder
-       draggingEle                 -&gt; draggingEle
-       placeholder                 -&gt; prevEle */</span>
-<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">placeholder</span><span class="p">,</span> <span class="nx">draggingEle</span><span class="p">);</span>
-<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">placeholder</span><span class="p">,</span> <span class="nx">prevEle</span><span class="p">);</span>
+       prevEl                     -&gt; placeholder
+       draggingEl                  -&gt; draggingEl
+       placeholder                 -&gt; prevEl */</span>
+<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">placeholder</span><span class="p">,</span> <span class="nx">draggingEl</span><span class="p">);</span>
+<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">placeholder</span><span class="p">,</span> <span class="nx">prevEl</span><span class="p">);</span>
 <span class="err">  </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
@@ -1102,13 +1102,13 @@ E
 <span class="err">  </span><span class="c1">// ...</span>
 
 <span class="err">  </span><span class="c1">// User moves the dragging element to the bottom</span>
-<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">nextEle</span> <span class="o">&amp;&amp;</span> <span class="nx">isAbove</span><span class="p">(</span><span class="nx">nextEle</span><span class="p">,</span> <span class="nx">draggingEle</span><span class="p">))</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">nextEl</span> <span class="o">&amp;&amp;</span> <span class="nx">isAbove</span><span class="p">(</span><span class="nx">nextEl</span><span class="p">,</span> <span class="nx">draggingEl</span><span class="p">))</span> <span class="p">{</span>
 <span class="err">    </span><span class="cm">/* Изменение порядка: исходный -&gt; новый
-       draggingEle                 -&gt; nextEle
+       draggingEl                  -&gt; nextEl
        placeholder                 -&gt; placeholder
-       nextEle                     -&gt; draggingEle */</span>
-<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">nextEle</span><span class="p">,</span> <span class="nx">placeholder</span><span class="p">);</span>
-<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">nextEle</span><span class="p">,</span> <span class="nx">draggingEle</span><span class="p">);</span>
+       nextEl                      -&gt; draggingEl */</span>
+<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">nextEl</span><span class="p">,</span> <span class="nx">placeholder</span><span class="p">);</span>
+<span class="err">    </span><span class="nx">swap</span><span class="p">(</span><span class="nx">nextEl</span><span class="p">,</span> <span class="nx">draggingEl</span><span class="p">);</span>
 <span class="err">  </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
@@ -1147,12 +1147,12 @@ E
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div>      </div>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragMe</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// Виртуальная проекция</span>
 <span class="kd">let</span> <span class="nx">ghostEle</span><span class="p">;</span>
 
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragstart</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragstart</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Создаем виртуальную проекцию</span>
 <span class="err">  </span><span class="nx">ghostEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">ghostEle</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">is-dragging</span><span class="dl">'</span><span class="p">);</span>
@@ -1165,7 +1165,7 @@ E
 
 <span class="c1">// По окончанию перетягивания виртуальную проекцию следует удалить.</span>
 
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragend</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragend</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">ghostEle</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
@@ -1184,7 +1184,7 @@ E
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ghostEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">ghost</span><span class="dl">'</span><span class="p">);</span>
 
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragstart</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">dragstart</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">dataTransfer</span><span class="p">.</span><span class="nx">setDragImage</span><span class="p">(</span><span class="nx">ghostEle</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
@@ -1213,9 +1213,9 @@ E
 
       <p>Поскольку благодаря <code class="language-plaintext highlighter-rouge">overflow: auto;</code> содержание контейнера становится прокручиваемым, мы можем прокрутить его до указанной точки с помощью свойств <code class="language-plaintext highlighter-rouge">scrollTop</code> и <code class="language-plaintext highlighter-rouge">scrollLeft</code>.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">container</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">ele</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="nx">ele</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">container</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
 </code></pre></div>      </div>
 
       <h4 id="section-13">Теперь то же самое — перетягиванием</h4>
@@ -1227,8 +1227,8 @@ E
 <span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">pos</span> <span class="o">=</span> <span class="p">{</span>
 <span class="err">    </span><span class="c1">// Текущее положение прокрутки</span>
-<span class="err">    </span><span class="na">left</span><span class="p">:</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">,</span>
-<span class="err">    </span><span class="na">top</span><span class="p">:</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">,</span>
+<span class="err">    </span><span class="na">left</span><span class="p">:</span> <span class="nx">el</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">,</span>
+<span class="err">    </span><span class="na">top</span><span class="p">:</span> <span class="nx">el</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">,</span>
 <span class="err">    </span><span class="c1">// Получить положение мыши</span>
 <span class="err">    </span><span class="na">x</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientX</span><span class="p">,</span>
 <span class="err">    </span><span class="na">y</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span><span class="p">,</span>
@@ -1251,8 +1251,8 @@ E
 <span class="err">  </span><span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 
 <span class="err">  </span><span class="c1">// Прокручиваем элемент</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="nx">dy</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">=</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">dx</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="nx">dy</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">=</span> <span class="nx">pos</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">dx</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -1260,8 +1260,8 @@ E
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mouseDownHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Change the cursor and prevent user from selecting the text</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">grabbing</span><span class="dl">'</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">userSelect</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">grabbing</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">userSelect</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
 <span class="err">  </span><span class="c1">// ...</span>
 <span class="p">};</span>
 
@@ -1271,8 +1271,8 @@ E
 <span class="err">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">mouseup</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mouseUpHandler</span><span class="p">);</span>
 
 <span class="err">  </span><span class="c1">// Меняем курсор и разрешаем выделение</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">grab</span><span class="dl">'</span><span class="p">;</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">user-select</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">grab</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">removeProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">user-select</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
     </div>
@@ -1456,7 +1456,7 @@ E
       <p>Определяем индексы перетаскиваемой и целевой строки.</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Перетаскиваемый элемент</span>
-<span class="kd">let</span> <span class="nx">draggingEle</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">draggingEl</span><span class="p">;</span>
 <span class="c1">// Индекс Перетаскиваемой строки</span>
 <span class="kd">let</span> <span class="nx">draggingRowIndex</span><span class="p">;</span>
 
@@ -1473,7 +1473,8 @@ E
 <span class="err">    </span><span class="nx">cloneTable</span><span class="p">();</span>
 
 <span class="err">    </span><span class="c1">// Получаем перетягиваемый элемент</span>
-<span class="err">    </span><span class="nx">draggingEle</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">children</span><span class="p">)[</span><span class="nx">draggingRowIndex</span><span class="p">];</span>
+<span class="err">    </span><span class="nx">draggingEl</span> <span class="o">=</span>
+<span class="err">      </span><span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">children</span><span class="p">)[</span><span class="nx">draggingRowIndex</span><span class="p">];</span>
 <span class="err">  </span><span class="p">}</span>
 <span class="p">};</span>
 
@@ -1481,7 +1482,7 @@ E
 <span class="err">  </span><span class="c1">// Получаем индекс целевой строки</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">endRowIndex</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span>
 <span class="err">    </span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span>
-<span class="err">    </span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">draggingEle</span><span class="p">);</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">draggingEl</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -1720,7 +1721,7 @@ E
       <p>Определяем индексы перетаскиваемой и целевой колонки.</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Перетаскиваемый элемент</span>
-<span class="kd">let</span> <span class="nx">draggingEle</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">draggingEl</span><span class="p">;</span>
 <span class="c1">// Индекс перетаскиваемой колонки</span>
 <span class="kd">let</span> <span class="nx">draggingRowIndex</span><span class="p">;</span>
 
@@ -1736,7 +1737,7 @@ E
 <span class="err">    </span><span class="nx">cloneTable</span><span class="p">();</span>
 
 <span class="err">    </span><span class="c1">// Получаем перетаскиваемый элемент</span>
-<span class="err">    </span><span class="nx">draggingEle</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span>
+<span class="err">    </span><span class="nx">draggingEl</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span>
 <span class="err">      </span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">children</span><span class="p">)[</span><span class="nx">draggingColumnIndex</span><span class="p">];</span>
 <span class="err">  </span><span class="p">}</span>
 <span class="p">};</span>
@@ -1745,7 +1746,7 @@ E
 <span class="err">  </span><span class="c1">// Получаем индекс последней колонки</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">endColumnIndex</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span>
 <span class="err">    </span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span>
-<span class="err">    </span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">draggingEle</span><span class="p">);</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">draggingEl</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -1787,8 +1788,8 @@ E
 <span class="kd">const</span> <span class="nx">images</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">img</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// и перебираем</span>
-<span class="nx">images</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">ele</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">images</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">el</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">/path/to/404/image.png</span><span class="dl">'</span><span class="p">;</span>
 <span class="err">  </span><span class="p">});</span>
 <span class="p">});</span>
@@ -1865,13 +1866,13 @@ E
 <span class="nt">&lt;img</span> <span class="na">id=</span><span class="s">"preview"</span><span class="nt">&gt;</span>
 </code></pre></div>      </div>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fileEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">input-file</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">previewEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fileEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">input-file</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">previewEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <h4 id="urlcreateobjecturl">1. Используем метод <code class="language-plaintext highlighter-rouge">URL.createObjectURL()</code></h4>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем выбранный файл</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
@@ -1879,20 +1880,20 @@ E
 <span class="err">  </span><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
 
 <span class="err">  </span><span class="c1">// Передаем в «заглушку» URL-объект</span>
-<span class="err">  </span><span class="nx">previewEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+<span class="err">  </span><span class="nx">previewEl</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
 
       <h4 id="filereaderreadasdataurl">2. Используем метод FileReader.readAsDataURL()</h4>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEle</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fileEl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Получаем выбранный файл</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
 <span class="err">  </span><span class="kd">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
 <span class="err">  </span><span class="nx">reader</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">    </span><span class="c1">// Передаем в «заглушку» ссылку</span>
-<span class="err">    </span><span class="nx">previewEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+<span class="err">    </span><span class="nx">previewEl</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
 <span class="err">  </span><span class="p">});</span>
 
 <span class="err">  </span><span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
@@ -1908,7 +1909,7 @@ E
       <p><strong>Задача</strong>. Масштабировать изображение на заданное в процентах значение. Для выбора картинки есть <code class="language-plaintext highlighter-rouge">#upload[type='file']</code>, для предпросмотра — пустой <code class="language-plaintext highlighter-rouge">div#preview</code>.</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">picture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">upload</span><span class="dl">'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">previewEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">previewEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">preview</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="cm">/**
 * Получение объекта Blob из data URL
@@ -1947,19 +1948,19 @@ E
 <span class="err">    </span><span class="c1">// После загрузки изображения</span>
 <span class="err">    </span><span class="nx">reader</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">      </span><span class="c1">// Создаем объект типа `Image`</span>
-<span class="err">      </span><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-<span class="err">      </span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<span class="err">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">        </span><span class="c1">// Создаем холст</span>
 <span class="err">        </span><span class="kd">const</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">canvas</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="err">        </span><span class="cm">/* Выводим на холсте заглушку масштабированного
         изображения */</span>
 <span class="err">        </span><span class="kd">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="dl">'</span><span class="s1">2d</span><span class="dl">'</span><span class="p">);</span>
-<span class="err">        </span><span class="kd">const</span> <span class="nx">w</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">ratio</span><span class="p">;</span>
-<span class="err">        </span><span class="kd">const</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">ratio</span><span class="p">;</span>
+<span class="err">        </span><span class="kd">const</span> <span class="nx">w</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">ratio</span><span class="p">;</span>
+<span class="err">        </span><span class="kd">const</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">ratio</span><span class="p">;</span>
 <span class="err">        </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">w</span><span class="p">;</span>
 <span class="err">        </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">h</span><span class="p">;</span>
-<span class="err">        </span><span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">ele</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+<span class="err">        </span><span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
 
 <span class="err">        </span><span class="c1">// Получаем данные масштабированной картинки</span>
 <span class="err">        </span><span class="dl">'</span><span class="s1">toBlob</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">canvas</span>
@@ -1970,7 +1971,7 @@ E
 <span class="err">      </span><span class="p">});</span>
 
 <span class="err">      </span><span class="c1">// Задаем атрибут `src`</span>
-<span class="err">      </span><span class="nx">ele</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+<span class="err">      </span><span class="nx">el</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
 <span class="err">    </span><span class="p">});</span>
 
 <span class="err">    </span><span class="nx">reader</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -1985,7 +1986,7 @@ E
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Уменьшаем картинку на 50%</span>
 <span class="nx">resize</span><span class="p">(</span><span class="nx">picture</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">blob</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="c1">// Предпросмотр</span>
-<span class="err">  </span><span class="nx">previewEle</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">previewEl</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>      </div>
     </div>
@@ -3391,14 +3392,14 @@ https://bit.ly/3v5Iu3p */</span>
 
       <p>Тот же <code class="language-plaintext highlighter-rouge">div</code> с <code class="language-plaintext highlighter-rouge">id</code> и <code class="language-plaintext highlighter-rouge">data</code>-атрибутом. Делаем <code class="language-plaintext highlighter-rouge">placeholder</code> по значению <code class="language-plaintext highlighter-rouge">data</code>-атрибута. На фокусе очищаем содержимое элемента, если оно совпадает с текстом <code class="language-plaintext highlighter-rouge">placeholder</code>‘а. На <code class="language-plaintext highlighter-rouge">blur</code>‘е, если пользователь ничего не ввёл, возвращаем <code class="language-plaintext highlighter-rouge">placeholder</code>.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit-me</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">placeholder</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-placeholder</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit-me</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">placeholder</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-placeholder</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="cm">/* Если элемент пустой, заполняем его строкой
 из `data`-атрибута */</span>
-<span class="nx">ele</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">===</span> <span class="dl">''</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">ele</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">placeholder</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">===</span> <span class="dl">''</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">placeholder</span><span class="p">);</span>
 
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">focus</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
 <span class="err">  </span><span class="cm">/* Альтернатива выражению `if`: если `value`
   равно `placeholder`, тогда очищаем элемент */</span>
@@ -3406,7 +3407,7 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="err">    </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">blur</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">blur</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
 <span class="err">  </span><span class="nx">value</span> <span class="o">===</span> <span class="dl">''</span> <span class="o">&amp;&amp;</span>
 <span class="err">    </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">placeholder</span><span class="p">);</span>
@@ -3488,7 +3489,7 @@ https://bit.ly/3v5Iu3p */</span>
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220721-1559"></script>
+<script src="/assets/js/main.js?20220722-1255"></script>
 
 <script>
   hljs.highlightAll();
