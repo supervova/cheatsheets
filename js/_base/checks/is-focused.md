@@ -1,3 +1,3 @@
-```javascript
-const hasFocus = ele === document.activeElement;
+```js
+const hasFocus = el === document.activeElement;
 ```

@@ -1,4 +1,4 @@
-```javascript
+```js
 function index(item, collection) {
   return [].slice
     .call(document.querySelectorAll(collection))

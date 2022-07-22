@@ -1,8 +1,8 @@
-Получим отступ элемента `ele` сверху и слева от элемента `target`.
+Получим отступ элемента ` сверху и слева от элемента `target`.
 
-```javascript
+```js
 // Координаты `top` и `left` обоих элементов
-const eleRect = ele.getBoundingClientRect();
+const eleRect = el.getBoundingClientRect();
 const targetRect = target.getBoundingClientRect();
 
 // Вычисляем отступы

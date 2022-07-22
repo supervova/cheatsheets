@@ -1,3 +1,3 @@
-```javascript
-target.appendChild(ele);
+```js
+target.appendChild(el);
 ```

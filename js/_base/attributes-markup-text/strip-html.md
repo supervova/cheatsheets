@@ -1,6 +1,6 @@
 #### 1\. С помощью `DOMParser`
 
-```javascript
+```js
 const stripHtml = function (html) {
   const doc = new DOMParser().parseFromString(html, 'text/html');
   return doc.body.textContent || '';
@@ -11,28 +11,28 @@ const stripHtml = function (html) {
 
 `<template>` предназначен для заготовок разметки, которая изначально скрыта от пользователя, но может быть использована для вывода данных с помощью JS.
 
-```javascript
+```js
 const stripHtml = (html) => {
-  const ele = document.createElement('template');
-  ele.innerHTML = html;
-  return ele.content.textContent || '';
+  const el = document.createElement('template');
+  el.innerHTML = html;
+  return el.content.textContent || '';
 };
 ```
 
 #### 3\. Извлечь текст из поддельного элемента (не рекомендуется)
 
-```javascript
+```js
 const stripHtml = (html) => {
   // Создаем новый элемент
-  const ele = document.createElement('div');
-// const ele = document.createElement('textarea');
+  const el = document.createElement('div');
+// const el = document.createElement('textarea');
   
   // Задаем HTML-разметку
-  ele.innerHTML = html;
+  el.innerHTML = html;
   
   // Возвращаем только текст
-  return ele.textContent || '';
+  return el.textContent || '';
 };
 ```
 
-Подход не рекомендуется, потому что оставляет возможность злоумышленникам вставить в разметку теги, например `<script>`. И хотя этого можно избежать, используя при создании `ele` не `div`, а `textarea`, какого-то преимущества перед первым способом — `DOMParser` — всё равно не появится.
+Подход не рекомендуется, потому что оставляет возможность злоумышленникам вставить в разметку теги, например `<script>`. И хотя этого можно избежать, используя при создании ` не `div`, а `textarea`, какого-то преимущества перед первым способом — `DOMParser` — всё равно не появится.

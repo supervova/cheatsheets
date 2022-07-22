@@ -1,6 +1,6 @@
 #### Изображение уже загружено
 
-```javascript
+```js
 const image = document.querySelector(...);
 
 // Исходные размеры
@@ -16,7 +16,7 @@ const height = image.height;
 
 Первым делом создаем тег изображения и слушаем событие `load`, чтобы вычислить размер изображения, загружаемое с указанного URL…
 
-```javascript
+```js
 const image = document.createElement('img');
 
 image.addEventListener('load', (e) => {
@@ -31,7 +31,7 @@ image.src = '/path/to/image.png';
 
 Мы можем использовать объект `Promise`, чтобы превратить предыдущий сниппет в функцию.
 
-```javascript
+```js
 const calculateSize = (url) => {
   return new Promise((resolve, reject) => {
     const image = document.createElement('img');
@@ -67,7 +67,7 @@ calculateSize('/path/to/image.png').then((data) => {
 <div id="size"></div>
 ```
 
-```javascript
+```js
 const avatarEle = document.getElementById('avatar');
 const sizeEle = document.getElementById('size');
 

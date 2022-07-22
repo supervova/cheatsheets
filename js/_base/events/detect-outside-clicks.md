@@ -1,7 +1,7 @@
-`isClickedOutside` вернёт `true`, если пользователь кликнет не по элементу `ele`.
+`isClickedOutside` вернёт `true`, если пользователь кликнет не по элементу `.
 
-```javascript
+```js
 document.addEventListener('click', (event) => {
-  const isClickedOutside = !ele.contains(event.target);
+  const isClickedOutside = !el.contains(event.target);
 });
 ```

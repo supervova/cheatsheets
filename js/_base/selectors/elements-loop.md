@@ -1,37 +1,37 @@
 #### 1\. Рекомендовано: циклом `forEach`
 
-```javascript
+```js
 const elements =
   document.querySelectorAll('.my-element');
 
-elements.forEach((ele) => {
-  console.log(ele);
+elements.forEach((el) => {
+  console.log(el);
   // Do smth useful...
 });
 ```
 
 #### 2\. Тоже, но еще и с оператором расширения (`spread`-оператором)
 
-```javascript
-[...elements].forEach((ele) => {
+```js
+[...elements].forEach((el) => {
   // Do smth
 });
 ```
 
 #### 3\. Тот же `forEach`, только, как метод массива
 
-```javascript
-Array.from(elements).forEach((ele) => {
+```js
+Array.from(elements).forEach((el) => {
   // Do smth...
 });
 
 // Или
-[].forEach.call(elements, (ele) => {
+[].forEach.call(elements, (el) => {
   // Do smth...
 });
 
 // Или
-[].slice.call(elements, 0).forEach((ele) => {
+[].slice.call(elements, 0).forEach((el) => {
   // Do smth...
 });
 ```
@@ -40,7 +40,7 @@ Array.from(elements).forEach((ele) => {
 
 #### 4\. Более быстрый цикл `for`
 
-```javascript
+```js
 for (let i = 0; i < elements.length; i++) {
   //Do smth w/ elements[i]
 }

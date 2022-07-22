@@ -1,4 +1,4 @@
-```javascript
+```js
 // Создаем ссылку
 const link = document.createElement('link');
 link.setAttribute('rel', 'stylesheet');

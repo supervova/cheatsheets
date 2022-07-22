@@ -1,6 +1,6 @@
 Функция меняет местами узлы, передаваемые в параметры.
 
-```javascript
+```js
 const swap = (nodeA, nodeB) => {
   const parentA = nodeA.parentNode;
   const siblingA =

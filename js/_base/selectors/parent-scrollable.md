@@ -1,12 +1,12 @@
 Функция `getScrollableParent` ищет блок с прокруткой, начиная с элемента переданного в параметр, вверх по цепочке родителей, вплоть до `body`. Возвращает первый попавшийся.
 
-```javascript
-const isScrollable = (ele) => {
+```js
+const isScrollable = (el) => {
 const hasScrollableContent =
-  ele.scrollHeight > ele.clientHeight;
+  el.scrollHeight > el.clientHeight;
 
 const overflowYStyle =
-  window.getComputedStyle(ele).overflowY;
+  window.getComputedStyle(el).overflowY;
 const isOverflowHidden =
   overflowYStyle.indexOf('hidden') !== -1;
 
@@ -15,11 +15,11 @@ const isOverflowHidden =
   );
 };
 
-const getScrollableParent = (ele) => {
-  return !ele || ele === document.body
+const getScrollableParent = (el) => {
+  return !el || el === document.body
   ? document.body
-  : isScrollable(ele)
+  : isScrollable(el)
   ? ele
-  : getScrollableParent(ele.parentNode);
+  : getScrollableParent(el.parentNode);
 };
 ```

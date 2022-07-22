@@ -1,8 +1,8 @@
-```javascript
-ele.scrollIntoView({ behavior: 'smooth' });
+```js
+el.scrollIntoView({ behavior: 'smooth' });
 
 // ...Или неплавно, без замедления
-ele.scrollIntoView();
+el.scrollIntoView();
 ```
 
 Опцию плавной прокрутки можно прописать и в CSS: `scroll-behavior: smooth;`

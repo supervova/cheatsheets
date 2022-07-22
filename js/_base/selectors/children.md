@@ -3,16 +3,16 @@
 - `children` возвращает коллекцию HTML-элементов, то есть узлов, соответствующих тегам;
 - `childNodes` — все дочерние элементы, включая текст и комментарии.
 
-```javascript
-const children = ele.children;
-const childNodes = ele.childNodes;
+```js
+const children = el.children;
+const childNodes = el.childNodes;
 ```
 
 Потомков можно [перебрать циклом](#topic-loop-nodelist), выбрать по индексу или с помощью методов `firstChild` и `lastChild`.
 
-```javascript
-const first = ele.firstChild;
-const last = ele.lastChild;
+```js
+const first = el.firstChild;
+const last = el.lastChild;
 
 // Те же потомки — первый и последний
 const first = childNodes[0];

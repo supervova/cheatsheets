@@ -1,6 +1,6 @@
 Функция `setFavicon` меняет URL иконки.
 
-```javascript
+```js
 const setFavicon = function (url) {
   // Получаем текущую иконку
   const favicon =
@@ -21,7 +21,7 @@ const setFavicon = function (url) {
 
 Чтобы менять в зависимости от разделов (например, в личных кабинетах — иконку-аватар пользователя), можно использовать такой метод.
 
-```javascript
+```js
 setFavicon('/path/to/user/profile/icon.ico');
 ```
 
@@ -29,7 +29,7 @@ setFavicon('/path/to/user/profile/icon.ico');
 
 В метод `setFavicon` можно передавать помимо обычных веб-адресов и Data URL. Таким образом можно создать элемент `canvas`, добавить на него эмодзи, конвертировать в Data Url и передать в `setFavicon`.
 
-```javascript
+```js
 const emojiFavicon = (emoji) => {
   // Создаем `canvas`
   const canvas = document.createElement('canvas');

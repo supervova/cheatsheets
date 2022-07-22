@@ -11,7 +11,7 @@
 
 А обработчик печати вызываться из слушателя установленного на кнопку.
 
-```javascript
+```js
 const printBtn = document.getElementById('print');
 
 printBtn.addEventListener('click', () => {
@@ -21,7 +21,7 @@ printBtn.addEventListener('click', () => {
 
 #### Создаем временный `iframe`
 
-```javascript
+```js
 const iframe = document.createElement('iframe');
 
 // Делаем его невидимыми
@@ -42,7 +42,7 @@ document.body.appendChild(iframe);
 
 Даже не смотря на то, что в `iframe` нет содержания из внешнего источника, надо дождаться его готовности.
 
-```javascript
+```js
 iframe.addEventListener('load', () => {
   // Клонируем картинку
   const image =
@@ -68,7 +68,7 @@ iframe.addEventListener('load', () => {
 
 …Когда пользователь запускает печать или когда закрывает окно печати.
 
-```javascript
+```js
 iframe.contentWindow.addEventListener(
   'afterprint',
   () => {

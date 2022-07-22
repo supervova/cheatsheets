@@ -1,12 +1,12 @@
 ☝️🧐 Лучше использовать `fetch`. Встроенный объект `XMLHttpRequest` приводится здесь только для полноты картины.
 
-Функция `upload` посылает выбранные в `fileEle` файлы на сервер.
+Функция `upload` посылает выбранные в `fileEl` файлы на сервер.
 
-```javascript
-const upload = (fileEle, backendUrl) => {
+```js
+const upload = (fileEl, backendUrl) => {
   return new Promise((resolve, reject) => {
     // Получаем выбранные файлы
-    const { files } = fileEle;
+    const { files } = fileEl;
 
     /* Создаем объект FormData. Он позволяет
     конструировать наборы пар ключ-значение,
@@ -18,7 +18,7 @@ const upload = (fileEle, backendUrl) => {
 
     // Добавляем выбранные файлы в `formData`
     files.forEach((file) => {
-      formData.append(fileEle.name, file, file.name);
+      formData.append(fileEl.name, file, file.name);
     });
 
     // Создаем AJAX-запрос.

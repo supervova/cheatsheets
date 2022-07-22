@@ -1,4 +1,4 @@
-```javascript
+```js
 let num;
 const pi = 3.141;
 
@@ -57,7 +57,7 @@ num = Number.POSITIVE_INFINITY;
 
 #### Объект `Math`
 
-```javascript
+```js
 // 3.141592653589793
 const pi = Math.PI;
 

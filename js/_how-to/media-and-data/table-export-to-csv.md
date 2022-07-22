@@ -9,7 +9,7 @@
 
 Функция `toCsv` переводит ячейки в формат CSV. Получаем строки, перебираем каждую: извлекаем содержимое ячеек, записываем через запятую; каждую `tr` записываем на новой строке.
 
-```javascript
+```js
 const toCsv = (table) => {
   // Получаем все строки таблицы
   const rows = table.querySelectorAll('tr');
@@ -35,7 +35,7 @@ const toCsv = (table) => {
 
 Функция `download` создает временную невидимую ссылку скачивания. Добавляет в атрибут `href` CSV, как Data URL. Инициирует событие `click`, а затем удаляет временную ссылку.
 
-```javascript
+```js
 const download = (text, fileName) => {
   const link = document.createElement('a');
   link.setAttribute(
@@ -56,7 +56,7 @@ const download = (text, fileName) => {
 
 Устанавливаем на кнопку слушатель с обработчиком, последовательно вызывающим функции `toCsv` и `download`.
 
-```javascript
+```js
 const table = document.getElementById('exportMe');
 const exportBtn = document.getElementById('export');
 

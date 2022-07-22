@@ -1,6 +1,6 @@
 #### 1\. C помощью метода `measureText()` элемента `canvas`
 
-```javascript
+```js
 const measureWidth = (text, font) => {
   // Создаем холст
   const canvas = document.createElement('canvas');
@@ -21,29 +21,29 @@ const measureWidth = (text, font) => {
 
 #### 2\. С помощью временного элемента
 
-```javascript
+```js
 const measureWidth = (text, font) => {
   // Создаем элемент
-  const ele = document.createElement('div');
+  const el = document.createElement('div');
 
   // Скрываем и запрещаем переносы
-  ele.style.position = 'absolute';
-  ele.style.visibility = 'hidden';
-  ele.style.whiteSpace = 'nowrap';
-  ele.style.left = '-9999px';
+  el.style.position = 'absolute';
+  el.style.visibility = 'hidden';
+  el.style.whiteSpace = 'nowrap';
+  el.style.left = '-9999px';
 
   // Устанавливаем шрифт и передаем строку
-  ele.style.font = font;
-  ele.innerText = text;
+  el.style.font = font;
+  el.innerText = text;
 
   // Вставляем в документ
-  document.body.appendChild(ele);
+  document.body.appendChild(el);
 
   // Получаем ширину
-  const { width } = window.getComputedStyle(ele);
+  const { width } = window.getComputedStyle(el);
 
   // Удаляем элемент
-  document.body.removeChild(ele);
+  document.body.removeChild(el);
 
   return width;
 };

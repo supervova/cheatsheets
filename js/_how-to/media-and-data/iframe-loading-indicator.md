@@ -33,7 +33,7 @@
 
 Скроем индикатор, когда загрузка закончится.
 
-```javascript
+```js
 const iframeEle = document.getElementById('iframe');
 const loadingEle = document.getElementById('loader');
 

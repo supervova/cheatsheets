@@ -1,10 +1,10 @@
 Предположим, у нас есть текстовой редактор `#editor` и нам нужно вставить в него содержимое буфера обмена, очистив его от форматирования — чистый текст.
 
-```javascript
-const editorEle = document.getElementById('editor');
+```js
+const editorEl = document.getElementById('editor');
 
 // Обработчик события `paste`
-editorEle.addEventListener('paste', (e) => {
+editorEl.addEventListener('paste', (e) => {
   // Предотвращаем действия браузера по умолчанию
   e.preventDefault();
 

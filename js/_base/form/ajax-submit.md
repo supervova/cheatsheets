@@ -1,6 +1,6 @@
 Следующая функция отправит данные из формы `formEle` на сервер в AJAX-запросе.
 
-```javascript
+```js
 const submit = (formEle) => {
   return new Promise(function (resolve, reject) {
     /* Вызов функции сериализации данных —
@@ -34,7 +34,7 @@ const submit = (formEle) => {
 
 #### Применение
 
-```javascript
+```js
 const formEle = document.getElementById('my-form');
 
 submit(formEle).then((response) => {

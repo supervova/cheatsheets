@@ -6,10 +6,10 @@
 <textarea id="message"></textarea>
 ```
 
-```javascript
-const ele = document.getElementById('message');
+```js
+const el = document.getElementById('message');
 
-ele.addEventListener('keydown', (e) => {
+el.addEventListener('keydown', (e) => {
   // Получаем кодовый номер кнопки
   const keyCode = e.which || e.keyCode;
   

@@ -1,4 +1,4 @@
-```javascript
+```js
 const a = str.search(/CheatSheet/i);
 ```
 
@@ -44,13 +44,13 @@ const a = str.search(/CheatSheet/i);
 
 Регулярки можно записать с помощью слешей…
 
-```javascript
+```js
 let regexp = /go+gle/gmi
 ```
 
 …или с помощью конструктора.
 
-```javascript
+```js
 // параметры заключаются в кавычки
 regexp = new RegExp('ab+c', 'i');
 ```
@@ -75,7 +75,7 @@ regexp = new RegExp('ab+c', 'i');
 
 - Скобочной группе можно дать имя с помощью конструкции `?<имя>`, добавляемой сразу после открытия скобки. Именованные группы сохраняются в свойство `groups` результата `String.match`.
 
-    ```javascript
+    ```js
     let dateRegexp
       = /(?<yy>[0-9]{4})-(?<mm>[0-9]{2})-(?<dd>[0-9]{2})/;
     let str = "2019-04-30";

@@ -4,7 +4,7 @@
 2. В обработчике проверяем `event.target`.
 3. Обрабатываем событие, если оно произошло внутри искомого элемента.
 
-```javascript
+```js
 window.addEventListener('click', (event) => {
   if (event.target.matches('[data-dropdown-toggle]')) {
     toggleDropdownOnLabelClick(event);

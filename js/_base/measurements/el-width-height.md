@@ -1,32 +1,32 @@
-```javascript
+```js
 // Стили документа
-const styles = window.getComputedStyle(ele);
+const styles = window.getComputedStyle(el);
 
 // Размер без рамки и padding
 const height =
-  ele.clientHeight -
+  el.clientHeight -
   parseFloat(styles.paddingTop) -
   parseFloat(styles.paddingBottom);
 const width =
-  ele.clientWidth -
+  el.clientWidth -
   parseFloat(styles.paddingLeft) -
   parseFloat(styles.paddingRight);
 
 // Размер c padding
-const { clientHeight } = ele;
-const { clientWidth } = ele;
+const { clientHeight } = el;
+const { clientWidth } = el;
 
 // Размер c рамкой и padding
-const { offsetHeight } = ele;
-const { offsetWidth } = ele;
+const { offsetHeight } = el;
+const { offsetWidth } = el;
 
 // Размер c рамкой, padding и margin
 const heightWithMargin =
-  ele.offsetHeight +
+  el.offsetHeight +
   parseFloat(styles.marginTop) +
   parseFloat(styles.marginBottom);
 const widthWithMargin =
-  ele.offsetWidth +
+  el.offsetWidth +
   parseFloat(styles.marginLeft) +
   parseFloat(styles.marginRight);
 ```

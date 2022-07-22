@@ -2,13 +2,13 @@
 
 В этом примере в переменной `message` передаем строку.
 
-```javascript
+```js
 window.parent.postMessage(message, '*');
 ```
 
 А если нужно передать объект, сначала записываем в формате JSON и конвертируем в строку методом `stringify`.
 
-```javascript
+```js
 const message = JSON.stringify({
   message: 'Hello from iframe',
   date: Date.now(),
@@ -20,7 +20,7 @@ window.parent.postMessage(message, '*');
 
 #### Передача данных в `iframe`
 
-```javascript
+```js
 // Вызов из родительской страницы
 myFrame.contentWindow.postMessage(message, '*');
 ```
@@ -29,7 +29,7 @@ myFrame.contentWindow.postMessage(message, '*');
 
 Чтобы получить данные, в `iframe` или на родительской странице нужно добавить слушателя события `message`.
 
-```javascript
+```js
 window.addEventListener('message', (e) => {
   // Получаем данные
   const data = e.data;
@@ -45,7 +45,7 @@ window.addEventListener('message', (e) => {
 
 Если обмен данными осуществляется с разными `iframe`, можно добавить свойство-«подпись».
 
-```javascript
+```js
 // Передача данных из `iframe`
 const message = JSON.stringify({
   channel: 'FROM_FRAME_A',
@@ -57,7 +57,7 @@ window.parent.postMessage(message, '*');
 
 В получателе (в примере — родительская страница) теперь можно распознавать отправителей.
 
-```javascript
+```js
 window.addEventListener('message', (e) => {
   const data = JSON.parse(e.data);
 

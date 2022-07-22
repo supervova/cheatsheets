@@ -1,4 +1,4 @@
-```javascript
+```js
 // Остановка прокрутки `body`
 document.body.style.overflow = 'hidden';
 

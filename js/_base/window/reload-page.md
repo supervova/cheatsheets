@@ -1,11 +1,11 @@
 #### Перегрузить и сохранить уже полученные данные POST-запроса
 
-```javascript
+```js
 window.location.reload();
 ```
 
 #### Перегрузить и не сохранять данные POST-запроса
 
-```javascript
+```js
 window.location = window.location.href;
 ```

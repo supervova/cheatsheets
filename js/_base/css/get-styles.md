@@ -1,12 +1,12 @@
 Мы можем получить все стили элемента из блоков разных селекторов.
 
-```javascript
-const styles = window.getComputedStyle(ele, null);
+```js
+const styles = window.getComputedStyle(el, null);
 ```
 
 Из полученных стилей можем извлечь значение нужного свойства.
 
-```javascript
+```js
 const bgColor = styles.backgroundColor;
 /* Или так. Свойства можно писать, как в шашлычном
 так и в верблюжьем регистре */
@@ -18,7 +18,7 @@ const bgColor =
 
 Для свойств с браузерным префиксом это делается иначе.
 
-```javascript
+```js
 const textSizeAdjust =
   styles['-webkit-text-size-adjust'];
 ```

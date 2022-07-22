@@ -1,4 +1,4 @@
-```javascript
+```js
 let abc = 'abcdefghijklmnopqrstuvwxyz';
 
 // \n = с новой строки

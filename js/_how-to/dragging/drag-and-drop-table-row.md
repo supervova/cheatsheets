@@ -66,7 +66,7 @@
 
 Во-первых, нам нужен флаг, чтобы помечать, когда происходит перетягивание.
 
-```javascript
+```js
 let isDraggingStarted = false;
 
 const mouseMoveHandler = (e) => {
@@ -81,7 +81,7 @@ const mouseMoveHandler = (e) => {
 
 Функция `cloneTable` создает клон таблицы и показывает его вместо таблицы.
 
-```javascript
+```js
 let list;
 
 const cloneTable = () => {
@@ -111,7 +111,7 @@ const cloneTable = () => {
 
 Лист будет состоять из клонов строк.
 
-```javascript
+```js
 let list;
 
 const cloneTable = () => {
@@ -161,7 +161,7 @@ const cloneTable = () => {
 
 Теперь нам нужно установить ширину ячеек, чтобы сделать дубликат таблицы похожим на оригинал.
 
-```javascript
+```js
 cells.forEach((cell) => {
   const newCell = cell.cloneNode(true);
   // Устанавливаем ширину оригинальной ячейки
@@ -175,9 +175,9 @@ cells.forEach((cell) => {
 
 Определяем индексы перетаскиваемой и целевой строки.
 
-```javascript
+```js
 // Перетаскиваемый элемент
-let draggingEle;
+let draggingEl;
 // Индекс Перетаскиваемой строки
 let draggingRowIndex;
 
@@ -194,7 +194,8 @@ const mouseMoveHandler = (e) => {
     cloneTable();
 
     // Получаем перетягиваемый элемент
-    draggingEle = [].slice.call(list.children)[draggingRowIndex];
+    draggingEl =
+      [].slice.call(list.children)[draggingRowIndex];
   }
 };
 
@@ -202,13 +203,13 @@ const mouseUpHandler = () => {
   // Получаем индекс целевой строки
   const endRowIndex = [].slice
     .call(list.children)
-    .indexOf(draggingEle);
+    .indexOf(draggingEl);
 };
 ```
 
 После того, как мы получили `draggingRowIndex` и `endRowIndex`, нетрудно определить, где пользователь отпустит перетаскиваемый элемент — сверху или снизу от исходной точки. И теперь мы можем решить, куда пристроить целевую строку: до или после нового места перетаскиваемой.
 
-```javascript
+```js
 const mouseUpHandler = () => {
   // Переносим перетаскиваемую строку к `endRowIndex`
   const rows = [].slice.call(table.querySelectorAll('tr'));

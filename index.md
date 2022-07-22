@@ -25,8 +25,10 @@ is-index: true
   {%- include details.html title="Дата" path="js/_base/theory/date.md" -%}
   {%- include details.html title="Глобальные функции и объекты" path="js/_base/theory/global-functions.md" -%}
   {%- include details.html title="Промисы" path="js/_base/theory/promises.md" -%}
+  {%- include details.html title="Модули" path="js/_base/theory/modules.md" -%}
   {%- include details.html title="Ошибки" path="js/_base/theory/errors.md" -%}
   {%- include details.html title="Правила хорошего кода" path="js/_base/theory/best-practicies.md" -%}
+  {%- include details.html title="Углубленное изучение" path="js/_base/theory/advanced.md" -%}
 </section>
 
 <section>
@@ -47,7 +49,7 @@ is-index: true
   <h2>Манипуляции с DOM</h2>
   {%- include details.html title="Создать элемент или текстовой узел" path="js/_base/manipulation/create.md" -%}
   {%- include details.html title="Клонирование элемента" path="js/_base/manipulation/clone.md" -%}
-  {%- include details.html title="Атрибуты: получить, задать или переопределить значение; удалить" path="js/_base/manipulation/attributes-get-set-remove.md" -%}
+  {%- include details.html title="Атрибуты: проверить наличие; получить, задать или переопределить значение; удалить" path="js/_base/manipulation/attributes-check-get-set-remove.md" -%}
   {%- include details.html title="Получение, установка, удаление data-атрибутов" path="js/_base/manipulation/attributes-data.md" -%}
   {%- include details.html title="Вставить элемент после открывающего тега будущего родителя" path="js/_base/manipulation/prepend.md" -%}
   {%- include details.html title="Вставить элемент перед закрывающим тегом будущего родителя" path="js/_base/manipulation/append.md" -%}
@@ -65,7 +67,7 @@ is-index: true
 </section>
 
 <section>
-  <h2>Атрибуты, разметка и текстовое содержание</h2>
+  <h2>Разметка и текстовое содержание</h2>
   {%- include details.html title="Получить или задать/переопределить HTML-разметку элемента" path="js/_base/attributes-markup-text/html-of-element.md" id="topic-inner-html" -%}
   {%- include details.html title="Создать / изменить содержимое элемента" path="js/_base/attributes-markup-text/set-edit.md" -%}
   {%- include details.html title="Получить текст элемента и его потомков" path="js/_base/attributes-markup-text/get.md" -%}
@@ -82,6 +84,7 @@ is-index: true
   {%- include details.html title="Добавить, удалить, переключить, заменить класс" path="js/_base/css/classes-add-remove-toggle.md" -%}
   {%- include details.html title="Проверка CSS-класса" path="js/_base/css/does-el-have-class.md" -%}
   {%- include details.html title="Получить стили элемента" path="js/_base/css/get-styles.md" -%}
+  {%- include details.html title="CSS-переменные" path="js/_base/css/custom-properties.md" -%}
   {%- include details.html title="Добавление, обновление и удаление строковых стилей" path="js/_base/css/set.md" -%}
   {%- include details.html title="Показать / скрыть элемент" path="js/_base/css/toggle-element.md" -%}
   {%- include details.html title="Выделение целевой области для перетаскиваемых файлов" path="js/_base/css/highlight-el-when-dragging-over-it.md" -%}
@@ -95,8 +98,9 @@ is-index: true
   <h2>События</h2>
   {%- include details.html title="Добавить / удалить обработчик события" path="js/_base/events/attach-detach-handler.md" -%}
   {%- include details.html title="Предотвращение действия по умолчанию" path="js/_base/events/prevent-default-action.md" -%}
-  {%- include details.html title="Всплытие и делегирование: обработка событий на динамически созданных элементах и на массе однотипных" path="js/_base/events/bubbling-and-dynamically-created-els.md" -%}
+  {%- include details.html title="Всплытие и делегирование: обработка событий на динамически созданных элементах и на массе однотипных" path="js/_base/events/bubbling-and-event-delegation.md" -%}
   {%- include details.html title="Вложенные обработчики событий" path="js/_base/events/nested-handlers.md" id="topic-nested-handlers" -%}
+  {%- include details.html title="События клавиатуры" path="js/_base/events/keyboard-events.md" -%}
   {%- include details.html title="Кликнул ли пользователь за границами элемента?" path="js/_base/events/detect-outside-clicks.md" -%}
   {%- include details.html title="Проверка поддержки событий касания" path="js/_base/events/check-touch-events-support.md" -%}
   {%- include details.html title="Генерация пользовательских событий, конструктор `Event` и его потомки" path="js/_base/events/event-constructor.md" -%}

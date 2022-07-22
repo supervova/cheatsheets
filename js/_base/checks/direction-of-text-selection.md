@@ -1,6 +1,6 @@
 Функция возвращает `forward`, если пользователь выделил текст слева направо, и `backward`, если наоборот.
 
-```javascript
+```js
 const getDirection = () => {
   const selection = window.getSelection();
   const range = document.createRange();

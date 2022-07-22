@@ -1,32 +1,32 @@
 Найти соседа выше.
 
-```javascript
-const prev = ele.previousElementSibling;
+```js
+const prev = el.previousElementSibling;
 ```
 
 Найти соседа ниже.
 
-```javascript
-const next = ele.nextElementSibling;
+```js
+const next = el.nextElementSibling;
 ```
 
 Если нужно найти не только элементы, но и текстовые узлы, тогда так:
 
-```javascript
-const prev = ele.previousSibling;
-const next = ele.nextSibling;
+```js
+const prev = el.previousSibling;
+const next = el.nextSibling;
 ```
 
 Найти всех соседей.
 
-```javascript
+```js
 // Сначала найти родителя
-const parent = ele.parentNode;
+const parent = el.parentNode;
 
-// Найти всех потомков за исключением исходного `ele`
+// Найти всех потомков за исключением исходного `
 const siblings = [].slice
   .call(parent.children)
   .filter((child) => {
-    return child !== ele;
+    return child !== el;
   });
 ```

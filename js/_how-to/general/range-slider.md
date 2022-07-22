@@ -115,13 +115,13 @@
 
 `input[type='range']` поддерживается абсолютным абсолютным большинством браузеров. Но, если потребуется, можно добавить проверку.
 
-```javascript
+```js
 const isRangeInputSupported = () => {
-  const ele = document.createElement('input');
-  ele.setAttribute('type', 'range');
+  const el = document.createElement('input');
+  el.setAttribute('type', 'range');
   /* Если браузер не поддерживает поле `range`,
   атрибуту `type` будет присвоено значение `text` */
-  return ele.type !== 'text';
+  return el.type !== 'text';
 };
 ```
 
@@ -156,7 +156,7 @@ const isRangeInputSupported = () => {
 
 Назначим на бегунок обработчик события `mousedown`, чтобы сделать его перетаскиваемым. В обработчик будет сохранятся позиция элемента.
 
-```javascript
+```js
 const thumb = document.getElementById('thumb');
 const leftSide = thumb.previousElementSibling;
 
@@ -183,7 +183,7 @@ const mouseDownHandler = (e) => {
 
 Когда бегунок перемещаемся, мы можем рассчитать расстояние, которое проделал курсор — это будет разница между исходной и текущей позицией. С этими данными мы можем рассчитать и ширину левой части дорожки.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   // Как далеко мышь продвинулась
   const dx = e.clientX - x;

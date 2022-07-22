@@ -1,3 +1,5 @@
+#### Обработчики события
+
 #### Атрибуты и свойства vs слушатели
 
 Обработчик события может быть назначен прямо в разметке, в атрибуте, который называется `on`-событие.
@@ -23,7 +25,7 @@
 
 Альтернативный способ назначения обработчиков — методы `addEventListener` и `removeEventListener`. Они свободны от указанного недостатка.
 
-```javascript
+```js
 function handler() {
   alert( 'Спасибо!' );
 }
@@ -38,7 +40,7 @@ elem.removeEventListener('click', handler);
 
 То есть, если пользователь кликнет на потомке кнопки, описанной в примере, — `span` или иконку — `event.currentTarget` всё равно будет содержать объект `btn`.
 
-```javascript
+```js
 `btn.addEventListener('click', (event) => {
   const el = event.currentTarget;
   console.log(`You've clicked on ${el}`);
@@ -159,7 +161,7 @@ elem.removeEventListener('click', handler);
 
 Создаются вызовами `setTimeout` или `setInterval`.
 
-```javascript
+```js
 setTimeout(() => {
   alert('Hello');
 }, 3000);

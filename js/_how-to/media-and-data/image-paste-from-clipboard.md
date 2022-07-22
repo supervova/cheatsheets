@@ -1,4 +1,4 @@
-```javascript
+```js
 // Устанавливаем слушатель события `paste`
 document.addEventListener('paste', (e) => {
 
@@ -25,14 +25,14 @@ document.addEventListener('paste', (e) => {
 
 Теперь мы можем увидеть картинку на странице, предположим, в «заглушке» `img#preview`. Для это в слушатель, после создания `blob` получаем этот элемент и устанавливаем его атрибут `src`.
 
-```javascript
+```js
 const imageEle = document.getElementById('preview');
 imageEle.src = URL.createObjectURL(blob);
 ```
 
 А можем отослать на сервер в AJAX-запросе. (Код нужно вставить в том же слушателе).
 
-```javascript
+```js
 // Создаем новую FormData
 const formData = new FormData();
 formData.append('image', blob, 'filename');

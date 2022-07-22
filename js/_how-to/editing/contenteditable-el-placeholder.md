@@ -13,7 +13,7 @@
 
 Значение `data-placeholder` показываем, если элемент пустой.
 
-```javascript
+```js
 .is-editable:empty:before {
   content: attr(data-placeholder);
 }
@@ -23,15 +23,15 @@
 
 Тот же `div` с `id` и `data`-атрибутом. Делаем `placeholder` по значению `data`-атрибута. На фокусе очищаем содержимое элемента, если оно совпадает с текстом `placeholder`'а. На `blur`'е, если пользователь ничего не ввёл, возвращаем `placeholder`.
 
-```javascript
-const ele = document.getElementById('edit-me');
-const placeholder = ele.getAttribute('data-placeholder');
+```js
+const el = document.getElementById('edit-me');
+const placeholder = el.getAttribute('data-placeholder');
 
 /* Если элемент пустой, заполняем его строкой
 из `data`-атрибута */
-ele.innerHTML === '' && (ele.innerHTML = placeholder);
+el.innerHTML === '' && (el.innerHTML = placeholder);
 
-ele.addEventListener('focus', (e) => {
+el.addEventListener('focus', (e) => {
   const value = e.target.innerHTML;
   /* Альтернатива выражению `if`: если `value`
   равно `placeholder`, тогда очищаем элемент */
@@ -39,7 +39,7 @@ ele.addEventListener('focus', (e) => {
     (e.target.innerHTML = '');
 });
 
-ele.addEventListener('blur', (e) => {
+el.addEventListener('blur', (e) => {
   const value = e.target.innerHTML;
   value === '' &&
     (e.target.innerHTML = placeholder);

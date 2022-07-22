@@ -7,11 +7,11 @@
 <button id="edit">Edit</button>
 ```
 
-```javascript
+```js
 const fullNameEle = document.getElementById('fullName');
-const editEle = document.getElementById('edit');
+const editEl = document.getElementById('edit');
 
-editEle.addEventListener('click', (e) => {
+editEl.addEventListener('click', (e) => {
   // Фокус на поле Ф.И.О.
   fullNameEle.focus();
   

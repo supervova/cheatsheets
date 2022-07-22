@@ -11,7 +11,7 @@
 </button>
 ```
 
-```javascript
+```js
 // Получаем необходимые элементы
 const password =
   document.getElementById('form-password');

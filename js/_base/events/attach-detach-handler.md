@@ -1,20 +1,20 @@
-```javascript
+```js
 const handler = () => {
   // ...
 };
 
 // Добавить обработчик событий `click`, `mouseenter`, `keyup`
-ele.addEventListener('click', handler);
-ele.addEventListener('mouseenter', (e) => { /* ... */ });
+el.addEventListener('click', handler);
+el.addEventListener('mouseenter', (e) => { /* ... */ });
 document.addEventListener('keyup', (e) => { /* ... */ });
 
 // Удалить обработчик события `click`
-ele.removeEventListener('click', handler);
+el.removeEventListener('click', handler);
 ```
 
 #### Установка слушателя на все элементы коллекции узлов
 
-```javascript
+```js
 const elems = document.querySelectorAll('.my-class');
 
 elems.forEach((elem) => {
@@ -28,7 +28,7 @@ elems.forEach((elem) => {
 
 Если в jQuery для этой задачи использовался специальный метод `on`, то в ванильном JS — тот же `addEventListener`, что и для исходных элементов DOM.
 
-```javascript
+```js
 const searchElement = document.createElement('div');
 document
   .querySelector('.search-container')
@@ -41,17 +41,17 @@ searchElement.addEventListener('click', handleClick);
 
 Чтобы обработчик вызывался только раз, можно использовать опцию `once` метода `addEventListener`…
 
-```javascript
+```js
 const handler = function (e) {
   // The event handler
 };
 
-ele.addEventListener('event-name', handler, { once: true });
+el.addEventListener('event-name', handler, { once: true });
 ```
 
 …Либо использовать «самоуничтожение» — записать удаление в самом теле обработчика.
 
-```javascript
+```js
 const handler = function (e) {
   // The event handler. Do something ...
 
@@ -59,5 +59,5 @@ const handler = function (e) {
   e.target.removeEventListener(e.type, handler);
 };
 
-ele.addEventListener('event-name', handler);
+el.addEventListener('event-name', handler);
 ```

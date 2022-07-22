@@ -1,10 +1,10 @@
-Функция выделяет текст элемента `ele`. Не получает, и не сохраняет — только выделяет — также, как пользователь текст курсором)
+Функция выделяет текст элемента `. Не получает, и не сохраняет — только выделяет — также, как пользователь текст курсором)
 
-```javascript
-const selectText = (ele) => {
+```js
+const selectText = (el) => {
   const selection = window.getSelection();
   const range = document.createRange();
-  range.selectNodeContents(ele);
+  range.selectNodeContents(el);
   selection.removeAllRanges();
   selection.addRange(range);
 };

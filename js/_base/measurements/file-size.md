@@ -9,11 +9,11 @@
 
 Надпись с размером появляется, когда пользователь выбирает файл.
 
-```javascript
-const fileEle = document.getElementById('upload');
+```js
+const fileEl = document.getElementById('upload');
 const sizeEle = document.getElementById('size');
 
-fileEle.addEventListener('change', function (e) {
+fileEl.addEventListener('change', function (e) {
   const files = e.target.files;
   if (files.length === 0) {
     // Спрятать надпись с размером, если файл не выбран
@@ -31,7 +31,7 @@ fileEle.addEventListener('change', function (e) {
 
 #### Размер в КБ, МБ, ГБ, ТБ
 
-```javascript
+```js
 // Convert the file size to a readable format
 const formatFileSize = function (bytes) {
   const sufixes = ['Б', 'КБ', 'MB', 'ГБ', 'ТБ'];

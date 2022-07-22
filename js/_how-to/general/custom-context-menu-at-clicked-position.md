@@ -11,9 +11,9 @@
 
 #### Предотвращаем вызов стандартного контекстного меню
 
-```javascript
-const ele = document.getElementById('element');
-ele.addEventListener('contextmenu', (e) => {
+```js
+const el = document.getElementById('element');
+el.addEventListener('contextmenu', (e) => {
   e.preventDefault();
 });
 ```
@@ -40,9 +40,9 @@ ele.addEventListener('contextmenu', (e) => {
 
 Рассчитываем позицию меню по позиции мышки.
 
-```javascript
-ele.addEventListener('contextmenu', (e) => {
-  const rect = ele.getBoundingClientRect();
+```js
+el.addEventListener('contextmenu', (e) => {
+  const rect = el.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
 
@@ -57,8 +57,8 @@ ele.addEventListener('contextmenu', (e) => {
 
 #### Закрываем меню по клику за его пределами
 
-```javascript
-ele.addEventListener('contextmenu', (e) => {
+```js
+el.addEventListener('contextmenu', (e) => {
   /* ...
   Добавляем вложенный слушатель */
   document.addEventListener('click', docClickHandler);

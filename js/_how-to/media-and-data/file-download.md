@@ -6,7 +6,7 @@
 
 #### Загрузка при переходе на страницу — вызов события `click`
 
-```javascript
+```js
 // Создаем ссылку
 const link = document.createElement('a');
 // <a href="/path/to/real-name" download="my-name">
@@ -27,7 +27,7 @@ document.body.removeChild(link);
 
 Сгенерированное содержание (в примере — JSON), можно перевести в [объект Blob](https://developer.mozilla.org/ru/docs/Web/API/Blob){:target="_blank"} и затем вызвать событие `click`, как описывалось выше.
 
-```javascript
+```js
 // Создаем Blob c JSON'ом
 const data = JSON.stringify({ 'message': 'Hello Word' });
 const blob = new Blob([data], {

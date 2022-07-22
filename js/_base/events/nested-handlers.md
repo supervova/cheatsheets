@@ -4,7 +4,7 @@
 
 Обычно мы записываем обработчики последовательно.
 
-```javascript
+```js
 const handleClick = () => {
   // Открыть модалку
 };
@@ -13,8 +13,8 @@ const handleKeydown = (e) => {
   // Закрыть модалку
 };
 
-// `buttonEle` — это наша кнопка
-buttonEle.addEventListener('click', handleClick);
+// `buttonEl` — это наша кнопка
+buttonEl.addEventListener('click', handleClick);
 document.addEventListener(
   'keydown', handleKeydown
 );
@@ -22,7 +22,7 @@ document.addEventListener(
 
 Обработчик `handleKeydown` зависит от `handleClick`, поскольку имеет смысл только тогда, когда модалка открыта. В принципе, можно использовать флаг, чтобы знать, когда окно открыто.
 
-```javascript
+```js
 let isModalOpened = false;
 
 const handleClick = () => {
@@ -43,7 +43,7 @@ const handleKeydown = (e) => {
 
 #### Более элегантное решение — вложенный обработчик
 
-```javascript
+```js
 const handleClick = () => {
   document.addEventListener(
     'keydown', handleKeydown

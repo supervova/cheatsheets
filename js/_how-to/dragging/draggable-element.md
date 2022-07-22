@@ -6,7 +6,7 @@
 
 Стили:
 
-```javascript
+```js
 .draggable {
     // Indicate the element draggable
     cursor: move;
@@ -25,12 +25,12 @@
 - `mousemove` даст возможность рассчитать как далеко мышка передвинулась и где сейчас находится перетаскиваемый элемент;
 - `mouseup` на этом событии удалим обработчики, установленные с предыдущими двумя.
 
-```javascript
+```js
 // Текущая позиция мышки
 let x = 0;
 let y = 0;
 
-const ele = document.getElementById('dragMe');
+const el = document.getElementById('dragMe');
 
 /** Отслеживаем передвижение */
 const mouseMoveHandler = (e) => {
@@ -39,8 +39,8 @@ const mouseMoveHandler = (e) => {
   const dy = e.clientY - y;
 
   // Устанавливаем позицию элемента
-  ele.style.top = `${ele.offsetTop + dy}px`;
-  ele.style.left = `${ele.offsetLeft + dx}px`;
+  el.style.top = `${el.offsetTop + dy}px`;
+  el.style.left = `${el.offsetLeft + dx}px`;
 
   // Переопределяем позицию курсора
   x = e.clientX;
@@ -65,5 +65,5 @@ const mouseDownHandler = (e) => {
   document.addEventListener('mouseup', mouseUpHandler);
 };
 
-ele.addEventListener('mousedown', mouseDownHandler);
+el.addEventListener('mousedown', mouseDownHandler);
 ```

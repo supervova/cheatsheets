@@ -5,11 +5,11 @@
 
 Обработка события `<input>`, происходящего при любом изменении введенных данных.
 
-```javascript
-const messageEle = document.getElementById('message');
+```js
+const messageEl = document.getElementById('message');
 const counterEle = document.getElementById('counter');
 
-messageEle.addEventListener('input', (e) => {
+messageEl.addEventListener('input', (e) => {
   const target = e.target;
   
   // Получаем значение `maxlength`

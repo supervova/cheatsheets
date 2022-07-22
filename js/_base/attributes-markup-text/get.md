@@ -1,5 +1,5 @@
-```javascript
-const content = ele.textContent;
+```js
+const content = el.textContent;
 ```
 
-В `content` сохранится текст `ele` и всех его потомков. Все HTML-теги будут удалены.
+В `content` сохранится текст ` и всех его потомков. Все HTML-теги будут удалены.

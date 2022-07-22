@@ -9,13 +9,13 @@
 
 Работает, как в обработчиках событий, так и в HTML-атрибутах.
 
-```javascript
-ele.addEventListener('click', (e) => {  
+```js
+el.addEventListener('click', (e) => {  
   e.preventDefault();
   // Do smth
 });
 
-ele.onclick = (e) => {
+el.onclick = (e) => {
   e.preventDefault();
   
   // Do smth
@@ -33,8 +33,8 @@ ele.onclick = (e) => {
 
 #### Есть еще один способ, но непрофессиональный — возврат `false` на событии
 
-```javascript
-ele.onclick = (e) => {
+```js
+el.onclick = (e) => {
   // Do smth
   return false;
 };

@@ -37,7 +37,7 @@
 
 В этом случае мы можем в JS рассчитать координаты панели, получив границы элементов методом `getBoundingClientRect`.
 
-```javascript
+```js
 const target = document.getElementById('target');
 const popover = document.getElementById('popover');
 

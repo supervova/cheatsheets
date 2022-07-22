@@ -1,13 +1,13 @@
 #### Создание
 
-```javascript
+```js
 let dogs = ['German Shepherd', 'Pug', 'Labrador'];
 dogs = ['Poodle', 'Beagle', 'Labrador'];
 ```
 
 #### Доступ к элементам, изменения
 
-```javascript
+```js
 // Доступ ко второму объекту, первый - [0]
 console.log(dogs[1]);
 
@@ -17,7 +17,7 @@ dogs[0] = 'Bulldog';
 
 #### Перебор
 
-```javascript
+```js
 for (let i = 0; i < dogs.length; i++) {
   console.log(dogs[i]);
 }
@@ -47,7 +47,7 @@ for (let i = 0; i < dogs.length; i++) {
 
 #### Пример использования `map(callback)`
 
-```javascript
+```js
 const names = ['HTML', 'CSS', 'JavaScript'];
 
 const nameLengths = names.map((name) => {

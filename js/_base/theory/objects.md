@@ -1,4 +1,4 @@
-```javascript
+```js
 const student = {
   // Свойства
   firstName: 'Jane',

@@ -6,13 +6,13 @@
 </div>
 ```
 
-```javascript
-const ele = document.getElementById('dragMe');
+```js
+const el = document.getElementById('dragMe');
 
 // Виртуальная проекция
 let ghostEle;
 
-ele.addEventListener('dragstart', (e) => {
+el.addEventListener('dragstart', (e) => {
   // Создаем виртуальную проекцию
   ghostEle = document.createElement('div');
   ghostEle.classList.add('is-dragging');
@@ -25,7 +25,7 @@ ele.addEventListener('dragstart', (e) => {
 
 // По окончанию перетягивания виртуальную проекцию следует удалить.
 
-ele.addEventListener('dragend', () => {
+el.addEventListener('dragend', () => {
   document.body.removeChild(ghostEle);
 });
 ```
@@ -43,10 +43,10 @@ ele.addEventListener('dragend', () => {
 
 Обработчик события не сильно изменится.
 
-```javascript
+```js
 const ghostEle = document.getElementById('ghost');
 
-ele.addEventListener('dragstart', (e) => {
+el.addEventListener('dragstart', (e) => {
   e.dataTransfer.setDragImage(ghostEle, 0, 0);
 });
 ```

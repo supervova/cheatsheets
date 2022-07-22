@@ -1,6 +1,6 @@
 Для исполнения скриптов по результатам медиазапросов используется методы `window.matchMedia` и `matches`.
 
-```javascript
+```js
 const title = document.getElementById('title');
 
 if (window.matchMedia('(max-width: 400px)').matches) {
@@ -16,7 +16,7 @@ if (window.matchMedia('(max-width: 400px)').matches) {
 
 `window.matchMedia` и `matches` можно также использовать и для определения ориентации устройства. Если ширина экрана больше высоты ориентация считается альбомной, если меньше — портретной.
 
-```javascript
+```js
 if (window.matchMedia('(orientation: landscape)')
 .matches) {
   // Do smth

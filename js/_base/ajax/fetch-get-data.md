@@ -11,7 +11,7 @@ JavaScript может отправлять сетевые запросы на с
 
 Первым аргументом методу `fetch()` передается URL. Вторым, необязательным — опции запроса. `fetch()` возвращает промис для обработки запроса.
 
-```javascript
+```js
 fetch('/data.json')
   .then((data) => {
     // Обработчик данных
@@ -23,7 +23,7 @@ fetch('/data.json')
 
 #### Пример. Открытие внешней ссылки в модальном окне Bootstrap
 
-```javascript
+```js
 (() => {
   const modal = document.getElementById('modal');
 

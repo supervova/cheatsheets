@@ -1,13 +1,13 @@
 #### 1\. Метод `remove`
 
-```javascript
-ele.remove();
+```js
+el.remove();
 ```
 
 #### 2\. Метод `removeChild`
 
-```javascript
-if (ele.parentNode) {
-  ele.parentNode.removeChild(ele);
+```js
+if (el.parentNode) {
+  el.parentNode.removeChild(el);
 }
 ```

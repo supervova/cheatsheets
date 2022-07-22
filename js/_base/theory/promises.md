@@ -14,7 +14,7 @@
 
 Создаем промис — вызываем конструктор и передаём в параметры функцию — «создающий» код (другое название — «исполнитель», executor). Она вызывается автоматически и получает два аргумента: `resolve` и `reject`. Это встроенные функции, писать их не нужно. Исполнитель вызовет одну из двух по готовности.
 
-```javascript
+```js
 /* Стрелочная функция, переданная в экземпляр —
 это «создающий» код (может занять время) */
 const myPromise = new Promise((myResolve, myReject) => {
@@ -46,7 +46,7 @@ myPromise.then(
 
 Наиболее важный и фундаментальный метод.
 
-```javascript
+```js
 promise.then(
   (result) => {
     // обработает успешное выполнение
@@ -57,7 +57,7 @@ promise.then(
 
 Например, вот реакция на успешно выполненный промис.
 
-```javascript
+```js
 const promise = new Promise((resolve, reject) => {
   setTimeout(() => resolve("done!"), 1000);
 });
@@ -71,7 +71,7 @@ promise.then(
 
 В `then` можно передать только первую, «успешную» функцию.
 
-```javascript
+```js
 let promise = new Promise(resolve => {
   setTimeout(() => resolve('done!'), 1000);
 });
@@ -84,7 +84,7 @@ promise.then(alert);
 
 Если нужно обработать только ошибку, то используют метод `catch(errorHandlingFunction)`.
 
-```javascript
+```js
 let promise = new Promise((resolve, reject) => {
   setTimeout(() => reject(new Error("Ошибка!")), 1000);
 });
@@ -99,7 +99,7 @@ promise.catch(alert);
 
 Выполнится, когда промис завершится, независимо от того, успешно или нет. Аналогичен блоку `finally` конструкции `try {...} catch {...}` — см. раздел «Ошибки».
 
-```javascript
+```js
 new Promise((resolve, reject) => {
 /* сделать что-то, что займёт время, и после
 вызвать resolve/reject */

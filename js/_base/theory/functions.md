@@ -1,6 +1,6 @@
 #### Объявление функции
 
-```javascript
+```js
 function addNumbers(a, b) {
   return a + b;
 }
@@ -8,15 +8,16 @@ function addNumbers(a, b) {
 
 #### Функциональное выражение и стрелочные функции
 
-```javascript
+```js
 const multiplyNumbers = (a, b) => {
   return a * b;
 };
 ```
 
+Функциональные выражения считаются [предпочтительнее объявлений функций](#topic-expression-over-declaration).
 #### Вызов функций
 
-```javascript
+```js
 const x = addNumbers(1, 2);
 const y = multiplyNumbers(3, 4);
 ```
@@ -25,7 +26,7 @@ const y = multiplyNumbers(3, 4);
 
 У функций есть встроенный метод `bind`, который позволяет привязать контекст.
 
-```javascript
+```js
 const user = {
   firstName: 'Вася',
 };

@@ -4,7 +4,7 @@
 - содержать подстановки, обозначаемые знаком доллара и фигурными скобками — `${переменная или выражение}`;
 - содержать условные конструкции: тернарный оператор или конструкцию `if … else`, заключенную в анонимную самовызывающуюся функцию (IIFE);
 
-```javascript
+```js
 const wizards = [
     'Hermione', 'Neville', 'Gandalf', 'Radagast'
   ];
@@ -33,7 +33,7 @@ const wizards = [
 
 #### Вложенные шаблонные литералы
 
-```javascript
+```js
 const classes = `header ${ isLargeScreen() ? '' :
   `icon-${item.isCollapsed ? 'expander' : 'collapser'}` }`;
 ```
@@ -50,7 +50,7 @@ const classes = `header ${ isLargeScreen() ? '' :
 
 В итоге, функция должна вернуть собранную строку или что-то еще, как будет показано в примере №3.
 
-```javascript
+```js
 const person = 'Mike';
 const age = 28;
 
@@ -89,7 +89,7 @@ console.log(output); // That Mike is a youngster
 
 **Пример №3.** Функция тега не обязана возвращать строку.
 
-```javascript
+```js
 function template(strings, ...keys) {
   return (...values) => {
     const dict = values[values.length - 1] || {};
@@ -113,7 +113,7 @@ t2Closure('Hello', { foo: 'World' }); // "Hello World!"`
 
 Специальное свойство `raw` первого аргумента тегового шаблона, позволяет получить строку в том виде, в каком она была введена, без экранирования.
 
-```javascript
+```js
 function tag(strings) {
   return strings.raw[0];
 }

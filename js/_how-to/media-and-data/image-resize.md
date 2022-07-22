@@ -1,8 +1,8 @@
 **Задача**. Масштабировать изображение на заданное в процентах значение. Для выбора картинки есть `#upload[type='file']`, для предпросмотра — пустой `div#preview`.
 
-```javascript
+```js
 const picture = document.getElementById('upload').files[0];
-const previewEle = document.getElementById('preview');
+const previewEl = document.getElementById('preview');
 
 /**
 * Получение объекта Blob из data URL
@@ -41,19 +41,19 @@ const resize = (image, ratio) => {
     // После загрузки изображения
     reader.addEventListener('load', (e) => {
       // Создаем объект типа `Image`
-      const ele = new Image();
-      ele.addEventListener('load', () => {
+      const el = new Image();
+      el.addEventListener('load', () => {
         // Создаем холст
         const canvas = document.createElement('canvas');
 
         /* Выводим на холсте заглушку масштабированного
         изображения */
         const context = canvas.getContext('2d');
-        const w = ele.width * ratio;
-        const h = ele.height * ratio;
+        const w = el.width * ratio;
+        const h = el.height * ratio;
         canvas.width = w;
         canvas.height = h;
-        context.drawImage(ele, 0, 0, w, h);
+        context.drawImage(el, 0, 0, w, h);
 
         // Получаем данные масштабированной картинки
         'toBlob' in canvas
@@ -64,7 +64,7 @@ const resize = (image, ratio) => {
       });
 
       // Задаем атрибут `src`
-      ele.src = e.target.result;
+      el.src = e.target.result;
     });
 
     reader.addEventListener('error', () => {
@@ -76,10 +76,10 @@ const resize = (image, ratio) => {
 
 Как только мы получаем Blob масштабированной картинки, мы можем просмотреть ее на странице или отослать на сервер, как часть `FormData`.
 
-```javascript
+```js
 // Уменьшаем картинку на 50%
 resize(picture, 0.5).then((blob) => {
   // Предпросмотр
-  previewEle.src = URL.createObjectURL(blob);
+  previewEl.src = URL.createObjectURL(blob);
 });
 ```

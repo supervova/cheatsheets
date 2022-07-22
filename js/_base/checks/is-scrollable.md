@@ -1,16 +1,16 @@
-Функция `isScrollable` возвращает `true`, если блок `ele` `scrollable` — то есть содержание превышает границы, и браузер добавляет полосу прокрутки.
+Функция `isScrollable` возвращает `true`, если блок ` `scrollable` — то есть содержание превышает границы, и браузер добавляет полосу прокрутки.
 
-```javascript
-const isScrollable = (ele) => {
+```js
+const isScrollable = (el) => {
   /* Первая проверка. Больше ли высота содержания
   высоты блока? */
   const hasScrollableContent =
-    ele.scrollHeight > ele.clientHeight;
+    el.scrollHeight > el.clientHeight;
 
   /* `overflow-y` элемента может быть `hidden`. Полоса
   прокрутки в таком случае не показывается. Поэтому: */
   const overflowYStyle =
-    window.getComputedStyle(ele).overflowY;
+    window.getComputedStyle(el).overflowY;
   const isOverflowHidden =
     overflowYStyle.indexOf('hidden') !== -1;
 

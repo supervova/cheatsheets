@@ -1,5 +1,5 @@
-```javascript
-ele.addEventListener('mousedown', (e) => {
+```js
+el.addEventListener('mousedown', (e) => {
   const target = e.target;
 
   // Границы цели

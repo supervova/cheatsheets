@@ -11,7 +11,7 @@
 - `bubbles: true` чтобы событие всплывало.
 - `cancelable: true` если нужно, чтобы работал `event.preventDefault()`.
 
-```javascript
+```js
 // Всплытие: ловим на document...
 document.addEventListener('hello', (event) => {
   alert(`Привет от ${event.target.tagName}`);
@@ -37,7 +37,7 @@ elem.dispatchEvent(myEvent);
 - WheelEvent
 - KeyboardEvent
 
-```javascript
+```js
 // Создаем событие
 const event = new MouseEvent('click', {
   bubbles: true,

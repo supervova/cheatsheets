@@ -1,5 +1,5 @@
-```javascript
-ele.addEventListener('focus', (e) => {
+```js
+el.addEventListener('focus', (e) => {
   // Выделить текст
   e.target.select();
 });

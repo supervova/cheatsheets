@@ -1,21 +1,21 @@
 #### Элемент
 
-```javascript
-const ele = document.createElement('div');
+```js
+const el = document.createElement('div');
 
 /* Необязательно, но обычно добавляются атрибуты
 и содержание. А затем элемент вставляется в документ */
-ele.width = '100px';
-ele.ariaLabel = 'Huzzah!';
+el.width = '100px';
+el.ariaLabel = 'Huzzah!';
 /* Альтернативный способ установки и изменения
 значений атрибутов — см. раздел ниже */
-ele.setAttribute('data-role', 'the-dummy');
-ele.innerHTML = 'Huzzah!';
-document.body.appendChild(ele);
+el.setAttribute('data-role', 'the-dummy');
+el.innerHTML = 'Huzzah!';
+document.body.appendChild(el);
 ```
 
 #### Текстовой узел
 
-```javascript
-const ele = document.createTextNode('Hello World!');
+```js
+const el = document.createTextNode('Hello World!');
 ```

@@ -42,10 +42,10 @@ JS используется в тех случаях, когда нужны ог
 
 «Повесив» обработчик на событие `keypress`, мы можем предотвратить ввод символов отличных от цифр и пробелов.
 
-```javascript
-const ele = document.getElementById('input');
+```js
+const el = document.getElementById('input');
 
-ele.addEventListener('keypress', (event) => {
+el.addEventListener('keypress', (event) => {
   // Получаем код нажатой клавиши
   const key = event.which || event.keyCode;
   
@@ -60,11 +60,11 @@ ele.addEventListener('keypress', (event) => {
 
 Теперь надо разобраться со вставкой из буфера обмена и перетаскиванием текста в поле. Назначаем обработчик событию `input`.
 
-```javascript
+```js
 // Получаем текущее значение поля
-let currentValue = ele.value || '';
+let currentValue = el.value || '';
 
-ele.addEventListener('input', (event) => {
+el.addEventListener('input', (event) => {
   const { target } = event;
 
   // Если пользователь ввел цифры или пробелы
@@ -80,11 +80,11 @@ ele.addEventListener('input', (event) => {
 
 Теперь остается маленькая проблема: `target.value = currentValue` переводит курсор в конец поля ввода. Нам следует сохранить позицию курсора.
 
-```javascript
+```js
 // Засекаем текущую позицию курсора в поле
 const selection = {};
 
-ele.addEventListener('keydown', (e) => {
+el.addEventListener('keydown', (e) => {
   const { target } = e;
   selection = {
     selectionStart: target.selectionStart,
@@ -95,8 +95,8 @@ ele.addEventListener('keydown', (e) => {
 
 Когда пользователь вставит в поле что-то неразрешенное, мы восстановим исходное значение и позицию курсора.
 
-```javascript
-ele.addEventListener('input', (e) => {
+```js
+el.addEventListener('input', (e) => {
   const target = e.target;
   
   if (/^[0-9\s]*$/.test(target.value)) {
@@ -115,7 +115,7 @@ ele.addEventListener('input', (e) => {
 
 Мы можем объединить отслеживаемые свойства `selectionStart` и `selectionEnd` в одной переменной.
 
-```javascript
+```js
 const target = e.target;
 state.selectionStart = target.selectionStart;
 state.selectionEnd = target.selectionEnd;

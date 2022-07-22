@@ -1,7 +1,7 @@
 Плавную прокрутку легко можно сделать в JS…
 
 ```js
-ele.scrollIntoView({ behavior: 'smooth' });
+el.scrollIntoView({ behavior: 'smooth' });
 ```
 
 … Или CSS.
@@ -32,8 +32,8 @@ const triggers = document.querySelectorAll(
   '.trigger'
 );
 
-triggers.forEach((ele) => {
-  ele.addEventListener('click', clickHandler);
+triggers.forEach((el) => {
+  el.addEventListener('click', clickHandler);
 });
 ```
 

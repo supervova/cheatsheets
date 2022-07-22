@@ -1,6 +1,6 @@
 #### `IntersectionObserver`
 
-```javascript
+```js
 if (
   window.matchMedia('(min-width: 768px)').matches
 ) {
@@ -40,9 +40,9 @@ if (
 
 #### Альтернативный способ
 
-```javascript
-const isInViewport = (ele) => {
-  const rect = ele.getBoundingClientRect();
+```js
+const isInViewport = (el) => {
+  const rect = el.getBoundingClientRect();
   return (
     rect.top >= 0 &&
     rect.left >= 0 &&

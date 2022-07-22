@@ -46,7 +46,7 @@ Here is the basic styles for the layout:
 - `mouseup` — добавляем обработчик на документ, чтобы удалить обработчик `mousemove` и самого себя.
 
 ```js
-const ele = document.getElementById('resize-me');
+const el = document.getElementById('resize-me');
 
 // Текущая позиция курсора
 let x = 0;
@@ -62,8 +62,8 @@ const mouseMoveHandler = (e) => {
   const dy = e.clientY - y;
 
   // Обновляем размеры элемента
-  ele.style.width = `${w + dx}px`;
-  ele.style.height = `${h + dy}px`;
+  el.style.width = `${w + dx}px`;
+  el.style.height = `${h + dy}px`;
 };
 
 /* Удаляем обработчики */
@@ -83,7 +83,7 @@ const mouseDownHandler = (e) => {
   y = e.clientY;
   
   // Измеряем элемент
-  const styles = window.getComputedStyle(ele);
+  const styles = window.getComputedStyle(el);
   w = parseInt(styles.width, 10);
   h = parseInt(styles.height, 10);
   
@@ -101,7 +101,7 @@ const mouseDownHandler = (e) => {
 Все обработчики готовы. Теперь добавляем обработчик `mousedown` на ручки.
 
 ```js
-const resizers = ele.querySelectorAll('.resizer');
+const resizers = el.querySelectorAll('.resizer');
 
 resizers.forEach((resizer) => {
   resizer.addEventListener(

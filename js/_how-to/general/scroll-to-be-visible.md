@@ -1,9 +1,9 @@
 Функция `scrollToBeVisible` перемещает элемент, переданный в первый параметр, в область видимости контейнера, переданного во второй параметр. См. также раздел [«Виден ли элемент в области просмотра блока с прокруткой»](/#topic-is-visible)
 
-```javascript
-const scrollToBeVisible = (ele, container) => {
-  const eleTop = ele.offsetTop;
-  const eleBottom = eleTop + ele.clientHeight;
+```js
+const scrollToBeVisible = (el, container) => {
+  const eleTop = el.offsetTop;
+  const eleBottom = eleTop + el.clientHeight;
 
   const containerTop = container.scrollTop;
   const containerBottom =

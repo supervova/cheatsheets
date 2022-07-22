@@ -3,7 +3,7 @@
 - `method` – HTTP-метод: POST, PUT, DELETE, etc.
 - `body` – тело запроса. Чаще всего — JSON. Но может быть объект `FormData`, `Blob` для картинок и пр. бинарных данных, `URLSearchParams`.
 
-```javascript
+```js
 const url = 'https://example.com/profile';
 const data = { username: 'example' };
 

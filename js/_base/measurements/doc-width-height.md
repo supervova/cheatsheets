@@ -2,7 +2,7 @@
 
 Получить ширину документа, включая полосу вертикальной прокрутки.
 
-```javascript
+```js
 const fullWidth = Math.max(
   document.body.scrollWidth,
   document.documentElement.scrollWidth,
@@ -15,7 +15,7 @@ const fullWidth = Math.max(
 
 Получить высоту документа, включая полосу горизонтальной прокрутки
 
-```javascript
+```js
 const fullHeight = Math.max(
   document.body.scrollHeight,
   document.documentElement.scrollHeight,

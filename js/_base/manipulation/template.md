@@ -34,7 +34,7 @@ HTML-тег `<template>` позволяет записывать на стран
 
 У нас есть таблица и разметка строки таблицы в `templat`'е. Используем JavaScript, чтобы вставить строки в таблицу. Содержимое шаблона доступно по его свойству `content` в качестве `DocumentFragment` – особого типа DOM-узла.
 
-```javascript
+```js
 // Убедимся, что браузер поддерживает <template>
 if ('content' in document.createElement('template')) {
   // Находим элемент tbody таблицы и шаблон строки
@@ -76,7 +76,7 @@ if ('content' in document.createElement('template')) {
 </template>
 ```
 
-```javascript
+```js
 const container = document.getElementById('container');
 const template = document.getElementById('template');
 
@@ -114,7 +114,7 @@ container.appendChild(secondClone);
 </template>
 ```
 
-```javascript
+```js
 // Получаем элементы
 const app = document.querySelector('#app');
 const listItem = document.querySelector('#list-item');

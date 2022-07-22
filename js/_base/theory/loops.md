@@ -2,14 +2,14 @@
 
 Выполняет указанную функцию один раз для каждого элемента в массиве или DOM-коллекции.
 
-```javascript
+```js
 const emotions = ['happy', 'sad', 'angry'];
 emotions.forEach((emotion) => console.log(emotion));
 ```
 
 #### `for`
 
-```javascript
+```js
 let sum = 0;
 const a = [10, 20, 30, 40];
 
@@ -23,7 +23,7 @@ for (let i = 0; i < a.length; i++) {
 
 Перебирает фактически любые итерируемые объекты (включая строки, массивы, наборы узлов, карты, объект аргументов и подобные).
 
-```javascript
+```js
 const language = 'JavaScript';
 let text = '';
 
@@ -37,7 +37,7 @@ for (const x of language) {
 
 Выполняется если и пока условие верно.
 
-```javascript
+```js
 let i = 1;
 
 while (i < 100) {
@@ -50,7 +50,7 @@ while (i < 100) {
 
 Выполняется минимум один раз и затем пока условие верно.
 
-```javascript
+```js
 let j = 1;
 
 do {
@@ -61,7 +61,7 @@ do {
 
 #### `break`
 
-```javascript
+```js
 for (let x = 0; x < 10; x++) {
   if (x === 5) {
     // Остановиться и выйти из цикла
@@ -75,7 +75,7 @@ for (let x = 0; x < 10; x++) {
 
 ⛔️ Также перебирает итерируемые объекты, но проходит по свойствам в произвольном порядке, поэтому не рекомендуется — безопаснее использовать какой-нибудь другой цикл.
 
-```javascript
+```js
 const numbers = [45, 4, 9, 16, 25];
 let txt = '';
 for (const x in numbers) {
@@ -88,7 +88,7 @@ for (const x in numbers) {
 
 ⛔️ [Не рекомендуется](https://eslint.org/docs/rules/no-continue){:target="_blank"}. Лучше использовать условие для подходящих элементов, а не для исключений. В примере это было бы if `(y !== 5) { console.log(`${y}, `); }`.
 
-```javascript
+```js
 for (let y = 0; y < 10; y++) {
   if (y === 5) {
     /* Пропустить и продолжить

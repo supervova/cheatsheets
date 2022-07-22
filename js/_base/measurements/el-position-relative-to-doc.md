@@ -1,7 +1,7 @@
-```javascript
+```js
 /* Получить координаты 'top' и 'left'
 относительно области просмотра */
-const rect = ele.getBoundingClientRect();
+const rect = el.getBoundingClientRect();
 
 /* Приплюсовать дистанцию прокрутки
 по вертикали и горизонтали */

@@ -17,7 +17,7 @@
 
 В нашем случае ручка масштабирования будет двигаться только по горизонтали. Сначала нам надо получить позицию мыши и ширину левой части split-представления до масштабирования.
 
-```javascript
+```js
 const resizer = document.getElementById('dragMe');
 const leftSide = resizer.previousElementSibling;
 const rightSide = resizer.nextElementSibling;
@@ -50,14 +50,14 @@ resizer.addEventListener('mousedown', mouseDownHandler);
 
 Если вернуться к разметке, обнаружим, что левая и правая часть представления являются предыдущим и следующим «соседями» ручки перетаскивания. Следовательно, выбираем их вот таким образом:
 
-```javascript
+```js
 const leftSide = resizer.previousElementSibling;
 const rightSide = resizer.nextElementSibling;
 ```
 
 Далее. Когда пользователь двигает мышью, мы определяем — как далеко — и, соответственно, обновляем ширину левой части представления.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   // Как далеко сместилась мышь
   const dx = e.clientX - x;
@@ -84,7 +84,7 @@ const mouseMoveHandler = (e) => {
 
 Чтобы исправить «баг», следует на момент перетягивания поменять курсор не только для ручки, но и для всего документа.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   // ...
   resizer.style.cursor = 'col-resize';
@@ -94,7 +94,7 @@ const mouseMoveHandler = (e) => {
 
 Также на момент перетягивания нужно предотвратить срабатывание событий и выделение текста в обоих частях split-представления. Для этого используем CSS-свойства `user-select` и `pointer-events`.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
 // ...
   leftSide.style.userSelect = 'none';
@@ -107,7 +107,7 @@ const mouseMoveHandler = (e) => {
 
 Стили будут удалены сразу после окончания перетягивания.
 
-```javascript
+```js
 const mouseUpHandler = () => {
   resizer.style.removeProperty('cursor');
   document.body.style.removeProperty('cursor');
@@ -132,7 +132,7 @@ const mouseUpHandler = () => {
 
 Вместо того, чтобы обновлять значение ширины левой части представления, будем обновлять высоту верхней части.
 
-```javascript
+```js
 const prevSibling = resizer.previousElementSibling;
 let prevSiblingHeight = 0;
 
@@ -151,7 +151,7 @@ const mouseMoveHandler = function (e) {
 
 Также поменяем курсор на `row-resize`.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   //...
   resizer.style.cursor = 'row-resize';
@@ -188,7 +188,7 @@ const mouseMoveHandler = (e) => {
 
 Теперь мы можем получать направление перетягивания.
 
-```javascript
+```js
 const direction =
   resizer.getAttribute('data-direction') ||
   'horizontal';
@@ -196,7 +196,7 @@ const direction =
 
 The logic of setting the width or height of previous sibling depends on the direction:
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   switch (direction) {
     case 'vertical':

@@ -1,28 +1,28 @@
 Получим значение атрибута `data-message` элемента.
 
-```javascript
-const message = ele.getAttribute('data-message');
+```js
+const message = el.getAttribute('data-message');
 
 // …или так
-const message = ele.dataset.message;
+const message = el.dataset.message;
 ```
 
 Установим значение `data`-атрибута.
 
-```javascript
-ele.setAttribute('data-message', 'Hello World');
+```js
+el.setAttribute('data-message', 'Hello World');
 
 // или
-ele.dataset.message = 'Hello World';
+el.dataset.message = 'Hello World';
 ```
 
 Удалим data-атрибут.
 
-```javascript
-ele.removeAttribute('data-message');
+```js
+el.removeAttribute('data-message');
 
 // или
-delete ele.dataset.message;
+delete el.dataset.message;
 ```
 
-Кстати `delete ele.dataset` не удалит все атрибуты. Надо удалять по одному.
+Кстати `delete el.dataset` не удалит все атрибуты. Надо удалять по одному.

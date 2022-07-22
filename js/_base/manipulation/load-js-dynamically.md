@@ -1,4 +1,4 @@
-```javascript
+```js
 // Создать script-ссылку
 const script = document.createElement('script');
 script.src = '/path/to/js/file.js';
@@ -9,7 +9,7 @@ document.body.appendChild(script);
 
 #### Исполнить JS по завершению загрузки
 
-```javascript
+```js
 // Создаем script-ссылку
 // ...
 
@@ -26,7 +26,7 @@ script.addEventListener('load', function() {
 
 Для это задачи мы подготовили массив скриптов `arrayOfJs`, собрав ссылки в нужном порядке. На странице мы подгрузим сначала первый скрипт. Когда он будет полностью загружен — второй. И так далее — пока не загрузим всё, что есть.
 
-```javascript
+```js
 /* Загружаем скрипт по ссылки переданной в `url`.
 Можно добавить второй параметр — `reject` и вызывать
 reject(true), если скрипт не загрузится — например,
@@ -75,7 +75,7 @@ const loadScriptsInOrder = (arrayOfJs) => {
 
 Функция `loadScriptsInOrder` возвращает промис, сигнализирующий, что все скрипты были загружены.
 
-```javascript
+```js
 loadScriptsInOrder([
   '/path/to/file.js',
   '/path/to/another-file.js',

@@ -1,4 +1,4 @@
-```javascript
+```js
 const touchSupported =
   'ontouchstart' in window ||
   (

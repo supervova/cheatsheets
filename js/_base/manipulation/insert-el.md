@@ -1,17 +1,17 @@
 #### Вставить до элемента `target`
 
-```javascript
-target.parentNode.insertBefore(ele, target);
+```js
+target.parentNode.insertBefore(el, target);
 
 // Или
-target.insertAdjacentElement('beforebegin', ele);
+target.insertAdjacentElement('beforebegin', el);
 ```
 
 #### Вставить после элемента `target`
 
-```javascript
-target.parentNode.insertBefore(ele, target.nextSibling);
+```js
+target.parentNode.insertBefore(el, target.nextSibling);
 
 // Или
-target.insertAdjacentElement('afterend', ele);
+target.insertAdjacentElement('afterend', el);
 ```

@@ -1,12 +1,12 @@
-#### Вставить до элемента `ele`
+#### Вставить до элемента `
 
-```javascript
+```js
 const html = '<h1>Huzzah!</h1>'
-ele.insertAdjacentHTML('beforebegin', html);
+el.insertAdjacentHTML('beforebegin', html);
 ```
 
-#### Вставить после элемента `ele`
+#### Вставить после элемента `
 
-```javascript
-ele.insertAdjacentHTML('afterend', html);
+```js
+el.insertAdjacentHTML('afterend', html);
 ```

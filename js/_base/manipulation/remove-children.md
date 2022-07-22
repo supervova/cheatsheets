@@ -1,6 +1,6 @@
 Следует удалить все дочерние узлы, пока не останется ни одного.
 
-```javascript
+```js
 while (node.firstChild) {
   node.removeChild(node.firstChild);
 }
@@ -8,6 +8,6 @@ while (node.firstChild) {
 
 Есть еще более очевидный, но не рекомендуемый способ. Очистка `innerHTML` не удаляет связанные обработчики событий. Что на больших объемах может привести к проблемам производительности.
 
-```javascript
-ele.innerHTML = '';
+```js
+el.innerHTML = '';
 ```

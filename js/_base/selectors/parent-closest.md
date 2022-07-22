@@ -1,4 +1,4 @@
-```javascript
+```js
 const parent = el.closest('.some-top-level-container');
 ```
 
@@ -14,7 +14,7 @@ const parent = el.closest('.some-top-level-container');
 </article>
 ```
 
-```javascript
+```js
 // Находим элемент, чьи предки нас интересуют
 const el = document.getElementById('child');
 

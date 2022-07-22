@@ -1,4 +1,4 @@
-```javascript
+```js
 const frame = document.getElementById('my-iframe');
 
 frame.addEventListener('load', () => {

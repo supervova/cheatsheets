@@ -76,7 +76,7 @@ padding-right: 1.6rem;
 
 Установим скроллбар в правый верхний угол.
 
-```javascript
+```js
 const wrapper = document.getElementById('wrapper');
 const content = document.getElementById('content');
 const anchor = document.getElementById('anchor');
@@ -129,7 +129,7 @@ scrollbar.style.height = `${wrapperRect.height}px`;
 
 Рассчитываем высоту бегунка: пропорционально отношению высоты содержания и высоты контейнера.
 
-```javascript
+```js
 const track = document.getElementById('track');
 const thumb = document.getElementById('thumb');
 
@@ -142,7 +142,7 @@ thumb.style.height = `${scrollRatio * 100}%`;
 
 Подробнее о технике [см. здесь](#topic-drag-to-scroll).
 
-```javascript
+```js
 let pos = { top: 0, y: 0 };
 
 const mouseDownThumbHandler = (e) => {
@@ -177,7 +177,7 @@ thumb.addEventListener(
 
 Когда пользователь перетягивает бегунок, он также прокручивает содержание элемента `content`. Для того, чтобы обновлять положение бегунка назначим обработчик события `scroll` на элемент `content`.
 
-```javascript
+```js
 const scrollContentHandler = () => {
   window.requestAnimationFrame(() => {
     thumb.style.top = `
@@ -194,7 +194,7 @@ content.addEventListener('scroll', scrollContentHandler);
 
 Для этого способа прокрутки мы должны снова рассчитать свойство `scrollTop` элемента `content`.
 
-```javascript
+```js
 const trackClickHandler = (e) => {
   const bound = track.getBoundingClientRect();
   const percentage =

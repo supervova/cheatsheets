@@ -1,4 +1,4 @@
-```javascript
+```js
 history.back();
 
 // Или

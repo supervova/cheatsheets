@@ -14,28 +14,28 @@
 
 Добавляем класс `is-over-me`, когда пользователь перетягивает что-то над `upload-photos`. Заодно предотвращаем действия браузера по умолчанию — открытие картинки.
 
-```javascript
-const ele = document.getElementById('upload-photos');
+```js
+const el = document.getElementById('upload-photos');
 
-ele.addEventListener('dragenter', (e) => {
+el.addEventListener('dragenter', (e) => {
   e.preventDefault();
   e.target.classList.add('is-over-me');
 });
 
-ele.addEventListener('dragover', (e) => {
+el.addEventListener('dragover', (e) => {
   e.preventDefault();
 });
 ```
 
 Удаляем класс, когда пользователь «опускает» в зону отправки или тащит его куда-то дальше, за границы `upload-photos`.
 
-```javascript
-ele.addEventListener('dragleave', (e) => {
+```js
+el.addEventListener('dragleave', (e) => {
   e.preventDefault();
   e.target.classList.remove('is-over-me');
 });
 
-ele.addEventListener('drop', (e) => {
+el.addEventListener('drop', (e) => {
   e.preventDefault();
   e.target.classList.remove('is-over-me');
 });

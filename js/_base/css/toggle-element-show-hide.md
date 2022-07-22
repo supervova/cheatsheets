@@ -1,11 +1,11 @@
 #### Показать
 
-```javascript
-ele.style.display = '';
+```js
+el.style.display = '';
 ```
 
 #### Спрятать
 
-```javascript
-ele.style.display = 'none';
+```js
+el.style.display = 'none';
 ```

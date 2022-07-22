@@ -1,4 +1,4 @@
-```javascript
+```js
 // Получить
 const title = document.title;
 

@@ -4,7 +4,7 @@
 
 ⚠️  [Значительный процент браузеров](https://caniuse.com/mdn-api_htmlelement_focus_preventscroll_option){:target="_blank"} не поддерживает эту опцию. Решение надо принимать по ситуации.
 
-```javascript
+```js
 element.focus({preventScroll: true});
 ```
 
@@ -12,7 +12,7 @@ element.focus({preventScroll: true});
 
 Метод работает во всех браузерах. Перед передачей фокуса надо сохранить координаты мыши. А после передачи прокрутить документ к соответствующей области.
 
-```javascript
+```js
 const x = window.scrollX;
 const y = window.scrollY;
 elem.focus();

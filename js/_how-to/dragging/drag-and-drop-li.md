@@ -21,9 +21,9 @@
 
 Используем технику, описанную в разделе «[Перетягиваемый элемент](#topic-draggable-base)».
 
-```javascript
+```js
 // Элемент, перетаскиваемый в данный момент
-let draggingEle;
+let draggingEl;
 
 // Текущая позиция курсора относительно перетаскиваемого элемента
 let x = 0;
@@ -32,9 +32,9 @@ let y = 0;
 /** Перетаскивание в процессе */
 const mouseMoveHandler = (e) => {
   // Устанавливаем позицию перетаскиваемого элемента
-  draggingEle.style.position = 'absolute';
-  draggingEle.style.top = `${e.pageY - y}px`;
-  draggingEle.style.left = `${e.pageX - x}px`;
+  draggingEl.style.position = 'absolute';
+  draggingEl.style.top = `${e.pageY - y}px`;
+  draggingEl.style.left = `${e.pageX - x}px`;
 };
 
 /** Перетаскивание закончилось.
@@ -43,13 +43,13 @@ const mouseMoveHandler = (e) => {
   */
 const mouseUpHandler = () => {
   // Remove the position styles
-  draggingEle.style.removeProperty('top');
-  draggingEle.style.removeProperty('left');
-  draggingEle.style.removeProperty('position');
+  draggingEl.style.removeProperty('top');
+  draggingEl.style.removeProperty('left');
+  draggingEl.style.removeProperty('position');
 
   x = null;
   y = null;
-  draggingEle = null;
+  draggingEl = null;
 
   // Удаляем слушатели `mousemove` и `mouseup`
   document.removeEventListener(
@@ -62,10 +62,10 @@ const mouseUpHandler = () => {
 
 /** Перетаскивание начинается */
 const mouseDownHandler = (e) => {
-  draggingEle = e.target;
+  draggingEl = e.target;
 
   // Рассчитываем позицию курсора
-  const rect = draggingEle.getBoundingClientRect();
+  const rect = draggingEl.getBoundingClientRect();
   x = e.pageX - rect.left;
   y = e.pageY - rect.top;
 
@@ -93,13 +93,13 @@ listItems.forEach((item) => {
 
 Заглушка создается в начале перетягивания.
 
-```javascript
+```js
 let placeholder;
 let isDraggingStarted = false;
 
 const mouseMoveHandler = (e) => {
   const draggingRect =
-    draggingEle.getBoundingClientRect();
+    draggingEl.getBoundingClientRect();
 
   if (!isDraggingStarted) {
   // Обновляем флаг
@@ -108,9 +108,9 @@ const mouseMoveHandler = (e) => {
   // Создаем заглушку
   placeholder = document.createElement('div');
   placeholder.classList.add('placeholder');
-  draggingEle.parentNode.insertBefore(
+  draggingEl.parentNode.insertBefore(
     placeholder,
-    draggingEle.nextSibling
+    draggingEl.nextSibling
   );
 
   /* Задаем высоту заглушке — такую же,
@@ -124,7 +124,7 @@ const mouseMoveHandler = (e) => {
 
 Заглушка удаляется, как только пользователь отпустит перетаскиваемый элемент.
 
-```javascript
+```js
 const mouseUpHandler = () => {
   // Удаляем
   placeholder &&
@@ -156,7 +156,7 @@ E
 
 Вертикальный центр рассчитывается как сумма координаты `top` элемента и половины его высоты.
 
-```javascript
+```js
 const isAbove = (nodeA, nodeB) => {
   // Получаем границы элементов
   const rectA = nodeA.getBoundingClientRect();
@@ -171,57 +171,57 @@ const isAbove = (nodeA, nodeB) => {
 
 Как только пользователь начинает перетаскивание, мы определяем соседей выбранного — снизу и сверху.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   /* Порядок элементов:
-     prevEle
-     draggingEle
+     prevEl
+     draggingEl
      placeholder
-     nextEle */
-  const prevEle = draggingEle.previousElementSibling;
-  const nextEle = placeholder.nextElementSibling;
+     nextEl */
+  const prevEl = draggingEl.previousElementSibling;
+  const nextEl = placeholder.nextElementSibling;
 };
 ```
 
 Если пользователь перетаскивает элемент вверх, мы меняем местами заглушку и соседа сверху.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   // ...
 
   // Пользователь тащит элемент вверх
-  if (prevEle && isAbove(draggingEle, prevEle)) {
+  if (prevEl && isAbove(draggingEl, prevEl)) {
     /* Изменение порядка: исходный -> новый
-       prevEle                     -> placeholder
-       draggingEle                 -> draggingEle
-       placeholder                 -> prevEle */
-    swap(placeholder, draggingEle);
-    swap(placeholder, prevEle);
+       prevEl                     -> placeholder
+       draggingEl                  -> draggingEl
+       placeholder                 -> prevEl */
+    swap(placeholder, draggingEl);
+    swap(placeholder, prevEl);
   }
 };
 ```
 
 Если пользователь перетаскивает элемент вниз, мы меняем местами заглушку и соседа снизу.
 
-```javascript
+```js
 const mouseMoveHandler = (e) => {
   // ...
 
   // User moves the dragging element to the bottom
-  if (nextEle && isAbove(nextEle, draggingEle)) {
+  if (nextEl && isAbove(nextEl, draggingEl)) {
     /* Изменение порядка: исходный -> новый
-       draggingEle                 -> nextEle
+       draggingEl                  -> nextEl
        placeholder                 -> placeholder
-       nextEle                     -> draggingEle */
-    swap(nextEle, placeholder);
-    swap(nextEle, draggingEle);
+       nextEl                      -> draggingEl */
+    swap(nextEl, placeholder);
+    swap(nextEl, draggingEl);
   }
 };
 ```
 
 Полная функция для изменения порядка элементов списка:
 
-```javascript
+```js
 const swap = (nodeA, nodeB) => {
   const parentA = nodeA.parentNode;
   const siblingA =
