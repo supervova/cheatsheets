@@ -28,7 +28,6 @@ is-index: true
   {%- include details.html title="Модули" path="js/_base/theory/modules.md" -%}
   {%- include details.html title="Ошибки" path="js/_base/theory/errors.md" -%}
   {%- include details.html title="Правила хорошего кода" path="js/_base/theory/best-practicies.md" -%}
-  {%- include details.html title="Углубленное изучение" path="js/_base/theory/advanced.md" -%}
 </section>
 
 <section>
@@ -170,4 +169,4 @@ is-index: true
   {%- include details.html title="Смена favicon сайта" path="js/_base/window/change-favicon.md" -%}
 </section>
 
-См. также [практическое пособие](/js/how-to.html).
+См. также [практическое пособие](/js/how-to.html) и [материалы для углубленного изучения](/js/advanced-theory.html).

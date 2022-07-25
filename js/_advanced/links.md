@@ -9,8 +9,9 @@
   - [Веб хранилище](https://www.w3schools.com/html/html5_webstorage.asp){:target="_blank"}
   - [Web Workers](https://www.w3schools.com/html/html5_webworkers.asp){:target="_blank"}
   - [Server-sent events](https://www.w3schools.com/html/html5_serversentevents.asp){:target="_blank"}
+- [WebAssembly](https://developer.mozilla.org/ru/docs/WebAssembly/Concepts) - это технология, предоставляющая новый тип кода, который можно запускать в современных веб-браузерах. Код для WebAssembly не пишется вручную, а компилируется из низкоуровневых исходных языков C, C++, Rust и.т.д.
 
-#### Полезные ссылки
+#### Справочники
 
 - [What is the difference](https://thisthat.dev/){:target="_blank"}
 - [Favorite JavaScript Utilities](https://1loc.dev/){:target="_blank"}

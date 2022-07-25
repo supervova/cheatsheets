@@ -56,4 +56,4 @@ categories:
   {%- include details.html title="Скопировать пример кода со страницы" path="_how-to/editing/copy-highlighted-code-to-clipboard.md" -%}
 </section>
 
-См. также [шпаргалку](/).
+См. также [шпаргалку](/) и [материалы для углубленного изучения](/js/advanced-theory.html).

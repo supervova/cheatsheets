@@ -370,3 +370,5 @@ document.getElementById('child')
 
 - [Оригинал руководства](https://github.com/airbnb/javascript){:target="_blank"}
 - [Перевод](https://github.com/uprock/javascript) (устаревшей версии){:target="_blank"}
+
+См. также [советы по оптимизации кода](/js/advanced-theory.html#topic-performance-tips)
