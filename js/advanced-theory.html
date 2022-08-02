@@ -3,11 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript. Теория — углубленное изучение</title>
-<meta name="description" content="{%- include details.html title=&quot;14 советов по оптимизации&quot; path=&quot;_advanced/best-practicies-perfomance.md&quot; id=&quot;topic-performance-tips&quot; -%}
-{%- include details.html title=&quot;Полезные ссылки&quot; path=&quot;_advanced/links.md&quot; -%}
-
-См. также [шпаргалку](/) и [практическое руководство](/js/how-to.html).
-">
+<meta name="description" content="Дополнительные материалы по теории {%- include details.html title=&quot;`if...else`&quot; path=&quot;_advanced/theory/if-else.md&quot; id=&quot;topic-if-else&quot; -%} {%- include details.html title=&quot;`switch`&quot; path=&quot;_advanced/theory/switch.md&quot; id=&quot;topic-switch&quot; -%} {%- include details.html title=&quot;`for`&quot; path=&quot;_advanced/theory/loop-for.md&quot; id=&quot;topic-loop-for&quot; -%} {%- include details.html title=&quot;`for`&quot; path=&quot;_advanced/theory/functions.md&quot; id=&quot;topic-functions&quot; -%} Советы и ссылки {%- include details.html title=&quot;14 советов по оптимизации&quot; path=&quot;_advanced/best-practicies-perfomance.md&quot; id=&quot;topic-performance-tips&quot; -%} {%- include details.html title=&quot;Полезные ссылки&quot;...">
 <meta name="author" content="Vladimir Nikishin, www.super-mark.ru">
 <meta name="apple-mobile-web-app-title" content="Шпоры">
 <meta name="theme-color" content="#e5effa"><link rel="canonical" href="https://cheatsheets.super-mark.ru/js/advanced-theory"><link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,51 +11,539 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220725-1213">
+<link rel="stylesheet" href="/assets/css/style.css?20220802-1146">
 </head>
 <body>
     <main class="main">
   <h1>JavaScript. Теория — углубленное изучение</h1>
   <input class="input__field is-lg" id="topic-filter" type="text" placeholder="Фильтр записей: введите запрос">
 
-  <details class="accordion" id="topic-performance-tips">
+  <section>
+  <h2>Дополнительные материалы по теории</h2><details class="accordion" id="topic-if-else">
+  <summary class="accordion__header">
+    <h3>`if...else`</h3>
+  </summary>
+  <div class="accordion__body">
+      <h4 id="section">Использование функции в условном выражении</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Необходимые переменные</span>
+<span class="kd">const</span> <span class="nx">myAge</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">'</span><span class="s1">How old are you?</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">legalDrivingAge</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
+
+<span class="c1">// Функция, которая будет использована в условии</span>
+<span class="kd">const</span> <span class="nx">canIDrive</span> <span class="o">=</span> <span class="p">(</span><span class="nx">age</span><span class="p">,</span> <span class="nx">legalAge</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">age</span> <span class="o">&gt;=</span> <span class="nx">legalAge</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="err">  </span><span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Функция в условии</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">canIDrive</span><span class="p">(</span><span class="nx">myAge</span><span class="p">,</span> <span class="nx">legalDrivingAge</span><span class="p">))</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">You can legally drive!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+<span class="err">    </span><span class="dl">'</span><span class="s1">You</span><span class="se">\'</span><span class="s1">ll have to wait a few more years!</span><span class="dl">'</span>
+<span class="err">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-1">Вложенные условные конструкции</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">result</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">yourName</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">gender</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Вложенная конструкция</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">gender</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">male</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">gender</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">female</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">result</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Thanks</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">result</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Please enter male or female.</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">result</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Tell us both your name and gender.</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-2">☝️🧐 Стилистические рекомендации</h4>
+
+      <p>Если в блоке <code class="language-plaintext highlighter-rouge">if</code> выполняется оператор <code class="language-plaintext highlighter-rouge">return</code>, последующий блок <code class="language-plaintext highlighter-rouge">else</code> не нужен. <code class="language-plaintext highlighter-rouge">return</code> внутри блока <code class="language-plaintext highlighter-rouge">else if</code>, следующем за блоком <code class="language-plaintext highlighter-rouge">if</code>, который содержит <code class="language-plaintext highlighter-rouge">return</code>, может быть разделен на несколько блоков <code class="language-plaintext highlighter-rouge">if</code>.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * ⛔️ плохо
+ * @return {*}
+ */</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="nx">x</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="nx">y</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * 👍 хорошо
+ * @return {*}
+ */</span>
+<span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="nx">x</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+
+<span class="err">  </span><span class="k">return</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>☝️🧐 Для логического типа используем сокращение — переменные равные <code class="language-plaintext highlighter-rouge">true</code> или <code class="language-plaintext highlighter-rouge">false</code> в сравнении не нуждаются. Для строк и чисел используем явное сравнение.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ⛔️ плохо</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// 👍 хорошо</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// ⛔️ плохо</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// 👍 хорошо</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">!==</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// ⛔️ плохо</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">collection</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// 👍 хорошо</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">collection</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>В условных операторах, результат выражения переводится в булевый тип по следующим правилам.</p>
+
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Object</code> = true</li>
+        <li><code class="language-plaintext highlighter-rouge">Undefined</code> = false</li>
+        <li><code class="language-plaintext highlighter-rouge">Null</code> соответствует false</li>
+        <li><code class="language-plaintext highlighter-rouge">Boolean</code> — по значению</li>
+        <li>Строка соответствует false, если пустая ‘’, в остальных случаях true</li>
+        <li>Число соответствует false, если +0, -0, or <code class="language-plaintext highlighter-rouge">NaN</code>, в остальных случаях true</li>
+      </ul>
+
+      <p>☝️🧐 Если управляющий оператор (<code class="language-plaintext highlighter-rouge">if</code>, <code class="language-plaintext highlighter-rouge">while</code> и т.д.) слишком длинный, то каждое (сгруппированное) условие можно поместить на новую строку. Логический оператор должен располагаться в начале строки.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ⛔️ плохо</span>
+<span class="k">if</span> <span class="p">((</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">||</span> <span class="nx">bar</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">doesItLookGoodWhenItBecomesThatLong</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">isThisReallyHappening</span><span class="p">())</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">thing1</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 👍 хорошо</span>
+<span class="k">if</span> <span class="p">(</span>
+<span class="err">  </span><span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="mi">123</span> <span class="o">||</span> <span class="nx">bar</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">)</span>
+<span class="err">  </span><span class="o">&amp;&amp;</span> <span class="nx">doesItLookGoodWhenItBecomesThatLong</span><span class="p">()</span>
+<span class="err">  </span><span class="o">&amp;&amp;</span> <span class="nx">isThisReallyHappening</span><span class="p">()</span>
+<span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">thing1</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion" id="topic-switch">
+  <summary class="accordion__header">
+    <h3>`switch`</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>☝️🧐 <strong>Использовать фигурные скобки</strong> для <code class="language-plaintext highlighter-rouge">case</code> и <code class="language-plaintext highlighter-rouge">default</code>, если они содержат присвоение значений переменных или объявление класса (так называемые «лексические декларации»).</p>
+
+      <p><strong>Не объявлять</strong> в switch функций. eslint: no-case-declarations, no-inner-declarations</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ⛔️ плохо</span>
+<span class="k">switch</span> <span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">default</span><span class="p">:</span>
+<span class="err">    </span><span class="cm">/**
+     * JSDoc
+     */</span>
+<span class="err">    </span><span class="kd">class</span> <span class="nx">C</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="c1">// 👍 хорошо</span>
+<span class="k">switch</span> <span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">bar</span><span class="p">();</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">default</span><span class="p">:</span> <span class="p">{</span>
+<span class="err">    </span><span class="cm">/**
+     * JSDoc
+     */</span>
+<span class="err">    </span><span class="kd">class</span> <span class="nx">C</span> <span class="p">{}</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-3">Примеры</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="k">switch</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Маловато</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">В точку!</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Перебор</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">default</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Я таких значений не знаю</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Сначала получаем номер дня недели из объекта
+Date. Затем присваиваем переменной переменной
+значения зависимости от этого номера */</span>
+<span class="k">switch</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">())</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">6</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Today is Saturday</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Today is Sunday</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+<span class="err">  </span><span class="k">default</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Looking forward to the Weekend</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="case">Группировка <code class="language-plaintext highlighter-rouge">case</code></h4>
+
+      <p>Несколько значений case можно группировать. В примере ниже case 3 и case 5 выполняют один и тот же код</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Верно!</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="err">  </span><span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+<span class="err">  </span><span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Немного ошиблись, бывает.</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="err">  </span><span class="k">default</span><span class="p">:</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Странный результат, очень странный</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion" id="topic-loop-for">
+  <summary class="accordion__header">
+    <h3>`for`</h3>
+  </summary>
+  <div class="accordion__body">
+      <h4 id="for"><code class="language-plaintext highlighter-rouge">for</code></h4>
+
+      <p><strong>Запись в круглых скобках состоит из трех частей</strong>. При этом все три части опциональны.</p>
+
+      <pre><code class="language-txt">for (
+  инициализация счетчика;
+  проверка условия;
+  увеличение/ уменьшение счетчика
+)
+</code></pre>
+
+      <p><strong>Первая часть</strong> — это, как правило, инициализация переменной цикла / счетчика. Однако в ней могут быть инициализированы и другие переменные. Например…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">text</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cities</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">text</span> <span class="o">+=</span> <span class="s2">`</span><span class="p">${</span><span class="nx">cities</span><span class="p">}</span><span class="s2"> &lt;br&gt;`</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p><strong>Вторая часть — проверка условия</strong>. Она выполняется при каждой итерации цикла. Если условие оказывается ложным, выполнение цикла прерывается. Если есть желание пропустить эту часть, в теле цикла нужно указать break.</p>
+
+      <p><strong>Третья часть — увеличение / уменьшение счетчика</strong>. Оно происходит один раз за итерацию, после выполнения всех команд в ТЕЛЕ цикла. Изменение счетчика чаще всего производят инкрементом <code class="language-plaintext highlighter-rouge">i++</code>. Но можно и декрементом <code class="language-plaintext highlighter-rouge">i--</code>, изменением на указанную цифру <code class="language-plaintext highlighter-rouge">i += 15</code> и т. д.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">👍 хорошо
+ &lt; короче/лучше, чем &lt;=</code></p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Сокращенный вариант цикла, только с условием,
+без счетчика */</span>
+<span class="k">for</span> <span class="p">(;</span><span class="nx">answer</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">forty-two</span><span class="dl">'</span><span class="p">;)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-4">Вложенные циклы</h4>
+
+      <p>Обычно вложенные циклы применяются для перебора многомерных массивов.</p>
+
+      <p>Например, когда нужно сложить аккуратно вещи в шкафчике из трех полок, внешним циклом мы перебираем полки: одну за другой. На каждой этапе запускаем вложенный цикл, в процессе которого перебираем и раскладываем вещи.</p>
+
+      <p>Те же процессы происходят, когда собираем колоду карт: поочереди масть за мастью — добавляем в каждой группе все номиналы. Или когда собираем многоуровневое главное меню сайта.</p>
+
+      <p>Никаких ограничений: <code class="language-plaintext highlighter-rouge">for</code> в <code class="language-plaintext highlighter-rouge">for</code>, <code class="language-plaintext highlighter-rouge">for</code> в <code class="language-plaintext highlighter-rouge">while</code>, наоборот, с любым уровнем вложенности.</p>
+
+      <p><strong>Пример.</strong> Три раза подряд посчитать от 1 до 5.</p>
+
+      <p>☝️🧐 <code class="language-plaintext highlighter-rouge">i</code> и <code class="language-plaintext highlighter-rouge">j</code> — стандартные названия переменных для циклов. Эта традиция идет от тех времен, когда объем программы был ограничен (а код пробивался на перфокартах) и у коротких имен были преимущества перед значащими названиями. Теперь это всего лишь традиция, но всего лишь исключение из правила о выборе осмысленных имен переменных.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>😎 <strong>Трюк</strong>. Заполнение массива нулями — с тем, чтобы потом суммировать их с числами, результатами вычислений. Сложение пустой позиций с числом дает в результате undefined.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Пять раз…</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="cm">/* …добавляем в созданный в начале документа
+  массив по 0 — получаем массив из 5 нулей */</span>
+<span class="err">  </span><span class="nx">myArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p><strong>Практический пример.</strong> Подсчет вероятности выпадения дубля на двух костях.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">isDouble</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">totalCombos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// Каждая из шести сторон одной кости…</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="cm">/* …Может составить пару с шестью сторонами
+  другой: 6x6 */</span>
+<span class="err">  </span><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="cm">/* Увеличиваем счетчик дублей, если значения
+    сторон совпадают */</span>
+<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="nx">j</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">isDouble</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">    </span><span class="p">}</span>
+<span class="err">    </span><span class="nx">totalCombos</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* Вероятность — количество дублей на общее
+количество комбинаций */</span>
+<span class="kd">const</span> <span class="nx">probability</span> <span class="o">=</span> <span class="nx">isDouble</span> <span class="o">/</span> <span class="nx">totalCombos</span><span class="p">;</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion" id="topic-functions">
+  <summary class="accordion__header">
+    <h3>`for`</h3>
+  </summary>
+  <div class="accordion__body">
+      <h4 id="return">Оператор <code class="language-plaintext highlighter-rouge">return</code></h4>
+
+      <p>Завершает выполнение текущей функции и возвращает её значение.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">square</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+<span class="err">  </span><span class="cm">/* return может находиться в любом месте тела
+  функции. Но после этой директивы код уже не будет
+  выполняться. */</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">В консоли это не появится</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Значение demo будет равняться 9</span>
+<span class="kd">const</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nx">square</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Вызовов <code class="language-plaintext highlighter-rouge">return</code> может быть несколько.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">checkAge</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">age</span> <span class="o">&gt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="nx">confirm</span><span class="p">(</span><span class="dl">'</span><span class="s1">А родители разрешили?</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">age</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">'</span><span class="s1">Сколько вам лет?</span><span class="dl">'</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="nx">checkAge</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span> <span class="dl">'</span><span class="s1">Доступ получен</span><span class="dl">'</span> <span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span> <span class="dl">'</span><span class="s1">Доступ закрыт</span><span class="dl">'</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Возможно использовать <code class="language-plaintext highlighter-rouge">return</code> и без значения. Это приведёт к немедленному выходу из функции.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showMovie</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">checkAge</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Вам показывается кино</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p><strong>Использование <code class="language-plaintext highlighter-rouge">return</code> необязательно.</strong> Если функция не возвращает значение, а, например, просто назначает CSS-класс, можно не использовать <code class="language-plaintext highlighter-rouge">return</code>.</p>
+
+      <p>☝️🧐  Надо помнить, что в если попытаться получить значение такой функции, оно будет <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
+
+      <p>☝️🧐  Хотя некоторые разработчики используют пустой <code class="language-plaintext highlighter-rouge">return</code> в конце функции для явного завершения выполнения, <a href="https://eslint.org/docs/rules/no-useless-return">Airbnb не рекомендует этого делать</a>.</p>
+
+      <p>🤓 В Си подобные функции начинаются с объявления типа <code class="language-plaintext highlighter-rouge">void</code>.</p>
+
+      <h4 id="call-">Вызов (call) функции</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myFunc</span><span class="p">(</span><span class="dl">'</span><span class="s1">аргумент в param1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">аргумент в param2</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Функции можно вызывать в других конструкциях, например в условной…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">myFunc</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// code…;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// code…;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Также функции можно вызвать в других функциях.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Пример № 1</span>
+<span class="kd">const</span> <span class="nx">square</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">cube</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">square</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+
+<span class="c1">// Пример № 2</span>
+<span class="kd">const</span> <span class="nx">isMultipleOfThree</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>      </div>
+
+      <p>Интересный пример использования оператора <code class="language-plaintext highlighter-rouge">!</code> — логического «НЕ». Число сначала передаётся в первую функцию <code class="language-plaintext highlighter-rouge">isMultipleOfThree</code>. То, что остаток деления на 3 не равен 0 обозначается ! перед использованной функцией</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isNotMultipleOfThree</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="nx">isMultipleOfThree</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-5">Локальные переменные</h4>
+
+      <p>Переменные, объявленные внутри функции, недоступны за пределами ее фигурных скобок (область видимости функции). Они создаются в момент вызова функции и очищаются после выполнения кода функции.</p>
+
+      <p>☝️🧐 Функции и объекты созданные внутри других функций, также ограничены локальной областью видимости и недоступны извне.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// code here can NOT use carName</span>
+
+<span class="kd">function</span> <span class="nx">myFunc</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">carName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Volvo</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="c1">// code here CAN use carName</span>
+<span class="p">}</span>
+
+<span class="c1">// code here can NOT use carName</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-6">Функция — это объект со своими методами и свойствами</h4>
+
+      <p>Функция, как почти все в JS — это объект. И у этого объекта есть свойства и методы. Например, свойство <code class="language-plaintext highlighter-rouge">name</code> содержит имя, указанное при объявлении функции, либо переменную / метод, в которую она сохранена.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// myFunc.name == 'myFunc'</span>
+<span class="kd">function</span> <span class="nx">myFunc</span><span class="p">()</span> <span class="p">{}</span>
+
+<span class="c1">// mySecondFunc.name == "mySecondFunc"</span>
+<span class="kd">const</span> <span class="nx">mySecondFunc</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+
+<span class="cm">/* Метод toString возвращает код функции в виде
+строки */</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myFunc</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+</code></pre></div>      </div>
+
+      <h4 id="arguments">Псевдомассив <code class="language-plaintext highlighter-rouge">arguments</code></h4>
+
+      <p>В JavaScript у функции есть встроенный объект (псведомассив) <code class="language-plaintext highlighter-rouge">arguments</code>. В него после вызова сохраняются переданные аргументы, после чего они становятся доступны по номерам: <code class="language-plaintext highlighter-rouge">arguments[0]</code>, <code class="language-plaintext highlighter-rouge">arguments[1]</code>… Псевдомассив имеет свойство <code class="language-plaintext highlighter-rouge">length</code>, но у него нет методов массива, таких как <code class="language-plaintext highlighter-rouge">join</code>, <code class="language-plaintext highlighter-rouge">slice</code> и др.</p>
+
+      <p>Если в функцию передано аргументов больше, чем параметров, получить их значения, можно перебрав <code class="language-plaintext highlighter-rouge">arguments</code>.</p>
+
+      <p><code class="language-plaintext highlighter-rouge">arguments.length</code> – свойство, содержащее число аргументов переданных в функцию</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">return</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-7">Устаревшая техника — функции-конструкторы</h4>
+
+      <p>Раньше в качестве шаблонов пользовательских объектов использовались функции, которые назывались «конструкторами».</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Конструктор объекта</span>
+<span class="kd">function</span> <span class="nx">MyConstructor</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">arg1</span><span class="p">;</span>
+<span class="err">  </span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">arg2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Создаем новый экземпляр объекта</span>
+<span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyConstructor</span><span class="p">(</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Doe</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="cm">/* Внутри console.log — вызов функции, как метода
+экземпляра объекта, созданного с помощью
+конструктора. */</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">firstName</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>В современных реализациях языка шаблонами пользовательских объектов служат <a href="/#topic-js-classes">классы</a>. И в них используется метод <code class="language-plaintext highlighter-rouge">constructor</code> — определяющий свойства объекта. Методы определяются за скобками <code class="language-plaintext highlighter-rouge">constructor'а</code>.</p>
+    </div>
+</details>
+</section>
+
+<section>
+  <h2>Советы и ссылки</h2><details class="accordion" id="topic-performance-tips">
   <summary class="accordion__header">
     <h3>14 советов по оптимизации</h3>
   </summary>
   <div class="accordion__body">
-    <h1 id="section">14 советов по оптимизации</h1>
+      <h1 id="section-8">14 советов по оптимизации</h1>
 
-    <p><a href="https://webformyself.com/14-sovetov-po-optimizacii-koda-javascript-dlya-front-end-razrabotchikov/">Источник</a></p>
+      <p><a href="https://webformyself.com/14-sovetov-po-optimizacii-koda-javascript-dlya-front-end-razrabotchikov/">Источник</a></p>
 
-    <h2 id="section-1">1. Удалить неиспользуемый код и функции</h2>
+      <h4 id="section-9">1. Удалить неиспользуемый код и функции</h4>
 
-    <p>Чем больше кода содержится в приложении, тем больше данных необходимо передать клиенту, а браузеру потребуется больше времени для анализа и интерпретации кода.</p>
+      <p>Чем больше кода содержится в приложении, тем больше данных необходимо передать клиенту, а браузеру потребуется больше времени для анализа и интерпретации кода.</p>
 
-    <p>Не надо включать в сборку неиспользуемые функции — пусть они хранятся в папках исходниках.</p>
+      <p>Не надо включать в сборку неиспользуемые функции — пусть они хранятся в папках исходниках.</p>
 
-    <p>Неиспользуемый код можно удалить вручную, a также при сборке с UglifyJS или <a href="https://developers.google.com/closure/compiler/docs/api-tutorial3">Google Closure Compiler</a>.</p>
+      <p>Неиспользуемый код можно удалить вручную, a также при сборке с UglifyJS или <a href="https://developers.google.com/closure/compiler/docs/api-tutorial3">Google Closure Compiler</a>.</p>
 
-    <p>При сборке webpack’ом применяют  <a href="https://bluepnume.medium.com/javascript-tree-shaking-like-a-pro-7bf96e139eb7">технику «встряхивания дерева»</a>.</p>
+      <p>При сборке webpack’ом применяют  <a href="https://bluepnume.medium.com/javascript-tree-shaking-like-a-pro-7bf96e139eb7">технику «встряхивания дерева»</a>.</p>
 
-    <p>Неиспользуемые пакеты npm, можно удалить командой <code class="language-plaintext highlighter-rouge">npm prune</code>.</p>
+      <p>Неиспользуемые пакеты npm, можно удалить командой <code class="language-plaintext highlighter-rouge">npm prune</code>.</p>
 
-    <h2 id="section-2">2. Кешировать</h2>
+      <h4 id="section-10">2. Кешировать</h4>
 
-    <p>Использовать <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> или <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Caching">HTTP-кэширования</a>.</p>
+      <p>Использовать <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> или <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Caching">HTTP-кэширования</a>.</p>
 
-    <h2 id="section-3">3. Избегайте утечек памяти</h2>
+      <h4 id="section-11">3. Избегайте утечек памяти</h4>
 
-    <p>Будучи языком высокого уровня, JS заботится о нескольких низкоуровневых системах управления, таких как управление памятью. Сборка мусора — это процесс, общий для большинства языков программирования. Сборка мусора с точки зрения непрофессионала — это просто сбор и освобождение памяти, которая была выделена объектам, но которая в настоящее время не используется. В таких языках программирования, как C, разработчик должен позаботиться о распределении и освобождении памяти, используя функции <code class="language-plaintext highlighter-rouge">malloc()</code> и <code class="language-plaintext highlighter-rouge">dealloc()</code>.</p>
+      <p>Будучи языком высокого уровня, JS заботится о нескольких низкоуровневых системах управления, таких как управление памятью. Сборка мусора — это процесс, общий для большинства языков программирования. Сборка мусора с точки зрения непрофессионала — это просто сбор и освобождение памяти, которая была выделена объектам, но которая в настоящее время не используется. В таких языках программирования, как C, разработчик должен позаботиться о распределении и освобождении памяти, используя функции <code class="language-plaintext highlighter-rouge">malloc()</code> и <code class="language-plaintext highlighter-rouge">dealloc()</code>.</p>
 
-    <p>Даже если сборка мусора выполняется в JavaScript автоматически, могут быть определенные случаи, когда она не будет идеальной. В JavaScript ES6 <code class="language-plaintext highlighter-rouge">Map</code> и <code class="language-plaintext highlighter-rouge">Set</code> были представлены со своими «более слабыми» братьями и сестрами. Этот «более слабый» аналог, известный как <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a> и WeakSet, содержит «слабые» ссылки на объекты. Они позволяют собирать ненужные значения и предотвращать утечки памяти.</p>
+      <p>Даже если сборка мусора выполняется в JavaScript автоматически, могут быть определенные случаи, когда она не будет идеальной. В JavaScript ES6 <code class="language-plaintext highlighter-rouge">Map</code> и <code class="language-plaintext highlighter-rouge">Set</code> были представлены со своими «более слабыми» братьями и сестрами. Этот «более слабый» аналог, известный как <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a> и WeakSet, содержит «слабые» ссылки на объекты. Они позволяют собирать ненужные значения и предотвращать утечки памяти.</p>
 
-    <h2 id="section-4">4. Попытайтесь выходить из циклов раньше</h2>
+      <h4 id="section-12">4. Попытайтесь выходить из циклов раньше</h4>
 
-    <p>Обработка больших циклов может занять много времени. Поэтому следует выходить из них как можно раньше — с помощью ключевого слова <code class="language-plaintext highlighter-rouge">break</code> и ключевого слова <code class="language-plaintext highlighter-rouge">continue</code>.</p>
+      <p>Обработка больших циклов может занять много времени. Поэтому следует выходить из них как можно раньше — с помощью ключевого слова <code class="language-plaintext highlighter-rouge">break</code> и ключевого слова <code class="language-plaintext highlighter-rouge">continue</code>.</p>
 
-    <p>В приведенном ниже примере, если вы не вышли из цикла, ваш код будет запускать цикл 1000000000 раз, что явно слишком.</p>
+      <p>В приведенном ниже примере, если вы не вышли из цикла, ваш код будет запускать цикл 1000000000 раз, что явно слишком.</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="dl">'</span><span class="s1">----</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="dl">'</span><span class="s1">----</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">arr</span><span class="p">[</span><span class="mi">970</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">found</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">found</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
@@ -67,11 +551,11 @@
     <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>    </div>
+</code></pre></div>      </div>
 
-    <p>В приведенном ниже примере, если вы не сделали continue, когда цикл не соответствует условию, вы все равно будете запускать функцию 1000000000 раз. Мы обрабатываем элемент массива только в том случае, если он находится в четном положении. Это уменьшает выполнение цикла почти вдвое.</p>
+      <p>В приведенном ниже примере, если вы не сделали continue, когда цикл не соответствует условию, вы все равно будете запускать функцию 1000000000 раз. Мы обрабатываем элемент массива только в том случае, если он находится в четном положении. Это уменьшает выполнение цикла почти вдвое.</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="dl">'</span><span class="s1">----</span><span class="dl">'</span><span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000000000</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="dl">'</span><span class="s1">----</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">arr</span><span class="p">[</span><span class="mi">970</span><span class="p">]</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">found</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
@@ -79,26 +563,26 @@
  <span class="p">};</span>
  <span class="nx">process</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
 <span class="p">}</span>
-</code></pre></div>    </div>
+</code></pre></div>      </div>
 
-    <h2 id="section-5">5. Минимизируйте количество вычислений переменных</h2>
+      <h4 id="section-13">5. Минимизируйте количество вычислений переменных</h4>
 
-    <p>Чтобы уменьшить количество вычислений переменной, вы можете использовать замыкания. С точки зрения непрофессионала, замыкания в JavaScript предоставляют доступ к области видимости внешней функции из внутренней функции. Замыкания создаются каждый раз, когда вызывается функция created-not. Внутренние функции будут иметь доступ к переменным внешней области видимости, даже после возврата внешней функции.</p>
+      <p>Чтобы уменьшить количество вычислений переменной, вы можете использовать замыкания. С точки зрения непрофессионала, замыкания в JavaScript предоставляют доступ к области видимости внешней функции из внутренней функции. Замыкания создаются каждый раз, когда вызывается функция created-not. Внутренние функции будут иметь доступ к переменным внешней области видимости, даже после возврата внешней функции.</p>
 
-    <p>Давайте рассмотрим два примера, чтобы увидеть это в действии. Эти примеры взяты из блога Брета.</p>
+      <p>Давайте рассмотрим два примера, чтобы увидеть это в действии. Эти примеры взяты из блога Брета.</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">findCustomerCity</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">findCustomerCity</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">texasCustomers</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Ludwig</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Kate</span><span class="dl">'</span><span class="p">];</span>
   <span class="kd">const</span> <span class="nx">californiaCustomers</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Wade</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Lucie</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">Kylie</span><span class="dl">'</span><span class="p">];</span>
 
   <span class="k">return</span> <span class="nx">texasCustomers</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">Texas</span><span class="dl">'</span> <span class="p">:</span>
     <span class="nx">californiaCustomers</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">California</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Unknown</span><span class="dl">'</span><span class="p">;</span>
 <span class="p">};</span>
-</code></pre></div>    </div>
+</code></pre></div>      </div>
 
-    <p>Если мы вызываем вышеупомянутые функции несколько раз, каждый раз создается новый объект. Для каждого вызова память излишне перераспределяется на переменные texasCustometrs и californiaCustomers. Используя решение с замыканиями, мы можем создать экземпляр переменных только один раз. Давайте рассмотрим приведенный ниже пример.</p>
+      <p>Если мы вызываем вышеупомянутые функции несколько раз, каждый раз создается новый объект. Для каждого вызова память излишне перераспределяется на переменные texasCustometrs и californiaCustomers. Используя решение с замыканиями, мы можем создать экземпляр переменных только один раз. Давайте рассмотрим приведенный ниже пример.</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">findCustomerCity</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">findCustomerCity</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">texasCustomers</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Ludwig</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Kate</span><span class="dl">'</span><span class="p">];</span>
   <span class="kd">const</span> <span class="nx">californiaCustomers</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Wade</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Lucie</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">Kylie</span><span class="dl">'</span><span class="p">];</span>
 
@@ -110,100 +594,102 @@
 <span class="nx">cityOfCustomer</span><span class="p">(</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">);</span><span class="c1">//Texas</span>
 <span class="nx">cityOfCustomer</span><span class="p">(</span><span class="dl">'</span><span class="s1">Wade</span><span class="dl">'</span><span class="p">);</span><span class="c1">//California</span>
 <span class="nx">cityOfCustomer</span><span class="p">(</span><span class="dl">'</span><span class="s1">Max</span><span class="dl">'</span><span class="p">);</span><span class="c1">//Unknown</span>
-</code></pre></div>    </div>
+</code></pre></div>      </div>
 
-    <p>В приведенном выше примере с помощью замыканий внутренняя функция, которая возвращается в переменную cityOfCustomer, имеет доступ к константам внешней функции findCustomerCity(). И всякий раз, когда вызывается внутренняя функция с именем, переданным в качестве параметра, ей не нужно снова создавать экземпляры констант.</p>
+      <p>В приведенном выше примере с помощью замыканий внутренняя функция, которая возвращается в переменную cityOfCustomer, имеет доступ к константам внешней функции findCustomerCity(). И всякий раз, когда вызывается внутренняя функция с именем, переданным в качестве параметра, ей не нужно снова создавать экземпляры констант.</p>
 
-    <h2 id="dom">6. Минимизируйте доступ к DOM</h2>
+      <h4 id="dom">6. Минимизируйте доступ к DOM</h4>
 
-    <p>Доступ к DOM медленный по сравнению с другими операторами JavaScript. Если вы внесете изменения в DOM, которые приведут к перерисовке макета, это может привести к замедлению работы.</p>
+      <p>Доступ к DOM медленный по сравнению с другими операторами JavaScript. Если вы внесете изменения в DOM, которые приведут к перерисовке макета, это может привести к замедлению работы.</p>
 
-    <p>Чтобы уменьшить количество раз, когда вы обращаетесь к элементу DOM, обращайтесь к нему один раз и используйте его как локальную переменную. Когда необходимость отпадет, обязательно удалите значение переменной, установив для него null. Это предотвратит утечку памяти, поскольку позволит работать процессу сбора мусора.</p>
+      <p>Чтобы уменьшить количество раз, когда вы обращаетесь к элементу DOM, обращайтесь к нему один раз и используйте его как локальную переменную. Когда необходимость отпадет, обязательно удалите значение переменной, установив для него null. Это предотвратит утечку памяти, поскольку позволит работать процессу сбора мусора.</p>
 
-    <h2 id="section-6">7. Сожмите файлы</h2>
+      <h4 id="section-14">7. Сожмите файлы</h4>
 
-    <p>Используя такие методы сжатия, как Gzip, вы можете уменьшить размер файлов JavaScript. Эти файлы поменьше приведут к увеличению производительности сайта, так как браузер должен будет загружать меньшие ресурсы. Эти сжатия могут уменьшить размер файла до 80%. Подробнее о сжатии читайте здесь.</p>
+      <p>Используя такие методы сжатия, как Gzip, вы можете уменьшить размер файлов JavaScript. Эти файлы поменьше приведут к увеличению производительности сайта, так как браузер должен будет загружать меньшие ресурсы. Эти сжатия могут уменьшить размер файла до 80%. Подробнее о сжатии читайте здесь.</p>
 
-    <h2 id="section-7">8. Оптимизируйте собранный код</h2>
+      <h4 id="section-15">8. Оптимизируйте собранный код</h4>
 
-    <p>Некоторые люди считают, что минимизация и сжатие – это одно и то же. Вовсе нет – это разные вещи. В сжатии используются специальные алгоритмы для изменения выходного размера файла. При минимизации в JS удаляются комментарии и лишние пробелы, переменные и функции переименовываются: длинные имена заменяются однобуквенными.</p>
+      <p>Некоторые люди считают, что минимизация и сжатие – это одно и то же. Вовсе нет – это разные вещи. В сжатии используются специальные алгоритмы для изменения выходного размера файла. При минимизации в JS удаляются комментарии и лишние пробелы, переменные и функции переименовываются: длинные имена заменяются однобуквенными.</p>
 
-    <h2 id="throttling--debouncing">9. Используйте <code class="language-plaintext highlighter-rouge">throttling</code> и <code class="language-plaintext highlighter-rouge">debouncing</code></h2>
+      <h4 id="throttling--debouncing">9. Используйте <code class="language-plaintext highlighter-rouge">throttling</code> и <code class="language-plaintext highlighter-rouge">debouncing</code></h4>
 
-    <p>Используя эти два метода, мы можем строго следить за тем, сколько раз событие должно обрабатываться кодом.
+      <p>Используя эти два метода, мы можем строго следить за тем, сколько раз событие должно обрабатываться кодом.
 При <code class="language-plaintext highlighter-rouge">throttling</code> указывается максимальное количество раз, когда функция может быть вызвана. Например, «выполнять функцию события <code class="language-plaintext highlighter-rouge">onkeyup</code> не чаще, чем раз в 1000 миллисекунд». Это будет означать, что если вы нажмете клавиши 20 раз в секунду, событие будет срабатывать только один раз в секунду. Это уменьшит нагрузку на код.</p>
 
-    <p><a href="../07-dom/window/02-window-ready-load-resize.md">С другой стороны, <code class="language-plaintext highlighter-rouge">debouncing</code></a> — это то, где вы указываете минимальную продолжительность времени для повторного запуска функции с момента предыдущего выполнения той же функции. Другими словами, «выполняйте эту функцию, только если прошло 600 миллисекунд без ее вызова».</p>
+      <p><a href="../07-dom/window/02-window-ready-load-resize.md">С другой стороны, <code class="language-plaintext highlighter-rouge">debouncing</code></a> — это то, где вы указываете минимальную продолжительность времени для повторного запуска функции с момента предыдущего выполнения той же функции. Другими словами, «выполняйте эту функцию, только если прошло 600 миллисекунд без ее вызова».</p>
 
-    <p>Вы можете реализовать собственные функции <code class="language-plaintext highlighter-rouge">debounce</code> и <code class="language-plaintext highlighter-rouge">throttle</code>. Последний, используется чаще, так как является более универсальным.</p>
+      <p>Вы можете реализовать собственные функции <code class="language-plaintext highlighter-rouge">debounce</code> и <code class="language-plaintext highlighter-rouge">throttle</code>. Последний, используется чаще, так как является более универсальным.</p>
 
-    <p>Также можно импортировать готовые функции из библиотеки Lodash (<a href="https://www.sitepoint.com/throttle-scroll-events/">предпочтительный метод</a>). <code class="language-plaintext highlighter-rouge">Импортировать можно при сборке Webpack'ом</code>(https://stackoverflow.com/questions/35250500/correct-way-to-import-lodash), который включает loadash.</p>
+      <p>Также можно импортировать готовые функции из библиотеки Lodash (<a href="https://www.sitepoint.com/throttle-scroll-events/">предпочтительный метод</a>). <code class="language-plaintext highlighter-rouge">Импортировать можно при сборке Webpack'ом</code>(https://stackoverflow.com/questions/35250500/correct-way-to-import-lodash), который включает loadash.</p>
 
-    <h2 id="delete">10. Избегайте использования ключевого слова delete</h2>
+      <h4 id="delete">10. Избегайте использования ключевого слова delete</h4>
 
-    <p>Ключевое слово delete используется, чтобы удалить свойство из объекта. В качестве альтернативы, вы можете просто установить нежелательное свойство как <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
+      <p>Ключевое слово delete используется, чтобы удалить свойство из объекта. В качестве альтернативы, вы можете просто установить нежелательное свойство как <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
 
-    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span><span class="dl">"</span><span class="s2">Jane Doe</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span><span class="mi">43</span><span class="p">};</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span><span class="dl">"</span><span class="s2">Jane Doe</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span><span class="mi">43</span><span class="p">};</span>
 <span class="nx">object</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
-</code></pre></div>    </div>
+</code></pre></div>      </div>
 
-    <p>Вы также можете использовать объект Map, так как его метод <code class="language-plaintext highlighter-rouge">delete</code> работает быстрее.</p>
+      <p>Вы также можете использовать объект Map, так как его метод <code class="language-plaintext highlighter-rouge">delete</code> работает быстрее.</p>
 
-    <h2 id="section-8">11. Используйте асинхронный код для предотвращения блокировки потоков</h2>
+      <h4 id="section-16">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
 
-    <p>Вы должны знать, что JavaScript является синхронным по умолчанию, а также однопоточным. Но могут быть случаи, когда коду требуется много времени для вычислений. Будучи синхронным по своей природе, для JavaScript это будет означать, что этот фрагмент кода будет блокировать выполнение других операторов кода до тех пор, пока он не будет выполнен. Это снизит производительность в целом.</p>
+      <p>Вы должны знать, что JavaScript является синхронным по умолчанию, а также однопоточным. Но могут быть случаи, когда коду требуется много времени для вычислений. Будучи синхронным по своей природе, для JavaScript это будет означать, что этот фрагмент кода будет блокировать выполнение других операторов кода до тех пор, пока он не будет выполнен. Это снизит производительность в целом.</p>
 
-    <p>Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises">промисами</a>.</p>
+      <p>Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises">промисами</a>.</p>
 
-    <h2 id="section-9">12.  Используйте разделение кода</h2>
+      <h4 id="section-17">12.  Используйте разделение кода</h4>
 
-    <p>Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
+      <p>Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
 First Contentful Paint (FCP) измеряет, сколько времени браузеру требуется для отображения первого фрагмента содержимого DOM после перехода пользователя на вашу страницу. Изображения, небелые <canvas> элементы и SVG на странице считаются содержимым DOM; ничего внутри iframe не включено.</canvas></p>
 
-    <p>Один из лучших способов получить более высокий балл FCP — использовать разделение кода. Разделение кода — это метод, при котором вы сначала отправляете пользователю только необходимые модули. Это сильно повлияет на оценку FCP, уменьшая размер полезной нагрузки, передаваемой изначально.</p>
+      <p>Один из лучших способов получить более высокий балл FCP — использовать разделение кода. Разделение кода — это метод, при котором вы сначала отправляете пользователю только необходимые модули. Это сильно повлияет на оценку FCP, уменьшая размер полезной нагрузки, передаваемой изначально.</p>
 
-    <p>Популярные пакеты модулей, такие как webpack, предоставляют функционал разделения кода. Вы также можете использовать собственные модули ES, чтобы загрузить отдельные модули.</p>
+      <p>Популярные пакеты модулей, такие как webpack, предоставляют функционал разделения кода. Вы также можете использовать собственные модули ES, чтобы загрузить отдельные модули.</p>
 
-    <h2 id="async--defer">13. Используйте <a href="01-html.md"><code class="language-plaintext highlighter-rouge">async</code> и <code class="language-plaintext highlighter-rouge">defer</code></a></h2>
+      <h4 id="async--defer">13. Используйте <code class="language-plaintext highlighter-rouge">async</code> и <code class="language-plaintext highlighter-rouge">defer</code></h4>
 
-    <h2 id="web-worker--------">14.  Используйте Web Worker для выполнения интенсивных задач процессора в фоновом режиме</h2>
+      <h4 id="web-worker--------">14.  Используйте Web Worker для выполнения интенсивных задач процессора в фоновом режиме</h4>
 
-    <p><a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Workers_API/Using_web_workers">Web Worker</a> позволяют запускать скрипты в фоновых потоках. Если у вас есть очень интенсивные задачи, вы можете назначить их для Web Worker, которые будут выполнять их без вмешательства в пользовательский интерфейс. После создания Web Worker может общаться с кодом JavaScript, отправляя сообщения в обработчик событий, указанный этим кодом. Это может происходить и наоборот.</p>
+      <p><a href="https://developer.mozilla.org/ru/docs/Web/API/Web_Workers_API/Using_web_workers">Web Worker</a> позволяют запускать скрипты в фоновых потоках. Если у вас есть очень интенсивные задачи, вы можете назначить их для Web Worker, которые будут выполнять их без вмешательства в пользовательский интерфейс. После создания Web Worker может общаться с кодом JavaScript, отправляя сообщения в обработчик событий, указанный этим кодом. Это может происходить и наоборот.</p>
 
-  </div>
+    </div>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
     <h3>Полезные ссылки</h3>
   </summary>
   <div class="accordion__body">
-    <ul>
-      <li><a href="https://learn.javascript.ru/web-components">Веб-компоненты</a></li>
-      <li><strong>Символ</strong> — уникальный и неизменяемый примитивный тип данных, который может быть использован как ключ для свойств объектов. См. в <a href="https://www.w3schools.com/js/js_es6.asp#mark_symbol" target="_blank">W3Schools</a> и «<a href="https://learn.javascript.ru/symbol" target="_blank">современном учебнике</a>».</li>
-      <li><a href="https://doka.guide/js/shallow-or-deep-clone/" target="_blank">Поверхностное и глубокое копирование</a></li>
-      <li><a href="https://www.stevenchang.tw/blog/2020/05/23/JavaScript-slice-call-function" target="_blank"><code class="language-plaintext highlighter-rouge">Array.prototype.slice</code> \ <code class="language-plaintext highlighter-rouge">\[\].slice.call()</code> — прием для применения методов массива к <code class="language-plaintext highlighter-rouge">NodeList</code></a></li>
-      <li><a href="https://developer.mozilla.org/ru/docs/Web/API" target="_blank">Интерфейсы веб API</a>:
-        <ul>
-          <li>Blob — <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob" target="_blank">1</a>, <a href="https://learn.javascript.ru/blob" target="_blank">2</a>, <a href="https://docs.microsoft.com/en-us/answers/questions/480791/what-is-the-difference-between-storing-documents-i.html#answer-481051" target="_blank">3</a></li>
-          <li><a href="https://www.w3schools.com/html/html5_geolocation.asp" target="_blank">Гео</a></li>
-          <li><a href="https://www.w3schools.com/html/html5_draganddrop.asp" target="_blank">Drag and drop</a></li>
-          <li><a href="https://www.w3schools.com/html/html5_webstorage.asp" target="_blank">Веб хранилище</a></li>
-          <li><a href="https://www.w3schools.com/html/html5_webworkers.asp" target="_blank">Web Workers</a></li>
-          <li><a href="https://www.w3schools.com/html/html5_serversentevents.asp" target="_blank">Server-sent events</a></li>
-        </ul>
-      </li>
-      <li><a href="https://developer.mozilla.org/ru/docs/WebAssembly/Concepts">WebAssembly</a> - это технология, предоставляющая новый тип кода, который можно запускать в современных веб-браузерах. Код для WebAssembly не пишется вручную, а компилируется из низкоуровневых исходных языков C, C++, Rust и.т.д.</li>
-    </ul>
+      <ul>
+        <li><a href="https://learn.javascript.ru/web-components">Веб-компоненты</a></li>
+        <li><strong>Символ</strong> — уникальный и неизменяемый примитивный тип данных, который может быть использован как ключ для свойств объектов. См. в <a href="https://www.w3schools.com/js/js_es6.asp#mark_symbol" target="_blank">W3Schools</a> и «<a href="https://learn.javascript.ru/symbol" target="_blank">современном учебнике</a>».</li>
+        <li><a href="https://doka.guide/js/shallow-or-deep-clone/" target="_blank">Поверхностное и глубокое копирование</a></li>
+        <li><a href="https://www.stevenchang.tw/blog/2020/05/23/JavaScript-slice-call-function" target="_blank"><code class="language-plaintext highlighter-rouge">Array.prototype.slice</code> \ <code class="language-plaintext highlighter-rouge">\[\].slice.call()</code> — прием для применения методов массива к <code class="language-plaintext highlighter-rouge">NodeList</code></a></li>
+        <li><a href="https://developer.mozilla.org/ru/docs/Web/API" target="_blank">Интерфейсы веб API</a>:
+          <ul>
+            <li>Blob — <a href="https://developer.mozilla.org/ru/docs/Web/API/Blob" target="_blank">1</a>, <a href="https://learn.javascript.ru/blob" target="_blank">2</a>, <a href="https://docs.microsoft.com/en-us/answers/questions/480791/what-is-the-difference-between-storing-documents-i.html#answer-481051" target="_blank">3</a></li>
+            <li><a href="https://www.w3schools.com/html/html5_geolocation.asp" target="_blank">Гео</a></li>
+            <li><a href="https://www.w3schools.com/html/html5_draganddrop.asp" target="_blank">Drag and drop</a></li>
+            <li><a href="https://www.w3schools.com/html/html5_webstorage.asp" target="_blank">Веб хранилище</a></li>
+            <li><a href="https://www.w3schools.com/html/html5_webworkers.asp" target="_blank">Web Workers</a></li>
+            <li><a href="https://www.w3schools.com/html/html5_serversentevents.asp" target="_blank">Server-sent events</a></li>
+          </ul>
+        </li>
+        <li><a href="https://developer.mozilla.org/ru/docs/WebAssembly/Concepts">WebAssembly</a> - это технология, предоставляющая новый тип кода, который можно запускать в современных веб-браузерах. Код для WebAssembly не пишется вручную, а компилируется из низкоуровневых исходных языков C, C++, Rust и.т.д.</li>
+      </ul>
 
-    <h4 id="section-10">Справочники</h4>
+      <h4 id="section-18">Справочники</h4>
 
-    <ul>
-      <li><a href="https://thisthat.dev/" target="_blank">What is the difference</a></li>
-      <li><a href="https://1loc.dev/" target="_blank">Favorite JavaScript Utilities</a></li>
-      <li><a href="https://www.canidev.tools/" target="_blank">CanIuse DevTools</a> - раздел JS; надо клинкуть на чекбокс, чтобы открыть инструкции.</li>
-    </ul>
-  </div>
+      <ul>
+        <li><a href="https://thisthat.dev/" target="_blank">What is the difference</a></li>
+        <li><a href="https://1loc.dev/" target="_blank">Favorite JavaScript Utilities</a></li>
+        <li><a href="https://www.canidev.tools/" target="_blank">CanIuse DevTools</a> - раздел JS; надо клинкуть на чекбокс, чтобы открыть инструкции.</li>
+      </ul>
+    </div>
 </details>
+</section>
+
 <p>См. также <a href="/">шпаргалку</a> и <a href="/js/how-to.html">практическое руководство</a>.</p>
 
 </main><footer class="footer">
@@ -217,7 +703,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220725-1213"></script>
+<script src="/assets/js/main.js?20220802-1146"></script>
 
 <script>
   hljs.highlightAll();
