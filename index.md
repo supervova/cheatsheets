@@ -20,6 +20,7 @@ is-index: true
   {%- include details.html title="Числа и методы объекта `Math`" path="js/_base/theory/number-and-math.md" -%}
   {%- include details.html title="Массивы" path="js/_base/theory/arrays.md" -%}
   {%- include details.html title="Объекты" path="js/_base/theory/objects.md" -%}
+  {%- include details.html title="Классы" path="js/_base/theory/classes.md" id="topic-js-classes" -%}
   {%- include details.html title="Регулярные выражения" path="js/_base/theory/regex.md" -%}
   {%- include details.html title="JSON" path="js/_base/theory/json.md" -%}
   {%- include details.html title="Дата" path="js/_base/theory/date.md" -%}
