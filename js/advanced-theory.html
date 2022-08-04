@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220803-1850">
+<link rel="stylesheet" href="/assets/css/style.css?20220804-1407">
 </head>
 <body>
     <main class="main">
@@ -462,6 +462,179 @@ Date. Затем присваиваем переменной переменно�
 </code></pre></div>      </div>
     </div>
 </details>
+<details class="accordion" id="topic-functions-first-class">
+  <summary class="accordion__header">
+    <h3>Первоклассные функции (или функции первого класса)</h3>
+  </summary>
+  <div class="accordion__body">
+      <ul>
+        <li>Могут быть присвоены переменным или сохранены в объекте.</li>
+        <li>Могут передаваться в качестве аргументов другим функциям.</li>
+        <li>Другие функции могут возвращать first-class function, как результат.</li>
+      </ul>
+
+      <p>В практическом смысле это означает систему вложений (includ’ов) для функций.</p>
+
+      <p>В JS все функции — первоклассные.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Функция которая будет передана в аргументе
+ * следующей функции - «инклуд»
+ */</span>
+<span class="kd">function</span> <span class="nx">hawaiianTranslator</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">translation</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">word</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">translation</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Aloha</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">word</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Goodbye</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">translation</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Aloha</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">translation</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * «Мастер-функция» которая получит в аргументе
+ * «функцию-инклуд»
+ *
+ * @param {function} translator — функция, которая
+ * переводит полученный аргумент.
+ */</span>
+<span class="kd">function</span> <span class="nx">sayIt</span><span class="p">(</span><span class="nx">translator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* «Функция-инклуд», переданная в аргументе
+  translator, вызывается, и полученное значение
+  сохраняется в переменной phrase. */</span>
+  <span class="kd">const</span> <span class="nx">phrase</span> <span class="o">=</span> <span class="nx">translator</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="nx">phrase</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Вызываем sayIt, передавая ей в аргументе
+«функцию-инклуд» */</span>
+<span class="nx">sayIt</span><span class="p">(</span><span class="nx">hawaiianTranslator</span><span class="p">);</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion" id="topic-functions-local-variables">
+  <summary class="accordion__header">
+    <h3>Локальные переменные</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Переменные, объявленные внутри функции, недоступны за пределами ее фигурных скобок (область видимости функции). Они создаются в момент вызова функции и очищаются после выполнения кода функции.</p>
+
+      <p>☝️🧐 Функции и объекты созданные внутри других функций, также ограничены локальной областью видимости и недоступны извне.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// code here can NOT use carName</span>
+
+<span class="kd">function</span> <span class="nx">myFunc</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">carName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Volvo</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="c1">// code here CAN use carName</span>
+<span class="p">}</span>
+
+<span class="c1">// code here can NOT use carName</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion" id="topic-functions-parameters-default-values">
+  <summary class="accordion__header">
+    <h3>Параметры по умолчанию</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Если функция не дополучает аргументов, пропущенные значения становятся <code class="language-plaintext highlighter-rouge">undefined</code>. Иногда это не страшно, но иногда чревато ошибками. Решают проблему значения по умолчанию. Присваиваются через знак равенства.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myFunc</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Икс</span><span class="dl">'</span><span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+</code></pre></div>      </div>
+
+      <p>Параметры со значениями по умолчанию пишутся в конце, после обычных параметров — так чтобы функция возвращала <code class="language-plaintext highlighter-rouge">undefined</code> только в случае пропуска всех аргументов.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * JSDoc
+ *
+ * @param {string} name
+ * @param {number} height
+ * @param {number} weight
+ */</span>
+<span class="kd">const</span> <span class="nx">sayMyHeight</span> <span class="o">=</span> <span class="p">(</span>
+<span class="err">  </span><span class="nx">name</span><span class="p">,</span>
+<span class="err">  </span><span class="nx">height</span> <span class="o">=</span> <span class="mi">186</span><span class="p">,</span>
+<span class="err">  </span><span class="nx">weight</span> <span class="o">=</span> <span class="mi">96</span>
+<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`
+    Hi! My name is </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">. My height
+    is </span><span class="p">${</span><span class="nx">height</span><span class="p">}</span><span class="s2">cm and my weight is </span><span class="p">${</span><span class="nx">weight</span><span class="p">}</span><span class="s2">kg.
+  `</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">sayMyHeight</span><span class="p">(</span><span class="dl">'</span><span class="s1">Vova</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Параметры по умолчанию могут быть любого типа: строками, числами, булевыми значениями, объектами…</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * JSDoc
+ * @param {object} opts
+ */</span>
+<span class="kd">function</span> <span class="nx">findProducts</span><span class="p">(</span>
+<span class="err">  </span><span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span> <span class="na">minPrice</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span>
+<span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">opts</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// { minPrice: 10, maxPrice: 20 }</span>
+<span class="nx">findProducts</span><span class="p">();</span>
+
+<span class="cm">/* {}. Даже пустой объект в аргументе заменит
+значение по умолчанию */</span>
+<span class="nx">findProducts</span><span class="p">({});</span>
+</code></pre></div>      </div>
+
+      <p>…и выражениями.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * JSDoc
+ * @param {function} who
+ */</span>
+<span class="kd">function</span> <span class="nx">sayHi</span><span class="p">(</span>
+<span class="nx">who</span> <span class="o">=</span> <span class="nx">getCurrentUser</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">()</span>
+<span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`Привет, </span><span class="p">${</span><span class="nx">who</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Привет, Вася</span>
+<span class="nx">sayHi</span><span class="p">();</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion" id="topic-functions-anonymous">
+  <summary class="accordion__header">
+    <h3>Анонимные функции</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Анонимная функция (еще можно встретить название «лямбды») — функция без имени. Применяется обычно тогда, когда функция используется лишь однажды. Например, как в примерах ниже, функция-обработчик загрузки страницы. Добавляется в функциональном выражении после знака равенства или в параметрах другой функции.</p>
+
+      <p>Разработчики Airbnb предлагают заменять анонимные функции «старого образца» <a href="https://github.com/leonidlebedev/javascript-airbnb#стрелочные-функции">функциями-стрелками</a>.</p>
+
+      <h4 id="section-5">Пример. Замена именованной функции анонимной…</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">handler</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Yeah, that page loaded!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">;</span>
+
+<span class="cm">/* Убрать имя переменной handler
+Назначить свойству window.onload функциональное
+выражение */</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">Yeah, that page loaded!</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Или так</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// code; event can be 'resize'  too</span>
+<span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+
+</code></pre></div>      </div>
+    </div>
+</details>
 <details class="accordion" id="topic-functions-arrow">
   <summary class="accordion__header">
     <h3>Стрелочные функции</h3>
@@ -493,7 +666,7 @@ Date. Затем присваиваем переменной переменно�
 
       <p>⛔️ Стрелочные функции не могут быть использованы как конструкторы, с <code class="language-plaintext highlighter-rouge">new</code> — потому что у них нет <code class="language-plaintext highlighter-rouge">this</code>. У функций-стрелок нет свойства <code class="language-plaintext highlighter-rouge">prototype</code>.</p>
 
-      <h2 id="section-5">Простейший вариант стрелочной функции</h2>
+      <h4 id="section-6">Простейший вариант стрелочной функции</h4>
 
       <p>Слева от <code class="language-plaintext highlighter-rouge">=&gt;</code> находится параметр (<code class="language-plaintext highlighter-rouge">x</code> в данном случае), а справа – выражение, которое нужно вернуть. Без слова <code class="language-plaintext highlighter-rouge">return</code> — в кратком синтаксисе стрелочных функций результат возвращается без лишних формальностей.</p>
 
@@ -562,7 +735,7 @@ Date. Затем присваиваем переменной переменно�
 <span class="p">);</span>
 </code></pre></div>      </div>
 
-      <h2 id="arguments">У функций-стрелок нет переменной <code class="language-plaintext highlighter-rouge">arguments</code></h2>
+      <h4 id="arguments">У функций-стрелок нет переменной <code class="language-plaintext highlighter-rouge">arguments</code></h4>
 
       <p>В JavaScript функции в традиционном синтаксисе может быть вызвана с произвольным количеством аргументов. Переданные аргументы сохраняются после вызова функции в псевдомассив <code class="language-plaintext highlighter-rouge">arguments</code> и становятся доступны по номерам: <code class="language-plaintext highlighter-rouge">arguments[0]</code>, <code class="language-plaintext highlighter-rouge">arguments[1]</code>…</p>
 
@@ -580,162 +753,421 @@ Date. Затем присваиваем переменной переменно�
 </code></pre></div>      </div>
     </div>
 </details>
-<details class="accordion" id="topic-functions-local-variables">
+<details class="accordion" id="topic-functions-callback">
   <summary class="accordion__header">
-    <h3>Локальные переменные</h3>
+    <h3>Функция обратного вызова, callback</h3>
   </summary>
   <div class="accordion__body">
-      <p>Переменные, объявленные внутри функции, недоступны за пределами ее фигурных скобок (область видимости функции). Они создаются в момент вызова функции и очищаются после выполнения кода функции.</p>
+      <p>Синтаксис функции через «стрелку» <code class="language-plaintext highlighter-rouge">=&gt;</code>, без ключевого слова <code class="language-plaintext highlighter-rouge">function</code> и в простых, однострочных случаях без ключевого слова  <code class="language-plaintext highlighter-rouge">return</code>.</p>
 
-      <p>☝️🧐 Функции и объекты созданные внутри других функций, также ограничены локальной областью видимости и недоступны извне.</p>
+      <p>Компактность функций-стрелок значительно облегчает чтение кода. Но главная особенность стрелочных функций в другом. <strong>У них нет своего <code class="language-plaintext highlighter-rouge">this</code>.</strong> Если происходит обращение к <code class="language-plaintext highlighter-rouge">this</code>, его значение берётся снаружи, из внешней функции.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// code here can NOT use carName</span>
+      <p>Функции-стрелки предназначены для небольшого кода (например, обратного вызова), который не имеет своего контекста, выполняясь в родительском.</p>
 
-<span class="kd">function</span> <span class="nx">myFunc</span><span class="p">()</span> <span class="p">{</span>
-<span class="err">  </span><span class="kd">const</span> <span class="nx">carName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Volvo</span><span class="dl">'</span><span class="p">;</span>
-<span class="err">  </span><span class="c1">// code here CAN use carName</span>
+      <p>В примере внутри <code class="language-plaintext highlighter-rouge">forEach</code> использована стрелочная функция. И это значит, что <code class="language-plaintext highlighter-rouge">this.title</code> в ней будет иметь точно такое же значение, как в методе <code class="language-plaintext highlighter-rouge">showList</code> — <code class="language-plaintext highlighter-rouge">group.title</code>.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">group</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">  </span><span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Наш курс</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">students</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Вася</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Петя</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Даша</span><span class="dl">'</span><span class="p">],</span>
+
+<span class="err">  </span><span class="nx">showList</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">students</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span>
+<span class="err">      </span><span class="c1">// стрелочная функция, в которой this тот</span>
+<span class="err">      </span><span class="c1">// же, что и у родительского метода</span>
+<span class="err">      </span><span class="nx">student</span> <span class="o">=&gt;</span> <span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="s2">: student`</span><span class="p">),</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">  </span><span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>⚠️ <strong>Стрелочные функции не надо писать везде.</strong> Главным образом — там, где нужно сохранить контекст родителя: обработчиках событий, ajax-запросах, анимации (<code class="language-plaintext highlighter-rouge">setInterval</code>, <code class="language-plaintext highlighter-rouge">setTimeout</code>). То есть, <strong>когда функция передается, как аргумент в другую функцию или встроенный метод</strong>.</p>
+
+      <p>⛔️ Стрелочные функции не могут быть использованы как конструкторы, с <code class="language-plaintext highlighter-rouge">new</code> — потому что у них нет <code class="language-plaintext highlighter-rouge">this</code>. У функций-стрелок нет свойства <code class="language-plaintext highlighter-rouge">prototype</code>.</p>
+
+      <h4 id="section-7">Простейший вариант стрелочной функции</h4>
+
+      <p>Слева от <code class="language-plaintext highlighter-rouge">=&gt;</code> находится параметр (<code class="language-plaintext highlighter-rouge">x</code> в данном случае), а справа – выражение, которое нужно вернуть. Без слова <code class="language-plaintext highlighter-rouge">return</code> — в кратком синтаксисе стрелочных функций результат возвращается без лишних формальностей.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myFunc</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">// Сейчас функция myFunc вернет 2</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">myFunc</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+
+<span class="c1">// Та же функция в традиционном синтаксисе:</span>
+<span class="kd">const</span> <span class="nx">myFunc2</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>Если аргументов несколько, то нужно обернуть их в скобки ()</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+
+<span class="c1">// Функция sum вернет 3</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+</code></pre></div>      </div>
+
+      <p>Если нужно задать функцию без аргументов, используются пустые скобки.</p>
+
+      <p>В примере вызов <code class="language-plaintext highlighter-rouge">getTime()</code> будет возвращать текущий час.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">getTime</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s2">`</span><span class="p">${</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getHours</span><span class="p">()}</span><span class="s2">:`</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">getTime</span><span class="p">());</span>
+</code></pre></div>      </div>
+
+      <p>Когда тело функции достаточно большое, то можно его обернуть в фигурные скобки.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">getTime</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">hours</span> <span class="o">=</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">minutes</span> <span class="o">=</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>
+<span class="err">  </span><span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hours</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">minutes</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>☝️🧐 Заметим, что как только тело функции оборачивается в {…}, то её результат уже не возвращается автоматически, как в кратком синтаксисе. Такой функции нужен явный <code class="language-plaintext highlighter-rouge">return</code>, если, конечно, нужно что-либо возвратить.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myFunc3</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">myFunc4</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">newSum</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+
+<span class="err">  </span><span class="c1">// Здесь нужно явно вернуть результат</span>
+<span class="err">  </span><span class="k">return</span> <span class="nx">newSum</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p><strong>Примеры</strong> использования стрелочных функций для обратного вызова.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myArr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+
+<span class="cm">/* В методе Array.sort используем стрелочную
+функцию обратного вызова. Такая запись –
+коротка и понятна… */</span>
+<span class="kd">const</span> <span class="nx">sorted</span> <span class="o">=</span> <span class="nx">myArr</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">sorted</span><span class="p">);</span> <span class="c1">// 3, 5, 8</span>
+
+<span class="cm">/* В gulpfil'e функции-стрелки также используются
+для обратного вызова */</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="dl">'</span><span class="s1">twig</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span>
+<span class="err">  </span><span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="dl">'</span><span class="s1">/src/*.twig</span><span class="dl">'</span><span class="p">)</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="dl">'</span><span class="s1">/dist</span><span class="dl">'</span><span class="p">)),</span>
+<span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h4 id="arguments-1">У функций-стрелок нет переменной <code class="language-plaintext highlighter-rouge">arguments</code></h4>
+
+      <p>В JavaScript функции в традиционном синтаксисе может быть вызвана с произвольным количеством аргументов. Переданные аргументы сохраняются после вызова функции в псевдомассив <code class="language-plaintext highlighter-rouge">arguments</code> и становятся доступны по номерам: <code class="language-plaintext highlighter-rouge">arguments[0]</code>, <code class="language-plaintext highlighter-rouge">arguments[1]</code>…</p>
+
+      <p>Но они могут использовать псевдомассив аргументов внешней традиционной функции.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myFunc5</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">showArg</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="err">  </span><span class="cm">/* Вызов showArg() вернет «Ты это видел?»,
+  получив его из аргументов myFunc5 */</span>
+<span class="err">  </span><span class="nx">showArg</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="c1">// code here can NOT use carName</span>
+<span class="nx">myFunc5</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ты это видел?</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
     </div>
 </details>
-<details class="accordion" id="topic-functions-arguments-object">
+<details class="accordion" id="topic-functions-parameters-destructuring">
   <summary class="accordion__header">
-    <h3>Псевдомассив `arguments`</h3>
+    <h3>Деструктуризация в параметрах</h3>
   </summary>
   <div class="accordion__body">
-      <p>В JavaScript у функции есть встроенный объект (псведомассив) <code class="language-plaintext highlighter-rouge">arguments</code>. В него после вызова сохраняются переданные аргументы, после чего они становятся доступны по номерам: <code class="language-plaintext highlighter-rouge">arguments[0]</code>, <code class="language-plaintext highlighter-rouge">arguments[1]</code>… Псевдомассив имеет свойство <code class="language-plaintext highlighter-rouge">length</code>, но у него нет методов массива, таких как <code class="language-plaintext highlighter-rouge">join</code>, <code class="language-plaintext highlighter-rouge">slice</code> и др.</p>
+      <p>См. также <a href="#topic-objects-destructuring">деструктурирующее присваивание или просто деструктуризацию</a></p>
 
-      <p>Если в функцию передано аргументов больше, чем параметров, получить их значения, можно перебрав <code class="language-plaintext highlighter-rouge">arguments</code>.</p>
+      <p>Деструктуризация в параметрах — это возможность функции получать значения из объекта или массива, переданного в параметры. Для этого параметры функции заключаются в фигурные скобки, как объект.</p>
 
-      <p><code class="language-plaintext highlighter-rouge">arguments.length</code> – свойство, содержащее число аргументов переданных в функцию</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myFunc</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">  </span><span class="k">return</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showMenu</span><span class="p">({</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">})</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">title</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">width</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">height</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div>      </div>
-    </div>
-</details>
-<details class="accordion" id="topic-functions-parameters-default-values">
-  <summary class="accordion__header">
-    <h3>Параметры по умолчанию</h3>
-  </summary>
-  <div class="accordion__body">
-      <p>Если функция не дополучает аргументов, пропущенные значения становятся <code class="language-plaintext highlighter-rouge">undefined</code>. Иногда это не страшно, но иногда чревато ошибками. Решают проблему значения по умолчанию. Присваиваются через знак равенства.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myFunc</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Икс</span><span class="dl">'</span><span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
-</code></pre></div>      </div>
-
-      <p>Параметры со значениями по умолчанию пишутся в конце, после обычных параметров — так чтобы функция возвращала <code class="language-plaintext highlighter-rouge">undefined</code> только в случае пропуска всех аргументов.</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- *
- * @param {string} name
- * @param {number} height
- * @param {number} weight
- */</span>
-<span class="kd">const</span> <span class="nx">sayMyHeight</span> <span class="o">=</span> <span class="p">(</span>
-  <span class="nx">name</span><span class="p">,</span>
-  <span class="nx">height</span> <span class="o">=</span> <span class="mi">186</span><span class="p">,</span>
-  <span class="nx">weight</span> <span class="o">=</span> <span class="mi">96</span>
-<span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s2">`
-    Hi! My name is </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">. My height
-    is </span><span class="p">${</span><span class="nx">height</span><span class="p">}</span><span class="s2">cm and my weight is </span><span class="p">${</span><span class="nx">weight</span><span class="p">}</span><span class="s2">kg.
-  `</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">  </span><span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Меню</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+<span class="err">  </span><span class="na">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="nx">sayMyHeight</span><span class="p">(</span><span class="dl">'</span><span class="s1">Vova</span><span class="dl">'</span><span class="p">);</span>
+<span class="cm">/* Объект options будет разбит на переменные.
+В диалог будет выведено «Меню 100 200» */</span>
+<span class="nx">showMenu</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <p>Параметры по умолчанию могут быть любого типа: строками, числами, булевыми значениями, объектами…</p>
+      <p>Можно использовать деструктуризацию со значениями по умолчанию.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- * @param {object} opts
- */</span>
-<span class="kd">function</span> <span class="nx">findProducts</span><span class="p">(</span>
-  <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span> <span class="na">minPrice</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span>
-<span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">opts</span><span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showNewMenu</span><span class="p">({</span>
+<span class="err">  </span><span class="nx">title</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Заголовок</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="nx">width</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="err">  </span><span class="nx">height</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="p">})</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">title</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">width</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">height</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="c1">// { minPrice: 10, maxPrice: 20 }</span>
-<span class="nx">findProducts</span><span class="p">();</span>
+<span class="cm">/* И в таком случае можно передавать объект только
+с измененным значением */</span>
+<span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">  </span><span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Меню</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">};</span>
 
-<span class="cm">/* {}. Даже пустой объект в аргументе заменит
-значение по умолчанию */</span>
-<span class="nx">findProducts</span><span class="p">({});</span>
+<span class="c1">// Меню 100 200</span>
+<span class="nx">showNewMenu</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <p>…и выражениями.</p>
+      <p>Чтобы функция могла быть вызвана вообще без аргументов, нужно добавить ей параметр по умолчанию — пустой объект, пустые фигурные скобки после объекта с параметрами по умолчанию и знака равенства.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- * @param {function} who
- */</span>
-<span class="kd">function</span> <span class="nx">sayHi</span><span class="p">(</span>
-<span class="nx">who</span> <span class="o">=</span> <span class="nx">getCurrentUser</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">()</span>
-<span class="p">)</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s2">`Привет, </span><span class="p">${</span><span class="nx">who</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showThirdMenu</span><span class="p">({</span>
+<span class="err">  </span><span class="nx">title</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Заголовок</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="nx">w</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="err">  </span><span class="nx">h</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="p">}</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">title</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">w</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">h</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="c1">// Привет, Вася</span>
-<span class="nx">sayHi</span><span class="p">();</span>
+<span class="c1">// Заголовок 100 200</span>
+<span class="nx">showThirdMenu</span><span class="p">();</span>
 </code></pre></div>      </div>
     </div>
 </details>
-<details class="accordion" id="topic-functions-first-class">
+<details class="accordion" id="topic-functions-rest-parameters-spread-operator">
   <summary class="accordion__header">
-    <h3>Первоклассные функции (или функции первого класса)</h3>
+    <h3>Остаточные параметры, оператор расширения и псевдомассив `arguments`</h3>
   </summary>
   <div class="accordion__body">
-      <ul>
-        <li>Могут быть присвоены переменным или сохранены в объекте.</li>
-        <li>Могут передаваться в качестве аргументов другим функциям.</li>
-        <li>Другие функции могут возвращать first-class function, как результат.</li>
-      </ul>
+      <p>В JS-функции можно передавать произвольное количество параметров в виде массива. Как в пользовательские, так и в некоторые встроенные методы. Например:</p>
 
-      <p>В практическом смысле это означает систему вложений (includ’ов) для функций.</p>
+      <p><code class="language-plaintext highlighter-rouge">Math.max(...numbers)</code></p>
 
-      <p>В JS все функции — первоклассные.</p>
+      <h4 id="rest-">Остаточные (или rest) параметры</h4>
+
+      <p>Вызывать функцию можно с любым количеством аргументов. Даже если она определена с одним параметром, а в нее передали десять, ошибки не будет. Просто 9 аргументов не будут использованы в расчетах, но и не пропадут бесследно — сохранятся в пседомассиве <code class="language-plaintext highlighter-rouge">arguments</code>.</p>
+
+      <p><strong>Остаточные параметры</strong> принимают множество значений, которые интерпретируются функцией, как массив.</p>
+
+      <p>Записываются как произвольное имя после трех точек. Может быть, как единственным параметром, так и одним из нескольких. Во втором случае записывается последним.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * Функция которая будет передана в аргументе
- * следующей функции - «инклуд»
+ * JSDoc
+ * @param {string} name
+ * @param {*} marks
  */</span>
-<span class="kd">function</span> <span class="nx">hawaiianTranslator</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">translation</span><span class="p">;</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">word</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">translation</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Aloha</span><span class="dl">'</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">word</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Goodbye</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">translation</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Aloha</span><span class="dl">'</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="kd">const</span> <span class="nx">pupil</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">...</span><span class="nx">marks</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">marks</span><span class="p">);</span>
+<span class="p">};</span>
 
-  <span class="k">return</span> <span class="nx">translation</span><span class="p">;</span>
+
+<span class="cm">/* Первый аргумент передается в параметр name.
+Остальные — в оператор расширения …marks */</span>
+<span class="nx">pupil</span><span class="p">(</span><span class="dl">'</span><span class="s1">Вова</span><span class="dl">'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-8">Пример  №2</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">abccc</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="p">...</span><span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="cm">/* В консоль будет выведены поочередно 'one',
+'two', ['three', 'four', 'five'] */</span>
+<span class="nx">abccc</span><span class="p">(</span><span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">three</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">four</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">five</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-9">Пример  №3</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showName</span><span class="p">(</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">firstName</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">lastName</span><span class="p">}</span><span class="s2"> - </span><span class="p">${</span><span class="nx">rest</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 <span class="p">}</span>
+
+<span class="cm">/* В диалог будет выведено: Юлий Цезарь -
+Император Рима. В rest попадёт массив всех
+аргументов, начиная с третьего. Собранные
+в rest данные станут настоящим массивом,
+с методами map, forEach и пр. */</span>
+<span class="nx">showName</span><span class="p">(</span><span class="dl">'</span><span class="s1">Юлий</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Цезарь</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Император</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Рима</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <h4 id="spread-">Оператор расширения (spread-оператор)</h4>
+
+      <p>Если троеточие в параметрах — признак остаточных параметров. То троеточие в caller’е указывает на оператор расширения или спред-оператор. Он позволяет передавать в функцию массив.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myArr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">];</span>
+
+<span class="cm">/* Вызов метода max с оператором расширения
+аналогичен Math.max(3, 5, 1) — оператор
+"раскрывает" массив в список аргументов) */</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">myArr1</span><span class="p">));</span>
+</code></pre></div>      </div>
+
+      <p>Этим же способом мы можем передать несколько итерируемых объектов:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myArr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">];</span>
+
+<span class="nx">alert</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">myArr1</span><span class="p">,</span> <span class="p">...</span><span class="nx">myArr2</span><span class="p">));</span>
+</code></pre></div>      </div>
+
+      <p>Мы можем комбинировать оператор расширения с обычными значениями:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">...</span><span class="nx">myArr1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">...</span><span class="nx">myArr2</span><span class="p">,</span> <span class="mi">25</span><span class="p">));</span> <span class="c1">// 25</span>
+</code></pre></div>      </div>
+
+      <p>Оператор расширения можно использовать и для слияния массивов:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">merged</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">...</span><span class="nx">myArr1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">...</span><span class="nx">myArr2</span><span class="p">];</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">merged</span><span class="p">);</span> <span class="c1">// 0, 3, 5, 1, 8, 3, -8, 1</span>
+</code></pre></div>      </div>
+
+      <h4 id="spread-----">Использование spread-оператора для создания копии массива</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">shallowCopy</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">myArr1</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">anotherShallowCopy</span> <span class="o">=</span> <span class="p">[</span>
+<span class="err">  </span><span class="p">...</span><span class="nx">myArr1</span><span class="p">,</span> <span class="p">...</span><span class="nx">myArr2</span><span class="p">,</span> <span class="mi">41</span>
+<span class="p">];</span>
+</code></pre></div>      </div>
+
+      <p>Spread-оператор, также, как и метод <code class="language-plaintext highlighter-rouge">assign()</code> создают так называемую мелкую копию (<code class="language-plaintext highlighter-rouge">shallow copy</code>). Это означает, что при дублировании вложенных объектов в новый объект будет скопирован полностью только первый уровень. Вместо вложенных объектов будут добавлены ссылки на них в «подлиннике».</p>
+
+      <p>☝️🧐  Чтобы полностью дублировать вложенные свойства (методы, в принципе, нельзя), используют методы JSON <code class="language-plaintext highlighter-rouge">stringify</code> (конвертация в строку) и <code class="language-plaintext highlighter-rouge">parse</code>.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">source</span> <span class="o">=</span>
+<span class="p">{</span>
+<span class="err">  </span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="err">  </span><span class="na">b</span><span class="p">:</span> <span class="p">{</span>
+<span class="err">    </span><span class="na">c</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="err">  </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">let</span> <span class="nx">dest</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+</code></pre></div>      </div>
+
+      <h3 id="spread------">Spread-оператор работает с любыми перебираемыми объектами</h3>
+
+      <p>В примерах выше мы использовали массив, чтобы продемонстрировать свойства оператора расширения, но он работает с любым перебираемым объектом.</p>
+
+      <p>Например, оператор расширения подойдёт для того, чтобы превратить строку в массив символов:</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Привет</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">([...</span><span class="nx">str</span><span class="p">]);</span> <span class="c1">// П,р,и,в,е,т</span>
+</code></pre></div>      </div>
+
+      <p>Оператор расширения перебирает строку как последовательность символов, поэтому из <code class="language-plaintext highlighter-rouge">...str</code> получается “П”, “р”, “и”, “в”, “е”, “т”. Получившиеся символы собираются в массив при помощи стандартного объявления массива, через квадратные скобки — <code class="language-plaintext highlighter-rouge">[...str]</code>.</p>
+
+      <p>Впрочем, задачу перевода разных данных в массив лучше выполнять более универсальным методом <code class="language-plaintext highlighter-rouge">Array.from</code>. Он работает не только с итерируемыми объектами (такими, как строка), но и с псевдомассивами (такими, как <code class="language-plaintext highlighter-rouge">NodeList</code>).</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">str</span><span class="p">));</span> <span class="c1">// П,р,и,в,е,т</span>
+</code></pre></div>      </div>
+
+      <h4 id="arguments------">Объект <code class="language-plaintext highlighter-rouge">arguments</code> — устаревший способ доступа к аргументам</h4>
+
+      <p>Раньше в языке не было остаточных параметров, и получить все аргументы функции можно было только с помощью псевдомассива <code class="language-plaintext highlighter-rouge">arguments</code>. Хотя способ всё ещё работает, мы можем найти его в старом коде.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showName</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="p">);</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+<span class="err">  </span><span class="nx">alert</span><span class="p">(</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>
+
+<span class="err">  </span><span class="c1">// Объект arguments можно перебирать</span>
+<span class="err">  </span><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">arg</span> <span class="k">of</span> <span class="nx">arguments</span><span class="p">)</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Вывод: 2, Юлий, Цезарь</span>
+<span class="nx">showName</span><span class="p">(</span><span class="dl">"</span><span class="s2">Юлий</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Цезарь</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// 1, Вова, undefined (второго аргумента нет)</span>
+<span class="nx">showName</span><span class="p">(</span><span class="dl">"</span><span class="s2">Вова</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Хотя <code class="language-plaintext highlighter-rouge">arguments</code> можно перебирать, псевдомассив не поддерживает методы массивов, например, <code class="language-plaintext highlighter-rouge">map()</code>.</p>
+
+      <p>К тому же, <code class="language-plaintext highlighter-rouge">arguments</code> всегда содержит все аргументы функции — нельзя получить их часть. А остаточные параметры позволяют это сделать.</p>
+
+      <p>☝️🧐 Стрелочные функции не имеют <code class="language-plaintext highlighter-rouge">arguments</code>. Если мы обратимся к <code class="language-plaintext highlighter-rouge">arguments</code> из стрелочной функции, то получим аргументы внешней «нормальной» функции.</p>
+
+      <p>Соответственно, для более удобной работы с аргументами <strong>лучше использовать остаточные параметры</strong>.</p>
+    </div>
+</details>
+<details class="accordion" id="topic-functions-closure">
+  <summary class="accordion__header">
+    <h3>Замыкание (closure) и самовызывающиеся функции</h3>
+  </summary>
+  <div class="accordion__body">
+      <p>Замыкание — вложенная функция, имеющая доступ к переменным внешних функций; при этом все её внутренние переменные для внешних скриптов скрыты. Собственные, а также доступные родительские переменные и параметры называются окружением.</p>
+
+      <p>Замыкание используется для ограничения области видимости и создания частных переменных, которые не могут изменить другие скрипты на странице.</p>
+
+      <p>Замыкания часто используются для сохранения состояния в обработчиках событий.</p>
+
+      <h4 id="section-10">Самовызывающиеся функции и выражения</h4>
+
+      <p>Замыканием может стать любая вложенная функция. Но когда замыкание создают специально, обычно в качестве родителя используют самовызывающиеся функциональное выражение или анонимную функцию. Родительские переменные и параметры передаются вложенным функциям, и в дальнейшим не возвращаются к исходным значениям до окончания сессии.</p>
+
+      <p>После самовызова родительской функции код оперируют только значениями, возвращаемыми вложенными функциями.</p>
+
+      <p>Самовызывающееся выражение или функция, как следует, из названия срабатывают без вызова, сразу после своего объявления. Используется, когда нужно выполнить код один раз и сохранить его результаты для вложенных функций, без объявления глобальных переменных). Записывается с помощью двух пар круглых скобок и точки с запятой.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Анонимная самовызывающаяся функция IIFE
+(Immediately-invoked Function Expression) */</span>
+<span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// код функции</span>
+<span class="p">})();</span>
 
 <span class="cm">/**
- * «Мастер-функция» которая получит в аргументе
- * «функцию-инклуд»
- *
- * @param {function} translator — функция, которая
- * переводит полученный аргумент.
+ * Самовызывающееся функциональное выражение.
+ * Создает замыкание для вложенной функции.
+ * Переменной add присваивается результат
+ * самовызывающейся функции, а это — вложенная
+ * функция increment().
  */</span>
-<span class="kd">function</span> <span class="nx">sayIt</span><span class="p">(</span><span class="nx">translator</span><span class="p">)</span> <span class="p">{</span>
-  <span class="cm">/* «Функция-инклуд», переданная в аргументе
-  translator, вызывается, и полученное значение
-  сохраняется в переменной phrase. */</span>
-  <span class="kd">const</span> <span class="nx">phrase</span> <span class="o">=</span> <span class="nx">translator</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="nx">phrase</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="cm">/* Переменная counter, созданная в add, передает
+  значение вложенной функции increment() только
+  раз. Далее в коде уже используются результаты
+  increment(). В примере counter будет
+  равняться 0 ровно до момента, когда
+  increment() не увеличит его до единицы. */</span>
+<span class="err">  </span><span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="cm">/* Вызываем sayIt, передавая ей в аргументе
-«функцию-инклуд» */</span>
-<span class="nx">sayIt</span><span class="p">(</span><span class="nx">hawaiianTranslator</span><span class="p">);</span>
+<span class="err">  </span><span class="cm">/**
+   * Вложенная функция.
+   * @return {Number}
+   */</span>
+<span class="err">  </span><span class="kd">function</span> <span class="nx">increment</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">    </span><span class="k">return</span> <span class="nx">counter</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="err">  </span><span class="k">return</span> <span class="nx">increment</span><span class="p">;</span>
+<span class="p">})();</span>
+
+<span class="nx">add</span><span class="p">();</span> <span class="c1">// Выражение вернет 1</span>
+<span class="nx">add</span><span class="p">();</span> <span class="c1">// Выражение вернет 2</span>
+<span class="nx">add</span><span class="p">();</span> <span class="c1">// Выражение вернет 3</span>
 </code></pre></div>      </div>
+
+      <h3 id="iife--">IIFE с параметрами</h3>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// В первой строке мы определяем два параметра</span>
+<span class="p">((</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">times</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// В цикл передаем аргументы…</span>
+<span class="err">  </span><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">times</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="cm">/* …которые получаем при вызове функции в последней
+строке */</span>
+<span class="p">}(</span><span class="dl">"</span><span class="s2">Hello!</span><span class="dl">"</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+
+<span class="c1">// Пример из jQuery</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nb">global</span><span class="p">,</span> <span class="nb">document</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// use $ for jQuery, global for window</span>
+<span class="p">}(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">));</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-11">Локальная область видимости</h4>
+
+      <p>С каждой функцией связывается окружение, которое содержит локальные переменные из внешней области видимости (функции-родителя). Вызывая функцию на другом уровне, мы получаем и связанные с ней локальные переменные.</p>
+
+      <p>На книжном языке это явление еще объясняют так. Каждая функция определяют свою лексическую область действия, объект переменных LexicalEnvironment. Каждый запуск функции создает новый такой объект. На верхнем уровне им является «глобальный объект», в браузере – window. Таким образом программа создает несколько объектов с независимыми свойствами и методами.</p>
     </div>
 </details>
 </section>
@@ -774,11 +1206,11 @@ Date. Затем присваиваем переменной переменно�
     <h3>14 советов по оптимизации</h3>
   </summary>
   <div class="accordion__body">
-      <h1 id="section-6">14 советов по оптимизации</h1>
+      <h1 id="section-12">14 советов по оптимизации</h1>
 
       <p><a href="https://webformyself.com/14-sovetov-po-optimizacii-koda-javascript-dlya-front-end-razrabotchikov/">Источник</a></p>
 
-      <h4 id="section-7">1. Удалить неиспользуемый код и функции</h4>
+      <h4 id="section-13">1. Удалить неиспользуемый код и функции</h4>
 
       <p>Чем больше кода содержится в приложении, тем больше данных необходимо передать клиенту, а браузеру потребуется больше времени для анализа и интерпретации кода.</p>
 
@@ -790,17 +1222,17 @@ Date. Затем присваиваем переменной переменно�
 
       <p>Неиспользуемые пакеты npm, можно удалить командой <code class="language-plaintext highlighter-rouge">npm prune</code>.</p>
 
-      <h4 id="section-8">2. Кешировать</h4>
+      <h4 id="section-14">2. Кешировать</h4>
 
       <p>Использовать <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> или <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Caching">HTTP-кэширования</a>.</p>
 
-      <h4 id="section-9">3. Избегайте утечек памяти</h4>
+      <h4 id="section-15">3. Избегайте утечек памяти</h4>
 
       <p>Будучи языком высокого уровня, JS заботится о нескольких низкоуровневых системах управления, таких как управление памятью. Сборка мусора — это процесс, общий для большинства языков программирования. Сборка мусора с точки зрения непрофессионала — это просто сбор и освобождение памяти, которая была выделена объектам, но которая в настоящее время не используется. В таких языках программирования, как C, разработчик должен позаботиться о распределении и освобождении памяти, используя функции <code class="language-plaintext highlighter-rouge">malloc()</code> и <code class="language-plaintext highlighter-rouge">dealloc()</code>.</p>
 
       <p>Даже если сборка мусора выполняется в JavaScript автоматически, могут быть определенные случаи, когда она не будет идеальной. В JavaScript ES6 <code class="language-plaintext highlighter-rouge">Map</code> и <code class="language-plaintext highlighter-rouge">Set</code> были представлены со своими «более слабыми» братьями и сестрами. Этот «более слабый» аналог, известный как <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a> и WeakSet, содержит «слабые» ссылки на объекты. Они позволяют собирать ненужные значения и предотвращать утечки памяти.</p>
 
-      <h4 id="section-10">4. Попытайтесь выходить из циклов раньше</h4>
+      <h4 id="section-16">4. Попытайтесь выходить из циклов раньше</h4>
 
       <p>Обработка больших циклов может занять много времени. Поэтому следует выходить из них как можно раньше — с помощью ключевого слова <code class="language-plaintext highlighter-rouge">break</code> и ключевого слова <code class="language-plaintext highlighter-rouge">continue</code>.</p>
 
@@ -828,7 +1260,7 @@ Date. Затем присваиваем переменной переменно�
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-11">5. Минимизируйте количество вычислений переменных</h4>
+      <h4 id="section-17">5. Минимизируйте количество вычислений переменных</h4>
 
       <p>Чтобы уменьшить количество вычислений переменной, вы можете использовать замыкания. С точки зрения непрофессионала, замыкания в JavaScript предоставляют доступ к области видимости внешней функции из внутренней функции. Замыкания создаются каждый раз, когда вызывается функция created-not. Внутренние функции будут иметь доступ к переменным внешней области видимости, даже после возврата внешней функции.</p>
 
@@ -867,11 +1299,11 @@ Date. Затем присваиваем переменной переменно�
 
       <p>Чтобы уменьшить количество раз, когда вы обращаетесь к элементу DOM, обращайтесь к нему один раз и используйте его как локальную переменную. Когда необходимость отпадет, обязательно удалите значение переменной, установив для него null. Это предотвратит утечку памяти, поскольку позволит работать процессу сбора мусора.</p>
 
-      <h4 id="section-12">7. Сожмите файлы</h4>
+      <h4 id="section-18">7. Сожмите файлы</h4>
 
       <p>Используя такие методы сжатия, как Gzip, вы можете уменьшить размер файлов JavaScript. Эти файлы поменьше приведут к увеличению производительности сайта, так как браузер должен будет загружать меньшие ресурсы. Эти сжатия могут уменьшить размер файла до 80%. Подробнее о сжатии читайте здесь.</p>
 
-      <h4 id="section-13">8. Оптимизируйте собранный код</h4>
+      <h4 id="section-19">8. Оптимизируйте собранный код</h4>
 
       <p>Некоторые люди считают, что минимизация и сжатие – это одно и то же. Вовсе нет – это разные вещи. В сжатии используются специальные алгоритмы для изменения выходного размера файла. При минимизации в JS удаляются комментарии и лишние пробелы, переменные и функции переименовываются: длинные имена заменяются однобуквенными.</p>
 
@@ -896,13 +1328,13 @@ Date. Затем присваиваем переменной переменно�
 
       <p>Вы также можете использовать объект Map, так как его метод <code class="language-plaintext highlighter-rouge">delete</code> работает быстрее.</p>
 
-      <h4 id="section-14">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
+      <h4 id="section-20">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
 
       <p>Вы должны знать, что JavaScript является синхронным по умолчанию, а также однопоточным. Но могут быть случаи, когда коду требуется много времени для вычислений. Будучи синхронным по своей природе, для JavaScript это будет означать, что этот фрагмент кода будет блокировать выполнение других операторов кода до тех пор, пока он не будет выполнен. Это снизит производительность в целом.</p>
 
       <p>Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises">промисами</a>.</p>
 
-      <h4 id="section-15">12.  Используйте разделение кода</h4>
+      <h4 id="section-21">12.  Используйте разделение кода</h4>
 
       <p>Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
 First Contentful Paint (FCP) измеряет, сколько времени браузеру требуется для отображения первого фрагмента содержимого DOM после перехода пользователя на вашу страницу. Изображения, небелые <canvas> элементы и SVG на странице считаются содержимым DOM; ничего внутри iframe не включено.</canvas></p>
@@ -942,7 +1374,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
         <li><a href="https://developer.mozilla.org/ru/docs/WebAssembly/Concepts">WebAssembly</a> - это технология, предоставляющая новый тип кода, который можно запускать в современных веб-браузерах. Код для WebAssembly не пишется вручную, а компилируется из низкоуровневых исходных языков C, C++, Rust и.т.д.</li>
       </ul>
 
-      <h4 id="section-16">Справочники</h4>
+      <h4 id="section-22">Справочники</h4>
 
       <ul>
         <li><a href="https://thisthat.dev/" target="_blank">What is the difference</a></li>
@@ -966,7 +1398,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220803-1850"></script>
+<script src="/assets/js/main.js?20220804-1407"></script>
 
 <script>
   hljs.highlightAll();
