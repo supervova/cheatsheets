@@ -15,14 +15,14 @@ const myFunc = (x = 'Икс', y = 100) => x + y;
  * @param {number} weight
  */
 const sayMyHeight = (
-  name,
-  height = 186,
-  weight = 96
+  name,
+  height = 186,
+  weight = 96
 ) => {
-  alert(`
-    Hi! My name is ${name}. My height
-    is ${height}cm and my weight is ${weight}kg.
-  `);
+  alert(`
+    Hi! My name is ${name}. My height
+    is ${height}cm and my weight is ${weight}kg.
+  `);
 };
 
 sayMyHeight('Vova');
@@ -36,9 +36,9 @@ sayMyHeight('Vova');
  * @param {object} opts
  */
 function findProducts(
-  opts = { minPrice: 10, maxPrice: 20 },
+  opts = { minPrice: 10, maxPrice: 20 },
 ) {
-  console.log(opts);
+  console.log(opts);
 }
 
 // { minPrice: 10, maxPrice: 20 }
@@ -59,7 +59,7 @@ findProducts({});
 function sayHi(
 who = getCurrentUser().toUpperCase()
 ) {
-  alert(`Привет, ${who}`);
+  alert(`Привет, ${who}`);
 }
 
 // Привет, Вася
