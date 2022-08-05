@@ -10,7 +10,7 @@
 
 Неиспользуемый код можно удалить вручную, a также при сборке с UglifyJS или [Google Closure Compiler](https://developers.google.com/closure/compiler/docs/api-tutorial3).
 
-При сборке webpack'ом применяют  [технику «встряхивания дерева»](https://bluepnume.medium.com/javascript-tree-shaking-like-a-pro-7bf96e139eb7).
+При сборке webpack'ом применяют  [технику «встряхивания дерева»](https://bluepnume.medium.com/javascript-tree-shaking-like-a-pro-7bf96e139eb7).
 
 Неиспользуемые пакеты npm, можно удалить командой `npm prune`.
 
@@ -34,10 +34,10 @@
 let arr = new Array(1000000000).fill('----');
 arr[970] = 'found';
 for (let i = 0; i < arr.length; i++) {
-  if (arr[i] === 'found') {
-    console.log("Found");
-    break;
-  }
+  if (arr[i] === 'found') {
+    console.log("Found");
+    break;
+  }
 }
 ```
 
@@ -47,8 +47,8 @@ for (let i = 0; i < arr.length; i++) {
 let arr = new Array(1000000000).fill('----');
 arr[970] = 'found';
 for (let i = 0; i < arr.length; i++) {
-  if(i%2!=0){
-  continue;
+  if(i%2!=0){
+  continue;
  };
  process(arr[i]);
 }
@@ -62,11 +62,11 @@ for (let i = 0; i < arr.length; i++) {
 
 ```js
 function findCustomerCity(name) {
-  const texasCustomers = ['John', 'Ludwig', 'Kate'];
-  const californiaCustomers = ['Wade', 'Lucie','Kylie'];
+  const texasCustomers = ['John', 'Ludwig', 'Kate'];
+  const californiaCustomers = ['Wade', 'Lucie','Kylie'];
 
-  return texasCustomers.includes(name) ? 'Texas' :
-    californiaCustomers.includes(name) ? 'California' : 'Unknown';
+  return texasCustomers.includes(name) ? 'Texas' :
+    californiaCustomers.includes(name) ? 'California' : 'Unknown';
 };
 ```
 
@@ -74,10 +74,10 @@ function findCustomerCity(name) {
 
 ```js
 function findCustomerCity() {
-  const texasCustomers = ['John', 'Ludwig', 'Kate'];
-  const californiaCustomers = ['Wade', 'Lucie','Kylie'];
+  const texasCustomers = ['John', 'Ludwig', 'Kate'];
+  const californiaCustomers = ['Wade', 'Lucie','Kylie'];
 
-  return name => texasCustomers.includes(name) ? 'Texas' :
+  return name => texasCustomers.includes(name) ? 'Texas' :
  californiaCustomers.includes(name) ? 'California' : 'Unknown';
 };
 
@@ -131,7 +131,7 @@ object.age = undefined;
 
 Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван [промисами](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises).
 
-#### 12.  Используйте разделение кода
+#### 12.  Используйте разделение кода
 
 Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
 First Contentful Paint (FCP) измеряет, сколько времени браузеру требуется для отображения первого фрагмента содержимого DOM после перехода пользователя на вашу страницу. Изображения, небелые <canvas> элементы и SVG на странице считаются содержимым DOM; ничего внутри iframe не включено.
@@ -142,7 +142,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
 
 #### 13. Используйте `async` и `defer`
 
-#### 14.  Используйте Web Worker для выполнения интенсивных задач процессора в фоновом режиме
+#### 14.  Используйте Web Worker для выполнения интенсивных задач процессора в фоновом режиме
 
 [Web Worker](https://developer.mozilla.org/ru/docs/Web/API/Web_Workers_API/Using_web_workers) позволяют запускать скрипты в фоновых потоках. Если у вас есть очень интенсивные задачи, вы можете назначить их для Web Worker, которые будут выполнять их без вмешательства в пользовательский интерфейс. После создания Web Worker может общаться с кодом JavaScript, отправляя сообщения в обработчик событий, указанный этим кодом. Это может происходить и наоборот.
 

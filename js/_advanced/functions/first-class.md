@@ -4,7 +4,7 @@
 
 В практическом смысле это означает систему вложений (includ'ов) для функций.
 
-В JS все функции — первоклассные.
+В JS все функции — высшего порядка (первоклассные).
 
 ```javascript
 /**
@@ -12,14 +12,14 @@
  * следующей функции - «инклуд»
  */
 function hawaiianTranslator(word) {
-  let translation;
-  if (word === 'Hello') {
-    translation = 'Aloha';
-  } else if (word === 'Goodbye') {
-    translation = 'Aloha';
-  }
+  let translation;
+  if (word === 'Hello') {
+    translation = 'Aloha';
+  } else if (word === 'Goodbye') {
+    translation = 'Aloha';
+  }
 
-  return translation;
+  return translation;
 }
 
 /**
@@ -30,11 +30,11 @@ function hawaiianTranslator(word) {
  * переводит полученный аргумент.
  */
 function sayIt(translator) {
-  /* «Функция-инклуд», переданная в аргументе
-  translator, вызывается, и полученное значение
-  сохраняется в переменной phrase. */
-  const phrase = translator('Hello');
-  alert(phrase);
+  /* «Функция-инклуд», переданная в аргументе
+  translator, вызывается, и полученное значение
+  сохраняется в переменной phrase. */
+  const phrase = translator('Hello');
+  alert(phrase);
 }
 
 /* Вызываем sayIt, передавая ей в аргументе

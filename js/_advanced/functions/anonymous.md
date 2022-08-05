@@ -6,7 +6,7 @@
 
 ```javascript
 function handler() {
-  alert('Yeah, that page loaded!');
+  alert('Yeah, that page loaded!');
 }
 
 window.onload = handler;
@@ -15,12 +15,12 @@ window.onload = handler;
 Назначить свойству window.onload функциональное
 выражение */
 window.onload = () => {
-  alert('Yeah, that page loaded!');
+  alert('Yeah, that page loaded!');
 };
 
 // Или так
 window.addEventListener('load', () => {
-  // code; event can be 'resize'  too
+  // code; event can be 'resize'  too
 }, false);
 
 ```

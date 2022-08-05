@@ -17,7 +17,7 @@ categories:
   {%- include details.html title="Оператор `return`" path="_advanced/functions/return.md" id="topic-functions-return" -%}
   {%- include details.html title="Вызов (call) функции" path="_advanced/functions/call.md" id="topic-functions-call" -%}
   {%- include details.html title="Функция — это объект" path="_advanced/functions/object.md" id="topic-functions-object" -%}
-  {%- include details.html title="Первоклассные функции (или функции первого класса)" path="_advanced/functions/first-class.md" id="topic-functions-first-class" -%}
+  {%- include details.html title="Функции высшего порядка (или функции первого класса)" path="_advanced/functions/first-class.md" id="topic-functions-first-class" -%}
   {%- include details.html title="Локальные переменные" path="_advanced/functions/local-variables.md" id="topic-functions-local-variables" -%}
   {%- include details.html title="Параметры по умолчанию" path="_advanced/functions/parameters-default-values.md" id="topic-functions-parameters-default-values" -%}
   {%- include details.html title="Анонимные функции" path="_advanced/functions/anonymous.md" id="topic-functions-anonymous" -%}
@@ -26,6 +26,12 @@ categories:
   {%- include details.html title="Деструктуризация в параметрах" path="_advanced/functions/parameters-destructuring-assignment.md" id="topic-functions-parameters-destructuring" -%}
   {%- include details.html title="Остаточные параметры, оператор расширения и псевдомассив `arguments`" path="_advanced/functions/rest-parameters-spread-operator.md" id="topic-functions-rest-parameters-spread-operator" -%}
   {%- include details.html title="Замыкание (closure) и самовызывающиеся функции" path="_advanced/functions/closure-and-self-invoking-expressions.md" id="topic-functions-closure" -%}
+  {%- include details.html title="Рекурсивные функции" path="_advanced/functions/recursion.md" id="topic-functions-recursion" -%}
+</section>
+
+<section>
+  <h2>Объекты</h2>
+  {%- include details.html title="Аксессоры: «геттеры» и «сеттеры»" path="_advanced/objects/accessors-getters-and-setters.md" id="topic-objects-getters-setters" -%}
 </section>
 
 <section>

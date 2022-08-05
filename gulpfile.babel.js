@@ -39,6 +39,13 @@ import uncss from 'postcss-uncss';
 // SCRIPTS
 import webpack from 'webpack-stream';
 
+// IMAGES
+import imagemin from 'gulp-imagemin';
+import imageminGIF from 'imagemin-gifsicle';
+import imageminJPG from 'imagemin-mozjpeg';
+import imageminPNG from 'imagemin-pngquant';
+import imageminSVG from 'imagemin-svgo';
+
 // UTILITIES
 const del = require('del');
 
@@ -90,8 +97,20 @@ const paths = {
     dest: `${root.dest.assets}/js`,
   },
 
-  files: {
-    src: `${root.src}/img/*.+(png|jpg|jpeg|webp)`,
+  img: {
+    src: {
+      graphics: [
+        `${root.src}/**/*.+(jpg|jpeg|png|svg|gif|webp)`,
+        `!${root.src}/base/graphics/**/*`,
+        `!${root.src}/img/**/*`,
+      ],
+      content: `${root.src}/img/**/*.+(jpg|jpeg|png|svg|gif|webp)`,
+    },
+    // Vars array in watchers breaks build process, so there is one var for a watcher
+    watch: [
+      `${root.src}/**/*.+(jpg|jpeg|png|svg|gif|webp)`,
+      `!${root.src}/base/icons/sprite/**/*`,
+    ],
     dest: `${root.dest.assets}/img`,
   },
 };
@@ -238,6 +257,58 @@ function js() {
 
 /**
  * -----------------------------------------------------------------------------
+ * 🖼 IMAGES
+ * -----------------------------------------------------------------------------
+ */
+// #region
+// Common images function
+function imgTasks(source, subtitle) {
+  src(source)
+    .pipe(changed(`${root.dest.site}/assets/img`))
+    .pipe(
+      imagemin(
+        [
+          imageminGIF({
+            interlaced: true,
+            optimizationLevel: 3,
+          }),
+          imageminJPG({ quality: 85 }),
+          imageminPNG([0.8, 0.9]),
+          imageminSVG({
+            plugins: [{ removeViewBox: false }, { cleanupIDs: false }],
+          }),
+        ],
+        { verbose: true }
+      )
+    )
+    .pipe(dest(`${root.dest.site}/assets/img`))
+    .pipe(size({ title: `images: ${subtitle}` }));
+}
+
+// Graphics
+function imgGraphics(done) {
+  imgTasks(
+    paths.img.src.graphics, // src
+    'graphics' // subtitle
+  );
+  done();
+}
+
+// Content
+function imgContent(done) {
+  imgTasks(
+    paths.img.src.content, // src
+    'content' // subtitle
+  );
+  done();
+}
+
+// OPTIMIZE
+const img = parallel(imgGraphics, imgContent);
+// #endregion
+
+/**
+ * -----------------------------------------------------------------------------
  * 🛠 UTILITIES
  * -----------------------------------------------------------------------------
  */
@@ -267,6 +338,7 @@ function files() {
 function watchFiles() {
   watch(paths.css.watch, series(css));
   watch(paths.js.src.main, series(js));
+  watch(paths.img.watch, series(img));
   watch(paths.jekyll.watch, series(jekyllBuild));
 }
 
@@ -314,6 +386,7 @@ exports.j = jekyllBuild;
 exports.jks = jekyllServe;
 
 // Base
+exports.img = img;
 exports.js = js;
 exports.css = css;
 exports.w = watchFiles;
