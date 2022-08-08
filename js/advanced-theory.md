@@ -6,6 +6,11 @@ categories:
 ---
 
 <section>
+  <h2>Общие темы</h2>
+  {%- include details.html title="Ключевое слово `this` и контекст (контекст выполнения)" path="_advanced/context-and-this.md" id="topic-if-else" -%}
+</section>
+
+<section>
   <h2>Условия и циклы</h2>
   {%- include details.html title="`if...else`" path="_advanced/control-structures/if-else.md" id="topic-if-else" -%}
   {%- include details.html title="`switch`" path="_advanced/control-structures/switch.md" id="topic-switch" -%}

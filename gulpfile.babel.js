@@ -320,12 +320,6 @@ function clean() {
     `${root.src}/**/*.css`,
   ]);
 }
-
-function files() {
-  return src(paths.files.src, { since: lastRun(files) })
-    .pipe(changed(paths.files.dest))
-    .pipe(dest(paths.files.dest));
-}
 // #endregion
 
 /**
@@ -342,7 +336,7 @@ function watchFiles() {
   watch(paths.jekyll.watch, series(jekyllBuild));
 }
 
-const serve = series(clean, jekyllBuild, parallel(css, js, files), jekyllServe);
+const serve = series(clean, jekyllBuild, parallel(css, js, img), jekyllServe);
 
 /* Use Browsersync for testing on mobile devices. Use html paths instead
 extension-free permalinks */
@@ -370,7 +364,7 @@ function serveBS(done) {
  */
 // #region
 
-const build = series(clean, jekyllBuild, parallel(css, js, files));
+const build = series(clean, jekyllBuild, parallel(css, js, img));
 // #endregion
 
 /**
@@ -381,7 +375,6 @@ const build = series(clean, jekyllBuild, parallel(css, js, files));
 // Add-ons
 exports.bs = serveBS;
 exports.clean = clean;
-exports.f = files;
 exports.j = jekyllBuild;
 exports.jks = jekyllServe;
 
