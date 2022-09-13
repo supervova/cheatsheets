@@ -4,7 +4,7 @@
 
 #### Пример. Замена именованной функции анонимной…
 
-```javascript
+```js
 function handler() {
   alert('Yeah, that page loaded!');
 }

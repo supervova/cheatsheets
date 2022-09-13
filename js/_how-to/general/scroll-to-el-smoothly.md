@@ -120,7 +120,7 @@ if (time < duration) {
 }
 ```
 
-☝️🧐 Часто для расчетов анимации используется `setTimeout()` или `setInterval()`, но использованный  в примере[requestAnimationFrame](https://developer.mozilla.org/ru/docs/Web/API/window/requestAnimationFrame){:target="_blank"} метод лучше по показателям производительности.
+☝️🧐 Часто для расчетов анимации используется `setTimeout()` или `setInterval()`, но использованный в примере[requestAnimationFrame](https://developer.mozilla.org/ru/docs/Web/API/window/requestAnimationFrame){:target="_blank"} метод лучше по показателям производительности.
 
 #### Настройка анимации
 

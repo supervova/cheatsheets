@@ -1,6 +1,6 @@
 Для контролируемого доступа к свойствам объекта используют специальные функции, так называемые «геттеры» (оператор `get`) и «сеттеры» (`set`).
 
-```javascript
+```js
 const person = {
   firstName: 'John',
   lastName: 'Doe',
@@ -43,25 +43,25 @@ const person = {
 
 **Изменение свойств** `firstName` и `lastName` с помощью сеттера `name`
 
-```javascript
+```js
 person.name = 'Владимир Никишин';
 ```
 
 **Доступ** к полному имени с помощью геттера.
 
-```javascript
+```js
 console.fullName(person.fullName);
 ```
 
 **Доступ** к полному имени с помощью метода fullNameOnceAgain — со скобками
 
-```javascript
+```js
 console.log(person.fullNameOnceAgain());
 ```
 
 #### Добавление геттеров и сеттеров в существующий объект — `Object.defineProperty()`
 
-```javascript
+```js
 const myObj = { counter: 0 };
 
 Object.defineProperty(myObj, 'reset', {
@@ -87,7 +87,7 @@ Object.defineProperty(myObj, 'subtract', {
 
 Вызовы геттеров и сеттеров объекта изменяют показания счетчика
 
-```javascript
+```js
 myObj.reset;
 myObj.add = 5;
 myObj.subtract = 1;

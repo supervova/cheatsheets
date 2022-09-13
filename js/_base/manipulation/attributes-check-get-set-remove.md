@@ -42,11 +42,11 @@ button.setAttribute('aria-expanded', false);
 
 ```js
 button.getAttribute('aria-expanded') === 'true'
-  ? button.setAttribute('aria-expanded', 'false')
-  : button.setAttribute('aria-expanded', 'true');
+  ? button.setAttribute('aria-expanded', 'false')
+  : button.setAttribute('aria-expanded', 'true');
 ```
 
-#### Переключение логических атрибутов, типа  `disabled`
+#### Переключение логических атрибутов, типа `disabled`
 
 ```js
 input.toggleAttribute('readonly');

@@ -2,7 +2,7 @@
 
 **Не объявлять** в switch функций. eslint: no-case-declarations, no-inner-declarations
 
-```javascript
+```js
 // ⛔️ плохо
 switch (foo) {
   case 1:
@@ -42,7 +42,7 @@ switch (foo) {
 
 #### Примеры
 
-```javascript
+```js
 const a = 2 + 2;
 
 switch (a) {
@@ -78,7 +78,7 @@ switch (new Date().getDay()) {
 
 Несколько значений case можно группировать. В примере ниже case 3 и case 5 выполняют один и тот же код
 
-```javascript
+```js
 switch (a) {
   case 4:
     alert('Верно!');

@@ -1,7 +1,7 @@
 Разметка:
 
 ```html
-<table  class="table" id="sort-me">
+<table class="table" id="sort-me">
   ...
 </table>
 ```

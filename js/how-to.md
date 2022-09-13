@@ -8,10 +8,21 @@ categories:
 <section>
   <h2>Интерфейсы: редактирование, общее</h2>
   {%- include details.html title="Пользовательское контекстное меню на ПКМ" path="_how-to/general/custom-context-menu-at-clicked-position.md" id="topic-context-menu" -%}
+  {%- include details.html title="Полный экран" path="_how-to/general/full-screen.md" id="topic-full-screen" -%}
   {%- include details.html title="Вывод элемента в область видимости прокручиваемого контейнера" path="_how-to/general/scroll-to-be-visible.md" -%}
   {%- include details.html title="Пользовательская полоса прокрутки" path="_how-to/general/custom-scrollbar.md" -%}
   {%- include details.html title="Слайдер диапазона — `range`" path="_how-to/general/range-slider.md" id="topic-range" -%}
   {%- include details.html title="Плавная прокрутка — пользовательская настройка анимации" path="_how-to/general/scroll-to-el-smoothly.md" -%}
+</section>
+
+<section>
+  <h2>Анимация</h2>
+  {%- include details.html title="Анимация высоты: от 0 до `max-height`" path="_how-to/animation/height.md" id="topic-animation-height" -%}
+</section>
+
+<section>
+  <h2>Расчёты</h2>
+  {%- include details.html title="Бинарный поиск" path="_how-to/calculation/binary-search.md" id="topic-calculation-binary-search" -%}
 </section>
 
 <section>

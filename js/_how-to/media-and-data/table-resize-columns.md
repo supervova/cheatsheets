@@ -16,12 +16,12 @@
 }
 
 .resizer {
-  cursor: col-resize;
-  position: absolute;
-  top: 0;
-  right: 0;
-  user-select: none;
-  width: 5px;
+  cursor: col-resize;
+  position: absolute;
+  top: 0;
+  right: 0;
+  user-select: none;
+  width: 5px;
 }
 ```
 

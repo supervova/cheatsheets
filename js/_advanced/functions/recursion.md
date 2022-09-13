@@ -4,7 +4,7 @@
 
 #### Пример №1
 
-```javascript
+```js
 function countSheep(number) {
   if (number === 0) {
     console.log('Zzzzzz');
@@ -33,7 +33,7 @@ countSheep(24);
 
 #### Пример №2. возведение в степень
 
-```javascript
+```js
 function pow(x, n) {
   // Пока n не равно 1…
   if (n !== 1) {
@@ -53,7 +53,7 @@ alert(pow(2, 3));
 
 #### Пример №3
 
-```javascript
+```js
 const n = 3;
 
 function howManyDollars(amountOfMoney) {
@@ -95,7 +95,7 @@ function howManyDollars(amountOfMoney) {
 
 #### Пример №4 — факториал
 
-```javascript
+```js
 const factorial = (n) => {
   if (n <= 1) {
     return 1;
@@ -144,7 +144,7 @@ factorial(3);
 
 #### Пример №5
 
-```javascript
+```js
 let change = 0;
 
 /* Рекурсивные функции могут иметь сколько угодно

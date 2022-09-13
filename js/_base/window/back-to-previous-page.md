@@ -1,6 +1,6 @@
 ```js
-history.back();
+window.history.back();
 
 // Или
-history.go(-1);
+window.history.go(-1);
 ```

@@ -9,7 +9,9 @@
   - [Веб хранилище](https://www.w3schools.com/html/html5_webstorage.asp){:target="_blank"}
   - [Web Workers](https://www.w3schools.com/html/html5_webworkers.asp){:target="_blank"}
   - [Server-sent events](https://www.w3schools.com/html/html5_serversentevents.asp){:target="_blank"}
+  - [Полноэкранный режим, full screen](https://developer.mozilla.org/ru/docs/Web/API/Fullscreen_API){:target="_blank"}
 - [WebAssembly](https://developer.mozilla.org/ru/docs/WebAssembly/Concepts) - это технология, предоставляющая новый тип кода, который можно запускать в современных веб-браузерах. Код для WebAssembly не пишется вручную, а компилируется из низкоуровневых исходных языков C, C++, Rust и.т.д.
+- [Декораторы и переадресация вызова, call/apply](https://learn.javascript.ru/call-apply-decorators)
 
 #### Справочники
 

@@ -31,7 +31,7 @@
 
 ```js
 document.getElementById('my-el').innerHTML =
-  'Hello World!';
+  'Hello World!';
 ```
 
 #### Структура кода
