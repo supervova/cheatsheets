@@ -22,18 +22,18 @@ const birthday = new Date('May 1, 1983');
 
 ```javascript
 String.prototype.cliche = () => {
-  const cliche = [
-    'lock and load',
-    'touch base',
-    'open the kimono',
-  ];
-  for (let i = 0; i < cliche.length; i++) {
-    const index = this.indexOf(cliche[i]);
-    if (index >= 0) {
-      return true;
-    }
-  }
-  return false;
+  const cliche = [
+    'lock and load',
+    'touch base',
+    'open the kimono',
+  ];
+  for (let i = 0; i < cliche.length; i++) {
+    const index = this.indexOf(cliche[i]);
+    if (index >= 0) {
+      return true;
+    }
+  }
+  return false;
 };
 ```
 
@@ -56,17 +56,17 @@ String.prototype.cliche = () => {
 
 #### `Number`
 
-Является объектом-обёрткой, позволяющей  работать с числовыми значениями.
+Является объектом-обёрткой, позволяющей  работать с числовыми значениями.
 
 Создаётся через конструктор Number(). Приводит значение к числовому типу. Если это невозможно, возвращает `NaN`.
 
 ```javascript
 console.log(
-  `${Number(true)}
-  ${Number(false)}
-  ${Number(new Date())}
-  ${Number('999')}
-  ${Number('999 888')}`,
+ `${Number(true)}
+  ${Number(false)}
+  ${Number(new Date())}
+  ${Number('999')}
+  ${Number('999 888')}`,
 );
 ```
 

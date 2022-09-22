@@ -82,13 +82,13 @@ d = new Date(-100000000000);
 ```javascript
 // eslint-disable-next-line no-extend-native
 Date.prototype.myMet = () => {
-  if (this.getMonth() === 0) {
-    this.myProp = 'January';
-  }
-  if (this.getMonth() === 1) {
-    this.myProp = 'February';
-  }
-  // etc
+  if (this.getMonth() === 0) {
+    this.myProp = 'January';
+  }
+  if (this.getMonth() === 1) {
+    this.myProp = 'February';
+  }
+  // etc
 };
 ```
 

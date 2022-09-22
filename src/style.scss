@@ -5,10 +5,12 @@
 
 @import 'base/variables';
 
-// BS & RESET
+// BS
 @import './node_modules/bootstrap/scss/functions';
 @import './node_modules/bootstrap/scss/variables';
+@import './node_modules/bootstrap/scss/maps';
 @import './node_modules/bootstrap/scss/mixins';
+
 
 // Base
 @import 'base/reset';
@@ -22,7 +24,6 @@
 // @import 'base/content/media';
 // @import 'base/button';
 @import 'base/layout/layout';
-
 
 // Components
 @import 'components/content-main/main';

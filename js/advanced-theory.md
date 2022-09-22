@@ -59,11 +59,22 @@ categories:
   {%- include details.html title="Встроенные объекты" path="_advanced/built-in-objects/overview.md" id="topic-built-in-objects" -%}
   {%- include details.html title="Глобальные свойства и методы JS" path="_advanced/built-in-objects/global.md" id="topic-built-in-global" -%}
   {%- include details.html title="Объект `Date`" path="_advanced/built-in-objects/date.md" id="topic-built-in-date" -%}
+  {%- include details.html title="Объект `Math`" path="_advanced/built-in-objects/math.md" id="topic-built-in-math" -%}
+  {%- include details.html title="Метод `Math.random()` и простой генератор случайных чисел" path="_advanced/built-in-objects/math-random.md" id="topic-built-in-math-random" -%}
+  {%- include details.html title="`NaN` / `isNaN()`, `isFinite()`" path="_advanced/built-in-objects/nan-isnan.md" id="topic-built-in-nan-isnan" -%}
 </section>
 
 <section>
   <h2>Классы</h2>
-  {%- include details.html title="Первоклассные функции (или функции первого класса)" path="_advanced/classes/deprecated-constructor-function.md" id="topic-classes-deprecated-constructor-function" -%}
+  {%- include details.html title="Общие сведения" path="_advanced/classes/base.md" id="topic-classes" -%}
+  {%- include details.html title="Наследование" path="_advanced/classes/inheritance.md" id="topic-classes-inheritance" -%}
+  {%- include details.html title="Наследование — методы `hasOwnProperty`, `isPrototypeOf`" path="_advanced/classes/inheritance-check.md" id="topic-classes-hasownproperty-isprototypeof" -%}
+  {%- include details.html title="Наследование — `instanceof`" path="_advanced/classes/inheritance-instanceof.md" id="topic-classes-instanceof" -%}
+  {%- include details.html title="Добавление или удаление свойств и методов класса, `prototype`" path="_advanced/classes/add-remove-method-property.md" id="topic-classes-add-remove-method-property" -%}
+  {%- include details.html title="Аксессоры — «геттеры» и «сеттеры» — класса" path="_advanced/classes/getters-and-setters.md" id="topic-classes-getters-and-setters" -%}
+  {%- include details.html title="Приватные и публичные поля классов, инкапсуляция" path="_advanced/classes/public-private-fields.md" id="topic-classes-public-private-fields" -%}
+  {%- include details.html title="Создание нового объекта, экземпляра класса. Доступ к его свойствам и методам" path="_advanced/classes/new.md" id="topic-classes-new-instance" -%}
+  {%- include details.html title="Предки классов — функции-конструкторы" path="_advanced/classes/deprecated-constructor-function.md" id="topic-classes-deprecated-constructor-function" -%}
 </section>
 
 <section>

@@ -1,5 +1,3 @@
-# Метод `Math.random()`
-
 Генерирует дробные числа от 0 (включительно) до 1 (исключительно).
 
 ----
@@ -31,27 +29,27 @@ myNum = Math.floor(Math.random() * 10) + 1;
 
 
 /**
- * Функция для получения случайного числа
- * в указанном диапазоне
- * @param {Number} min
- * @param {Number} max - Максимально возможное число
- */
+ * Функция для получения случайного числа
+ * в указанном диапазоне
+ * @param {Number} min
+ * @param {Number} max - Максимально возможное число
+ */
 function getRandomInteger(min, max) {
-  return Math.floor(
-    Math.random() * ((max - min) + 1),
-  ) + min;
+  return Math.floor(
+    Math.random() * ((max - min) + 1),
+  ) + min;
 }
 ```
 
-⛔️ Math.random() не выдает криптографически стойкие случайные числа. Поэтому непригоден ни для чего, требующего безопасности данных. Вместо него следует использовать Web Crypto API (API криптографии в вебе), метод `window.crypto.getRandomValues()`.
+⛔️ Math.random() не выдает криптографически стойкие случайные числа. Поэтому непригоден ни для чего, требующего безопасности данных. Вместо него следует использовать [Web Crypto API](https://developer.mozilla.org/ru/docs/Web/API/Crypto) (API криптографии в вебе), метод `RandomSource.getRandomValues()`.
 
-## `Math.random` и длина массива
+#### `Math.random` и длина массива
 
 Так как
 
 - индекс массива начинается с нуля,
 - и индекс последнего элемента поэтому на единицу меньше длины массива
-- а единица в результат возвращаемый Math.random не входит
+- а единица в результат возвращаемый `Math.random` не входит
 
 для генерации случайного индекса массива достаточно конструкции
 
@@ -59,10 +57,10 @@ function getRandomInteger(min, max) {
 Math.floor(Math.random() * words.length);
 
 const words = [
-  '24/7', 'multi-tier',
-  '30,000 foot', 'B-to-B', 'win-win',
+  '24/7', 'multi-tier',
+  '30,000 foot', 'B-to-B', 'win-win',
 ];
 const rand = Math.floor(
-  Math.random() * words.length
+  Math.random() * words.length
 );
 ```

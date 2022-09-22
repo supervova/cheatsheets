@@ -29,6 +29,7 @@ _site
 
 # Working stuff
 deploy.sh
+playground.*
 todo.md
 
 # Editors
