@@ -19,12 +19,12 @@
 
 ```javascript
 class CoffeeMachine {
-  static waterAmount = 0; // количество воды внутри
+  static waterAmount = 0; // количество воды внутри
 
-  constructor(power) {
-    this.power = power;
-    alert(`Создана кофеварка, мощность: ${power}`);
-  }
+  constructor(power) {
+    this.power = power;
+    alert(`Создана кофеварка, мощность: ${power}`);
+  }
 }
 
 // создаём кофеварку
@@ -44,22 +44,22 @@ coffeeMachine.waterAmount = 200;
 
 ```javascript
 class CoffeeMachine {
-  _waterAmount = 0;
+  _waterAmount = 0;
 
-  set waterAmount(value) {
-    if (value < 0) throw new Error(
-      "Отрицательное количество воды"
-    );
-    this._waterAmount = value;
-  }
+  set waterAmount(value) {
+    if (value < 0) throw new Error(
+      "Отрицательное количество воды"
+    );
+    this._waterAmount = value;
+  }
 
-  get waterAmount() {
-    return this._waterAmount;
-  }
+  get waterAmount() {
+    return this._waterAmount;
+  }
 
-  constructor(power) {
-    this._power = power;
-  }
+  constructor(power) {
+    this._power = power;
+  }
 }
 
 // создаём новую кофеварку
@@ -82,15 +82,15 @@ coffeeMachine.waterAmount = -10;
 
 ```javascript
 class CoffeeMachine {
-  // ...
+  // ...
 
-  constructor(power) {
-    this._power = power;
-  }
+  constructor(power) {
+    this._power = power;
+  }
 
-  get power() {
-    return this._power;
-  }
+  get power() {
+    return this._power;
+  }
 }
 
 // создаём кофеварку
@@ -118,21 +118,21 @@ coffeeMachine.power = 25; // Error (no setter)
 
 ```javascript
 class CoffeeMachine {
-  #waterLimit = 200;
+  #waterLimit = 200;
 
-  #checkWater(value) {
-    if (value < 0) throw new Error(
-      "Отрицательный уровень воды"
-    );
-    if (value > this.#waterLimit) throw new Error(
-      "Слишком много воды"
-    );
-  }
+  #checkWater(value) {
+    if (value < 0) throw new Error(
+      "Отрицательный уровень воды"
+    );
+    if (value > this.#waterLimit) throw new Error(
+      "Слишком много воды"
+    );
+  }
 }
 
 let coffeeMachine = new CoffeeMachine();
 
-// снаружи  нет доступа к приватным методам класса
+// снаружи  нет доступа к приватным методам класса
 coffeeMachine.#checkWater(); // Error
 coffeeMachine.#waterLimit = 1000; // Error
 ```
@@ -146,18 +146,18 @@ coffeeMachine.#waterLimit = 1000; // Error
 ```javascript
 class CoffeeMachine {
 
-  #waterAmount = 0;
+  #waterAmount = 0;
 
-  get waterAmount() {
-    return this.#waterAmount;
-  }
+  get waterAmount() {
+    return this.#waterAmount;
+  }
 
-  set waterAmount(value) {
-    if (value < 0) throw new Error(
-      "Отрицательный уровень воды"
-    );
-    this.#waterAmount = value;
-  }
+  set waterAmount(value) {
+    if (value < 0) throw new Error(
+      "Отрицательный уровень воды"
+    );
+    this.#waterAmount = value;
+  }
 }
 
 let machine = new CoffeeMachine();
@@ -172,10 +172,10 @@ alert(machine.#waterAmount); // Error
 
 ```javascript
 class MegaCoffeeMachine extends CoffeeMachine {
-  method() {
-    // Error: can only access from CoffeeMachine
-    alert( this.#waterAmount );
-  }
+  method() {
+    // Error: can only access from CoffeeMachine
+    alert( this.#waterAmount );
+  }
 }
 ```
 
@@ -189,11 +189,11 @@ class MegaCoffeeMachine extends CoffeeMachine {
 
 ```javascript
 class User {
-  ...
-  sayHi() {
-    let fieldName = "name";
-    alert(`Hello, ${this[fieldName]}`);
-  }
+  ...
+  sayHi() {
+    let fieldName = "name";
+    alert(`Hello, ${this[fieldName]}`);
+  }
 }
 ```
 

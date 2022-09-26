@@ -1,6 +1,6 @@
 <details class="accordion"{% if include.id %} id="{{ include.id }}"{% endif %}>
   <summary class="accordion__header">
-    <h3>{{ include.title }}</h3>
+    {{ include.title }}
   </summary>
   <div class="accordion__body" markdown="1">
     {%- include_relative {{ include.path }} -%}

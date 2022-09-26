@@ -3,10 +3,6 @@
 // -----------------------------------------------------------------------------
 // #region
 
-// We are using <details> for subsection accordions.
-// <details> also can be used for other disclosure components as collapsible
-// panels and tabs
-
 $details-animation-speed: $motion-duration-base;
 
 // PARENT
@@ -16,10 +12,6 @@ $details-animation-speed: $motion-duration-base;
   border-radius: $shape-border-radius-base;
   overflow: hidden;
   transition: height $details-animation-speed $motion-easing-base;
-}
-
-.accordion.is-section {
-  border: 0;
 }
 
 .accordion + .accordion {
@@ -35,26 +27,21 @@ $details-animation-speed: $motion-duration-base;
 }
 
 // HEADER
-
 .accordion__header {
+  @extend %h4;
+
   background-color: $color-background-info;
   border-radius: $shape-border-radius-base;
   cursor: pointer;
   // Hide the summary marker in non-Webkit
   display: list-item;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: var(--font-line-height-base);
   list-style: none;
-  font-weight: bold;
   padding: $size-2 $size-6 $size-2 $size-2d5;
   position: relative;
-  transition:
-    color $details-animation-speed $motion-easing-base;
-
-  > h3,
-  > h4 {
-    font-size: var(--font-size-base);
-    line-height: var(--font-line-height-base);
-    padding: 0;
-  }
+  transition: color $details-animation-speed $motion-easing-base;
 
   &:focus {
     outline: none;
@@ -68,11 +55,7 @@ $details-animation-speed: $motion-duration-base;
   .accordion[open] & {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-
-    h3,
-    h4 {
-      color: $color-ink-primary-text;
-    }
+    color: $color-ink-primary-text;
   }
 }
 
@@ -116,6 +99,7 @@ $details-animation-speed: $motion-duration-base;
 // We are usng BS collapse for section accordion
 
 .accordion.is-section {
+  border: 0;
   padding-bottom: 0;
 }
 

@@ -7,12 +7,11 @@
     "email": "vlaimir.nikishin@gmail.com",
     "url": "https://super-mark.ru/"
   },
-  "license": "MIT",
+  "license": "ISC",
   "engines": {
     "node": ">=10",
     "npm": ">=3"
   },
-
   "scripts": {
     "start": "concurrently --kill-others 'gulp s' 'gulp w'",
     "deploy": "yarn prebuild && yarn build && yarn pages && yarn postpages",

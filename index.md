@@ -13,7 +13,7 @@ is-index: true
   {%- include details.html title="Переменные" path="js/_base/theory/variables.md" -%}
   {%- include details.html title="Операторы" path="js/_base/theory/operators.md" -%}
   {%- include details.html title="Условные выражения" path="js/_base/theory/conditionals.md" -%}
-  {%- include details.html title="События" path="js/_base/theory/events.md" -%}
+  {%- include details.html title="События" path="js/_base/theory/events.md" id="topic-js-events" -%}
   {%- include details.html title="Циклы" path="js/_base/theory/loops.md" -%}
   {%- include details.html title="Функции" path="js/_base/theory/functions.md" -%}
   {%- include details.html title="Строки" path="js/_base/theory/string.md" -%}

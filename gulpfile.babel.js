@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 /**
  * -----------------------------------------------------------------------------
  * 🧩 PLUGINS AND PATHS
@@ -11,8 +12,8 @@
 // But for some reason, the watchFiles() does not work in the `serve` series.
 // Therefore, I launch two processes in parallel: `npm start`.
 
-// The last option: symlink
-import { src, dest, watch, series, parallel, lastRun } from 'gulp';
+// The last option: symlink, lastRun
+import { src, dest, watch, series, parallel } from 'gulp';
 
 // GENERAL
 import browserSync from 'browser-sync';
@@ -122,6 +123,8 @@ const paths = {
  * -----------------------------------------------------------------------------
  */
 // #region
+
+// eslint-disable Missing JSDoc comment.
 
 // Error: no acceptor (port is in use or requires root privileges)'
 // We need to stop the local server, see what processes are running
