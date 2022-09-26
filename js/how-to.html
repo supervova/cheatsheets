@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript. Практическое пособие</title>
-<meta name="description" content="Интерфейсы: редактирование, общее {%- include details.html title=&quot;Пользовательское контекстное меню на ПКМ&quot; path=&quot;_how-to/general/custom-context-menu-at-clicked-position.md&quot; id=&quot;topic-context-menu&quot; -%} {%- include details.html title=&quot;Вывод элемента в область видимости прокручиваемого контейнера&quot; path=&quot;_how-to/general/scroll-to-be-visible.md&quot; -%} {%- include details.html title=&quot;Пользовательская полоса прокрутки&quot; path=&quot;_how-to/general/custom-scrollbar.md&quot; -%} {%- include details.html title=&quot;Слайдер диапазона — `range`&quot; path=&quot;_how-to/general/range-slider.md&quot; id=&quot;topic-range&quot; -%} {%- include details.html title=&quot;Плавная прокрутка —...">
+<meta name="description" content="Интерфейсы: редактирование, общее {%- include details.html title=&quot;Пользовательское контекстное меню на ПКМ&quot; path=&quot;_how-to/general/custom-context-menu-at-clicked-position.md&quot; id=&quot;topic-context-menu&quot; -%} {%- include details.html title=&quot;Полный экран&quot; path=&quot;_how-to/general/full-screen.md&quot; id=&quot;topic-full-screen&quot; -%} {%- include details.html title=&quot;Вывод элемента в область видимости прокручиваемого контейнера&quot; path=&quot;_how-to/general/scroll-to-be-visible.md&quot; -%} {%- include details.html title=&quot;Пользовательская полоса прокрутки&quot; path=&quot;_how-to/general/custom-scrollbar.md&quot; -%} {%- include details.html title=&quot;Слайдер диапазона — `range`&quot; path=&quot;_how-to/general/range-slider.md&quot;...">
 <meta name="author" content="Vladimir Nikishin, www.super-mark.ru">
 <meta name="apple-mobile-web-app-title" content="Шпоры">
 <meta name="theme-color" content="#e5effa"><link rel="canonical" href="https://cheatsheets.super-mark.ru/js/how-to"><link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220812-0742">
+<link rel="stylesheet" href="/assets/css/style.css?20220926-1147">
 </head>
 <body>
     <main class="main">
@@ -21,7 +21,7 @@
   <section>
   <h2>Интерфейсы: редактирование, общее</h2><details class="accordion" id="topic-context-menu">
   <summary class="accordion__header">
-    <h3>Пользовательское контекстное меню на ПКМ</h3>
+    Пользовательское контекстное меню на ПКМ
   </summary>
   <div class="accordion__body">
       <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"is-relative"</span><span class="nt">&gt;</span>
@@ -102,9 +102,33 @@
       <p>Обработчик клика удаляется со страницы вместе с меню, так как он не нужен, пока меню скрыто.</p>
     </div>
 </details>
+<details class="accordion" id="topic-full-screen">
+  <summary class="accordion__header">
+    Полный экран
+  </summary>
+  <div class="accordion__body">
+      <p>Для выхода в полноэкранный режим используется Fullscreen API, интерфейсы веб API и метод <code class="language-plaintext highlighter-rouge">requestFullscreen()</code>, который он добавляет объектам <code class="language-plaintext highlighter-rouge">Document</code> и <code class="language-plaintext highlighter-rouge">Element</code>.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;article&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Hello World<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;button&gt;</span>Say it louder<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>      </div>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">greetings</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">article</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">button</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">takeFullscreen</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">greetings</span><span class="p">.</span><span class="nx">requestFullscreen</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="nx">takeFullscreen</span><span class="p">);</span>
+</code></pre></div>      </div>
+    </div>
+</details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Вывод элемента в область видимости прокручиваемого контейнера</h3>
+    Вывод элемента в область видимости прокручиваемого контейнера
   </summary>
   <div class="accordion__body">
       <p>Функция <code class="language-plaintext highlighter-rouge">scrollToBeVisible</code> перемещает элемент, переданный в первый параметр, в область видимости контейнера, переданного во второй параметр. См. также раздел <a href="/#topic-is-visible">«Виден ли элемент в области просмотра блока с прокруткой»</a></p>
@@ -130,7 +154,7 @@
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Пользовательская полоса прокрутки</h3>
+    Пользовательская полоса прокрутки
   </summary>
   <div class="accordion__body">
       <p>Можно обновить внешний вид полосы прокрутки исключительно стилями.</p>
@@ -334,7 +358,7 @@
 </details>
 <details class="accordion" id="topic-range">
   <summary class="accordion__header">
-    <h3>Слайдер диапазона — `range`</h3>
+    Слайдер диапазона — `range`
   </summary>
   <div class="accordion__body">
       <p>Два способа создать элемент управления.</p>
@@ -561,7 +585,7 @@
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Плавная прокрутка — пользовательская настройка анимации</h3>
+    Плавная прокрутка — пользовательская настройка анимации
   </summary>
   <div class="accordion__body">
       <p>Плавную прокрутку легко можно сделать в JS…</p>
@@ -679,7 +703,7 @@
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>☝️🧐 Часто для расчетов анимации используется <code class="language-plaintext highlighter-rouge">setTimeout()</code> или <code class="language-plaintext highlighter-rouge">setInterval()</code>, но использованный  в примере<a href="https://developer.mozilla.org/ru/docs/Web/API/window/requestAnimationFrame" target="_blank">requestAnimationFrame</a> метод лучше по показателям производительности.</p>
+      <p>☝️🧐 Часто для расчетов анимации используется <code class="language-plaintext highlighter-rouge">setTimeout()</code> или <code class="language-plaintext highlighter-rouge">setInterval()</code>, но использованный в примере<a href="https://developer.mozilla.org/ru/docs/Web/API/window/requestAnimationFrame" target="_blank">requestAnimationFrame</a> метод лучше по показателям производительности.</p>
 
       <h4 id="section-8">Настройка анимации</h4>
 
@@ -704,9 +728,120 @@
 </section>
 
 <section>
+  <h2>Анимация</h2><details class="accordion" id="topic-animation-height">
+  <summary class="accordion__header">
+    Анимация высоты: от 0 до `max-height`
+  </summary>
+  <div class="accordion__body">
+      <p>Невозможно закодировать плавный переход от нулевой высоты к высоте содержания, используя только CSS. С помощью JS надо получить высоту содержания открытого контейнера и изменить значение переменной <code class="language-plaintext highlighter-rouge">--max-height</code>. Это можно сделать на клике или на <code class="language-plaintext highlighter-rouge">:hover</code>, как в примере.</p>
+
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"details"</span><span class="nt">&gt;</span>
+  Hover me to see a height transition.
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"details__body"</span><span class="nt">&gt;</span>Additional content<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.details__body</span> <span class="p">{</span>
+<span class="err">  </span><span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">transition</span><span class="p">:</span> <span class="n">max-height</span> <span class="m">.3s</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">max-height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.details</span><span class="nd">:hover</span> <span class="o">&gt;</span> <span class="nc">.details__body</span> <span class="p">{</span>
+<span class="err">  </span><span class="nl">max-height</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--max-height</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.details__body</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+<span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--max-height</span><span class="dl">'</span><span class="p">,</span> <span class="nx">height</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">px</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+</section>
+
+<section>
+  <h2>Расчёты</h2><details class="accordion" id="topic-calculation-binary-search">
+  <summary class="accordion__header">
+    Бинарный поиск
+  </summary>
+  <div class="accordion__body">
+      <p>Бинарный поиск — это алгоритм, который получает отсортированный список элементов и ищет заданный элемент, разделяя массив пополам, сравнивая элемент в середине с определенным условием и выполняя эту операцию до тех пор пока не будет найден искомый вариант.</p>
+
+      <p>Если элемент, который  мы ищем, присутствует в списке, то функция бинарного поиска возвращает ту позицию, в которой он был найден. В противном слу­чае возвращает null.</p>
+
+      <p>Например. Некто загадал число от 1 до 100. Мы должны отгадать. А загадавший при каждой попытке будет давать один из трех ответов: «мало», «много» или «угадал».</p>
+
+      <p>Если мы начнем перебирать все варианты подряд — 1, 2, 3, 4… — то в случае, если было загадано 99, на поиск верного ответа уйдет 99 попыток.</p>
+
+      <p>Существует другой, более эффективный способ.</p>
+
+      <p>— Начнем с 50.<br />
+— Слишком мало…</p>
+
+      <p>Но мы только что исключили половину чисел! Теперь мы знаем, что все числа 1-50 меньше загаданного.</p>
+
+      <p>— Следующая попытка: 75.<br />
+— На этот раз перелет…</p>
+
+      <p>Но мы снова исключили половину оставшихся чисел! С бинарным поиском мы каждый раз проверяем число в середине диапазона и исключаем половину оставшихся чисел.</p>
+
+      <p>— 63 (по середине между 50 и 75)?<br />
+— Много!<br />
+— 57?<br />
+— Да!</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Бинарный поиск
+ * @param {array} list Массив с возможными значениями
+ * @param {number} item Искомое число
+ */</span>
+<span class="kd">function</span> <span class="nx">binarySearch</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="err">  </span><span class="c1">// Минимальный и максимальный индекс в массиве</span>
+<span class="err">  </span><span class="kd">let</span> <span class="nx">low</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err">  </span><span class="kd">let</span> <span class="nx">high</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="err">  </span><span class="cm">/* Пока минимальный индекс меньше или равен
+  максимальному, находим индекс элемента в середине
+  массива. И сравним число в середине массива -
+  list[mid] — с искомым */</span>
+<span class="err">  </span><span class="k">while</span> <span class="p">(</span><span class="nx">low</span> <span class="o">&lt;=</span> <span class="nx">high</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">mid</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">low</span> <span class="o">+</span> <span class="nx">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">guess</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">];</span>
+
+<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">guess</span> <span class="o">===</span> <span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">      </span><span class="k">return</span> <span class="nx">mid</span><span class="p">;</span>
+<span class="err">    </span><span class="p">}</span>
+
+<span class="err">    </span><span class="cm">/* Если число в середине больше искомого,
+    тогда соответственно обновляется переменная
+    high — переносим максимальную границу в меньшую
+    сторону. А если догадка была слишком мала, то
+    обновляется переменная low. */</span>
+<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">guess</span> <span class="o">&gt;</span> <span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">high</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">    </span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="err">      </span><span class="nx">low</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="err">    </span><span class="p">}</span>
+<span class="err">  </span><span class="p">}</span>
+
+<span class="err">  </span><span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">myArr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">binarySearch</span><span class="p">(</span><span class="nx">myArr</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> <span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">binarySearch</span><span class="p">(</span><span class="nx">myArr</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// null</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+</section>
+
+<section>
   <h2>Перетаскивание / перетягивание</h2><details class="accordion">
   <summary class="accordion__header">
-    <h3>Перетаскиваемый элемент</h3>
+    Перетаскиваемый элемент
   </summary>
   <div class="accordion__body">
       <p>Разметка:</p>
@@ -781,7 +916,7 @@
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Масштабируемый элемент</h3>
+    Масштабируемый элемент
   </summary>
   <div class="accordion__body">
       <p>Разметка:</p>
@@ -898,7 +1033,7 @@
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Сортировка элементов списка перетаскиванием</h3>
+    Сортировка элементов списка перетаскиванием
   </summary>
   <div class="accordion__body">
       <p>Разметка и стили:</p>
@@ -1137,7 +1272,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Оформление виртуальной проекции перетягиваемого элемента</h3>
+    Оформление виртуальной проекции перетягиваемого элемента
   </summary>
   <div class="accordion__body">
       <p>По умолчанию браузер создает полупрозрачного виртуального двойника перетягиваемого элемента. Но его можно еще и оформить по собственному смотрению.</p>
@@ -1192,7 +1327,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Прокрутка перетягиванием, перетягивание «холста»</h3>
+    Прокрутка перетягиванием, перетягивание «холста»
   </summary>
   <div class="accordion__body">
       <p>Кроме традиционной прокрутки некоторые приложения предлагают прокрутку перетягиванием — например, передвижение холста в Photoshop и Figma с зажатым пробелом.</p>
@@ -1279,7 +1414,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Перетаскивание строки в таблице</h3>
+    Перетаскивание строки в таблице
   </summary>
   <div class="accordion__body">
       <p>Техника основана на <a href="#topic-dnd-li">перетягивании элементов списка</a>. Идея заключается в том, чтобы создавать дубликат строк таблицы в виде списка — как только пользователь начинает тянуть. На время перетягивания мы показываем только этот список (каждый элемент — клон строки), а таблицу прячем.</p>
@@ -1510,7 +1645,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Перетаскивание колонки в таблице</h3>
+    Перетаскивание колонки в таблице
   </summary>
   <div class="accordion__body">
       <p>Техника основана на <a href="#topic-dnd-li">перетягивании элементов списка</a>. Идея заключается в том, чтобы создавать дубликат колонок в виде списка — как только пользователь начинает тянуть. На время перетягивания мы показываем только этот список (каждый элемент — клон колонки), а таблицу прячем.</p>
@@ -1779,7 +1914,7 @@ E
 <section>
   <h2>Изображения, ifram'ы, файлы и таблицы</h2><details class="accordion">
   <summary class="accordion__header">
-    <h3>Заменить «битые» изображения</h3>
+    Заменить «битые» изображения
   </summary>
   <div class="accordion__body">
       <p>Вместо ненайденных картинок показывать картинку с соответствующим сообщением.</p>
@@ -1798,7 +1933,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Вставить изображение из буфера обмена</h3>
+    Вставить изображение из буфера обмена
   </summary>
   <div class="accordion__body">
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Устанавливаем слушатель события `paste`</span>
@@ -1857,7 +1992,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Предпросмотр изображения перед отправкой на сервер</h3>
+    Предпросмотр изображения перед отправкой на сервер
   </summary>
   <div class="accordion__body">
       <p>Исходная разметка. Поле <code class="language-plaintext highlighter-rouge">\[type='file'\]</code> для выбора изображения и «заглушка» картинки.</p>
@@ -1903,7 +2038,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Растягивание и уменьшение (scale) изображения</h3>
+    Растягивание и уменьшение (scale) изображения
   </summary>
   <div class="accordion__body">
       <p><strong>Задача</strong>. Масштабировать изображение на заданное в процентах значение. Для выбора картинки есть <code class="language-plaintext highlighter-rouge">#upload[type='file']</code>, для предпросмотра — пустой <code class="language-plaintext highlighter-rouge">div#preview</code>.</p>
@@ -1993,7 +2128,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Приближение и удаление (zoom) изображения с помощью бегунка</h3>
+    Приближение и удаление (zoom) изображения с помощью бегунка
   </summary>
   <div class="accordion__body">
       <p>Разметка:</p>
@@ -2127,7 +2262,7 @@ E
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Распечатать одну картинку со страницы</h3>
+    Распечатать одну картинку со страницы
   </summary>
   <div class="accordion__body">
       <p>Страницу целиком можно распечатать, вызвав команду браузера <strong>Файл</strong> ➜ <strong>Печать…</strong> (<kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>P</kbd>) или вызвав функцию <code class="language-plaintext highlighter-rouge">window.print()</code>.</p>
@@ -2207,7 +2342,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Виджет сравнения фотографий</h3>
+    Виджет сравнения фотографий
   </summary>
   <div class="accordion__body">
       <h4 id="section-22">Разметка</h4>
@@ -2330,7 +2465,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Загрузка файла: по клику и при переходе на страницу</h3>
+    Загрузка файла: по клику и при переходе на страницу
   </summary>
   <div class="accordion__body">
       <h4 id="section-24">Загрузка по клику</h4>
@@ -2379,7 +2514,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Обмен данными с `iframe`</h3>
+    Обмен данными с `iframe`
   </summary>
   <div class="accordion__body">
       <h4 id="iframe---">Передача данных из <code class="language-plaintext highlighter-rouge">iframe</code> наверх, родительскому окну</h4>
@@ -2447,7 +2582,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Установить высоту iframe по содержанию</h3>
+    Установить высоту iframe по содержанию
   </summary>
   <div class="accordion__body">
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-iframe</span><span class="dl">'</span><span class="p">);</span>
@@ -2464,7 +2599,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Индикатор загрузки `iframe`</h3>
+    Индикатор загрузки `iframe`
   </summary>
   <div class="accordion__body">
       <h4 id="section-28">Разметка и стили</h4>
@@ -2515,12 +2650,12 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Сортировка таблицы</h3>
+    Сортировка таблицы
   </summary>
   <div class="accordion__body">
       <p>Разметка:</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table</span>  <span class="na">class=</span><span class="s">"table"</span> <span class="na">id=</span><span class="s">"sort-me"</span><span class="nt">&gt;</span>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"table"</span> <span class="na">id=</span><span class="s">"sort-me"</span><span class="nt">&gt;</span>
   ...
 <span class="nt">&lt;/table&gt;</span>
 </code></pre></div>      </div>
@@ -2700,7 +2835,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Показать или скрыть колонки таблицы</h3>
+    Показать или скрыть колонки таблицы
   </summary>
   <div class="accordion__body">
       <p>Каркас разметки:</p>
@@ -2927,7 +3062,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Изменение ширины колонки в таблице</h3>
+    Изменение ширины колонки в таблице
   </summary>
   <div class="accordion__body">
       <p>Разметка:</p>
@@ -2946,12 +3081,12 @@ https://bit.ly/3v5Iu3p */</span>
 <span class="p">}</span>
 
 <span class="nc">.resizer</span> <span class="p">{</span>
-  <span class="nl">cursor</span><span class="p">:</span> <span class="n">col-resize</span><span class="p">;</span>
-  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
-  <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-  <span class="nl">right</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-  <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-  <span class="nl">width</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">cursor</span><span class="p">:</span> <span class="n">col-resize</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">right</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="err">  </span><span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="err">  </span><span class="nl">width</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
@@ -3069,7 +3204,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Экспорт HTML-таблицы в CSV</h3>
+    Экспорт HTML-таблицы в CSV
   </summary>
   <div class="accordion__body">
       <h4 id="section-39">Экспорт ячеек</h4>
@@ -3145,7 +3280,7 @@ https://bit.ly/3v5Iu3p */</span>
 <section>
   <h2>Редактирование</h2><details class="accordion">
   <summary class="accordion__header">
-    <h3>Масштабируемое разделенное представление (split view)</h3>
+    Масштабируемое разделенное представление (split view)
   </summary>
   <div class="accordion__body">
       <p>Исходная разметка.</p>
@@ -3366,7 +3501,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>«Заглушка» (placeholder) для редактируемого элемента, не `input`'а</h3>
+    «Заглушка» (placeholder) для редактируемого элемента, не `input`'а
   </summary>
   <div class="accordion__body">
       <p>Редактируемый элемент не обязательно должен быть полем ввода. Это может быть <code class="language-plaintext highlighter-rouge">div[contenteditable]</code>, а атрибута <code class="language-plaintext highlighter-rouge">placeholder</code> у <code class="language-plaintext highlighter-rouge">div</code>‘ов нет.</p>
@@ -3417,7 +3552,7 @@ https://bit.ly/3v5Iu3p */</span>
 </details>
 <details class="accordion">
   <summary class="accordion__header">
-    <h3>Скопировать пример кода со страницы</h3>
+    Скопировать пример кода со страницы
   </summary>
   <div class="accordion__body">
       <p>Задача. Предоставить пользователю скопировать в буфер обмена пример кода по нажатию кнопки.</p>
@@ -3489,7 +3624,7 @@ https://bit.ly/3v5Iu3p */</span>
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220812-0742"></script>
+<script src="/assets/js/main.js?20220926-1147"></script>
 
 <script>
   hljs.highlightAll();
