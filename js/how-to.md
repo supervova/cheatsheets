@@ -7,6 +7,7 @@ categories:
 
 <section>
   <h2>Интерфейсы: редактирование, общее</h2>
+  {%- include details.html title="Защита от ошибок" path="_how-to/general/error-handling.md" id="topic-error-handling" -%}
   {%- include details.html title="Пользовательское контекстное меню на ПКМ" path="_how-to/general/custom-context-menu-at-clicked-position.md" id="topic-context-menu" -%}
   {%- include details.html title="Полный экран" path="_how-to/general/full-screen.md" id="topic-full-screen" -%}
   {%- include details.html title="Вывод элемента в область видимости прокручиваемого контейнера" path="_how-to/general/scroll-to-be-visible.md" -%}

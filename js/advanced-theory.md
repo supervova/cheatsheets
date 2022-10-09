@@ -74,6 +74,7 @@ categories:
   {%- include details.html title="Аксессоры — «геттеры» и «сеттеры» — класса" path="_advanced/classes/getters-and-setters.md" id="topic-classes-getters-and-setters" -%}
   {%- include details.html title="Приватные и публичные поля классов, инкапсуляция" path="_advanced/classes/public-private-fields.md" id="topic-classes-public-private-fields" -%}
   {%- include details.html title="Создание нового объекта, экземпляра класса. Доступ к его свойствам и методам" path="_advanced/classes/new.md" id="topic-classes-new-instance" -%}
+  {%- include details.html title="Состояние и stateful-компоненты" path="_advanced/classes/new.md" id="topic-classes-stateful-components" -%}
   {%- include details.html title="Предки классов — функции-конструкторы" path="_advanced/classes/deprecated-constructor-function.md" id="topic-classes-deprecated-constructor-function" -%}
 </section>
 

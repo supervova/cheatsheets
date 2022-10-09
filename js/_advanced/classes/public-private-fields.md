@@ -1,4 +1,4 @@
-Один из важнейших принципов объектно-ориентированного программирования – разделение свойств и методов разделены на 2 группы.
+Один из важнейших принципов объектно-ориентированного программирования – разделение свойств и методов на 2 группы.
 
 #### Внутренний и внешний интерфейсы
 
@@ -9,197 +9,30 @@
 
 Во многих других языках также существуют **защищённые** поля. Они доступны внутри класса, как приватные. Но кроме того, доступны и в наследуемых классах.
 
-Защищённые поля не реализованы в JavaScript на уровне языка, но на практике они очень удобны, поэтому их эмулируют.
+В JS таких пока нет. Зато приватные поля официально добавлены в JavaScript в спецификации ECMAScript 2022 и поддерживаются [97% браузеров](https://caniuse.com/mdn-javascript_classes_private_class_fields).
 
-Сделаем виртуальную кофеварку на JavaScript со всеми этими типами свойств.
+#### Приватные поля
 
-#### Защищённое свойство "waterAmount"
+Названия приватных полей — свойств и методов — начинаются со знака решетки. И отдают ошибку при попытки обращения к ним из-за пределов класса.
 
-Давайте для начала создадим простой класс для описания кофеварки:
+```js
+class Human {
+  #name = "John";
 
-```javascript
-class CoffeeMachine {
-  static waterAmount = 0; // количество воды внутри
-
-  constructor(power) {
-    this.power = power;
-    alert(`Создана кофеварка, мощность: ${power}`);
-  }
+  setName(name) {
+    this.name = name;
+  }
 }
 
-// создаём кофеварку
-let coffeeMachine = new CoffeeMachine(100);
+const human = new Human()
+human.#name = 'Amy'  // ОШИБКА!
+human.setName('Amy') // ОК
 
-// добавляем воды
-coffeeMachine.waterAmount = 200;
-```
+- [Приватные поля класса](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/Private_class_fields)
+- [Working with private class features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_With_Private_Class_Features)
+- [8 new JavaScript features to start using today](https://www.infoworld.com/article/3665748/8-new-javascript-features-to-start-using-today.html)
 
-Прямо сейчас свойства `waterAmount` и `power` публичные. Мы можем легко получать и устанавливать им любое значение извне.
-
-Давайте изменим свойство `waterAmount` на защищённое, чтобы иметь больше контроля над ним. Например, мы не хотим, чтобы кто-либо устанавливал его ниже нуля.
-
-**Названия защищённых свойств обычно начинаются с префикса `_`.** Это не синтаксис языка — просто общепринятое соглашение.
-
-Так что наше свойство будет называться `_waterAmount`:
-
-```javascript
-class CoffeeMachine {
-  _waterAmount = 0;
-
-  set waterAmount(value) {
-    if (value < 0) throw new Error(
-      "Отрицательное количество воды"
-    );
-    this._waterAmount = value;
-  }
-
-  get waterAmount() {
-    return this._waterAmount;
-  }
-
-  constructor(power) {
-    this._power = power;
-  }
-}
-
-// создаём новую кофеварку
-let coffeeMachine = new CoffeeMachine(100);
-
-/* устанавливаем количество воды и получаем
-Error: Отрицательное количество воды */
-coffeeMachine.waterAmount = -10;
-```
-
-Теперь доступ под контролем, поэтому указать воду ниже нуля не удалось.
-
-## Свойство только для чтения «power»
-
-Давайте сделаем свойство `power` доступным только для чтения. Иногда нужно, чтобы свойство устанавливалось только при создании объекта и после этого никогда не изменялось.
-
-Это как раз требуется для кофеварки: мощность никогда не меняется.
-
-Для этого нам нужно создать только геттер, но не сеттер:
-
-```javascript
-class CoffeeMachine {
-  // ...
-
-  constructor(power) {
-    this._power = power;
-  }
-
-  get power() {
-    return this._power;
-  }
-}
-
-// создаём кофеварку
-let coffeeMachine = new CoffeeMachine(100);
-
-// Мощность: 100W
-alert(`Мощность: ${coffeeMachine.power}W`);
-
-coffeeMachine.power = 25; // Error (no setter)
-```
-
-**Защищённые поля наследуются**
-
-Если мы унаследуем `class MegaMachine extends CoffeeMachine`, ничто не помешает нам обращаться к `this._waterAmount` или `this._power` из методов нового класса.
-
-Таким образом защищённые методы, конечно же, наследуются. В отличие от приватных полей, в чём мы убедимся ниже.
-
-## Приватное свойство «#waterLimit»
-
-Приватные поля вошли в стандарт ECMAScript 2022 и реализованы в [подавляющем большинстве браузеров](https://caniuse.com/?search=class%20fields){:target="_blank"}.
-
-Приватные свойства и методы должны начинаться с `#`. Они доступны только внутри класса.
-
-Например, в классе ниже есть приватное свойство `#waterLimit` и приватный метод `#checkWater` для проверки количества воды:
-
-```javascript
-class CoffeeMachine {
-  #waterLimit = 200;
-
-  #checkWater(value) {
-    if (value < 0) throw new Error(
-      "Отрицательный уровень воды"
-    );
-    if (value > this.#waterLimit) throw new Error(
-      "Слишком много воды"
-    );
-  }
-}
-
-let coffeeMachine = new CoffeeMachine();
-
-// снаружи  нет доступа к приватным методам класса
-coffeeMachine.#checkWater(); // Error
-coffeeMachine.#waterLimit = 1000; // Error
-```
-
-На уровне языка `#` является специальным символом, который означает, что поле приватное. Мы не можем получить к нему доступ извне или из наследуемых классов.
-
-Приватные поля не конфликтуют с публичными. У нас может быть два поля одновременно – приватное `#waterAmount` и публичное `waterAmount`.
-
-Например, давайте сделаем аксессор `waterAmount` для `#waterAmount`:
-
-```javascript
-class CoffeeMachine {
-
-  #waterAmount = 0;
-
-  get waterAmount() {
-    return this.#waterAmount;
-  }
-
-  set waterAmount(value) {
-    if (value < 0) throw new Error(
-      "Отрицательный уровень воды"
-    );
-    this.#waterAmount = value;
-  }
-}
-
-let machine = new CoffeeMachine();
-
-machine.waterAmount = 100;
-alert(machine.#waterAmount); // Error
-```
-
-В отличие от защищённых, функциональность приватных полей обеспечивается самим языком. Это хорошо.
-
-Но если мы унаследуем от `CoffeeMachine`, то мы не получим прямого доступа к `#waterAmount`. Мы будем вынуждены полагаться на геттер/сеттер `waterAmount`:
-
-```javascript
-class MegaCoffeeMachine extends CoffeeMachine {
-  method() {
-    // Error: can only access from CoffeeMachine
-    alert( this.#waterAmount );
-  }
-}
-```
-
-Во многих случаях такое ограничение слишком жёсткое. Раз уж мы расширяем `CoffeeMachine`, у нас может быть вполне законная причина для доступа к внутренним методам и свойствам. Поэтому защищённые свойства используются чаще, хоть они и не поддерживаются синтаксисом языка.
-
-**Важно:**
-
-Приватные поля особенные.
-
-Обычно мы можем получить доступ к полям объекта с помощью this[name]:
-
-```javascript
-class User {
-  ...
-  sayHi() {
-    let fieldName = "name";
-    alert(`Hello, ${this[fieldName]}`);
-  }
-}
-```
-
-С приватными свойствами такое невозможно: `this['#name']` не работает. Это ограничение синтаксиса сделано для обеспечения приватности.
-
-## Итог
+#### Итог
 
 В терминах ООП отделение внутреннего интерфейса от внешнего называется [инкапсуляция](https://ru.wikipedia.org/wiki/Инкапсуляция_(программирование)){:target="_blank"}.
 

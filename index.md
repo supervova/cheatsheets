@@ -139,6 +139,7 @@ is-index: true
   {%- include details.html title="Поддерживает ли браузер `input[type=\"date\"]`?" path="js/_base/checks/support-native-date-input.md" -%}
   {%- include details.html title="Определение мобильного браузера" path="js/_base/checks/is-it-mobile-browser.md" -%}
   {%- include details.html title="Определение темной темы ОС" path="js/_base/checks/is-it-dark-mode.md" -%}
+  {%- include details.html title="Определение операционной системы" path="js/_base/checks/detect-os.md" -%}
   {%- include details.html title="Определение браузера в iOS / macOS" path="js/_base/checks/is-it-ios-macos-browser.md" -%}
   {%- include details.html title="Определение прокрутки у блока" path="js/_base/checks/is-scrollable.md" -%}
   {%- include details.html title="Определение направления выделения текста: слева направо или наоборот" path="js/_base/checks/direction-of-text-selection.md" -%}

@@ -1,11 +1,21 @@
 ```js
-// Изменение переменной в :root
+// Получение глобальной переменной (в :root)
+const myVar =
+  getComputedStyle(document.documentElement)
+  .getPropertyValue('--my-var');
+
+// Изменение глобальной переменной
 document.documentElement.style
-  .setProperty('--my-variable-name', 'pink');
+.setProperty('--my-var', 'pink');
+
+const el = document.querySelector('.my-element');
+
+if (el) {
+  // Получение локальной переменной
+  getComputedStyle(el)
+    .getPropertyValue('--my-var');
 
 // Изменение локальной переменной
-const the2nd = document.querySelector('.hero + .section');
-if (the2nd) {
-  the2nd.style.setProperty('--zindex', index);
+  el.style.setProperty('--my-var', '10px');
 }
 ```
