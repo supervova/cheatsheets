@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221010-1145">
+<link rel="stylesheet" href="/assets/css/style.css?20221010-1157">
 </head>
 <body>
     <main class="main">
@@ -4000,43 +4000,67 @@ const objectName = new ClassName(arg1, arg2, etc);
     Состояние и stateful-компоненты
   </summary>
   <div class="accordion__body">
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">objectName</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClassName</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="nx">etc</span><span class="p">);</span>
+      <p>Обновлять интерфейс страницы можно, выбирая элемент через <code class="language-plaintext highlighter-rouge">querySelector</code> и пр., добавляя <code class="language-plaintext highlighter-rouge">innerHTML</code>, меняя классы через <code class="language-plaintext highlighter-rouge">classList</code> или строковые стили в свойстве <code class="language-plaintext highlighter-rouge">style</code>.</p>
+
+      <p>Современные фреймворки — React, Vue etc — предлагают управление интерфейсом через состояния. Без выбора элементов по CSS-селекторам и дальнейших манипуляций. Обновляешь состояние и выводишь на экран свежую копию интерфейса на основе новых данных.</p>
+
+      <p><strong>Состояние</strong> — это всего лишь данные (обычно — простой объект) в определенный момент времени. Значения состояний (<code class="language-plaintext highlighter-rouge">states</code>) устанавливаются внутри компонента — по аналогии с переменными, которые объявлены внутри функции.</p>
+
+      <p>Для того, чтобы сохранять состояние UI элементов (один выбран, другой помечен, как важный и т.д.) используются stateful-компоненты (другие названия: компоненты с состояниями, классовые компоненты). Они известны, прежде всего, по фреймворкам, но их можно написать и на «ванильном» JS.</p>
+
+      <p>Простой пример с состоянием, сохраненном в глобальной переменной.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Вот это состояние</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">  </span><span class="na">greeting</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">there</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Простой компонент</span>
+<span class="kd">const</span> <span class="nx">greeting</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">return</span> <span class="s2">`&lt;p&gt;</span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">greeting</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">!&lt;/p&gt;`</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Выводим на экран</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#app</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">greeting</span><span class="p">();</span>
 </code></pre></div>      </div>
 
-      <p>Пример.</p>
+      <p>Улучшенный вариант. Состояние (данные) стало свойством компонента и доступно только изнутри.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- */</span>
-<span class="kd">class</span> <span class="nx">Person</span> <span class="p">{</span>
-<span class="err">  </span><span class="cm">/**
-   * @param {string} firstName
-   * @param {string} lastName
-   * @param {number} age
-   */</span>
-<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">firstName</span><span class="p">;</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">lastName</span><span class="p">;</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Компонент</span>
+<span class="kd">const</span> <span class="nx">greeting</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">return</span> <span class="s2">`
+    &lt;p&gt;</span><span class="p">${</span><span class="nx">greeting</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">greeting</span><span class="p">}</span><span class="s2">,
+    </span><span class="p">${</span><span class="nx">greeting</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">!&lt;/p&gt;
+  `</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="c1">// Создаем новые объекты класса Person</span>
-<span class="kd">const</span> <span class="nx">john</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Smith</span><span class="dl">'</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">susan</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Susan</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jordan</span><span class="dl">'</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+<span class="c1">// Состояние</span>
+<span class="nx">greeting</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">  </span><span class="na">greeting</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">there</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Вывод на экран</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#app</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">greeting</span><span class="p">();</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-74">Создание массива объектов с использованием класса</h4>
+      <h4 id="section-74">Планирование компонента — вопросы, которые надо себе задавать перед тем, как начать писать код</h4>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">family</span> <span class="o">=</span> <span class="p">[</span>
-<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alice</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
-<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Bob</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span>
-<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Michelle</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
-<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Timmy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-<span class="p">];</span>
-</code></pre></div>      </div>
+      <ul>
+        <li>Как мы собираемся в странице выбирать один компонент из множества и не загрязнить глобальное пространство имен?</li>
+        <li>Как мы собираемся рендерить HTML для компонента?</li>
+        <li>Как мы будем сохранять и контролировать внутреннее состояние компонента?</li>
+        <li>Как мы будем удалять компонент и обработчики событий, когда они перестанут быть нужными?</li>
+      </ul>
 
-      <p>☝️🧐 При использовании <code class="language-plaintext highlighter-rouge">new</code> с классом создается новый̆ пустой̆ объект. Свойства объекта инициализируются только передачей аргументов.</p>
+      <p>См. примеры:</p>
+
+      <ul>
+        <li><a href="/js/how-to.html#topic-stateful-counter">Счётчик</a></li>
+      </ul>
     </div>
 </details>
 <details class="accordion" id="topic-classes-deprecated-constructor-function">
@@ -4262,7 +4286,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221010-1145"></script>
+<script src="/assets/js/main.js?20221010-1157"></script>
 
 <script>
   hljs.highlightAll();
