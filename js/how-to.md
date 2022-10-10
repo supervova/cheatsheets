@@ -14,6 +14,7 @@ categories:
   {%- include details.html title="Пользовательская полоса прокрутки" path="_how-to/general/custom-scrollbar.md" -%}
   {%- include details.html title="Слайдер диапазона — `range`" path="_how-to/general/range-slider.md" id="topic-range" -%}
   {%- include details.html title="Плавная прокрутка — пользовательская настройка анимации" path="_how-to/general/scroll-to-el-smoothly.md" -%}
+  {%- include details.html title="Пример stateful-компонента — счётчик" path="_how-to/general/stateful-component-counter.md" id="topic-stateful-counter" -%}
 </section>
 
 <section>
