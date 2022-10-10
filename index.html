@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220926-1147">
+<link rel="stylesheet" href="/assets/css/style.css?20221010-1145">
 </head>
 <body>
     <main class="main">
@@ -1975,10 +1975,10 @@ consectetur adipisicing elit. Sed repellendus. */</span>
       <p>В JavaScript встроен ряд конструкторов для обработки стандартных ошибок.</p>
 
       <ul>
-        <li><code class="language-plaintext highlighter-rouge">RangeError</code> — значение не входит в множество или выходит за диапазон допустимых значений.</li>
-        <li><code class="language-plaintext highlighter-rouge">ReferenceError</code> — ошибка, возникающая при обращении к несуществующей переменной.</li>
         <li><code class="language-plaintext highlighter-rouge">SyntaxError</code> — синтаксически неправильный код.</li>
         <li><code class="language-plaintext highlighter-rouge">TypeError</code> — ошибка, связанная с типом данных.</li>
+        <li><code class="language-plaintext highlighter-rouge">RangeError</code> — значение не входит в множество или выходит за диапазон допустимых значений.</li>
+        <li><code class="language-plaintext highlighter-rouge">ReferenceError</code> — ошибка, возникающая при обращении к несуществующей переменной.</li>
         <li><code class="language-plaintext highlighter-rouge">URIError</code> — ошибка декодирования или кодирования URI.</li>
       </ul>
 
@@ -3680,14 +3680,24 @@ reject(true), если скрипт не загрузится — наприме
     CSS-переменные
   </summary>
   <div class="accordion__body">
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Изменение переменной в :root</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Получение глобальной переменной (в :root)</span>
+<span class="kd">const</span> <span class="nx">myVar</span> <span class="o">=</span>
+<span class="err">  </span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">)</span>
+<span class="err">  </span><span class="p">.</span><span class="nx">getPropertyValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">--my-var</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Изменение глобальной переменной</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span>
-<span class="err">  </span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--my-variable-name</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pink</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--my-var</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pink</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.my-element</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">  </span><span class="c1">// Получение локальной переменной</span>
+<span class="err">  </span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span>
+<span class="err">    </span><span class="p">.</span><span class="nx">getPropertyValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">--my-var</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// Изменение локальной переменной</span>
-<span class="kd">const</span> <span class="nx">the2nd</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.hero + .section</span><span class="dl">'</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">the2nd</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">the2nd</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--zindex</span><span class="dl">'</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="err">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--my-var</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">10px</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
     </div>
@@ -5086,9 +5096,25 @@ reject(true), если скрипт не загрузится — наприме
 </details>
 <details class="accordion">
   <summary class="accordion__header">
+    Определение операционной системы
+  </summary>
+  <div class="accordion__body">
+      <p>Определение операционной системы.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">Win</span><span class="dl">'</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* Windows */</span> <span class="p">};</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">Mac</span><span class="dl">'</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* MacOS */</span> <span class="p">};</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">X11</span><span class="dl">'</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* UNIX */</span> <span class="p">};</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">Linux</span><span class="dl">'</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* Linux */</span> <span class="p">};</span>
+</code></pre></div>      </div>
+    </div>
+</details>
+<details class="accordion">
+  <summary class="accordion__header">
     Определение браузера в iOS / macOS
   </summary>
   <div class="accordion__body">
+      <p>На MDN метод <code class="language-plaintext highlighter-rouge">navigator.platform</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform" target="_blank">объявлен устаревшим</a>. Вместо этого можно использовать <code class="language-plaintext highlighter-rouge">navigator.userAgent</code> — см. выше.</p>
+
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isMacBrowser</span> <span class="o">=</span>
 <span class="err">  </span><span class="o">/</span><span class="nx">Mac</span><span class="o">|</span><span class="nx">iPod</span><span class="o">|</span><span class="nx">iPhone</span><span class="o">|</span><span class="nx">iPad</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">platform</span><span class="p">);</span>
 </code></pre></div>      </div>
@@ -5734,7 +5760,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220926-1147"></script>
+<script src="/assets/js/main.js?20221010-1145"></script>
 
 <script>
   hljs.highlightAll();

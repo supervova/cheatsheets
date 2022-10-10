@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20220926-1147">
+<link rel="stylesheet" href="/assets/css/style.css?20221010-1145">
 </head>
 <body>
     <main class="main">
@@ -3899,7 +3899,7 @@ enumerable: true, configurable: true } */</span>
     Приватные и публичные поля классов, инкапсуляция
   </summary>
   <div class="accordion__body">
-      <p>Один из важнейших принципов объектно-ориентированного программирования – разделение свойств и методов разделены на 2 группы.</p>
+      <p>Один из важнейших принципов объектно-ориентированного программирования – разделение свойств и методов на 2 группы.</p>
 
       <h4 id="section-71">Внутренний и внешний интерфейсы</h4>
 
@@ -3912,217 +3912,92 @@ enumerable: true, configurable: true } */</span>
 
       <p>Во многих других языках также существуют <strong>защищённые</strong> поля. Они доступны внутри класса, как приватные. Но кроме того, доступны и в наследуемых классах.</p>
 
-      <p>Защищённые поля не реализованы в JavaScript на уровне языка, но на практике они очень удобны, поэтому их эмулируют.</p>
+      <p>В JS таких пока нет. Зато приватные поля официально добавлены в JavaScript в спецификации ECMAScript 2022 и поддерживаются <a href="https://caniuse.com/mdn-javascript_classes_private_class_fields">97% браузеров</a>.</p>
 
-      <p>Сделаем виртуальную кофеварку на JavaScript со всеми этими типами свойств.</p>
+      <h4 id="section-72">Приватные поля</h4>
 
-      <h4 id="wateramount">Защищённое свойство “waterAmount”</h4>
+      <p>Названия приватных полей — свойств и методов — начинаются со знака решетки. И отдают ошибку при попытки обращения к ним из-за пределов класса.</p>
 
-      <p>Давайте для начала создадим простой класс для описания кофеварки:</p>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Human</span> <span class="p">{</span>
+  <span class="err">#</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">CoffeeMachine</span> <span class="p">{</span>
-<span class="err">  </span><span class="kd">static</span> <span class="nx">waterAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// количество воды внутри</span>
+  <span class="nx">setName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">power</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">power</span> <span class="o">=</span> <span class="nx">power</span><span class="p">;</span>
-<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`Создана кофеварка, мощность: </span><span class="p">${</span><span class="nx">power</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">human</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Human</span><span class="p">()</span>
+<span class="nx">human</span><span class="p">.</span><span class="err">#</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Amy</span><span class="dl">'</span>  <span class="c1">// ОШИБКА!</span>
+<span class="nx">human</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="dl">'</span><span class="s1">Amy</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// ОК</span>
+
+<span class="o">-</span> <span class="p">[</span><span class="nx">Приватные</span> <span class="nx">поля</span> <span class="nx">класса</span><span class="p">](</span><span class="nx">https</span><span class="p">:</span><span class="c1">//developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/Private_class_fields)</span>
+<span class="o">-</span> <span class="p">[</span><span class="nx">Working</span> <span class="kd">with</span> <span class="kr">private</span> <span class="kd">class</span> <span class="nx">features</span><span class="p">](</span><span class="nx">https</span><span class="p">:</span><span class="c1">//developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_With_Private_Class_Features)</span>
+<span class="o">-</span> <span class="p">[</span><span class="mi">8</span> <span class="k">new</span> <span class="nx">JavaScript</span> <span class="nx">features</span> <span class="nx">to</span> <span class="nx">start</span> <span class="nx">using</span> <span class="nx">today</span><span class="p">](</span><span class="nx">https</span><span class="p">:</span><span class="c1">//www.infoworld.com/article/3665748/8-new-javascript-features-to-start-using-today.html)</span>
+
+<span class="err">####</span> <span class="nx">Итог</span>
+
+<span class="nx">В</span> <span class="nx">терминах</span> <span class="nx">ООП</span> <span class="nx">отделение</span> <span class="nx">внутреннего</span> <span class="nx">интерфейса</span> <span class="nx">от</span> <span class="nx">внешнего</span> <span class="nx">называется</span> <span class="p">[</span><span class="nx">инкапсуляция</span><span class="p">](</span><span class="nx">https</span><span class="p">:</span><span class="c1">//ru.wikipedia.org/wiki/Инкапсуляция_(программирование)){:target="_blank"}.</span>
+
+<span class="nx">Это</span> <span class="nx">даёт</span> <span class="nx">следующие</span> <span class="nx">выгоды</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="nx">Защита</span> <span class="nx">для</span> <span class="nx">пользователей</span><span class="p">,</span> <span class="nx">чтобы</span> <span class="nx">они</span> <span class="nx">не</span> <span class="nx">выстрелили</span> <span class="nx">себе</span> <span class="nx">в</span> <span class="nx">ногу</span><span class="p">.</span> <span class="nx">Если</span> <span class="nx">пользователь</span> <span class="nx">класса</span> <span class="nx">изменит</span> <span class="nx">вещи</span><span class="p">,</span> <span class="nx">не</span> <span class="nx">предназначенные</span> <span class="nx">для</span> <span class="nx">изменения</span> <span class="nx">извне</span> <span class="err">–</span> <span class="nx">последствия</span> <span class="nx">непредсказуемы</span><span class="p">.</span>
+
+<span class="o">-</span> <span class="nx">Поддерживаемость</span><span class="p">.</span> <span class="nx">Приватные</span> <span class="nx">методы</span> <span class="nx">можно</span> <span class="nx">безопасно</span> <span class="nx">переименовывать</span><span class="p">,</span> <span class="nx">их</span> <span class="nx">параметры</span> <span class="nx">можно</span> <span class="nx">изменять</span> <span class="nx">и</span> <span class="nx">даже</span> <span class="nx">удалять</span><span class="p">,</span> <span class="nx">потому</span> <span class="nx">что</span> <span class="nx">от</span> <span class="nx">них</span> <span class="nx">не</span> <span class="nx">зависит</span> <span class="nx">внешний</span> <span class="nx">код</span><span class="p">.</span> <span class="nx">В</span> <span class="nx">новой</span> <span class="nx">версии</span> <span class="nx">вы</span> <span class="nx">можете</span> <span class="nx">полностью</span> <span class="nx">всё</span> <span class="nx">переписать</span><span class="p">,</span> <span class="nx">но</span> <span class="nx">пользователю</span> <span class="nx">будет</span> <span class="nx">легко</span> <span class="nx">обновиться</span><span class="p">,</span> <span class="nx">если</span> <span class="nx">внешний</span> <span class="nx">интерфейс</span> <span class="nx">остался</span> <span class="nx">такой</span> <span class="nx">же</span><span class="p">.</span>
+
+<span class="o">-</span> <span class="nx">Сокрытие</span> <span class="nx">сложности</span><span class="p">.</span> <span class="nx">Люди</span> <span class="nx">обожают</span> <span class="nx">использовать</span> <span class="nx">простые</span> <span class="nx">вещи</span><span class="p">.</span> <span class="nx">По</span> <span class="nx">крайней</span> <span class="nx">мере</span><span class="p">,</span> <span class="nx">снаружи</span><span class="p">.</span> <span class="nx">Что</span> <span class="nx">внутри</span> <span class="err">–</span> <span class="nx">это</span> <span class="nx">другое</span> <span class="nx">дело</span><span class="p">.</span> <span class="nx">Для</span> <span class="nx">сокрытия</span> <span class="nx">внутреннего</span> <span class="nx">интерфейса</span> <span class="nx">мы</span> <span class="nx">используем</span> <span class="nx">защищённые</span> <span class="nx">или</span> <span class="nx">приватные</span> <span class="nx">свойства</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="nx">Защищённые</span> <span class="nx">поля</span> <span class="nx">имеют</span> <span class="nx">префикс</span> <span class="s2">`_`</span><span class="p">.</span> <span class="nx">Это</span> <span class="nx">хорошо</span> <span class="nx">известное</span> <span class="nx">соглашение</span><span class="p">,</span> <span class="nx">не</span> <span class="nx">поддерживаемое</span> <span class="nx">на</span> <span class="nx">уровне</span> <span class="nx">языка</span><span class="p">.</span> <span class="nx">Программисты</span> <span class="nx">должны</span> <span class="nx">обращаться</span> <span class="nx">к</span> <span class="nx">полю</span><span class="p">,</span> <span class="nx">начинающемуся</span> <span class="nx">с</span> <span class="s2">`_`</span><span class="p">,</span> <span class="nx">только</span> <span class="nx">из</span> <span class="nx">его</span> <span class="nx">класса</span> <span class="nx">и</span> <span class="nx">классов</span><span class="p">,</span> <span class="nx">унаследованных</span> <span class="nx">от</span> <span class="nx">него</span><span class="p">.</span>
+
+<span class="o">-</span> <span class="nx">Приватные</span> <span class="nx">поля</span> <span class="nx">имеют</span> <span class="nx">префикс</span> <span class="s2">`#`</span><span class="p">.</span> <span class="nx">JavaScript</span> <span class="nx">гарантирует</span><span class="p">,</span> <span class="nx">что</span> <span class="nx">мы</span> <span class="nx">можем</span> <span class="nx">получить</span> <span class="nx">доступ</span> <span class="nx">к</span> <span class="nx">таким</span> <span class="nx">полям</span> <span class="nx">только</span> <span class="nx">внутри</span> <span class="nx">класса</span><span class="p">.</span>
+<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/details</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">details</span> <span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">accordion</span><span class="dl">"</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">topic-classes-new-instance</span><span class="dl">"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">summary</span> <span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">accordion__header</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="nx">Создание</span> <span class="nx">нового</span> <span class="nx">объекта</span><span class="p">,</span> <span class="nx">экземпляра</span> <span class="nx">класса</span><span class="p">.</span> <span class="nx">Доступ</span> <span class="nx">к</span> <span class="nx">его</span> <span class="nx">свойствам</span> <span class="nx">и</span> <span class="nx">методам</span>
+  <span class="o">&lt;</span><span class="sr">/summary</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">accordion__body</span><span class="dl">"</span> <span class="nx">markdown</span><span class="o">=</span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="o">&gt;</span><span class="s2">```javascript
+const objectName = new ClassName(arg1, arg2, etc);
+</span></code></pre></div>      </div>
+
+      <p>Пример.</p>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * JSDoc
+ */</span>
+<span class="kd">class</span> <span class="nx">Person</span> <span class="p">{</span>
+<span class="err">  </span><span class="cm">/**
+   * @param {string} firstName
+   * @param {string} lastName
+   * @param {number} age
+   */</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">firstName</span><span class="p">;</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">lastName</span><span class="p">;</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
 <span class="err">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// создаём кофеварку</span>
-<span class="kd">let</span> <span class="nx">coffeeMachine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CoffeeMachine</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-
-<span class="c1">// добавляем воды</span>
-<span class="nx">coffeeMachine</span><span class="p">.</span><span class="nx">waterAmount</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+<span class="c1">// Создаем новые объекты класса Person</span>
+<span class="kd">const</span> <span class="nx">john</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">John</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Smith</span><span class="dl">'</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">susan</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Susan</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jordan</span><span class="dl">'</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <p>Прямо сейчас свойства <code class="language-plaintext highlighter-rouge">waterAmount</code> и <code class="language-plaintext highlighter-rouge">power</code> публичные. Мы можем легко получать и устанавливать им любое значение извне.</p>
+      <h4 id="section-73">Создание массива объектов с использованием класса</h4>
 
-      <p>Давайте изменим свойство <code class="language-plaintext highlighter-rouge">waterAmount</code> на защищённое, чтобы иметь больше контроля над ним. Например, мы не хотим, чтобы кто-либо устанавливал его ниже нуля.</p>
-
-      <p><strong>Названия защищённых свойств обычно начинаются с префикса <code class="language-plaintext highlighter-rouge">_</code>.</strong> Это не синтаксис языка — просто общепринятое соглашение.</p>
-
-      <p>Так что наше свойство будет называться <code class="language-plaintext highlighter-rouge">_waterAmount</code>:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">CoffeeMachine</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">_waterAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="err">  </span><span class="kd">set</span> <span class="nx">waterAmount</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span>
-<span class="err">      </span><span class="dl">"</span><span class="s2">Отрицательное количество воды</span><span class="dl">"</span>
-<span class="err">    </span><span class="p">);</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">_waterAmount</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-
-<span class="err">  </span><span class="kd">get</span> <span class="nx">waterAmount</span><span class="p">()</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_waterAmount</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-
-<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">power</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">_power</span> <span class="o">=</span> <span class="nx">power</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// создаём новую кофеварку</span>
-<span class="kd">let</span> <span class="nx">coffeeMachine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CoffeeMachine</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-
-<span class="cm">/* устанавливаем количество воды и получаем
-Error: Отрицательное количество воды */</span>
-<span class="nx">coffeeMachine</span><span class="p">.</span><span class="nx">waterAmount</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">family</span> <span class="o">=</span> <span class="p">[</span>
+<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alice</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
+<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Bob</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span>
+<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Michelle</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Timmy</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+<span class="p">];</span>
 </code></pre></div>      </div>
 
-      <p>Теперь доступ под контролем, поэтому указать воду ниже нуля не удалось.</p>
-
-      <h2 id="power">Свойство только для чтения «power»</h2>
-
-      <p>Давайте сделаем свойство <code class="language-plaintext highlighter-rouge">power</code> доступным только для чтения. Иногда нужно, чтобы свойство устанавливалось только при создании объекта и после этого никогда не изменялось.</p>
-
-      <p>Это как раз требуется для кофеварки: мощность никогда не меняется.</p>
-
-      <p>Для этого нам нужно создать только геттер, но не сеттер:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">CoffeeMachine</span> <span class="p">{</span>
-<span class="err">  </span><span class="c1">// ...</span>
-
-<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">power</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">_power</span> <span class="o">=</span> <span class="nx">power</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-
-<span class="err">  </span><span class="kd">get</span> <span class="nx">power</span><span class="p">()</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_power</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// создаём кофеварку</span>
-<span class="kd">let</span> <span class="nx">coffeeMachine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CoffeeMachine</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-
-<span class="c1">// Мощность: 100W</span>
-<span class="nx">alert</span><span class="p">(</span><span class="s2">`Мощность: </span><span class="p">${</span><span class="nx">coffeeMachine</span><span class="p">.</span><span class="nx">power</span><span class="p">}</span><span class="s2">W`</span><span class="p">);</span>
-
-<span class="nx">coffeeMachine</span><span class="p">.</span><span class="nx">power</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span> <span class="c1">// Error (no setter)</span>
-</code></pre></div>      </div>
-
-      <p><strong>Защищённые поля наследуются</strong></p>
-
-      <p>Если мы унаследуем <code class="language-plaintext highlighter-rouge">class MegaMachine extends CoffeeMachine</code>, ничто не помешает нам обращаться к <code class="language-plaintext highlighter-rouge">this._waterAmount</code> или <code class="language-plaintext highlighter-rouge">this._power</code> из методов нового класса.</p>
-
-      <p>Таким образом защищённые методы, конечно же, наследуются. В отличие от приватных полей, в чём мы убедимся ниже.</p>
-
-      <h2 id="waterlimit">Приватное свойство «#waterLimit»</h2>
-
-      <p>Приватные поля вошли в стандарт ECMAScript 2022 и реализованы в <a href="https://caniuse.com/?search=class%20fields" target="_blank">подавляющем большинстве браузеров</a>.</p>
-
-      <p>Приватные свойства и методы должны начинаться с <code class="language-plaintext highlighter-rouge">#</code>. Они доступны только внутри класса.</p>
-
-      <p>Например, в классе ниже есть приватное свойство <code class="language-plaintext highlighter-rouge">#waterLimit</code> и приватный метод <code class="language-plaintext highlighter-rouge">#checkWater</code> для проверки количества воды:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">CoffeeMachine</span> <span class="p">{</span>
-<span class="err">  #</span><span class="nx">waterLimit</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-
-<span class="err">  #</span><span class="nx">checkWater</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span>
-<span class="err">      </span><span class="dl">"</span><span class="s2">Отрицательный уровень воды</span><span class="dl">"</span>
-<span class="err">    </span><span class="p">);</span>
-<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">waterLimit</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span>
-<span class="err">      </span><span class="dl">"</span><span class="s2">Слишком много воды</span><span class="dl">"</span>
-<span class="err">    </span><span class="p">);</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">let</span> <span class="nx">coffeeMachine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CoffeeMachine</span><span class="p">();</span>
-
-<span class="c1">// снаружи  нет доступа к приватным методам класса</span>
-<span class="nx">coffeeMachine</span><span class="p">.</span><span class="err">#</span><span class="nx">checkWater</span><span class="p">();</span> <span class="c1">// Error</span>
-<span class="nx">coffeeMachine</span><span class="p">.</span><span class="err">#</span><span class="nx">waterLimit</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span> <span class="c1">// Error</span>
-</code></pre></div>      </div>
-
-      <p>На уровне языка <code class="language-plaintext highlighter-rouge">#</code> является специальным символом, который означает, что поле приватное. Мы не можем получить к нему доступ извне или из наследуемых классов.</p>
-
-      <p>Приватные поля не конфликтуют с публичными. У нас может быть два поля одновременно – приватное <code class="language-plaintext highlighter-rouge">#waterAmount</code> и публичное <code class="language-plaintext highlighter-rouge">waterAmount</code>.</p>
-
-      <p>Например, давайте сделаем аксессор <code class="language-plaintext highlighter-rouge">waterAmount</code> для <code class="language-plaintext highlighter-rouge">#waterAmount</code>:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">CoffeeMachine</span> <span class="p">{</span>
-
-<span class="err">  #</span><span class="nx">waterAmount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="err">  </span><span class="kd">get</span> <span class="nx">waterAmount</span><span class="p">()</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">waterAmount</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-
-<span class="err">  </span><span class="kd">set</span> <span class="nx">waterAmount</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span>
-<span class="err">      </span><span class="dl">"</span><span class="s2">Отрицательный уровень воды</span><span class="dl">"</span>
-<span class="err">    </span><span class="p">);</span>
-<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">waterAmount</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">let</span> <span class="nx">machine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CoffeeMachine</span><span class="p">();</span>
-
-<span class="nx">machine</span><span class="p">.</span><span class="nx">waterAmount</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">machine</span><span class="p">.</span><span class="err">#</span><span class="nx">waterAmount</span><span class="p">);</span> <span class="c1">// Error</span>
-</code></pre></div>      </div>
-
-      <p>В отличие от защищённых, функциональность приватных полей обеспечивается самим языком. Это хорошо.</p>
-
-      <p>Но если мы унаследуем от <code class="language-plaintext highlighter-rouge">CoffeeMachine</code>, то мы не получим прямого доступа к <code class="language-plaintext highlighter-rouge">#waterAmount</code>. Мы будем вынуждены полагаться на геттер/сеттер <code class="language-plaintext highlighter-rouge">waterAmount</code>:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">MegaCoffeeMachine</span> <span class="kd">extends</span> <span class="nx">CoffeeMachine</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">method</span><span class="p">()</span> <span class="p">{</span>
-<span class="err">    </span><span class="c1">// Error: can only access from CoffeeMachine</span>
-<span class="err">    </span><span class="nx">alert</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">waterAmount</span> <span class="p">);</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>      </div>
-
-      <p>Во многих случаях такое ограничение слишком жёсткое. Раз уж мы расширяем <code class="language-plaintext highlighter-rouge">CoffeeMachine</code>, у нас может быть вполне законная причина для доступа к внутренним методам и свойствам. Поэтому защищённые свойства используются чаще, хоть они и не поддерживаются синтаксисом языка.</p>
-
-      <p><strong>Важно:</strong></p>
-
-      <p>Приватные поля особенные.</p>
-
-      <p>Обычно мы можем получить доступ к полям объекта с помощью this[name]:</p>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span>
-<span class="err">  </span><span class="p">...</span>
-<span class="err">  </span><span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span>
-<span class="err">    </span><span class="kd">let</span> <span class="nx">fieldName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">;</span>
-<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="k">this</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">]}</span><span class="s2">`</span><span class="p">);</span>
-<span class="err">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>      </div>
-
-      <p>С приватными свойствами такое невозможно: <code class="language-plaintext highlighter-rouge">this['#name']</code> не работает. Это ограничение синтаксиса сделано для обеспечения приватности.</p>
-
-      <h2 id="section-72">Итог</h2>
-
-      <p>В терминах ООП отделение внутреннего интерфейса от внешнего называется <a href="https://ru.wikipedia.org/wiki/Инкапсуляция_(программирование)" target="_blank">инкапсуляция</a>.</p>
-
-      <p>Это даёт следующие выгоды:</p>
-
-      <ul>
-        <li>
-          <p>Защита для пользователей, чтобы они не выстрелили себе в ногу. Если пользователь класса изменит вещи, не предназначенные для изменения извне – последствия непредсказуемы.</p>
-        </li>
-        <li>
-          <p>Поддерживаемость. Приватные методы можно безопасно переименовывать, их параметры можно изменять и даже удалять, потому что от них не зависит внешний код. В новой версии вы можете полностью всё переписать, но пользователю будет легко обновиться, если внешний интерфейс остался такой же.</p>
-        </li>
-        <li>
-          <p>Сокрытие сложности. Люди обожают использовать простые вещи. По крайней мере, снаружи. Что внутри – это другое дело. Для сокрытия внутреннего интерфейса мы используем защищённые или приватные свойства:</p>
-        </li>
-        <li>
-          <p>Защищённые поля имеют префикс <code class="language-plaintext highlighter-rouge">_</code>. Это хорошо известное соглашение, не поддерживаемое на уровне языка. Программисты должны обращаться к полю, начинающемуся с <code class="language-plaintext highlighter-rouge">_</code>, только из его класса и классов, унаследованных от него.</p>
-        </li>
-        <li>
-          <p>Приватные поля имеют префикс <code class="language-plaintext highlighter-rouge">#</code>. JavaScript гарантирует, что мы можем получить доступ к таким полям только внутри класса.</p>
-        </li>
-      </ul>
+      <p>☝️🧐 При использовании <code class="language-plaintext highlighter-rouge">new</code> с классом создается новый̆ пустой̆ объект. Свойства объекта инициализируются только передачей аргументов.</p>
     </div>
 </details>
-<details class="accordion" id="topic-classes-new-instance">
+<details class="accordion" id="topic-classes-stateful-components">
   <summary class="accordion__header">
-    Создание нового объекта, экземпляра класса. Доступ к его свойствам и методам
+    Состояние и stateful-компоненты
   </summary>
   <div class="accordion__body">
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">objectName</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClassName</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="nx">etc</span><span class="p">);</span>
@@ -4151,7 +4026,7 @@ Error: Отрицательное количество воды */</span>
 <span class="kd">const</span> <span class="nx">susan</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Susan</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jordan</span><span class="dl">'</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-73">Создание массива объектов с использованием класса</h4>
+      <h4 id="section-74">Создание массива объектов с использованием класса</h4>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">family</span> <span class="o">=</span> <span class="p">[</span>
 <span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alice</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
@@ -4197,7 +4072,7 @@ Error: Отрицательное количество воды */</span>
     14 советов по оптимизации
   </summary>
   <div class="accordion__body">
-      <h4 id="section-74">1. Удалить неиспользуемый код и функции</h4>
+      <h4 id="section-75">1. Удалить неиспользуемый код и функции</h4>
 
       <p>Чем больше кода содержится в приложении, тем больше данных необходимо передать клиенту, а браузеру потребуется больше времени для анализа и интерпретации кода.</p>
 
@@ -4209,17 +4084,17 @@ Error: Отрицательное количество воды */</span>
 
       <p>Неиспользуемые пакеты npm, можно удалить командой <code class="language-plaintext highlighter-rouge">npm prune</code>.</p>
 
-      <h4 id="section-75">2. Кешировать</h4>
+      <h4 id="section-76">2. Кешировать</h4>
 
       <p>Использовать <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> или <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Caching">HTTP-кэширования</a>.</p>
 
-      <h4 id="section-76">3. Избегайте утечек памяти</h4>
+      <h4 id="section-77">3. Избегайте утечек памяти</h4>
 
       <p>Будучи языком высокого уровня, JS заботится о нескольких низкоуровневых системах управления, таких как управление памятью. Сборка мусора — это процесс, общий для большинства языков программирования. Сборка мусора с точки зрения непрофессионала — это просто сбор и освобождение памяти, которая была выделена объектам, но которая в настоящее время не используется. В таких языках программирования, как C, разработчик должен позаботиться о распределении и освобождении памяти, используя функции <code class="language-plaintext highlighter-rouge">malloc()</code> и <code class="language-plaintext highlighter-rouge">dealloc()</code>.</p>
 
       <p>Даже если сборка мусора выполняется в JavaScript автоматически, могут быть определенные случаи, когда она не будет идеальной. В JavaScript ES6 <code class="language-plaintext highlighter-rouge">Map</code> и <code class="language-plaintext highlighter-rouge">Set</code> были представлены со своими «более слабыми» братьями и сестрами. Этот «более слабый» аналог, известный как <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a> и WeakSet, содержит «слабые» ссылки на объекты. Они позволяют собирать ненужные значения и предотвращать утечки памяти.</p>
 
-      <h4 id="section-77">4. Попытайтесь выходить из циклов раньше</h4>
+      <h4 id="section-78">4. Попытайтесь выходить из циклов раньше</h4>
 
       <p>Обработка больших циклов может занять много времени. Поэтому следует выходить из них как можно раньше — с помощью ключевого слова <code class="language-plaintext highlighter-rouge">break</code> и ключевого слова <code class="language-plaintext highlighter-rouge">continue</code>.</p>
 
@@ -4247,7 +4122,7 @@ Error: Отрицательное количество воды */</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-78">5. Минимизируйте количество вычислений переменных</h4>
+      <h4 id="section-79">5. Минимизируйте количество вычислений переменных</h4>
 
       <p>Чтобы уменьшить количество вычислений переменной, вы можете использовать замыкания. С точки зрения непрофессионала, замыкания в JavaScript предоставляют доступ к области видимости внешней функции из внутренней функции. Замыкания создаются каждый раз, когда вызывается функция created-not. Внутренние функции будут иметь доступ к переменным внешней области видимости, даже после возврата внешней функции.</p>
 
@@ -4286,11 +4161,11 @@ Error: Отрицательное количество воды */</span>
 
       <p>Чтобы уменьшить количество раз, когда вы обращаетесь к элементу DOM, обращайтесь к нему один раз и используйте его как локальную переменную. Когда необходимость отпадет, обязательно удалите значение переменной, установив для него null. Это предотвратит утечку памяти, поскольку позволит работать процессу сбора мусора.</p>
 
-      <h4 id="section-79">7. Сожмите файлы</h4>
+      <h4 id="section-80">7. Сожмите файлы</h4>
 
       <p>Используя такие методы сжатия, как Gzip, вы можете уменьшить размер файлов JavaScript. Эти файлы поменьше приведут к увеличению производительности сайта, так как браузер должен будет загружать меньшие ресурсы. Эти сжатия могут уменьшить размер файла до 80%. Подробнее о сжатии читайте здесь.</p>
 
-      <h4 id="section-80">8. Оптимизируйте собранный код</h4>
+      <h4 id="section-81">8. Оптимизируйте собранный код</h4>
 
       <p>Некоторые люди считают, что минимизация и сжатие – это одно и то же. Вовсе нет – это разные вещи. В сжатии используются специальные алгоритмы для изменения выходного размера файла. При минимизации в JS удаляются комментарии и лишние пробелы, переменные и функции переименовываются: длинные имена заменяются однобуквенными.</p>
 
@@ -4315,13 +4190,13 @@ Error: Отрицательное количество воды */</span>
 
       <p>Вы также можете использовать объект Map, так как его метод <code class="language-plaintext highlighter-rouge">delete</code> работает быстрее.</p>
 
-      <h4 id="section-81">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
+      <h4 id="section-82">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
 
       <p>Вы должны знать, что JavaScript является синхронным по умолчанию, а также однопоточным. Но могут быть случаи, когда коду требуется много времени для вычислений. Будучи синхронным по своей природе, для JavaScript это будет означать, что этот фрагмент кода будет блокировать выполнение других операторов кода до тех пор, пока он не будет выполнен. Это снизит производительность в целом.</p>
 
       <p>Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises">промисами</a>.</p>
 
-      <h4 id="section-82">12.  Используйте разделение кода</h4>
+      <h4 id="section-83">12.  Используйте разделение кода</h4>
 
       <p>Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
 First Contentful Paint (FCP) измеряет, сколько времени браузеру требуется для отображения первого фрагмента содержимого DOM после перехода пользователя на вашу страницу. Изображения, небелые <canvas> элементы и SVG на странице считаются содержимым DOM; ничего внутри iframe не включено.</canvas></p>
@@ -4363,7 +4238,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
         <li><a href="https://learn.javascript.ru/call-apply-decorators">Декораторы и переадресация вызова, call/apply</a></li>
       </ul>
 
-      <h4 id="section-83">Справочники</h4>
+      <h4 id="section-84">Справочники</h4>
 
       <ul>
         <li><a href="https://thisthat.dev/" target="_blank">What is the difference</a></li>
@@ -4387,7 +4262,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20220926-1147"></script>
+<script src="/assets/js/main.js?20221010-1145"></script>
 
 <script>
   hljs.highlightAll();
