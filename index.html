@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221010-1157">
+<link rel="stylesheet" href="/assets/css/style.css?20221012-0826">
 </head>
 <body>
     <main class="main">
@@ -967,10 +967,14 @@ consectetur adipisicing elit. Sed repellendus. */</span>
 <span class="err">  </span><span class="k">return</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
+
+      <p>Вызываются функции, созданные с помощью выражений, также, как и объявленные — см. ниже.</p>
+
       <h4 id="section-29">Вызов функций</h4>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">addNumbers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">multiplyNumbers</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="nx">saySmthInspiring</span><span class="p">(</span><span class="dl">'</span><span class="s1">peace</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>☝️🧐  Обращение к функции без круглых скобок приведет к получению ее кода, а не к вызову. В примере в переменную y будет сохранен код функции myFunc.</p>
@@ -4906,7 +4910,30 @@ reject(true), если скрипт не загрузится — наприме
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>См. <a href="https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API" target="_blank">Intersection Observer API</a>.</p>
+      <p>Свойство <code class="language-plaintext highlighter-rouge">target</code> (<code class="language-plaintext highlighter-rouge">IntersectionObserverEntry.target</code>) позволяет определить один из множества целевых элементов в момент появления в области видимости. То есть также помогает вызвать методы нужного объекта, как и <code class="language-plaintext highlighter-rouge">event.target</code>.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">  </span><span class="na">root</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="err">  </span><span class="na">threshold</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">observer</span> <span class="o">=</span>
+<span class="err">  </span><span class="k">new</span> <span class="nx">IntersectionObserver</span><span class="p">((</span><span class="nx">entries</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">entry</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">intersectionRatio</span> <span class="o">&gt;=</span> <span class="mf">0.15</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// It's magic</span>
+<span class="err">      </span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">is-my-hero</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">    </span><span class="p">}</span>
+<span class="err">  </span><span class="p">});</span>
+<span class="p">},</span> <span class="nx">settings</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Материалы по теме:</p>
+
+      <ul>
+        <li><a href="https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API" target="_blank">Intersection Observer API</a>.</li>
+        <li><a href="https://habr.com/ru/post/494670/" target="_blank"></a>.</li>
+      </ul>
 
       <h4 id="section-101">Альтернативный способ</h4>
 
@@ -5760,7 +5787,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221010-1157"></script>
+<script src="/assets/js/main.js?20221012-0826"></script>
 
 <script>
   hljs.highlightAll();

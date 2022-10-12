@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221010-1157">
+<link rel="stylesheet" href="/assets/css/style.css?20221012-0826">
 </head>
 <body>
     <main class="main">
@@ -4047,6 +4047,12 @@ const objectName = new ClassName(arg1, arg2, etc);
 <span class="nx">app</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">greeting</span><span class="p">();</span>
 </code></pre></div>      </div>
 
+      <p>См. также примеры:</p>
+
+      <ul>
+        <li><a href="/js/how-to.html#topic-stateful-counter">Счётчик</a></li>
+      </ul>
+
       <h4 id="section-74">Планирование компонента — вопросы, которые надо себе задавать перед тем, как начать писать код</h4>
 
       <ul>
@@ -4056,11 +4062,62 @@ const objectName = new ClassName(arg1, arg2, etc);
         <li>Как мы будем удалять компонент и обработчики событий, когда они перестанут быть нужными?</li>
       </ul>
 
-      <p>См. примеры:</p>
+      <h4 id="section-75">Прокси</h4>
 
-      <ul>
-        <li><a href="/js/how-to.html#topic-stateful-counter">Счётчик</a></li>
-      </ul>
+      <p>Для отслеживания изменений во фреймворках используются <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank">прокси</a> — объект, который «оборачивается» вокруг другого объекта и может перехватывать (и, при желании, самостоятельно обрабатывать) разные действия с ним — в частности, чтение/запись свойств.</p>
+
+      <p>Эту же технологию использует npm-пакет on-change, который можно использовать в ванильных stateful-компонентах.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">onChange</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">on-change</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="c1">// Состояние</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">      </span><span class="na">currentTodoItemID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="err">    </span><span class="p">};</span>
+
+<span class="err">    </span><span class="c1">// Слушатель с помощью пакета 'on-change'</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">onChange</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+
+<span class="err">  </span><span class="cm">/* Изменение компонента в ответ на изменения
+  состояния */</span>
+<span class="err">  </span><span class="kd">static</span> <span class="nx">update</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+<span class="err">      </span><span class="s2">`</span><span class="p">${</span><span class="nx">path</span><span class="p">}</span><span class="s2"> changed
+      from </span><span class="p">${</span><span class="nx">previous</span><span class="p">}</span><span class="s2"> to </span><span class="p">${</span><span class="nx">current</span><span class="p">}</span><span class="s2">`</span>
+<span class="err">    </span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">App</span><span class="p">();</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">currentTodoItemID</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+</code></pre></div>      </div>
+
+      <p>Можно обойтись и без дополнительных npm-пакетов.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Component</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="c1">// Состояние</span>
+<span class="err">    </span><span class="kd">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="err">  </span><span class="p">}</span>
+
+<span class="err">  </span><span class="nx">setState</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Proxy</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">stateHandler</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
+
+<span class="err">  </span><span class="nx">stateHandler</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="c1">// updates the object state</span>
+<span class="err">    </span><span class="nx">target</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="err">    </span><span class="c1">// triggers the rendering</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p><a href="https://learn.javascript.ru/proxy">Ещё о прокси</a>(https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy){:target=”_blank”}</p>
     </div>
 </details>
 <details class="accordion" id="topic-classes-deprecated-constructor-function">
@@ -4096,7 +4153,7 @@ const objectName = new ClassName(arg1, arg2, etc);
     14 советов по оптимизации
   </summary>
   <div class="accordion__body">
-      <h4 id="section-75">1. Удалить неиспользуемый код и функции</h4>
+      <h4 id="section-76">1. Удалить неиспользуемый код и функции</h4>
 
       <p>Чем больше кода содержится в приложении, тем больше данных необходимо передать клиенту, а браузеру потребуется больше времени для анализа и интерпретации кода.</p>
 
@@ -4108,17 +4165,17 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Неиспользуемые пакеты npm, можно удалить командой <code class="language-plaintext highlighter-rouge">npm prune</code>.</p>
 
-      <h4 id="section-76">2. Кешировать</h4>
+      <h4 id="section-77">2. Кешировать</h4>
 
       <p>Использовать <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> или <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Caching">HTTP-кэширования</a>.</p>
 
-      <h4 id="section-77">3. Избегайте утечек памяти</h4>
+      <h4 id="section-78">3. Избегайте утечек памяти</h4>
 
       <p>Будучи языком высокого уровня, JS заботится о нескольких низкоуровневых системах управления, таких как управление памятью. Сборка мусора — это процесс, общий для большинства языков программирования. Сборка мусора с точки зрения непрофессионала — это просто сбор и освобождение памяти, которая была выделена объектам, но которая в настоящее время не используется. В таких языках программирования, как C, разработчик должен позаботиться о распределении и освобождении памяти, используя функции <code class="language-plaintext highlighter-rouge">malloc()</code> и <code class="language-plaintext highlighter-rouge">dealloc()</code>.</p>
 
       <p>Даже если сборка мусора выполняется в JavaScript автоматически, могут быть определенные случаи, когда она не будет идеальной. В JavaScript ES6 <code class="language-plaintext highlighter-rouge">Map</code> и <code class="language-plaintext highlighter-rouge">Set</code> были представлены со своими «более слабыми» братьями и сестрами. Этот «более слабый» аналог, известный как <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a> и WeakSet, содержит «слабые» ссылки на объекты. Они позволяют собирать ненужные значения и предотвращать утечки памяти.</p>
 
-      <h4 id="section-78">4. Попытайтесь выходить из циклов раньше</h4>
+      <h4 id="section-79">4. Попытайтесь выходить из циклов раньше</h4>
 
       <p>Обработка больших циклов может занять много времени. Поэтому следует выходить из них как можно раньше — с помощью ключевого слова <code class="language-plaintext highlighter-rouge">break</code> и ключевого слова <code class="language-plaintext highlighter-rouge">continue</code>.</p>
 
@@ -4146,7 +4203,7 @@ const objectName = new ClassName(arg1, arg2, etc);
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-79">5. Минимизируйте количество вычислений переменных</h4>
+      <h4 id="section-80">5. Минимизируйте количество вычислений переменных</h4>
 
       <p>Чтобы уменьшить количество вычислений переменной, вы можете использовать замыкания. С точки зрения непрофессионала, замыкания в JavaScript предоставляют доступ к области видимости внешней функции из внутренней функции. Замыкания создаются каждый раз, когда вызывается функция created-not. Внутренние функции будут иметь доступ к переменным внешней области видимости, даже после возврата внешней функции.</p>
 
@@ -4185,11 +4242,11 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Чтобы уменьшить количество раз, когда вы обращаетесь к элементу DOM, обращайтесь к нему один раз и используйте его как локальную переменную. Когда необходимость отпадет, обязательно удалите значение переменной, установив для него null. Это предотвратит утечку памяти, поскольку позволит работать процессу сбора мусора.</p>
 
-      <h4 id="section-80">7. Сожмите файлы</h4>
+      <h4 id="section-81">7. Сожмите файлы</h4>
 
       <p>Используя такие методы сжатия, как Gzip, вы можете уменьшить размер файлов JavaScript. Эти файлы поменьше приведут к увеличению производительности сайта, так как браузер должен будет загружать меньшие ресурсы. Эти сжатия могут уменьшить размер файла до 80%. Подробнее о сжатии читайте здесь.</p>
 
-      <h4 id="section-81">8. Оптимизируйте собранный код</h4>
+      <h4 id="section-82">8. Оптимизируйте собранный код</h4>
 
       <p>Некоторые люди считают, что минимизация и сжатие – это одно и то же. Вовсе нет – это разные вещи. В сжатии используются специальные алгоритмы для изменения выходного размера файла. При минимизации в JS удаляются комментарии и лишние пробелы, переменные и функции переименовываются: длинные имена заменяются однобуквенными.</p>
 
@@ -4214,13 +4271,13 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Вы также можете использовать объект Map, так как его метод <code class="language-plaintext highlighter-rouge">delete</code> работает быстрее.</p>
 
-      <h4 id="section-82">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
+      <h4 id="section-83">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
 
       <p>Вы должны знать, что JavaScript является синхронным по умолчанию, а также однопоточным. Но могут быть случаи, когда коду требуется много времени для вычислений. Будучи синхронным по своей природе, для JavaScript это будет означать, что этот фрагмент кода будет блокировать выполнение других операторов кода до тех пор, пока он не будет выполнен. Это снизит производительность в целом.</p>
 
       <p>Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises">промисами</a>.</p>
 
-      <h4 id="section-83">12.  Используйте разделение кода</h4>
+      <h4 id="section-84">12.  Используйте разделение кода</h4>
 
       <p>Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
 First Contentful Paint (FCP) измеряет, сколько времени браузеру требуется для отображения первого фрагмента содержимого DOM после перехода пользователя на вашу страницу. Изображения, небелые <canvas> элементы и SVG на странице считаются содержимым DOM; ничего внутри iframe не включено.</canvas></p>
@@ -4262,7 +4319,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
         <li><a href="https://learn.javascript.ru/call-apply-decorators">Декораторы и переадресация вызова, call/apply</a></li>
       </ul>
 
-      <h4 id="section-84">Справочники</h4>
+      <h4 id="section-85">Справочники</h4>
 
       <ul>
         <li><a href="https://thisthat.dev/" target="_blank">What is the difference</a></li>
@@ -4286,7 +4343,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221010-1157"></script>
+<script src="/assets/js/main.js?20221012-0826"></script>
 
 <script>
   hljs.highlightAll();
