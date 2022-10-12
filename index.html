@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221012-0826">
+<link rel="stylesheet" href="/assets/css/style.css?20221012-1341">
 </head>
 <body>
     <main class="main">
@@ -4875,6 +4875,8 @@ reject(true), если скрипт не загрузится — наприме
   <div class="accordion__body">
       <h4 id="intersectionobserver"><code class="language-plaintext highlighter-rouge">IntersectionObserver</code></h4>
 
+      <p>Для работы с Intersection Observer API (IOA) необходимо с помощью конструктора создать объект-наблюдатель с двумя параметрами — функцией обратного вызова и настройками.</p>
+
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span>
 <span class="err">  </span><span class="nb">window</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="dl">'</span><span class="s1">(min-width: 768px)</span><span class="dl">'</span><span class="p">).</span><span class="nx">matches</span>
 <span class="p">)</span> <span class="p">{</span>
@@ -4892,10 +4894,11 @@ reject(true), если скрипт не загрузится — наприме
 
 <span class="err">  </span><span class="kd">const</span> <span class="nx">observer</span> <span class="o">=</span>
 <span class="err">    </span><span class="k">new</span> <span class="nx">IntersectionObserver</span><span class="p">((</span><span class="nx">entries</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">      </span><span class="cm">/* В параметр `entries` передаем массив узлов,
-      которые ожидаем в поле видимости. В примере нас
-      интересует только первый, с индексом `[0]` —
-      «подвал». В условии проверяется, есть ли он
+<span class="err">      </span><span class="cm">/* В параметр `entries` передается массив
+      записей, о целевых элементах, которые попали
+      в поле видимости. В примере нас интересует
+      только первый, с индексом `[0]` — «подвал».
+      В условии проверяется, есть ли он
       в документе и видим ли сейчас в области
       просмотра. */</span>
 <span class="err">      </span><span class="k">if</span> <span class="p">(</span><span class="nx">entries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">entries</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">isIntersecting</span><span class="p">)</span> <span class="p">{</span>
@@ -4910,29 +4913,58 @@ reject(true), если скрипт не загрузится — наприме
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>Свойство <code class="language-plaintext highlighter-rouge">target</code> (<code class="language-plaintext highlighter-rouge">IntersectionObserverEntry.target</code>) позволяет определить один из множества целевых элементов в момент появления в области видимости. То есть также помогает вызвать методы нужного объекта, как и <code class="language-plaintext highlighter-rouge">event.target</code>.</p>
+      <p>Каждая запись в массиве <code class="language-plaintext highlighter-rouge">entries</code> содержит свойства  с изменениями, произошедшими с целевым элементом:</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
-<span class="err">  </span><span class="na">root</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-<span class="err">  </span><span class="na">threshold</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">entry</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="cm">/*  entry (запись) - изменение
+        entry.boundingClientRect
+        entry.intersectionRatio
+        entry.intersectionRect
+        entry.isIntersecting
+        entry.rootBounds
+        entry.target
+        entry.time */</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>В частности, свойство <code class="language-plaintext highlighter-rouge">target</code> (<code class="language-plaintext highlighter-rouge">IntersectionObserverEntry.target</code>) позволяет определить один из множества целевых элементов в момент появления в области видимости. То есть также помогает вызвать методы нужного объекта, как и <code class="language-plaintext highlighter-rouge">event.target</code>.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">observer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IntersectionObserver</span><span class="p">(</span>
+<span class="err">  </span><span class="p">(</span><span class="nx">entries</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">entry</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">      </span><span class="k">if</span> <span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">intersectionRatio</span> <span class="o">&gt;=</span> <span class="mf">0.15</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">        </span><span class="c1">// It's magic</span>
+<span class="err">        </span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">is-my-hero</span><span class="dl">'</span><span class="p">);</span>
+<span class="err">      </span><span class="p">}</span>
+<span class="err">    </span><span class="p">});</span>
+<span class="err">  </span><span class="p">},</span>
+<span class="err">  </span><span class="p">{</span> <span class="nl">threshold</span><span class="p">:</span> <span class="mf">0.15</span> <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>Если объект-наблюдатель должен отслеживать один UI-компонент, в параметр <code class="language-plaintext highlighter-rouge">callback</code>‘a можно передавать первый и единственный элемент массива — <code class="language-plaintext highlighter-rouge">([entry]) =&gt; {/*...*/}</code>. Цикл не нужен.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">toggleTitleStyle</span> <span class="o">=</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">const</span> <span class="nx">observer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IntersectionObserver</span><span class="p">(</span>
+<span class="err">    </span><span class="p">([</span><span class="nx">entry</span><span class="p">])</span> <span class="o">=&gt;</span>
+<span class="err">      </span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span>
+<span class="err">        </span><span class="dl">'</span><span class="s1">is-pinned</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">intersectionRatio</span> <span class="o">&lt;</span> <span class="mi">1</span>
+<span class="err">      </span><span class="p">),</span>
+<span class="err">    </span><span class="p">{</span> <span class="na">threshold</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">}</span>
+<span class="err">  </span><span class="p">);</span>
+
+<span class="err">  </span><span class="nx">observer</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
 <span class="p">};</span>
 
-<span class="kd">const</span> <span class="nx">observer</span> <span class="o">=</span>
-<span class="err">  </span><span class="k">new</span> <span class="nx">IntersectionObserver</span><span class="p">((</span><span class="nx">entries</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">  </span><span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">entry</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-<span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">intersectionRatio</span> <span class="o">&gt;=</span> <span class="mf">0.15</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// It's magic</span>
-<span class="err">      </span><span class="nx">entry</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">is-my-hero</span><span class="dl">'</span><span class="p">);</span>
-<span class="err">    </span><span class="p">}</span>
-<span class="err">  </span><span class="p">});</span>
-<span class="p">},</span> <span class="nx">settings</span><span class="p">);</span>
 </code></pre></div>      </div>
 
       <p>Материалы по теме:</p>
 
       <ul>
         <li><a href="https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API" target="_blank">Intersection Observer API</a>.</li>
-        <li><a href="https://habr.com/ru/post/494670/" target="_blank"></a>.</li>
+        <li><a href="https://habr.com/ru/post/494670/" target="_blank">Intersection Observer API: примеры использования
+</a>.</li>
       </ul>
 
       <h4 id="section-101">Альтернативный способ</h4>
@@ -5787,7 +5819,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221012-0826"></script>
+<script src="/assets/js/main.js?20221012-1341"></script>
 
 <script>
   hljs.highlightAll();
