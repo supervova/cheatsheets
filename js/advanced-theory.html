@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221012-1341">
+<link rel="stylesheet" href="/assets/css/style.css?20221013-0630">
 </head>
 <body>
     <main class="main">
@@ -540,9 +540,6 @@
 <span class="err">    </span><span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="err">    </span><span class="k">break</span><span class="p">;</span>
 <span class="err">  </span><span class="k">default</span><span class="p">:</span>
-<span class="err">    </span><span class="cm">/**
-     * JSDoc
-     */</span>
 <span class="err">    </span><span class="kd">class</span> <span class="nx">C</span> <span class="p">{}</span>
 <span class="p">}</span>
 
@@ -560,9 +557,6 @@
 <span class="err">    </span><span class="nx">bar</span><span class="p">();</span>
 <span class="err">    </span><span class="k">break</span><span class="p">;</span>
 <span class="err">  </span><span class="k">default</span><span class="p">:</span> <span class="p">{</span>
-<span class="err">    </span><span class="cm">/**
-     * JSDoc
-     */</span>
 <span class="err">    </span><span class="kd">class</span> <span class="nx">C</span> <span class="p">{}</span>
 <span class="err">  </span><span class="p">}</span>
 <span class="p">}</span>
@@ -944,14 +938,7 @@ Date. Затем присваиваем переменной переменно�
 
       <p>Параметры со значениями по умолчанию пишутся в конце, после обычных параметров — так чтобы функция возвращала <code class="language-plaintext highlighter-rouge">undefined</code> только в случае пропуска всех аргументов.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- *
- * @param {string} name
- * @param {number} height
- * @param {number} weight
- */</span>
-<span class="kd">const</span> <span class="nx">sayMyHeight</span> <span class="o">=</span> <span class="p">(</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sayMyHeight</span> <span class="o">=</span> <span class="p">(</span>
 <span class="err">  </span><span class="nx">name</span><span class="p">,</span>
 <span class="err">  </span><span class="nx">height</span> <span class="o">=</span> <span class="mi">186</span><span class="p">,</span>
 <span class="err">  </span><span class="nx">weight</span> <span class="o">=</span> <span class="mi">96</span>
@@ -967,11 +954,7 @@ Date. Затем присваиваем переменной переменно�
 
       <p>Параметры по умолчанию могут быть любого типа: строками, числами, булевыми значениями, объектами…</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- * @param {object} opts
- */</span>
-<span class="kd">function</span> <span class="nx">findProducts</span><span class="p">(</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">findProducts</span><span class="p">(</span>
 <span class="err">  </span><span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span> <span class="na">minPrice</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span>
 <span class="p">)</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">opts</span><span class="p">);</span>
@@ -987,12 +970,8 @@ Date. Затем присваиваем переменной переменно�
 
       <p>…и выражениями.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- * @param {function} who
- */</span>
-<span class="kd">function</span> <span class="nx">sayHi</span><span class="p">(</span>
-<span class="nx">who</span> <span class="o">=</span> <span class="nx">getCurrentUser</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">()</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sayHi</span><span class="p">(</span>
+<span class="err">  </span><span class="nx">who</span> <span class="o">=</span> <span class="nx">getCurrentUser</span><span class="p">().</span><span class="nx">toUpperCase</span><span class="p">()</span>
 <span class="p">)</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`Привет, </span><span class="p">${</span><span class="nx">who</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 <span class="p">}</span>
@@ -1414,12 +1393,7 @@ Date. Затем присваиваем переменной переменно�
 
       <p>Записываются как произвольное имя после трех точек. Может быть, как единственным параметром, так и одним из нескольких. Во втором случае записывается последним.</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- * @param {string} name
- * @param {*} marks
- */</span>
-<span class="kd">const</span> <span class="nx">pupil</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">...</span><span class="nx">marks</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">pupil</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">...</span><span class="nx">marks</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 <span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 <span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">marks</span><span class="p">);</span>
 <span class="p">};</span>
@@ -3526,7 +3500,9 @@ enumerable: true, configurable: true } */</span>
   <div class="accordion__body">
       <p>Класс — это шаблон для однотипных объектов, «экземпляров класса». Особый тип функции, для запуска которого вместо ключевого слова <code class="language-plaintext highlighter-rouge">function</code> используется ключевое слово <code class="language-plaintext highlighter-rouge">class</code>.</p>
 
-      <p>Содержит метод <code class="language-plaintext highlighter-rouge">constructor</code>, — конструктор объектов — в котором создаются заготовки свойств, которые затем наследуются экземплярами.</p>
+      <p>Содержит метод <code class="language-plaintext highlighter-rouge">constructor</code>, в котором создаются заготовки свойств, которые затем наследуются экземплярами.</p>
+
+      <p>Также может другие методы — функции для взаимодействия с внешним кодом.</p>
 
       <p>Наследуемые свойства и методы всегда можно переопределить в экземпляре. Кроме того, можно добавить уникальные.</p>
 
@@ -3534,54 +3510,66 @@ enumerable: true, configurable: true } */</span>
 
       <p>А сама идея классов пришла из работ по базам знаний. Используемые человеком классификации в зоологии, ботанике, химии несут в себе основную идею, что любую вещь всегда можно представить частным случаем некоторого более общего понятия. Конкретное яблоко, the apple является и яблоком вообще, an apple. А «яблоко вообще» является фруктом.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Название</span> <span class="p">[</span><span class="kd">extends</span> <span class="nx">Родитель</span><span class="p">]</span>  <span class="p">{</span>
-  <span class="kd">constructor</span>
-  <span class="nx">методы</span>
+      <h4 id="section-67">Синтаксис</h4>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ClassName</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">property1</span> <span class="o">=</span> <span class="nx">param1</span><span class="p">;</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">property2</span> <span class="o">=</span> <span class="nx">param2</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="err">  </span><span class="nx">method1</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="err">  </span><span class="nx">method2</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="err">  </span><span class="nx">method3</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-67">Новый класс</h4>
+      <p>С наследованием от другого класса.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ClassName</span> <span class="kd">extends</span> <span class="nx">Parent</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">super</span><span class="p">();</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">property1</span> <span class="o">=</span> <span class="nx">param1</span><span class="p">;</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">property2</span> <span class="o">=</span> <span class="nx">param2</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="err">  </span><span class="nx">method1</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="err">  </span><span class="nx">method2</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="err">  </span><span class="nx">method3</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+
+      <h4 id="section-68">Пример</h4>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * ESLint: Класс, конструктор и другие методы
- * класса должны объясняться в JSDoc.
  * Имя класса начинается в прописной буквы.
+ * Кстати, Google рекомендует комментировать классы
+ * и их методы в формате
+ * {@link https://bit.ly/3VmBtGa JSDoc}.
  */</span>
 <span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span>
-  <span class="cm">/**
-   * Конструктор объектов - это метод для создания
-   * экземпляров класса. Параметры конструктора
-   * соответствуют свойствам экземпляров.
-   * @param {*} name
-   */</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/* Ключевое слово this в конструкторе ссылается
-    на создаваемый новый объект.
-    Название параметров конструктора и свойств
-    класса не обязаны совпадать, но часто
-    совпадают — это удобное соглашение.
-    Конструктор ничего не возвращает */</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="cm">/* Ключевое слово this в конструкторе ссылается
+    на создаваемый новый объект.
+    Название параметров конструктора и свойств
+    класса не обязаны совпадать, но часто
+    совпадают — это удобное соглашение.
+    Конструктор ничего не возвращает */</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
 
-  <span class="cm">/**
-   * JSDoc
-   * Перед названием метода this не нужна.
-   * При вызове метода (см. ниже) в его параметры
-   * можно передать аргументы для расчётов.
-   */</span>
-  <span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="err">  </span><span class="cm">/**
+   * Класс состоит из методов. constructor — метод
+   * для заготовки свойств, sayHi() - метод для
+   * примера.
+   */</span>
+<span class="err">  </span><span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
 
-  <span class="c1">// Запятые между членами класса не нужны.</span>
+<span class="err">  </span><span class="c1">// Запятые между членами класса не нужны.</span>
 
-  <span class="cm">/**
-   * JSDoc
-   */</span>
-  <span class="nx">sayBye</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">`Bye, </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="err">  </span><span class="nx">sayBye</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">`Bye, </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
 
@@ -3589,37 +3577,7 @@ enumerable: true, configurable: true } */</span>
 
       <p>Класс создали, как удобную замену <a href="/js/advanced-theory.html#topic-classes-deprecated-constructor-function">самодельным классам</a>, которые программисты создавали с помощью свойства <code class="language-plaintext highlighter-rouge">prototype</code>.</p>
 
-      <h4 id="section-68">Синтаксис класса без длинных комментариев</h4>
-
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- */</span>
-<span class="kd">class</span> <span class="nx">myClass</span> <span class="p">{</span>
-  <span class="cm">/**
-   * @param {*} param
-   */</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">param</span> <span class="o">=</span> <span class="nx">param</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="cm">/**
-   * JSDoc
-   */</span>
-  <span class="nx">myMethod</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">param</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">brand</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="nx">present</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="dl">'</span><span class="s1">I have an </span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">brand</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>      </div>
+      <h4 id="section-69">Экземпляр класса</h4>
 
       <p>Для создания экземпляра используется оператор <code class="language-plaintext highlighter-rouge">new</code>, за которым следует имея класса. Значения свойств передаются в параметры. По-программистски можно назвать команду «вызовом конструктора».</p>
 
@@ -3632,18 +3590,18 @@ enumerable: true, configurable: true } */</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myCar</span><span class="p">.</span><span class="nx">present</span><span class="p">());</span> <span class="c1">// I have an Audi</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-69">Не стоит создавать класс ради одного экземпляра</h4>
+      <h4 id="section-70">Не стоит создавать класс ради одного экземпляра</h4>
 
       <p>Классы применяются, когда надо создать множество однотипных объектов. Но <strong>когда объект нужен один, предпочтительнее создавать объект</strong> (объектный литерал). Кроме того, объектные литералы используются для передачи конструкторам параметров — когда параметров больше трех, легко спутать их порядок.</p>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">newCar</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">make</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GM</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">model</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cadillac</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">year</span><span class="p">:</span> <span class="mi">1955</span><span class="p">,</span>
-  <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tan</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">passengers</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-  <span class="na">convertible</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="na">mileage</span><span class="p">:</span> <span class="mi">12892</span><span class="p">,</span>
+<span class="err">  </span><span class="na">make</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GM</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">model</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cadillac</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">year</span><span class="p">:</span> <span class="mi">1955</span><span class="p">,</span>
+<span class="err">  </span><span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tan</span><span class="dl">'</span><span class="p">,</span>
+<span class="err">  </span><span class="na">passengers</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+<span class="err">  </span><span class="na">convertible</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="err">  </span><span class="na">mileage</span><span class="p">:</span> <span class="mi">12892</span><span class="p">,</span>
 <span class="p">};</span>
 
 </code></pre></div>      </div>
@@ -3652,16 +3610,10 @@ enumerable: true, configurable: true } */</span>
 
       <p>Классы можно записать, как функциональное выражение, — присвоив переменной. Это называется Class Expression (выражение класса).</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- */</span>
-<span class="kd">const</span> <span class="nx">User2</span> <span class="o">=</span> <span class="kd">class</span> <span class="p">{</span>
-  <span class="cm">/**
-   * JSDoc
-   */</span>
-  <span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-  <span class="p">}</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="kd">class</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="err">  </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>      </div>
 
@@ -3669,49 +3621,41 @@ enumerable: true, configurable: true } */</span>
 
       <p>Наиболее очевидная область применения этой возможности – создание вспомогательного класса прямо при вызове функции.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- */</span>
-<span class="kd">const</span> <span class="nx">SiteGuest</span> <span class="o">=</span> <span class="kd">class</span> <span class="nx">User3</span> <span class="p">{</span>
-  <span class="cm">/**
-   * JSDoc
-   */</span>
-  <span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="p">}</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SiteGuest</span> <span class="o">=</span> <span class="kd">class</span> <span class="nx">User3</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">sayHi</span><span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="k">new</span> <span class="nx">SiteGuest</span><span class="p">().</span><span class="nx">sayHi</span><span class="p">();</span> <span class="c1">// Привет</span>
 <span class="k">new</span> <span class="nx">User3</span><span class="p">();</span> <span class="c1">// ошибка</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-70">Статические свойства</h4>
+      <h4 id="section-71">Статические методы</h4>
 
-      <p>Это <strong>методы</strong> класса, которые можно вызывать через точку. Для их объявления используется ключевое слово <code class="language-plaintext highlighter-rouge">static</code>. Как правило, они используются для операций, не требующих создания уникального объекта. Например, как в примере — создается объект с ранее заготовленными свойствами.</p>
+      <p>Статические методы класса описывают внутреннюю логику класса. Статический метод можно вызвать на классе, но <strong>нельзя вызвать на экземпляре класса</strong>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- */</span>
-<span class="kd">class</span> <span class="nx">User4</span> <span class="p">{</span>
-  <span class="cm">/**
-   * JSDoc
-   * @param {string} firstName
-   * @param {string} lastName
-   */</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">firstName</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">lastName</span><span class="p">;</span>
-  <span class="p">}</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+<span class="err">  </span><span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
 
-  <span class="cm">/**
-   * JSDoc
-   * @return {Object}
-   */</span>
-  <span class="kd">static</span> <span class="nx">createGuest</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="dl">'</span><span class="s1">Гость</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">сайта</span><span class="dl">'</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="err">  </span><span class="kd">static</span> <span class="nx">hello</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">    </span><span class="k">return</span> <span class="dl">'</span><span class="s1">Hello!!</span><span class="dl">'</span><span class="p">;</span>
+<span class="err">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">const</span> <span class="nx">user4</span> <span class="o">=</span> <span class="nx">User4</span><span class="p">.</span><span class="nx">createGuest</span><span class="p">();</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">user4</span><span class="p">.</span><span class="nx">firstName</span><span class="p">);</span> <span class="c1">// Гость</span>
+<span class="kd">const</span> <span class="nx">myCar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="dl">'</span><span class="s1">Ford</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="cm">/* Мы можем вызвать статический метод на самом
+классе */</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">demo</span><span class="dl">'</span><span class="p">).</span><span class="nx">innerHTML</span>
+<span class="err">  </span><span class="o">=</span> <span class="nx">Car</span><span class="p">.</span><span class="nx">hello</span><span class="p">();</span>
+
+<span class="cm">/* ⚠️ Но не можем на экземпляре класса.
+Это вызовет ошибку.
+
+document.getElementById("demo").innerHTML
+  = myCar.hello();
+ */</span>
 </code></pre></div>      </div>
     </div>
 </details>
@@ -3722,11 +3666,7 @@ enumerable: true, configurable: true } */</span>
   <div class="accordion__body">
       <p>Для наследования свойств и методов от другого класса при создании нового используется ключевое слово <code class="language-plaintext highlighter-rouge">extends</code>. В конструктор принимаются наследуемые свойства с помощью метода <code class="language-plaintext highlighter-rouge">super()</code>.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- *
- * JSDoc
- */</span>
-<span class="kd">class</span> <span class="nx">SuperUser</span> <span class="kd">extends</span> <span class="nx">User</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">SuperUser</span> <span class="kd">extends</span> <span class="nx">User</span> <span class="p">{</span>
   <span class="cm">/**
    * Новые свойства можно добавлять только после
    * получения наследуемых с помощью `super()`.
@@ -3901,7 +3841,7 @@ enumerable: true, configurable: true } */</span>
   <div class="accordion__body">
       <p>Один из важнейших принципов объектно-ориентированного программирования – разделение свойств и методов на 2 группы.</p>
 
-      <h4 id="section-71">Внутренний и внешний интерфейсы</h4>
+      <h4 id="section-72">Внутренний и внешний интерфейсы</h4>
 
       <p>В JavaScript есть два типа полей (свойств и методов) объекта:</p>
 
@@ -3914,7 +3854,7 @@ enumerable: true, configurable: true } */</span>
 
       <p>В JS таких пока нет. Зато приватные поля официально добавлены в JavaScript в спецификации ECMAScript 2022 и поддерживаются <a href="https://caniuse.com/mdn-javascript_classes_private_class_fields">97% браузеров</a>.</p>
 
-      <h4 id="section-72">Приватные поля</h4>
+      <h4 id="section-73">Приватные поля</h4>
 
       <p>Названия приватных полей — свойств и методов — начинаются со знака решетки. И отдают ошибку при попытки обращения к ним из-за пределов класса.</p>
 
@@ -3961,10 +3901,7 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Пример.</p>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * JSDoc
- */</span>
-<span class="kd">class</span> <span class="nx">Person</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Person</span> <span class="p">{</span>
 <span class="err">  </span><span class="cm">/**
    * @param {string} firstName
    * @param {string} lastName
@@ -3982,7 +3919,7 @@ const objectName = new ClassName(arg1, arg2, etc);
 <span class="kd">const</span> <span class="nx">susan</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Susan</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jordan</span><span class="dl">'</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-73">Создание массива объектов с использованием класса</h4>
+      <h4 id="section-74">Создание массива объектов с использованием класса</h4>
 
       <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">family</span> <span class="o">=</span> <span class="p">[</span>
 <span class="err">  </span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">'</span><span class="s1">Alice</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
@@ -4053,7 +3990,7 @@ const objectName = new ClassName(arg1, arg2, etc);
         <li><a href="/js/how-to.html#topic-stateful-counter">Счётчик</a></li>
       </ul>
 
-      <h4 id="section-74">Планирование компонента — вопросы, которые надо себе задавать перед тем, как начать писать код</h4>
+      <h4 id="section-75">Планирование компонента — вопросы, которые надо себе задавать перед тем, как начать писать код</h4>
 
       <ul>
         <li>Как мы собираемся в странице выбирать один компонент из множества и не загрязнить глобальное пространство имен?</li>
@@ -4062,7 +3999,7 @@ const objectName = new ClassName(arg1, arg2, etc);
         <li>Как мы будем удалять компонент и обработчики событий, когда они перестанут быть нужными?</li>
       </ul>
 
-      <h4 id="section-75">Прокси</h4>
+      <h4 id="section-76">Прокси</h4>
 
       <p>Для отслеживания изменений во фреймворках используются <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank">прокси</a> — объект, который «оборачивается» вокруг другого объекта и может перехватывать (и, при желании, самостоятельно обрабатывать) разные действия с ним — в частности, чтение/запись свойств.</p>
 
@@ -4153,7 +4090,7 @@ const objectName = new ClassName(arg1, arg2, etc);
     14 советов по оптимизации
   </summary>
   <div class="accordion__body">
-      <h4 id="section-76">1. Удалить неиспользуемый код и функции</h4>
+      <h4 id="section-77">1. Удалить неиспользуемый код и функции</h4>
 
       <p>Чем больше кода содержится в приложении, тем больше данных необходимо передать клиенту, а браузеру потребуется больше времени для анализа и интерпретации кода.</p>
 
@@ -4165,17 +4102,17 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Неиспользуемые пакеты npm, можно удалить командой <code class="language-plaintext highlighter-rouge">npm prune</code>.</p>
 
-      <h4 id="section-77">2. Кешировать</h4>
+      <h4 id="section-78">2. Кешировать</h4>
 
       <p>Использовать <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> или <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Caching">HTTP-кэширования</a>.</p>
 
-      <h4 id="section-78">3. Избегайте утечек памяти</h4>
+      <h4 id="section-79">3. Избегайте утечек памяти</h4>
 
       <p>Будучи языком высокого уровня, JS заботится о нескольких низкоуровневых системах управления, таких как управление памятью. Сборка мусора — это процесс, общий для большинства языков программирования. Сборка мусора с точки зрения непрофессионала — это просто сбор и освобождение памяти, которая была выделена объектам, но которая в настоящее время не используется. В таких языках программирования, как C, разработчик должен позаботиться о распределении и освобождении памяти, используя функции <code class="language-plaintext highlighter-rouge">malloc()</code> и <code class="language-plaintext highlighter-rouge">dealloc()</code>.</p>
 
       <p>Даже если сборка мусора выполняется в JavaScript автоматически, могут быть определенные случаи, когда она не будет идеальной. В JavaScript ES6 <code class="language-plaintext highlighter-rouge">Map</code> и <code class="language-plaintext highlighter-rouge">Set</code> были представлены со своими «более слабыми» братьями и сестрами. Этот «более слабый» аналог, известный как <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a> и WeakSet, содержит «слабые» ссылки на объекты. Они позволяют собирать ненужные значения и предотвращать утечки памяти.</p>
 
-      <h4 id="section-79">4. Попытайтесь выходить из циклов раньше</h4>
+      <h4 id="section-80">4. Попытайтесь выходить из циклов раньше</h4>
 
       <p>Обработка больших циклов может занять много времени. Поэтому следует выходить из них как можно раньше — с помощью ключевого слова <code class="language-plaintext highlighter-rouge">break</code> и ключевого слова <code class="language-plaintext highlighter-rouge">continue</code>.</p>
 
@@ -4203,7 +4140,7 @@ const objectName = new ClassName(arg1, arg2, etc);
 <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <h4 id="section-80">5. Минимизируйте количество вычислений переменных</h4>
+      <h4 id="section-81">5. Минимизируйте количество вычислений переменных</h4>
 
       <p>Чтобы уменьшить количество вычислений переменной, вы можете использовать замыкания. С точки зрения непрофессионала, замыкания в JavaScript предоставляют доступ к области видимости внешней функции из внутренней функции. Замыкания создаются каждый раз, когда вызывается функция created-not. Внутренние функции будут иметь доступ к переменным внешней области видимости, даже после возврата внешней функции.</p>
 
@@ -4242,11 +4179,11 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Чтобы уменьшить количество раз, когда вы обращаетесь к элементу DOM, обращайтесь к нему один раз и используйте его как локальную переменную. Когда необходимость отпадет, обязательно удалите значение переменной, установив для него null. Это предотвратит утечку памяти, поскольку позволит работать процессу сбора мусора.</p>
 
-      <h4 id="section-81">7. Сожмите файлы</h4>
+      <h4 id="section-82">7. Сожмите файлы</h4>
 
       <p>Используя такие методы сжатия, как Gzip, вы можете уменьшить размер файлов JavaScript. Эти файлы поменьше приведут к увеличению производительности сайта, так как браузер должен будет загружать меньшие ресурсы. Эти сжатия могут уменьшить размер файла до 80%. Подробнее о сжатии читайте здесь.</p>
 
-      <h4 id="section-82">8. Оптимизируйте собранный код</h4>
+      <h4 id="section-83">8. Оптимизируйте собранный код</h4>
 
       <p>Некоторые люди считают, что минимизация и сжатие – это одно и то же. Вовсе нет – это разные вещи. В сжатии используются специальные алгоритмы для изменения выходного размера файла. При минимизации в JS удаляются комментарии и лишние пробелы, переменные и функции переименовываются: длинные имена заменяются однобуквенными.</p>
 
@@ -4271,13 +4208,13 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <p>Вы также можете использовать объект Map, так как его метод <code class="language-plaintext highlighter-rouge">delete</code> работает быстрее.</p>
 
-      <h4 id="section-83">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
+      <h4 id="section-84">11. Используйте асинхронный код для предотвращения блокировки потоков</h4>
 
       <p>Вы должны знать, что JavaScript является синхронным по умолчанию, а также однопоточным. Но могут быть случаи, когда коду требуется много времени для вычислений. Будучи синхронным по своей природе, для JavaScript это будет означать, что этот фрагмент кода будет блокировать выполнение других операторов кода до тех пор, пока он не будет выполнен. Это снизит производительность в целом.</p>
 
       <p>Но мы можем предотвратить эту ситуацию, внедрив асинхронный код. Асинхронный код был ранее написан в форме обратных вызовов, но с ES6 был введен новый стиль обработки асинхронного кода. Этот новый стиль был назван <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Using_promises">промисами</a>.</p>
 
-      <h4 id="section-84">12.  Используйте разделение кода</h4>
+      <h4 id="section-85">12.  Используйте разделение кода</h4>
 
       <p>Если у вас есть опыт работы с Google Lighthouse, вы знакомы с метрикой, которая называется «первое значимое отображение». Это один из шести показателей, отслеживаемых в разделе «Производительность» отчета Light House.
 First Contentful Paint (FCP) измеряет, сколько времени браузеру требуется для отображения первого фрагмента содержимого DOM после перехода пользователя на вашу страницу. Изображения, небелые <canvas> элементы и SVG на странице считаются содержимым DOM; ничего внутри iframe не включено.</canvas></p>
@@ -4319,7 +4256,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
         <li><a href="https://learn.javascript.ru/call-apply-decorators">Декораторы и переадресация вызова, call/apply</a></li>
       </ul>
 
-      <h4 id="section-85">Справочники</h4>
+      <h4 id="section-86">Справочники</h4>
 
       <ul>
         <li><a href="https://thisthat.dev/" target="_blank">What is the difference</a></li>
@@ -4343,7 +4280,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221012-1341"></script>
+<script src="/assets/js/main.js?20221013-0630"></script>
 
 <script>
   hljs.highlightAll();
