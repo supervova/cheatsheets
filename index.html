@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221013-0630">
+<link rel="stylesheet" href="/assets/css/style.css?20221103-0742">
 </head>
 <body>
     <main class="main">
@@ -4104,6 +4104,61 @@ reject(true), если скрипт не загрузится — наприме
 </details>
 <details class="accordion">
   <summary class="accordion__header">
+    Событие прокрутки
+  </summary>
+  <div class="accordion__body">
+      <p>Можно отслеживать прокрутку, как всего документа…</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">scroll</span><span class="dl">'</span><span class="p">,(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Scrolling...</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// или</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onscroll</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Прокрутка...</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>      </div>
+
+      <p>…Так и элемента с прокруткой (<code class="language-plaintext highlighter-rouge">overflow: visible | auto</code>).</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myEl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">scroll</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Прокрутка...</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>      </div>
+
+      <p>Для снижения потребления вычислительных мощностей при обработке события прокрутки желательно использовать технику <code class="language-plaintext highlighter-rouge">throttling</code>: «тормозящий декоратор» — функцию-обёртку ограничивающую вызовы в «обёрнутую» функцию.</p>
+
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// По умолчанию, снимаем флаг «прокрутка»</span>
+<span class="kd">let</span> <span class="nx">scrolling</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="c1">// Во время прокрутки флаг устанавливаем</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">scroll</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="nx">scrolling</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/* Исполняем на прокрутке обработчик не постоянно,
+а только каждые 300мс */</span>
+<span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="err">  </span><span class="k">if</span> <span class="p">(</span><span class="nx">scrolling</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="nx">scrolling</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="err">    </span><span class="cm">/* Здесь описываем логику обработки
+    прокрутки - это будет основная,
+    «обёрнутая» функция */</span>
+<span class="err">  </span><span class="p">}</span>
+<span class="p">},</span> <span class="mi">300</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+      <p>В обработчиках прокрутки часто используются:</p>
+
+      <ul>
+        <li>в случае объекта <code class="language-plaintext highlighter-rouge">window</code> — свойства <a href="https://www.w3schools.com/jsref/prop_win_scrollx.asp" target="_blank"><code class="language-plaintext highlighter-rouge">scrollX</code></a>, <a href="https://www.w3schools.com/jsref/prop_win_scrolly.asp" target="_blank">scrollY</a> и методы <a href="https://www.w3schools.com/jsref/met_win_scrollby.asp" target="_blank"><code class="language-plaintext highlighter-rouge">scrollBy()</code></a>, <a href="https://www.w3schools.com/jsref/met_win_scrollto.asp" target="_blank"><code class="language-plaintext highlighter-rouge">scrollTo()</code></a></li>
+        <li>в случае прокручиваемого элемента - свойства <a href="https://www.w3schools.com/jsref/prop_element_scrolltop.asp" target="_blank"><code class="language-plaintext highlighter-rouge">scrollTop</code></a> и <a href="https://www.w3schools.com/jsref/prop_element_scrollleft.asp" target="_blank"><code class="language-plaintext highlighter-rouge">scrollLeft</code></a>.</li>
+      </ul>
+    </div>
+</details>
+<details class="accordion">
+  <summary class="accordion__header">
     Кликнул ли пользователь за границами элемента?
   </summary>
   <div class="accordion__body">
@@ -5819,7 +5874,7 @@ reject(true), если скрипт не загрузится — наприме
         <li><a href="https://learn.javascript.ru/" target="_blank" rel="noopener noreferrer">Современного учебника JavaScript</a>,</li><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221013-0630"></script>
+<script src="/assets/js/main.js?20221103-0742"></script>
 
 <script>
   hljs.highlightAll();

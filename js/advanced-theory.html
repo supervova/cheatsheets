@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto:wght@400;500&display=swap">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/mono-blue.css">
-<link rel="stylesheet" href="/assets/css/style.css?20221013-0630">
+<link rel="stylesheet" href="/assets/css/style.css?20221103-0742">
 </head>
 <body>
     <main class="main">
@@ -3657,6 +3657,8 @@ document.getElementById("demo").innerHTML
   = myCar.hello();
  */</span>
 </code></pre></div>      </div>
+
+      <p>Можно посылать</p>
     </div>
 </details>
 <details class="accordion" id="topic-classes-inheritance">
@@ -4189,14 +4191,13 @@ const objectName = new ClassName(arg1, arg2, etc);
 
       <h4 id="throttling--debouncing">9. Используйте <code class="language-plaintext highlighter-rouge">throttling</code> и <code class="language-plaintext highlighter-rouge">debouncing</code></h4>
 
-      <p>Используя эти два метода, мы можем строго следить за тем, сколько раз событие должно обрабатываться кодом.
-При <code class="language-plaintext highlighter-rouge">throttling</code> указывается максимальное количество раз, когда функция может быть вызвана. Например, «выполнять функцию события <code class="language-plaintext highlighter-rouge">onkeyup</code> не чаще, чем раз в 1000 миллисекунд». Это будет означать, что если вы нажмете клавиши 20 раз в секунду, событие будет срабатывать только один раз в секунду. Это уменьшит нагрузку на код.</p>
+      <p>Используя эти два метода, мы можем строго следить за тем, сколько раз событие должно обрабатываться кодом.</p>
+
+      <p>При <code class="language-plaintext highlighter-rouge">throttling</code> (<a href="https://learn.javascript.ru/task/throttle">встречается перевод «тормозящий»</a>) указывается максимальное количество раз, когда функция может быть вызвана. Например, «выполнять функцию события <code class="language-plaintext highlighter-rouge">onkeyup</code> не чаще, чем раз в 1000 миллисекунд». Это будет означать, что если вы нажмете клавиши 20 раз в секунду, событие будет срабатывать только один раз в секунду. Это уменьшит нагрузку на код.</p>
 
       <p><a href="/js/advanced-theory.html#topic-dom-window-ready-load-resize">С другой стороны, <code class="language-plaintext highlighter-rouge">debouncing</code></a> — это то, где вы указываете минимальную продолжительность времени для повторного запуска функции с момента предыдущего выполнения той же функции. Другими словами, «выполняйте эту функцию, только если прошло 600 миллисекунд без ее вызова».</p>
 
-      <p>Вы можете реализовать собственные функции <code class="language-plaintext highlighter-rouge">debounce</code> и <code class="language-plaintext highlighter-rouge">throttle</code>. Последний, используется чаще, так как является более универсальным.</p>
-
-      <p>Также можно импортировать готовые функции из библиотеки Lodash (<a href="https://www.sitepoint.com/throttle-scroll-events/">предпочтительный метод</a>). <code class="language-plaintext highlighter-rouge">Импортировать можно при сборке Webpack'ом</code>(https://stackoverflow.com/questions/35250500/correct-way-to-import-lodash), который включает loadash.</p>
+      <p>Можно написать <a href="https://gomakethings.com/debouncing-vs.-throttling-with-vanilla-js/" target="_blank">собственные функции <code class="language-plaintext highlighter-rouge">debounce</code> и <code class="language-plaintext highlighter-rouge">throttle</code></a> — первая проще, вторая универсальная. А можно импортировать <a href="https://www.sitepoint.com/throttle-scroll-events/" target="_blank">готовые функции из библиотеки Lodash</a>. Импортировать можно <a href="https://stackoverflow.com/questions/35250500/correct-way-to-import-lodash" target="_blank">при сборке Webpack’ом</a>, который включает loadash.</p>
 
       <h4 id="delete">10. Избегайте использования ключевого слова delete</h4>
 
@@ -4280,7 +4281,7 @@ First Contentful Paint (FCP) измеряет, сколько времени б�
   <ul class="footer__credits"><li><a href="https://htmldom.dev/" target="_blank" rel="noopener noreferrer">HTML DOM</a>.</li></ul>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-<script src="/assets/js/main.js?20221013-0630"></script>
+<script src="/assets/js/main.js?20221103-0742"></script>
 
 <script>
   hljs.highlightAll();
