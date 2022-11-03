@@ -7,13 +7,6 @@ const myFunc = (x = 'Икс', y = 100) => x + y;
 Параметры со значениями по умолчанию пишутся в конце, после обычных параметров — так чтобы функция возвращала `undefined` только в случае пропуска всех аргументов.
 
 ```js
-/**
- * JSDoc
- *
- * @param {string} name
- * @param {number} height
- * @param {number} weight
- */
 const sayMyHeight = (
   name,
   height = 186,
@@ -31,10 +24,6 @@ sayMyHeight('Vova');
 Параметры по умолчанию могут быть любого типа: строками, числами, булевыми значениями, объектами…
 
 ```js
-/**
- * JSDoc
- * @param {object} opts
- */
 function findProducts(
   opts = { minPrice: 10, maxPrice: 20 },
 ) {
@@ -52,12 +41,8 @@ findProducts({});
 …и выражениями.
 
 ```js
-/**
- * JSDoc
- * @param {function} who
- */
 function sayHi(
-who = getCurrentUser().toUpperCase()
+  who = getCurrentUser().toUpperCase()
 ) {
   alert(`Привет, ${who}`);
 }

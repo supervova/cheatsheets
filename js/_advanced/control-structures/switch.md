@@ -12,9 +12,6 @@ switch (foo) {
     const y = 2;
     break;
   default:
-    /**
-     * JSDoc
-     */
     class C {}
 }
 
@@ -32,9 +29,6 @@ switch (foo) {
     bar();
     break;
   default: {
-    /**
-     * JSDoc
-     */
     class C {}
   }
 }

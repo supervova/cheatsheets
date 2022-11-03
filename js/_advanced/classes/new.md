@@ -5,9 +5,6 @@ const objectName = new ClassName(arg1, arg2, etc);
 Пример.
 
 ```javascript
-/**
- * JSDoc
- */
 class Person {
   /**
    * @param {string} firstName

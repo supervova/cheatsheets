@@ -47,6 +47,10 @@ const app = document.querySelector('#app');
 app.innerHTML = greeting();
 ```
 
+См. также примеры:
+
+- [Счётчик](/js/how-to.html#topic-stateful-counter)
+
 #### Планирование компонента — вопросы, которые надо себе задавать перед тем, как начать писать код
 
 - Как мы собираемся в странице выбирать один компонент из множества и не загрязнить глобальное пространство имен?
@@ -54,6 +58,61 @@ app.innerHTML = greeting();
 - Как мы будем сохранять и контролировать внутреннее состояние компонента?
 - Как мы будем удалять компонент и обработчики событий, когда они перестанут быть нужными?
 
-См. примеры:
+#### Прокси
 
-- [Счётчик](/js/how-to.html#topic-stateful-counter)
+Для отслеживания изменений во фреймворках используются [прокси](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy){:target="_blank"} — объект, который «оборачивается» вокруг другого объекта и может перехватывать (и, при желании, самостоятельно обрабатывать) разные действия с ним — в частности, чтение/запись свойств.
+
+Эту же технологию использует npm-пакет on-change, который можно использовать в ванильных stateful-компонентах.
+
+```js
+import onChange from 'on-change';
+
+class App {
+  constructor() {
+    // Состояние
+    const state = {
+      currentTodoItemID: null,
+    };
+
+    // Слушатель с помощью пакета 'on-change'
+    this.state = onChange(state, this.update);
+  }
+
+  /* Изменение компонента в ответ на изменения
+  состояния */
+  static update(path, current, previous) {
+    console.log(
+      `${path} changed
+      from ${previous} to ${current}`
+    );
+  }
+}
+
+const app = new App();
+app.state.currentTodoItemID = 1;
+
+```
+
+Можно обойтись и без дополнительных npm-пакетов.
+
+```js
+class Component {
+  constructor() {
+    // Состояние
+    const state = {};
+  }
+
+  setState(state) {
+    this.state = new Proxy(state, this.stateHandler);
+  }
+
+  stateHandler(target, prop, value) {
+    // updates the object state
+    target[prop] = value;
+    // triggers the rendering
+    this.render();
+  }
+}
+```
+
+[Ещё о прокси](https://learn.javascript.ru/proxy)(https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Proxy){:target="_blank"}

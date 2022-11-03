@@ -101,6 +101,7 @@ is-index: true
   {%- include details.html title="Всплытие и делегирование: обработка событий на динамически созданных элементах и на массе однотипных" path="js/_base/events/bubbling-and-event-delegation.md" -%}
   {%- include details.html title="Вложенные обработчики событий" path="js/_base/events/nested-handlers.md" id="topic-nested-handlers" -%}
   {%- include details.html title="События клавиатуры" path="js/_base/events/keyboard-events.md" -%}
+  {%- include details.html title="Событие прокрутки" path="js/_base/events/scroll-event.md" -%}
   {%- include details.html title="Кликнул ли пользователь за границами элемента?" path="js/_base/events/detect-outside-clicks.md" -%}
   {%- include details.html title="Проверка поддержки событий касания" path="js/_base/events/check-touch-events-support.md" -%}
   {%- include details.html title="Генерация пользовательских событий, конструктор `Event` и его потомки" path="js/_base/events/event-constructor.md" -%}
