@@ -10,6 +10,11 @@ categories:
   {%- include details.html title="Ключевое слово `this` и контекст (контекст выполнения)" path="_advanced/common/context-and-this.md" id="topic-context" -%}
   {%- include details.html title="Явное указание `this`: методы `call()`, `apply()`" path="_advanced/common/binding-call-and-apply.md" id="topic-common-call-apply" -%}
   {%- include details.html title="Привязка контекста к функции / методу - `bind`()" path="_advanced/common/binding-bind.md" id="topic-common-bind" -%}
+  {%- include details.html title="Одно- и двусторонняя привязка данных" path="_advanced/common/binding-1-2-way.md" id="topic-common-2-way-binding" -%}
+  {%- include details.html title="Императивное и декларативное программирование" path="_advanced/common/imperative-declarative.md" id="topic-imperative-declarative" -%}
+  {%- include details.html title="Функциональное программирование, реактивное программирование и функциональное реактивное программирование" path="_advanced/common/functional-programming.md" id="topic-functional-programming" -%}
+  {%- include details.html title="Неизменяемость и изменяемость" path="_advanced/common/immutability-mutability.md" id="topic-immutability-mutability" -%}
+  {%- include details.html title="Observables" path="_advanced/common/observables.md" id="topic-observables" -%}
 </section>
 
 <section>
@@ -34,6 +39,7 @@ categories:
   {%- include details.html title="Остаточные параметры, оператор расширения и псевдомассив `arguments`" path="_advanced/functions/rest-parameters-spread-operator.md" id="topic-functions-rest-parameters-spread-operator" -%}
   {%- include details.html title="Замыкание (closure) и самовызывающиеся функции" path="_advanced/functions/closure-and-self-invoking-expressions.md" id="topic-functions-closure" -%}
   {%- include details.html title="Рекурсивные функции" path="_advanced/functions/recursion.md" id="topic-functions-recursion" -%}
+  {%- include details.html title="Чистые и нечистые функции, побочные эффекты" path="_advanced/functions/pure-impure-functions-side-effects.md" id="topic-pure-impure" -%}
 </section>
 
 <section>
@@ -68,6 +74,7 @@ categories:
   <h2>Классы</h2>
   {%- include details.html title="Общие сведения" path="_advanced/classes/base.md" id="topic-classes" -%}
   {%- include details.html title="Наследование" path="_advanced/classes/inheritance.md" id="topic-classes-inheritance" -%}
+  {%- include details.html title="Наследование — цепочка прототипов" path="_advanced/classes/prototype-chain.md" id="topic-prototype-chain" -%}
   {%- include details.html title="Наследование — методы `hasOwnProperty`, `isPrototypeOf`" path="_advanced/classes/inheritance-check.md" id="topic-classes-hasownproperty-isprototypeof" -%}
   {%- include details.html title="Наследование — `instanceof`" path="_advanced/classes/inheritance-instanceof.md" id="topic-classes-instanceof" -%}
   {%- include details.html title="Добавление или удаление свойств и методов класса, `prototype`" path="_advanced/classes/add-remove-method-property.md" id="topic-classes-add-remove-method-property" -%}
@@ -76,6 +83,7 @@ categories:
   {%- include details.html title="Создание нового объекта, экземпляра класса. Доступ к его свойствам и методам" path="_advanced/classes/new.md" id="topic-classes-new-instance" -%}
   {%- include details.html title="Состояние и stateful-компоненты" path="_advanced/classes/stateful-components.md" id="topic-classes-stateful-components" -%}
   {%- include details.html title="Предки классов — функции-конструкторы" path="_advanced/classes/deprecated-constructor-function.md" id="topic-classes-deprecated-constructor-function" -%}
+
 </section>
 
 <section>

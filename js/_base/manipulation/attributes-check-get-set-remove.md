@@ -35,7 +35,9 @@ image.height = '120px';
 image.setAttribute('width', '100px');
 image.setAttribute('height', '120px');
 
-button.setAttribute('aria-expanded', false);
+/* Любые значения во втором параметре записываются,
+как строки */
+button.setAttribute('aria-expanded', 'false');
 ```
 
 #### Переключение логических значений атрибута

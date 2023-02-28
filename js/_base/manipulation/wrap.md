@@ -1,9 +1,17 @@
-Завернуть элемент ` в эемент `wrapper`
+Завернуть элемент `el` в элемент `wrapper`
 
 ```js
-// Сначала добавляем `wrapper` перед ` — в общего предка
+/* Сначала добавляем `wrapper` перед `el` —
+в общего предка */
 el.parentNode.insertBefore(wrapper, el);
 
-// Затем делаем ` потомком `wrapper`'а
+// Затем делаем `el` потомком `wrapper`'а
 wrapper.appendChild(el);
+```
+
+Выделить слово `foo` в элементе `el` жирным.
+
+```js
+el.innerHTML =
+  el.textContent.replace(/(foo)/g,'<b>$1<\/b>');
 ```

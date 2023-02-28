@@ -16,4 +16,10 @@ el.innerHTML = 'Hello World!';
 будет замена <h2 class="subhead">Hello World!</h2>
 заголовком `h3` с новым содержанием. */
 el.outerHTML = '<h3>Изменили!</h3>';
+
+/* Метод полезен, в частности, для отладки.
+Используя его в вывод попадёт разметка, а не
+бесполезный [object HTMLElement] */
+
+console.log(el.outerHTML);
 ```

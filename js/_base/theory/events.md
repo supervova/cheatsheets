@@ -98,6 +98,15 @@ elem.removeEventListener('click', handler);
 - `search`,
 - `select`
 
+#### События сенсорных экранов
+
+- `touchstart`,
+- `touchend`,
+- `touchcancel`,
+- `touchmove`
+
+Эти события можно использовать для отслеживания жестов — например, [смахивания](https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d){:target="_blank"}.
+
 #### События анимации
 
 - `animationend`,
@@ -151,10 +160,7 @@ elem.removeEventListener('click', handler);
 - `show`,
 - `storage`,
 - `toggle`,
-- `wheel`,
-- `touchcancel`,
-- `touchmove`
-
+- `wheel`
 #### Хронометражные события (события таймеров)
 
 Создаются вызовами `setTimeout` или `setInterval`.

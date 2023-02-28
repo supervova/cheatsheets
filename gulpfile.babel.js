@@ -56,15 +56,8 @@ const server = browserSync.create();
 
 // Paths
 const root = {
-  root: '.',
   src: './src',
-  // It is better to stick to the system standards to avoid errors.
-  tmp: './assets',
-  dest: {
-    site: './_site',
-    assets: './_site/assets',
-    build: './.publish',
-  },
+  dest: './_site',
 };
 
 const paths = {
@@ -74,18 +67,18 @@ const paths = {
     },
     watch: `${root.src}/**/*.scss`,
     tmp: `${root.src}/css`,
-    dest: `${root.dest.assets}/css`,
+    dest: `${root.dest}/assets/css`,
   },
 
   jekyll: {
     watch: [
-      `${root.base}/*.html`,
-      `${root.base}/_config.yml`,
-      `${root.base}/_data/*.yml`,
-      `${root.base}/_includes/*.html`,
-      `${root.base}/_layouts/*.html`,
-      `${root.base}/_posts/*.*`,
-      `${root.base}/**/*.md`,
+      './*.html',
+      './_config.yml',
+      './_data/*.yml',
+      './_includes/*.html',
+      './_layouts/*.html',
+      './_posts/*.*',
+      './**/*.md',
     ],
   },
 
@@ -95,7 +88,7 @@ const paths = {
       vendor: `${root.src}/js/**/*.js`,
     },
     watch: [`${root.src}/**/*.js`],
-    dest: `${root.dest.assets}/js`,
+    dest: `${root.dest}/assets/js`,
   },
 
   img: {
@@ -112,7 +105,7 @@ const paths = {
       `${root.src}/**/*.+(jpg|jpeg|png|svg|gif|webp)`,
       `!${root.src}/base/icons/sprite/**/*`,
     ],
-    dest: `${root.dest.assets}/img`,
+    dest: `${root.dest}/assets/img`,
   },
 };
 // #endregion
@@ -133,28 +126,22 @@ const paths = {
 // And then terminate unnecessary processes by specifying the PID
 // $ kill -9 <PID>
 
-function jekyllBuild(done) {
+const jekyllBuild = (done) => {
   let command;
 
   if (PRODUCTION) {
     command = shell.exec('JEKYLL_ENV=production bundle exec jekyll build');
-    done();
+  } else {
+    command = shell.exec('bundle exec jekyll build');
   }
-
-  if (!PRODUCTION) {
-    command = shell.exec('bundle exec jekyll build --config _config.yml');
-    // command = child.spawn('bundle', ['exec', 'jekyll', 'build', '--config', '_config.yml,_config.dev.yml'], { stdio: 'inherit' });
-    done();
-  }
-  return command;
-}
-
-function jekyllServe(done) {
-  shell.exec(
-    'bundle exec jekyll serve --incremental --watch --drafts --trace --config _config.yml'
-  );
   done();
-}
+  return command;
+};
+
+const jekyllServe = (done) => {
+  shell.exec('bundle exec jekyll serve --incremental --watch --drafts --trace');
+  done();
+};
 // #endregion
 
 /**
@@ -165,7 +152,7 @@ function jekyllServe(done) {
 // #region
 
 // COMMON STYLES FUNCTION
-function cssTasks(source, subtitle, destination, unCssHtml) {
+const cssTasks = (source, subtitle, destination, unCssHtml) => {
   src(source)
     .pipe(changed(destination))
     .pipe(plumber())
@@ -218,21 +205,21 @@ function cssTasks(source, subtitle, destination, unCssHtml) {
     .pipe(size({ title: `styles: ${subtitle}` }))
     .pipe(dest(destination))
     .pipe(server.stream());
-}
+};
 
 // MAIN
 // source, subtitle, destination, unCssHtml
-function css(done) {
+const css = (done) => {
   cssTasks(
     paths.css.src.main, // src
     'main', // subtitle
     paths.css.dest,
 
     // uncssHTML; use array syntax for normal results
-    [`${root.dest.site}/**/*.html`]
+    [`${root.dest}/**/*.html`]
   );
   done();
-}
+};
 // #endregion
 
 /**
@@ -241,7 +228,7 @@ function css(done) {
  * -----------------------------------------------------------------------------
  */
 // #region
-function js() {
+const js = () => {
   return src(paths.js.src.main)
     .pipe(changed(paths.js.dest))
     .pipe(
@@ -255,7 +242,7 @@ function js() {
       })
     )
     .pipe(dest(paths.js.dest));
-}
+};
 // #endregion
 
 /**
@@ -265,9 +252,9 @@ function js() {
  */
 // #region
 // Common images function
-function imgTasks(source, subtitle) {
+const imgTasks = (source, subtitle) => {
   src(source)
-    .pipe(changed(`${root.dest.site}/assets/img`))
+    .pipe(changed(`${root.dest}/assets/img`))
     .pipe(
       imagemin(
         [
@@ -284,27 +271,27 @@ function imgTasks(source, subtitle) {
         { verbose: true }
       )
     )
-    .pipe(dest(`${root.dest.site}/assets/img`))
+    .pipe(dest(`${root.dest}/assets/img`))
     .pipe(size({ title: `images: ${subtitle}` }));
-}
+};
 
 // Graphics
-function imgGraphics(done) {
+const imgGraphics = (done) => {
   imgTasks(
     paths.img.src.graphics, // src
     'graphics' // subtitle
   );
   done();
-}
+};
 
 // Content
-function imgContent(done) {
+const imgContent = (done) => {
   imgTasks(
     paths.img.src.content, // src
     'content' // subtitle
   );
   done();
-}
+};
 
 // OPTIMIZE
 const img = parallel(imgGraphics, imgContent);
@@ -316,13 +303,13 @@ const img = parallel(imgGraphics, imgContent);
  * -----------------------------------------------------------------------------
  */
 // #region
-function clean() {
+const clean = () => {
   return del([
     `${paths.css.dest}/**/*`,
     `${paths.js.dest}/**/*`,
     `${root.src}/**/*.css`,
   ]);
-}
+};
 // #endregion
 
 /**
@@ -332,22 +319,21 @@ function clean() {
  */
 // #region
 
-function watchFiles() {
+const watchFiles = () => {
   watch(paths.css.watch, series(css));
   watch(paths.js.src.main, series(js));
   watch(paths.img.watch, series(img));
   watch(paths.jekyll.watch, series(jekyllBuild));
-}
+};
 
 const serve = series(clean, jekyllBuild, parallel(css, js, img), jekyllServe);
 
 /* Use Browsersync for testing on mobile devices. Use html paths instead
 extension-free permalinks */
-function serveBS(done) {
+const serveBS = (done) => {
   server.init({
     server: {
-      // baseDir: '../../../',
-      baseDir: root.dest.site,
+      baseDir: root.dest,
     },
     middleware(req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -357,7 +343,7 @@ function serveBS(done) {
     notify: false,
   });
   done();
-}
+};
 // #endregion
 
 /**

@@ -12,20 +12,41 @@
 - `cancelable: true` если нужно, чтобы работал `event.preventDefault()`.
 
 ```js
-// Всплытие: ловим на document...
-document.addEventListener('hello', (event) => {
-  alert(`Привет от ${event.target.tagName}`);
-});
-
 /* Создаем пользовательское событие
 и привязываем к элементу методом `dispatchEvent` */
 const myEvent = new Event('hello', { bubbles: true });
+
+// И генерируем новое событие на элементе
 elem.dispatchEvent(myEvent);
 
-// Обработчик на document сработает и выведет сообщение.
+/* Всплытие: ловим на document... Обработчик
+на document'е сработает и выведет сообщение. */
+document.addEventListener('hello', (event) => {
+  alert(`Привет от ${event.target.tagName}`);
+});
 ```
 
 Для генерации пользовательских событий можно также использовать специальный конструктор `CustomEvent`, в опциях которого есть дополнительное свойство `detail`, в котором можно указывать информацию для передачи в событие.
+
+```js
+// Создаем событие
+const event = new CustomEvent('myEvent', {
+  bubbles: true,
+  cancelable: true,
+  detail: 'This is awesome (read me in console)',
+});
+
+// Генерируем событие
+document.dispatchEvent(event);
+
+// Устанавливаем слушатель
+document.addEventListener(
+  'myEvent',
+  function (event) {
+    console.log(event.detail);
+  }
+);
+```
 
 #### `MouseEvent`, `KeyboardEvent` и другие специальные конструкторы
 

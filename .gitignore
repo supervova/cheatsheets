@@ -29,24 +29,19 @@ deploy.sh
 # ------------------------------------------------------------------------------
 
 # Working stuff
-deploy.sh
 playground.*
 todo.md
 
 # Editors
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/settings.json
-!.vscode/tasks.json
-*.code-workspace
-*_notes
 .vscode/*
+!.vscode/settings.json
 
 #Build generated
 *.sass-cache*
+.eslintcache
 .tmp
-src/**/*.css
 sprite.symbol.html
+src/**/*.css
 
 # Logs, backups
 *.bak
@@ -56,15 +51,11 @@ sprite.symbol.html
 # Package managers
 .npm
 .yarn-integrity
-jspm_packages
 node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 # All yarn.lock files should be checked into source control
-
-# Optional eslint cache
-.eslintcache
 
 # dotenv environment variables file(s)
 .env

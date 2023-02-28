@@ -25,7 +25,7 @@ is-index: true
   {%- include details.html title="JSON" path="js/_base/theory/json.md" -%}
   {%- include details.html title="Дата" path="js/_base/theory/date.md" -%}
   {%- include details.html title="Глобальные функции и объекты" path="js/_base/theory/global-functions.md" -%}
-  {%- include details.html title="Промисы" path="js/_base/theory/promises.md" -%}
+  {%- include details.html title="Промисы" path="js/_base/theory/promises.md" id="topic-promises" -%}
   {%- include details.html title="Модули" path="js/_base/theory/modules.md" -%}
   {%- include details.html title="Ошибки" path="js/_base/theory/errors.md" -%}
   {%- include details.html title="Правила хорошего кода" path="js/_base/theory/best-practicies.md" -%}
@@ -125,7 +125,7 @@ is-index: true
 <section>
   <h2>AJAX</h2>
   {%- include details.html title="Получить данные с сервера — `fetch`" path="js/_base/ajax/fetch-get-data.md" -%}
-  {%- include details.html title="Послать файлы на сервер — `fetch`" path="js/_base/ajax/fetch-upload-files.md" -%}
+  {%- include details.html title="Послать файлы на сервер — `fetch`" path="js/_base/ajax/fetch-upload-files.md" id="topic-fetch-upload" -%}
   {%- include details.html title="Послать файлы на сервер — `XMLHttpRequest`" path="js/_base/ajax/xml-http-request.md" -%}
 </section>
 

@@ -1,0 +1,10 @@
+{
+  "short_name": "Шпоры",
+  "name": "Шпаргалки программиста",
+  "icons": [
+    { "src": "/assets/img/icon-192.png", "type": "image/png", "sizes": "192x192" }
+  ],
+  "start_url": "/",
+  "background_color": "#fcfcfd",
+  "theme_color": "#5d5de5"
+}

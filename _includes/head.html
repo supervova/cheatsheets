@@ -1,13 +1,10 @@
-{%- assign project = site.data.i18n.project -%}
-{%- comment -%} See polylog-2020, super-mark andd pproject-YYYY for more {%- endcomment -%}
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>
   {%- if page.title -%}{{ page.title | strip_html | replace: '&nbsp;', ' ' | escape }}{%- endif -%}
   {%- if page.section -%} | {{ page.section }}{%- endif -%}
-  {%- if page.has-patronymic -%} | {{ project.title[page.lang] }}{%- endif -%}
+  {% unless page.home %} | {{ site.title }}{% endunless %}
 </title>
 <meta name="description" content="{%- if page.description -%}{{ page.description | strip_html | replace: '&nbsp;', ' ' | strip_newlines }}{%- else -%}{{ page.content | strip_html | xml_escape | truncatewords: 50 }}{%- endif -%}">
 <meta name="author" content="Vladimir Nikishin, www.super-mark.ru">
